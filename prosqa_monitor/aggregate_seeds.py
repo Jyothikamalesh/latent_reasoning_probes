@@ -8,6 +8,10 @@ for d in dirs:
     for mp in sorted(glob.glob(os.path.join(d, 's*_run_meta.json'))):
         m = json.load(open(mp)); csv = mp.replace('run_meta.json', 'monitor_results.csv')
         if not os.path.exists(csv): continue
+        gp = mp.replace('run_meta.json', 'generations.jsonl'); c = m['cfg']
+        want = 4 * (c['N_MON_TRAIN'] + c['N_MON_TEST']); got = sum(1 for _ in open(gp)) if os.path.exists(gp) else -1
+        if got != want:   # smoke-pass leftovers (a real run that aborted) have far fewer rows than the real configuration
+            print(f"REJECTED seed {m['seed']} in {d}: generations has {got} rows, expected {want} (looks like smoke-pass leftovers from an aborted run)"); continue
         metas[m['seed']] = m; frames.append(pd.read_csv(csv).assign(seed=m['seed']))
 assert frames, 'no per-seed results found'
 hashes, modes = {m['code_hash'] for m in metas.values()}, {m['mode'] for m in metas.values()}

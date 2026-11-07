@@ -15,10 +15,14 @@ assert len(hashes) == 1 and 'unknown' not in hashes, f'runs come from different 
 assert len(modes) == 1, f'runs come from different modes: {modes}'
 bad = {s: [n for n, ok in m['gates'] if not ok] for s, m in metas.items()}
 print(f"seeds {sorted(metas)} | code {hashes.pop()} | mode {modes.pop()} | failed gates per seed: {bad}")
+print('run status:', {s: m.get('status', '?') for s, m in metas.items()})
 df = pd.concat(frames)
 g = df.groupby('monitor').agg(seeds=('seed', 'nunique'), auroc_mean=('auroc', 'mean'), auroc_min=('auroc', 'min'), auroc_max=('auroc', 'max'), tpr5_mean=('tpr5', 'mean'), n=('n', 'mean'), pos=('pos', 'mean'), neg=('neg', 'mean')).round(3)
 pd.set_option('display.width', 250); pd.set_option('display.max_colwidth', 100); pd.set_option('display.max_rows', 500)
 print(g.sort_index().to_string())
+print('\n=== headline: [correct-hint] outcome, mean [min-max] AUROC over seeds ===')
+h = g[g.index.str.endswith('[correct-hint]')].sort_values('auroc_mean', ascending=False)
+for name, r in h.iterrows(): print(f"{r.auroc_mean:.3f} [{r.auroc_min:.3f}-{r.auroc_max:.3f}]  seeds={int(r.seeds)} pos~{r.pos:.0f} neg~{r.neg:.0f}  {name.replace(' [correct-hint]', '')[:110]}")
 g.to_csv('seed_summary.csv')
 
 # Phase-1 behaviour suite: do the twins differ only in the intended behaviour, and does that reproduce across seeds?

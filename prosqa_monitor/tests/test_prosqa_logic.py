@@ -177,6 +177,34 @@ def suite_questions_are_disjoint_from_other_sets():
     assert len(parts[3]) == n and sum(len(x) for x in sets) == len(set().union(*sets))
 
 @test
+def fail_fast_guard_aborts_only_non_learning_explicit_twins():
+    m = tiny(); orig_val, orig_ff = ns['val_acc'], ns['FAIL_FAST']
+    try:
+        ns['FAIL_FAST'] = True
+        ns['LEARN_HIST'].clear(); ns['val_acc'] = lambda *a, **k: 0.40
+        for fmt, name in (('explicit', 'x_exp'),):                                   # never learns: aborts at 3/4 of 7 epochs (epoch 6)
+            for done in range(1, 6): g('learn_check')(name, done, 7, m, fmt)
+            try: g('learn_check')(name, 6, 7, m, fmt); raise SystemExit('guard did not fire')
+            except AssertionError: pass
+        ns['LEARN_HIST'].clear(); vals = iter([0.40, 0.4, 0.4, 0.4, 0.62, 0.5, 0.6]); ns['val_acc'] = lambda *a, **k: next(vals)   # recovers: best of the last two (epochs 5 and 6) is 0.62
+        for done in range(1, 7): g('learn_check')('y_exp', done, 7, m, 'explicit')
+        ns['LEARN_HIST'].clear(); ns['val_acc'] = lambda *a, **k: 0.2                 # COCONUT curves dip mid-curriculum: logged, never fatal
+        for done in range(1, 8): g('learn_check')('z_coco', done, 7, m, 'coconut', done - 1)
+        ns['FAIL_FAST'] = False; ns['val_acc'] = lambda *a, **k: 0.1
+        for done in range(1, 8): g('learn_check')('w_exp', done, 7, m, 'explicit')   # non-fail-fast modes never abort
+    finally: ns['val_acc'], ns['FAIL_FAST'] = orig_val, orig_ff; ns['LEARN_HIST'].clear(); ns['GATES'].clear()
+
+@test
+def critical_gate_stops_and_ordinary_gate_does_not():
+    ns['GATES'].clear(); old = ns['MODE']
+    try:
+        ns['MODE'] = 'seeds'; g('gate')('some ordinary check', False)              # recorded, not fatal
+        try: g('gate')('training set size', False); raise SystemExit('critical gate did not stop')
+        except AssertionError: pass
+        g('gate_summary')()                                                        # must not raise in fail-fast modes
+    finally: ns['MODE'] = old; ns['GATES'].clear()
+
+@test
 def max_len_covers_data():
     rg = random.Random(1); L = [len(g('make_text_example')(g('plant')(i, rg), True)[0]) for i in g('_items')[:3000]]
     assert max(L) <= g('MAX_LEN'), (max(L), g('MAX_LEN'))

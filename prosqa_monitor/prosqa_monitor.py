@@ -37,6 +37,8 @@ print(f'mode={MODE} device={dev} {torch.cuda.get_device_name(0) if dev == "cuda"
 
 # %%
 SEED_OVERRIDE = None               # build_prosqa_nb.py --seed N sets this for Kaggle pushes (kernels cannot take env vars)
+EXTRA_SEEDS_OVERRIDE = None        # build_notebook.py --extra-seeds 2,3 sets this: those seeds run after SEED, in this same notebook and session
+EXTRA_SEEDS = EXTRA_SEEDS_OVERRIDE or ()
 SEED = SEED_OVERRIDE if SEED_OVERRIDE is not None else int(os.environ.get('SEED', 0))
 SPLIT_SEED = 1234                  # fixes the evaluation questions; identical for every seed
 OBEY_MIN_STEPS = 4                 # behaviour twins follow a hint only when the problem has >= this many steps
@@ -46,7 +48,7 @@ def _code_hash():                  # hash of all code cells (SEED_OVERRIDE line 
     for p in ['__notebook__.ipynb', 'prosqa_monitor.ipynb']:
         if os.path.exists(p):
             srcs = [''.join(c['source']) for c in json.load(open(p))['cells'] if c['cell_type'] == 'code']
-            return hashlib.sha1('\n'.join(re.sub(r'^(SEED|MODE)_OVERRIDE = .*$', '', x, flags=re.M) for x in srcs).encode()).hexdigest()[:10]
+            return hashlib.sha1('\n'.join(re.sub(r'^(SEED|MODE|EXTRA_SEEDS)_OVERRIDE = .*$', '', x, flags=re.M) for x in srcs).encode()).hexdigest()[:10]
     return 'unknown'
 CODE_HASH = _code_hash()
 N_STAGES, C_PER_STEP = 6, 1        # ProsQA solutions have 3-6 steps; stage s replaces the first s steps with s latents (reference config: c_thought=1, max_latent_stage=6)
@@ -777,3 +779,16 @@ log(f'saved {TAG}monitor_results.csv, {TAG}monitor_scores.json, {TAG}features.np
 phase(None)
 json.dump(dict(status='OK' if all(ok for _, ok in GATES) else 'GATES_FAILED', failed_gates=[n for n, ok in GATES if not ok], seed=SEED, split_seed=SPLIT_SEED, code_hash=CODE_HASH, mode=MODE, cfg=CFG, knobs=dict(P_CORRECT=P_CORRECT, ANS_W=ANS_W, OBEY_MIN_STEPS=OBEY_MIN_STEPS, TRAIN_WORDINGS=TRAIN_WORDINGS), minutes=round((time.time() - T_START) / 60, 1), gates=GATES), open(f'{OUT_DIR}/{TAG}run_meta.json', 'w'))
 log(f'ALL DONE in {(time.time() - T_START) / 60:.1f}m')
+
+# %% [markdown]
+# ## Further seeds in this same notebook (only when built with `--extra-seeds`)
+# Re-runs every pipeline cell for each extra seed in this session: data order, hint assignment and init follow the seed; the evaluation questions stay fixed. Outputs go to `s{seed}_*`. A fail-fast abort ends the notebook (the seeds after it do not run).
+
+# %%
+for _sd in EXTRA_SEEDS:
+    for _n in ('explicit_b', 'explicit_c', 'coconut_b', 'coconut_c'): globals().pop(_n, None)    # free the previous seed's twins
+    gc.collect(); {'cuda': torch.cuda.empty_cache, 'mps': torch.mps.empty_cache}.get(dev, lambda: None)()
+    SEED, TAG = _sd, f's{_sd}_'; GATES.clear(); LEARN_HIST.clear(); T_START = time.time()
+    log(f'##### starting seed {SEED} in the same notebook (outputs {TAG}*) #####')
+    for _src in pipeline_sources(): exec(compile(_src, f'<seed {SEED}>', 'exec'), globals())
+

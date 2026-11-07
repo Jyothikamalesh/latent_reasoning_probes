@@ -9,3 +9,5 @@ tiny_run.py
 *.pt
 *.npz
 .DS_Store
+seed_summary.csv
+tiny_*

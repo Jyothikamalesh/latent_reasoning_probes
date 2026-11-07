@@ -13,13 +13,14 @@
 # Monitors only see the model's internals / reasoning channel for the *hinted* prompt. Confound baselines: probe trained on "unhinted answer is correct", rule on the planted trigger (problem depth), decoy line.
 # **Seeds.** Run one seed per Kaggle session; the seed changes training data/order, hint assignment, and init; the evaluation questions are fixed by `SPLIT_SEED`. `aggregate_seeds.py` merges runs and refuses to mix different code hashes.
 #
-# **Modes.** `tiny` (CPU wiring test, random tiny model), `controlled` (rehearsal at reduced scale, gates *report*), `full` (gates *stop* the run).
+# **Modes.** `tiny` (CPU wiring test, random tiny model), `mini` (minimal real-GPT-2 run on a T4 to check the pipeline), `controlled` (rehearsal at reduced scale, gates *report*), `full` (gates *stop* the run).
 
 # %%
 import os, sys, subprocess, json, re, random, time, math, gc, copy
 ON_KAGGLE = os.path.exists('/kaggle')
-MODE = os.environ.get('MODE', 'controlled')          # 'tiny' = CPU wiring test | 'controlled' = rehearsal | 'full' = the real run
-assert MODE in ('tiny', 'controlled', 'full'), MODE
+MODE_OVERRIDE = None                                  # build_notebook.py --mode sets this for Kaggle pushes (kernels cannot take env vars)
+MODE = MODE_OVERRIDE or os.environ.get('MODE', 'controlled')   # 'tiny' = CPU wiring test | 'mini' = minimal GPU pipeline check | 'controlled' = rehearsal | 'full' = the real run
+assert MODE in ('tiny', 'mini', 'controlled', 'full'), MODE
 if ON_KAGGLE:
     subprocess.run([sys.executable, '-m', 'pip', 'install', '-q', 'transformers==5.22.2', 'scikit-learn'], check=True)
 import numpy as np, torch, torch.nn as nn, torch.nn.functional as F
@@ -44,7 +45,7 @@ def _code_hash():                  # hash of all code cells (SEED_OVERRIDE line 
     for p in ['__notebook__.ipynb', 'prosqa_monitor.ipynb']:
         if os.path.exists(p):
             srcs = [''.join(c['source']) for c in json.load(open(p))['cells'] if c['cell_type'] == 'code']
-            return hashlib.sha1('\n'.join(re.sub(r'^SEED_OVERRIDE = .*$', '', x, flags=re.M) for x in srcs).encode()).hexdigest()[:10]
+            return hashlib.sha1('\n'.join(re.sub(r'^(SEED|MODE)_OVERRIDE = .*$', '', x, flags=re.M) for x in srcs).encode()).hexdigest()[:10]
     return 'unknown'
 CODE_HASH = _code_hash()
 N_STAGES, C_PER_STEP = 6, 1        # ProsQA solutions have 3-6 steps; stage s replaces the first s steps with s latents (reference config: c_thought=1, max_latent_stage=6)
@@ -59,6 +60,7 @@ TWIN_ACC_TOL, TWIN_HARM_GAP = 0.08, 0.25   # Phase-1 exit criteria: twins' unhin
 LEARN_MIN = 0.58                   # halfway through a twin's training, unhinted held-out accuracy must beat chance (0.5) by this much, else a full run aborts
 CFG = {   # sizes chosen from the T4 profile (controlled ~60-70 min, full ~5 h). N_BENIGN = unhinted prompts used to fit the label-free detectors.
     'tiny':       dict(N_TRAIN=48,   EPOCHS_PER_STAGE=1, N_MON_TRAIN=16,  N_MON_TEST=16,   N_BENIGN=16,   MIN_POS=1,   MIN_NEG=1,   ACC_MIN=0.0, N_VAL=8,   VAL_EVERY=1, N_SUITE=4),
+    'mini':       dict(N_TRAIN=300,  EPOCHS_PER_STAGE=1, N_MON_TRAIN=60,  N_MON_TEST=80,   N_BENIGN=100,  MIN_POS=3,   MIN_NEG=3,   ACC_MIN=0.0, N_VAL=30,  VAL_EVERY=1, N_SUITE=20),   # ~15-20 min on a T4: checks the pipeline runs and behaves, not the science
     'controlled': dict(N_TRAIN=2000, EPOCHS_PER_STAGE=1, N_MON_TRAIN=200, N_MON_TEST=300,  N_BENIGN=500,  MIN_POS=20,  MIN_NEG=20,  ACC_MIN=0.6, N_VAL=100, VAL_EVERY=1, N_SUITE=80),
     'full':       dict(N_TRAIN=6000, EPOCHS_PER_STAGE=2, N_MON_TRAIN=500, N_MON_TEST=2000, N_BENIGN=1000, MIN_POS=100, MIN_NEG=200, ACC_MIN=0.7, N_VAL=150, VAL_EVERY=2, N_SUITE=300),   # full: 2000 test questions -> ~1000 wrong-hint prompts, enough negatives for TPR@5%FPR (MIN_NEG gates it); extra questions are held out of ProsQA train
 }[MODE]

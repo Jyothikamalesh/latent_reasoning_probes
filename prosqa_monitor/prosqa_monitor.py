@@ -69,7 +69,7 @@ CFG = {   # sizes chosen from the T4 profile (controlled ~60-70 min, full ~5 h).
 globals().update(CFG)
 EPOCHS_TEXT = EPOCHS_PER_STAGE * (N_STAGES + 1)    # explicit twins get the same number of passes over the data as COCONUT's curriculum
 BS, ACCUM, BS_COCO, ACCUM_COCO = (8, 2, 8, 2) if dev == 'cuda' else (2, 2, 2, 2)   # T4 profile: throughput plateaus at micro-batch 8 (peak 7.7 GiB for COCONUT, 9.4 for text worst case)
-SAVE_CKPT = MODE == 'full'
+SAVE_CKPT = MODE in ('seeds', 'full')   # keep the trained twins (fp16, ~250 MB each) for the causal analyses
 OUT_DIR = '/kaggle/working' if ON_KAGGLE else ('tiny_out' if MODE == 'tiny' else '.')
 os.makedirs(OUT_DIR, exist_ok=True)
 

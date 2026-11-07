@@ -2,7 +2,8 @@
 Refuses to merge runs with different code hashes or modes. Reports mean, min, max AUROC over seeds per monitor/outcome."""
 import sys, glob, json, os
 import pandas as pd
-dirs = sys.argv[1:] or ['.']
+EQUIV = {h for a in sys.argv[1:] if a.startswith('--equivalent=') for h in a.split('=', 1)[1].split(',')}   # code hashes the user has checked differ only in non-scientific code (e.g. checkpoint saving)
+dirs = [a for a in sys.argv[1:] if not a.startswith('--')] or ['.']
 metas, frames = {}, []
 for d in dirs:
     for mp in sorted(glob.glob(os.path.join(d, 's*_run_meta.json'))):
@@ -15,6 +16,7 @@ for d in dirs:
         metas[m['seed']] = m; frames.append(pd.read_csv(csv).assign(seed=m['seed']))
 assert frames, 'no per-seed results found'
 hashes, modes = {m['code_hash'] for m in metas.values()}, {m['mode'] for m in metas.values()}
+if len(hashes) > 1 and hashes <= EQUIV: print(f'NOTE: merging runs from code {sorted(hashes)} declared equivalent with --equivalent'); hashes = {'+'.join(sorted(hashes))}
 assert len(hashes) == 1 and 'unknown' not in hashes, f'runs come from different code: {hashes}'
 assert len(modes) == 1, f'runs come from different modes: {modes}'
 bad = {s: [n for n, ok in m['gates'] if not ok] for s, m in metas.items()}

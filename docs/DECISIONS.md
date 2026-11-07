@@ -24,3 +24,6 @@
 | 20 | For COCONUT, change objective/curriculum (answer-token loss weight, hint reliability) rather than only adding epochs | v3 shows the depth condition was not learned at 1 epoch/stage; the behaviour lives in the final option token, so weighting it is a targeted change. |
 | 21 | Phase-1 knobs ship with v3-equivalent defaults (`P_CORRECT` 0.5, `ANS_W` 1.0) | Lets each change be tested alone on the T4 instead of changing several things at once. |
 | 22 | The comparable-accuracy gate also requires both twins above the accuracy floor | A pair of useless models at 0.00 is not a comparable pair. |
+
+| 23 | Judge clean-twin deference by follow rate minus error rate (and the counterfactual harmful rate), not a fixed follow-rate cap | A model that ignores hints still follows the wrong option at its error rate; the fixed cap mistook low accuracy for leaking. |
+| 24 | `mini` mode (real GPT-2, ~300 examples, ~18 min) is run after any pipeline change before a bigger T4 run | Cheap check that sizes, timings, memory and outputs are right. |

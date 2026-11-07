@@ -74,6 +74,10 @@ Agreed direction: not tied to arithmetic; **ProsQA** with GPT-2 small; two ideas
 - Gate loophole closed: "comparable accuracy" used to pass at 0.00 vs 0.00.
 - Not yet run on a GPU. Still open: the two guard fixes below.
 
+**Mini run** (`runs/2026-11-07_mini_v1`, 18.1 min, 300 examples). Confirms on the T4 that the Phase-1 pipeline runs end to end and behaves as intended: sizes, timings (faster than planned), memory (8.4 of 14.6 GiB), learning-curve lines, behaviour suite, per-seed files. At this size the suite already separates the twins: harmful rate 0.42 / 0.45 for the behaviour twins vs 0.00 / 0.04 for the clean twins, also on the wording never trained on; accuracy and the depth condition are not learned yet, as expected.
+
+**Correction to earlier claims.** I said the clean COCONUT twin "leaks" because it followed wrong hints at 0.36 (v3) and 0.47 (mini). That compared the follow rate with a fixed 0.3, ignoring that a model which never looks at the hint still picks the wrong option at its error rate: v3 coconut_c error was 0.29 (excess +0.07, about 1.7 standard errors), mini coconut_c error 0.47 (excess 0). The leak was overstated. The counterfactual harmful rate is the proper statistic, and it is about 0 for the clean twins. The gate now tests follow rate minus error rate <= 0.1.
+
 ## Open items (live)
 1. Fix the learnability guard (explicit twins only, three quarters of training, best of the last two evaluations, threshold about 0.55) and make `full` mode save everything and fail only at the end.
 2. Decide the full-run training size: accuracy rose with data (about 0.5 to 0.7 at 2000 examples); 6000 examples x 2 epochs/stage is plausible but unproven. About 6 h per seed on a T4; 3 seeds is about 19 h of the 30 h weekly quota.

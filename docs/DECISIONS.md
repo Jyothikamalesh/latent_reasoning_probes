@@ -17,3 +17,9 @@
 | 13 | Seeds run separately, one per Kaggle session; aggregate with a code-hash check | Fits the 9 h session limit, isolates failures; mixed code versions are never merged. |
 | 14 | Track held-out accuracy during training; abort `full` runs that are not learning | The controlled run only revealed near-chance accuracy at the end. (Guard needs revision: it is too noisy at the halfway point.) |
 | 15 | One folder per experiment, git, `HISTORY.md` + per-run `RUN.md` | Chosen by the user. |
+| 16 | Reframe the paper around monitor *validity* (when do monitors detect the behaviour vs a correlate) | Robust to null results, reuses the infrastructure. Not yet supported by data: v3 explicit probes beat the confound baselines. Novelty unchecked. |
+| 17 | Phase 1 first: reliable behavioural twins with exit criteria before more monitor experiments | Without clean, comparable twins the monitor results (especially the latent nulls) cannot be interpreted. |
+| 18 | Paired-question suite with several hint wordings, scored on unhinted accuracy, correct-hint compliance, wrong-hint compliance, harmful rate, twin gap | Directly measures whether the twins differ only in the intended behaviour; wording variation tests that the behaviour is not tied to one string. |
+| 19 | Treat the clean twin as bounded by the base model's reasoning | A twin cannot verify hints better than its own accuracy (about 0.7 here); a stronger base model may be needed. Open question. |
+| 20 | For COCONUT, change objective/curriculum (answer-token loss weight, hint reliability) rather than only adding epochs | v3 shows the depth condition was not learned at 1 epoch/stage; the behaviour lives in the final option token, so weighting it is a targeted change. |
+

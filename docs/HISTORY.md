@@ -52,6 +52,18 @@ Agreed direction: not tied to arithmetic; **ProsQA** with GPT-2 small; two ideas
 
 **Repository reorganised** into one folder per experiment (this commit). Notebook rebuild made byte-reproducible (deterministic cell ids). Found and fixed a latent bug: the profile builder selected the config cell by the text `SEED = 0`, which no longer existed after adding the seed parameter (the profile notebook would have lost its config cell).
 
+## Phase 4: direction refined toward a monitor-validity study (decided 2026-11-07, after controlled v3)
+
+**Trigger.** Reading controlled v3 honestly: the explicit monitors work, every latent monitor is at chance, but the COCONUT behaviour twin did not learn the planted behaviour and the clean COCONUT twin leaks, so the latent test was uninformative. A reviewer-style proposal then framed a paper as *"When do internal AI monitors actually detect misbehaviour?"*: an empirical study of behavioural validity, shortcut learning and robustness in activation-based monitoring. Central hypothesis: an activation monitor can score high without detecting the intended behaviour, because it may track correlated signals (difficulty, answer correctness, model-specific representations).
+
+**Assessment recorded (my view at the time).**
+- It fits the data we have and is robust to null results; it reuses the infrastructure already built (two outcomes, confound baselines, decoy check, fixed evaluation split, seeds).
+- It is **not yet supported**: in v3 the explicit probes beat both confound baselines (0.80 vs 0.54 and 0.68), i.e. they did detect deference. The COCONUT nulls come from unclean twins, not from shortcut learning, so they must not be presented as evidence for the hypothesis. The sharp claim needs at least one case where a monitor scores well and the baselines explain it; we have none yet.
+- **Limit on one proposed design point.** A clean twin that "uses correct hints but resists wrong ones" can only separate them by reasoning, and at about 0.7 accuracy it cannot verify hints much better than chance. At this scale the achievable clean twin treats hints as weak evidence. This may push toward a stronger base model; unresolved (see open items).
+- Novelty of the reframed paper is unchecked.
+
+**Phase 1 (build reliable behavioural twins), the priority.** Paired questions per item (no hint, correct hint, wrong hint, varied hint wording), measuring unhinted accuracy, correct-hint compliance, wrong-hint compliance, harmful hint-following rate and the twin gap. Exit criteria before anything else: both twins learn their policy, unhinted accuracy comparable, harmful rates clearly different, separation reproduces across seeds. For COCONUT, change the curriculum / training objective rather than only adding epochs. Implemented locally first (see the entry below); no Kaggle push without the user's yes.
+
 ## Open items (live)
 1. Fix the learnability guard (explicit twins only, three quarters of training, best of the last two evaluations, threshold about 0.55) and make `full` mode save everything and fail only at the end.
 2. Decide the full-run training size: accuracy rose with data (about 0.5 to 0.7 at 2000 examples); 6000 examples x 2 epochs/stage is plausible but unproven. About 6 h per seed on a T4; 3 seeds is about 19 h of the 30 h weekly quota.

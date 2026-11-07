@@ -26,3 +26,6 @@
 | 22 | The comparable-accuracy gate also requires both twins above the accuracy floor | A pair of useless models at 0.00 is not a comparable pair. |
 | 23 | Judge clean-twin deference by follow rate minus error rate (and the counterfactual harmful rate), not a fixed follow-rate cap | A model that ignores hints still follows the wrong option at its error rate; the fixed cap mistook low accuracy for leaking. |
 | 24 | `mini` mode (real GPT-2, ~300 examples, ~18 min) is run after any pipeline change before a bigger T4 run | Cheap check that sizes, timings, memory and outputs are right. |
+| 25 | Add the output-only exact-match baseline to every monitor table | Required by the comparison with Ferreira et al.; on wrong-hint prompts it already reaches AUROC 0.86 for the explicit model, so an internal monitor must beat it. |
+| 26 | Consider a correct-hint (or both-hint) counterfactual label as the primary one | Their argument: a wrong hint makes the label collapse to "prediction equals hint". Our harmful subset has exactly this weakness; to be settled before the next run. |
+

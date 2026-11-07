@@ -1,0 +1,106 @@
+[{"stream_name":"stderr","time":7.306043294,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":7.306105304,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":7.306112179,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":7.306116672,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":7.89543143,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":7.895460635,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":7.895472806,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":7.89547605,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":50.267758059,"data":"mode=controlled device=cuda Tesla T4 torch=2.11.0+cu130 transformers=5.22.2\n"}
+,{"stream_name":"stdout","time":50.297571228,"data":"[09:32:13 +  0.0m] MODE=controlled: N_TRAIN=2000, epochs/stage=1, explicit epochs=7, monitor sets 200/300, benign 500\n"}
+,{"stream_name":"stdout","time":50.342351099,"data":"[09:32:13 +  0.0m] plan: preflight -\u003e smoke pass -\u003e train explicit_b -\u003e train explicit_c -\u003e train coconut_b -\u003e train coconut_c -\u003e generation + features -\u003e monitors; total expected ~78m (provisional). gpu mem 0.0G (peak 0.0/14.6G) util 0\n"}
+,{"stream_name":"stdout","time":50.342383388,"data":"0% | cpu 30% ram 1.4/31.3G\n"}
+,{"stream_name":"stderr","time":50.379328108,"data":"Cloning into '/kaggle/working/coconut_repo'...\n"}
+,{"stream_name":"stderr","time":50.581997535,"data":"Cloning into '/kaggle/working/coconut_repo'...\n"}
+,{"stream_name":"stderr","time":50.582047658,"data":"\n"}
+,{"stream_name":"stderr","time":50.58205488,"data":"Cloning into '/kaggle/working/coconut_repo'...\n"}
+,{"stream_name":"stderr","time":51.876132076,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stderr","time":51.876177037,"data":"\n"}
+,{"stream_name":"stderr","time":51.876216749,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stdout","time":52.713491325,"data":"2000 train questions; hints: 971 none, 505 correct, 524 wrong | decoy 0.50\n"}
+,{"stream_name":"stdout","time":52.713531332,"data":"example prompt tail: pus is a wumpus. Sam is a storpus. Is Rex a yumpus or impus? | hint None | true impus | steps 4\n"}
+,{"stream_name":"stderr","time":57.701225418,"data":"[transformers] The new embeddings will be initialized from a multivariate normal distribution that has old embeddings' mean and covariance. As described in this article: https://nlp.stanford.edu/~johnhew/vocab-expansion.html. To disable this, use `mean_resizing=False`\n"}
+,{"stream_name":"stderr","time":57.701287491,"data":"\n"}
+,{"stream_name":"stderr","time":57.70129533,"data":"[transformers] The new embeddings will be initialized from a multivariate normal distribution that has old embeddings' mean and covariance. As described in this article: https://nlp.stanford.edu/~johnhew/vocab-expansion.html. To disable this, use `mean_resizing=False`\n"}
+,{"stream_name":"stderr","time":60.020363191,"data":"[transformers] `loss_type=None` was set in the config but it is unrecognized. Using the default loss: `ForCausalLMLoss`.\n"}
+,{"stream_name":"stderr","time":60.02042441,"data":"\n"}
+,{"stream_name":"stderr","time":60.020430948,"data":"[transformers] `loss_type=None` was set in the config but it is unrecognized. Using the default loss: `ForCausalLMLoss`.\n"}
+,{"stream_name":"stdout","time":61.313370772,"data":"[09:32:24 +  0.2m] {'config': 'text', 'bs': 1, 'peak_gib': 1.7075786590576172, 'sec_per_step': 0.15262691179911295, 'samples_per_s': 6.551924481812204, 'gpu_util': -1.0, 'cpu_pct': 31.3, 'ram_gib': 2.1202774047851562}\n"}
+,{"stream_name":"stdout","time":62.552398258,"data":"[09:32:25 +  0.2m] {'config': 'text', 'bs': 2, 'peak_gib': 3.582057476043701, 'sec_per_step': 0.14643963177998862, 'samples_per_s': 13.65750497792023, 'gpu_util': -1.0, 'cpu_pct': 24.0, 'ram_gib': 2.1543540954589844}\n"}
+,{"stream_name":"stdout","time":64.268129652,"data":"[09:32:27 +  0.2m] {'config': 'text', 'bs': 4, 'peak_gib': 5.532462120056152, 'sec_per_step': 0.24996495246887207, 'samples_per_s': 16.002243356488613, 'gpu_util': -1.0, 'cpu_pct': 24.3, 'ram_gib': 2.1544570922851562}\n"}
+,{"stream_name":"stdout","time":66.898483705,"data":"[09:32:29 +  0.3m] {'config': 'text', 'bs': 8, 'peak_gib': 9.392587184906006, 'sec_per_step': 0.4073332945505778, 'samples_per_s': 19.639936403496364, 'gpu_util': -1.0, 'cpu_pct': 24.7, 'ram_gib': 2.1449356079101562}\n"}
+,{"stream_name":"stdout","time":67.638567271,"data":"[09:32:30 +  0.3m] {'config': 'text', 'bs': 16, 'note': 'OOM'}\n"}
+,{"stream_name":"stdout","time":68.96436525,"data":"[09:32:31 +  0.3m] {'config': 'coconut stage 0 (0 latents)', 'bs': 1, 'peak_gib': 2.428572177886963, 'sec_per_step': 0.12225023905436198, 'samples_per_s': 8.179943104694642, 'gpu_util': -1.0, 'cpu_pct': 23.3, 'ram_gib': 2.2407379150390625}\n"}
+,{"stream_name":"stdout","time":70.082451857,"data":"[09:32:33 +  0.3m] {'config': 'coconut stage 0 (0 latents)', 'bs': 2, 'peak_gib': 2.964857578277588, 'sec_per_step': 0.13931854565938315, 'samples_per_s': 14.35559056789005, 'gpu_util': -1.0, 'cpu_pct': 23.4, 'ram_gib': 2.2609405517578125}\n"}
+,{"stream_name":"stdout","time":71.487404134,"data":"[09:32:34 +  0.4m] {'config': 'coconut stage 0 (0 latents)', 'bs': 4, 'peak_gib': 4.091602802276611, 'sec_per_step': 0.18748108545939127, 'samples_per_s': 21.33548560484736, 'gpu_util': -1.0, 'cpu_pct': 29.3, 'ram_gib': 2.2658157348632812}\n"}
+,{"stream_name":"stdout","time":73.864784958,"data":"[09:32:36 +  0.4m] {'config': 'coconut stage 0 (0 latents)', 'bs': 8, 'peak_gib': 6.528193950653076, 'sec_per_step': 0.372622807820638, 'samples_per_s': 21.46943190834094, 'gpu_util': -1.0, 'cpu_pct': 25.1, 'ram_gib': 2.2850341796875}\n"}
+,{"stream_name":"stdout","time":77.888522315,"data":"[09:32:40 +  0.5m] {'config': 'coconut stage 0 (0 latents)', 'bs': 16, 'peak_gib': 11.387585639953613, 'sec_per_step': 0.6706569989522299, 'samples_per_s': 23.857202750432585, 'gpu_util': -1.0, 'cpu_pct': 25.7, 'ram_gib': 2.2755165100097656}\n"}
+,{"stream_name":"stdout","time":79.207170505,"data":"[09:32:42 +  0.5m] {'config': 'coconut stage 1 (1 latents)', 'bs': 1, 'peak_gib': 2.4781408309936523, 'sec_per_step': 0.13905533154805502, 'samples_per_s': 7.19138194032077, 'gpu_util': -1.0, 'cpu_pct': 23.4, 'ram_gib': 2.298137664794922}\n"}
+,{"stream_name":"stdout","time":80.586771577,"data":"[09:32:43 +  0.5m] {'config': 'coconut stage 1 (1 latents)', 'bs': 2, 'peak_gib': 3.062009334564209, 'sec_per_step': 0.18155550956726074, 'samples_per_s': 11.015914663052742, 'gpu_util': -1.0, 'cpu_pct': 24.3, 'ram_gib': 2.2910232543945312}\n"}
+,{"stream_name":"stdout","time":82.290388021,"data":"[09:32:45 +  0.5m] {'config': 'coconut stage 1 (1 latents)', 'bs': 4, 'peak_gib': 4.231826305389404, 'sec_per_step': 0.2494521141052246, 'samples_per_s': 16.035141711858607, 'gpu_util': -1.0, 'cpu_pct': 24.4, 'ram_gib': 2.2958984375}\n"}
+,{"stream_name":"stdout","time":84.754500157,"data":"[09:32:47 +  0.6m] {'config': 'coconut stage 1 (1 latents)', 'bs': 8, 'peak_gib': 6.706326007843018, 'sec_per_step': 0.38261906305948895, 'samples_per_s': 20.908524358484915, 'gpu_util': -1.0, 'cpu_pct': 24.8, 'ram_gib': 2.277446746826172}\n"}
+,{"stream_name":"stdout","time":89.24875848799999,"data":"[09:32:52 +  0.6m] {'config': 'coconut stage 1 (1 latents)', 'bs': 16, 'peak_gib': 11.743343353271484, 'sec_per_step': 0.7684845129648844, 'samples_per_s': 20.820198364532448, 'gpu_util': -1.0, 'cpu_pct': 25.2, 'ram_gib': 2.2842063903808594}\n"}
+,{"stream_name":"stdout","time":90.692208189,"data":"[09:32:53 +  0.7m] {'config': 'coconut stage 2 (2 latents)', 'bs': 1, 'peak_gib': 2.503119945526123, 'sec_per_step': 0.16948445638020834, 'samples_per_s': 5.900246083668447, 'gpu_util': -1.0, 'cpu_pct': 23.6, 'ram_gib': 2.2723770141601562}\n"}
+,{"stream_name":"stdout","time":92.189040141,"data":"[09:32:55 +  0.7m] {'config': 'coconut stage 2 (2 latents)', 'bs': 2, 'peak_gib': 3.108126163482666, 'sec_per_step': 0.21382244427998862, 'samples_per_s': 9.353555033638616, 'gpu_util': -1.0, 'cpu_pct': 24.5, 'ram_gib': 2.2697601318359375}\n"}
+,{"stream_name":"stdout","time":94.068768744,"data":"[09:32:56 +  0.7m] {'config': 'coconut stage 2 (2 latents)', 'bs': 4, 'peak_gib': 4.327836513519287, 'sec_per_step': 0.2901306947072347, 'samples_per_s': 13.786890091158135, 'gpu_util': -1.0, 'cpu_pct': 24.3, 'ram_gib': 2.261272430419922}\n"}
+,{"stream_name":"stdout","time":96.468824273,"data":"[09:32:59 +  0.8m] {'config': 'coconut stage 2 (2 latents)', 'bs': 8, 'peak_gib': 6.901584148406982, 'sec_per_step': 0.3579587936401367, 'samples_per_s': 22.348941113156627, 'gpu_util': -1.0, 'cpu_pct': 24.7, 'ram_gib': 2.2694168090820312}\n"}
+,{"stream_name":"stdout","time":100.934908069,"data":"[09:33:03 +  0.8m] {'config': 'coconut stage 2 (2 latents)', 'bs': 16, 'peak_gib': 12.13061237335205, 'sec_per_step': 0.7511943181355795, 'samples_per_s': 21.299415628849626, 'gpu_util': -1.0, 'cpu_pct': 25.3, 'ram_gib': 2.2415809631347656}\n"}
+,{"stream_name":"stdout","time":102.539180176,"data":"[09:33:05 +  0.9m] {'config': 'coconut stage 3 (3 latents)', 'bs': 1, 'peak_gib': 2.5270767211914062, 'sec_per_step': 0.1943215529123942, 'samples_per_s': 5.146109554048434, 'gpu_util': -1.0, 'cpu_pct': 24.8, 'ram_gib': 2.2699127197265625}\n"}
+,{"stream_name":"stdout","time":104.053234678,"data":"[09:33:06 +  0.9m] {'config': 'coconut stage 3 (3 latents)', 'bs': 2, 'peak_gib': 3.159386157989502, 'sec_per_step': 0.21900216738382974, 'samples_per_s': 9.132329711124457, 'gpu_util': -1.0, 'cpu_pct': 24.0, 'ram_gib': 2.2607269287109375}\n"}
+,{"stream_name":"stdout","time":106.001679291,"data":"[09:33:08 +  0.9m] {'config': 'coconut stage 3 (3 latents)', 'bs': 4, 'peak_gib': 4.424546718597412, 'sec_per_step': 0.29770342508951825, 'samples_per_s': 13.436190728397618, 'gpu_util': -1.0, 'cpu_pct': 24.4, 'ram_gib': 2.271312713623047}\n"}
+,{"stream_name":"stdout","time":108.859679437,"data":"[09:33:11 +  1.0m] {'config': 'coconut stage 3 (3 latents)', 'bs': 8, 'peak_gib': 7.095240116119385, 'sec_per_step': 0.4644510746002197, 'samples_per_s': 17.2246344932802, 'gpu_util': -1.0, 'cpu_pct': 25.0, 'ram_gib': 2.2756309509277344}\n"}
+,{"stream_name":"stdout","time":113.36590252,"data":"[09:33:16 +  1.1m] {'config': 'coconut stage 3 (3 latents)', 'bs': 16, 'peak_gib': 12.473161697387695, 'sec_per_step': 0.7466399669647217, 'samples_per_s': 21.42933771017376, 'gpu_util': -1.0, 'cpu_pct': 26.8, 'ram_gib': 2.2515182495117188}\n"}
+,{"stream_name":"stdout","time":115.075351643,"data":"[09:33:18 +  1.1m] {'config': 'coconut stage 4 (4 latents)', 'bs': 1, 'peak_gib': 2.5509872436523438, 'sec_per_step': 0.21789677937825522, 'samples_per_s': 4.589328960498596, 'gpu_util': -1.0, 'cpu_pct': 24.1, 'ram_gib': 2.2630767822265625}\n"}
+,{"stream_name":"stdout","time":116.696594287,"data":"[09:33:19 +  1.1m] {'config': 'coconut stage 4 (4 latents)', 'bs': 2, 'peak_gib': 3.2064757347106934, 'sec_per_step': 0.23673446973164877, 'samples_per_s': 8.44828386110019, 'gpu_util': -1.0, 'cpu_pct': 24.6, 'ram_gib': 2.258289337158203}\n"}
+,{"stream_name":"stdout","time":118.653219048,"data":"[09:33:21 +  1.1m] {'config': 'coconut stage 4 (4 latents)', 'bs': 4, 'peak_gib': 4.5210280418396, 'sec_per_step': 0.2948421637217204, 'samples_per_s': 13.566580673228618, 'gpu_util': -1.0, 'cpu_pct': 24.4, 'ram_gib': 2.255481719970703}\n"}
+,{"stream_name":"stdout","time":121.535521017,"data":"[09:33:24 +  1.2m] {'config': 'coconut stage 4 (4 latents)', 'bs': 8, 'peak_gib': 7.286637783050537, 'sec_per_step': 0.4648805459340413, 'samples_per_s': 17.20872183181239, 'gpu_util': -1.0, 'cpu_pct': 28.0, 'ram_gib': 2.264667510986328}\n"}
+,{"stream_name":"stdout","time":126.14415901,"data":"[09:33:29 +  1.3m] {'config': 'coconut stage 4 (4 latents)', 'bs': 16, 'peak_gib': 12.838522911071777, 'sec_per_step': 0.7627478440602621, 'samples_per_s': 20.97678823296142, 'gpu_util': -1.0, 'cpu_pct': 25.0, 'ram_gib': 2.268024444580078}\n"}
+,{"stream_name":"stdout","time":128.026119862,"data":"[09:33:30 +  1.3m] {'config': 'coconut stage 5 (5 latents)', 'bs': 1, 'peak_gib': 2.573883533477783, 'sec_per_step': 0.2478640874226888, 'samples_per_s': 4.034469093115031, 'gpu_util': -1.0, 'cpu_pct': 24.0, 'ram_gib': 2.2691268920898438}\n"}
+,{"stream_name":"stdout","time":129.806673114,"data":"[09:33:32 +  1.3m] {'config': 'coconut stage 5 (5 latents)', 'bs': 2, 'peak_gib': 3.253709316253662, 'sec_per_step': 0.271468718846639, 'samples_per_s': 7.367331339305658, 'gpu_util': -1.0, 'cpu_pct': 24.5, 'ram_gib': 2.2620162963867188}\n"}
+,{"stream_name":"stdout","time":131.959977296,"data":"[09:33:34 +  1.4m] {'config': 'coconut stage 5 (5 latents)', 'bs': 4, 'peak_gib': 4.617661952972412, 'sec_per_step': 0.33685119946797687, 'samples_per_s': 11.874679402411521, 'gpu_util': -1.0, 'cpu_pct': 27.8, 'ram_gib': 2.2478904724121094}\n"}
+,{"stream_name":"stdout","time":134.823363513,"data":"[09:33:37 +  1.4m] {'config': 'coconut stage 5 (5 latents)', 'bs': 8, 'peak_gib': 7.47802209854126, 'sec_per_step': 0.44672322273254395, 'samples_per_s': 17.908180262188097, 'gpu_util': -1.0, 'cpu_pct': 24.9, 'ram_gib': 2.2501449584960938}\n"}
+,{"stream_name":"stdout","time":139.513607746,"data":"[09:33:42 +  1.5m] {'config': 'coconut stage 5 (5 latents)', 'bs': 16, 'peak_gib': 13.219131469726562, 'sec_per_step': 0.7673529783884684, 'samples_per_s': 20.850899717105268, 'gpu_util': -1.0, 'cpu_pct': 25.1, 'ram_gib': 2.2679824829101562}\n"}
+,{"stream_name":"stdout","time":141.555918953,"data":"[09:33:44 +  1.5m] {'config': 'coconut stage 6 (6 latents)', 'bs': 1, 'peak_gib': 2.5977253913879395, 'sec_per_step': 0.2802249590555827, 'samples_per_s': 3.568561499197685, 'gpu_util': -1.0, 'cpu_pct': 29.0, 'ram_gib': 2.269378662109375}\n"}
+,{"stream_name":"stdout","time":143.50747476,"data":"[09:33:46 +  1.6m] {'config': 'coconut stage 6 (6 latents)', 'bs': 2, 'peak_gib': 3.300568103790283, 'sec_per_step': 0.30910007158915204, 'samples_per_s': 6.470396430895523, 'gpu_util': -1.0, 'cpu_pct': 24.3, 'ram_gib': 2.263378143310547}\n"}
+,{"stream_name":"stdout","time":145.765251626,"data":"[09:33:48 +  1.6m] {'config': 'coconut stage 6 (6 latents)', 'bs': 4, 'peak_gib': 4.714524745941162, 'sec_per_step': 0.3534736633300781, 'samples_per_s': 11.316260346855742, 'gpu_util': -1.0, 'cpu_pct': 24.4, 'ram_gib': 2.2659759521484375}\n"}
+,{"stream_name":"stdout","time":149.229361528,"data":"[09:33:52 +  1.6m] {'config': 'coconut stage 6 (6 latents)', 'bs': 8, 'peak_gib': 7.66920804977417, 'sec_per_step': 0.5885212421417236, 'samples_per_s': 13.593392093863445, 'gpu_util': -1.0, 'cpu_pct': 24.8, 'ram_gib': 2.258960723876953}\n"}
+,{"stream_name":"stdout","time":154.653531096,"data":"[09:33:57 +  1.7m] {'config': 'coconut stage 6 (6 latents)', 'bs': 16, 'peak_gib': 13.599740028381348, 'sec_per_step': 0.8539101282755533, 'samples_per_s': 18.737334843786822, 'gpu_util': -1.0, 'cpu_pct': 25.0, 'ram_gib': 2.2730674743652344}\n"}
+,{"stream_name":"stdout","time":165.010060894,"data":"[09:34:07 +  1.9m] gen explicit 2/2 (100%) elapsed 0.1m eta 0.0m | gpu mem 0.9G (peak 13.6/14.6G) util 92\n"}
+,{"stream_name":"stdout","time":165.010105004,"data":"0% | cpu 28% ram 2.5/31.3G\n"}
+,{"stream_name":"stdout","time":167.131889114,"data":"[09:34:10 +  1.9m] gen coconut 2/2 (100%) elapsed 0.0m eta 0.0m | gpu mem 1.5G (peak 13.6/14.6G) util 92\n"}
+,{"stream_name":"stdout","time":167.13192403,"data":"0% | cpu 25% ram 2.4/31.3G\n"}
+,{"stream_name":"stdout","time":167.138534021,"data":"[09:34:10 +  1.9m] generation: explicit 0.242s/prompt, coconut 0.066s/prompt\n"}
+,{"stream_name":"stdout","time":167.164160408,"data":"{\n"}
+,{"stream_name":"stdout","time":167.164179254,"data":" \"text_bs\": 8,\n"}
+,{"stream_name":"stdout","time":167.164184059,"data":" \"coco_bs\": {\n"}
+,{"stream_name":"stdout","time":167.164188063,"data":"  \"0\": 16,\n"}
+,{"stream_name":"stdout","time":167.164192023,"data":"  \"1\": 8,\n"}
+,{"stream_name":"stdout","time":167.164195787,"data":"  \"2\": 8,\n"}
+,{"stream_name":"stdout","time":167.164199437,"data":"  \"3\": 16,\n"}
+,{"stream_name":"stdout","time":167.164203232,"data":"  \"4\": 16,\n"}
+,{"stream_name":"stdout","time":167.16420645,"data":"  \"5\": 8,\n"}
+,{"stream_name":"stdout","time":167.164209832,"data":"  \"6\": 8\n"}
+,{"stream_name":"stdout","time":167.164216955,"data":" },\n"}
+,{"stream_name":"stdout","time":167.164220264,"data":" \"budget_gib\": 13.1,\n"}
+,{"stream_name":"stdout","time":167.164223725,"data":" \"controlled\": {\n"}
+,{"stream_name":"stdout","time":167.164228885,"data":"  \"explicit_each_min\": 12,\n"}
+,{"stream_name":"stdout","time":167.16423655,"data":"  \"coconut_each_min\": 12,\n"}
+,{"stream_name":"stdout","time":167.164253125,"data":"  \"generation_min\": 13,\n"}
+,{"stream_name":"stdout","time":167.164257105,"data":"  \"total_min\": 61\n"}
+,{"stream_name":"stdout","time":167.164260874,"data":" },\n"}
+,{"stream_name":"stdout","time":167.16427823,"data":" \"full\": {\n"}
+,{"stream_name":"stdout","time":167.164282271,"data":"  \"explicit_each_min\": 71,\n"}
+,{"stream_name":"stdout","time":167.164286268,"data":"  \"coconut_each_min\": 72,\n"}
+,{"stream_name":"stdout","time":167.164290203,"data":"  \"generation_min\": 18,\n"}
+,{"stream_name":"stdout","time":167.164294107,"data":"  \"total_min\": 304\n"}
+,{"stream_name":"stdout","time":167.164297085,"data":" }\n"}
+,{"stream_name":"stdout","time":167.164300035,"data":"}\n"}
+,{"stream_name":"stderr","time":172.698417584,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":172.69847044,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":172.859293902,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":172.85932951,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":173.610975494,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":173.70653432,"data":"[NbConvertApp] Writing 196077 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":176.217811748,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":176.88466691,"data":"[NbConvertApp] Writing 574373 bytes to __results__.html\n"}
+]

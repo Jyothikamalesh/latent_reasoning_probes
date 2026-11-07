@@ -1,0 +1,2 @@
+# ProsQA monitorability (current experiment)
+Four GPT-2 small twins per seed (explicit_b, explicit_c, coconut_b, coconut_c; b = behaviour, c = clean). Monitors: explicit-trace text monitors, supervised probes, explicit-to-COCONUT probe transfer, label-free clean-anchor matching, Mahalanobis, plus controls and confound baselines. Modes: tiny (CPU wiring), controlled (rehearsal), full (gates stop the run). See `prosqa_monitor.py` header and `../docs/HISTORY.md`.

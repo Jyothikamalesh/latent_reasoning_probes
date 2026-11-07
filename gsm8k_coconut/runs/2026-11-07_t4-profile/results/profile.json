@@ -1,0 +1,14 @@
+{
+ "text_bs": 32,
+ "coco_stage0_bs": 32,
+ "coco_stage1_bs": 4,
+ "coco_stage2_bs": 4,
+ "coco_stage3_bs": 4,
+ "budget_gib": 13.1,
+ "est_minutes": {
+  "text": 7,
+  "coconut": 49,
+  "generation": 17,
+  "total": 73
+ }
+}

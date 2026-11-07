@@ -1,0 +1,11 @@
+.venv/
+.kaggle_push/
+kaggle_output/
+__pycache__/
+.ipynb_checkpoints/
+coconut_repo/
+tiny_out/
+tiny_run.py
+*.pt
+*.npz
+.DS_Store

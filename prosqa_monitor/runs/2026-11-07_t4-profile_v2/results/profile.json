@@ -1,0 +1,25 @@
+{
+ "text_bs": 8,
+ "coco_bs": {
+  "0": 16,
+  "1": 8,
+  "2": 8,
+  "3": 16,
+  "4": 16,
+  "5": 8,
+  "6": 8
+ },
+ "budget_gib": 13.1,
+ "controlled": {
+  "explicit_each_min": 12,
+  "coconut_each_min": 12,
+  "generation_min": 13,
+  "total_min": 61
+ },
+ "full": {
+  "explicit_each_min": 71,
+  "coconut_each_min": 72,
+  "generation_min": 18,
+  "total_min": 304
+ }
+}

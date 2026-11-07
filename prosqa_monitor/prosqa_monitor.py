@@ -62,7 +62,7 @@ LEARN_MIN = 0.55                   # halfway through a twin's training, unhinted
 CFG = {   # sizes chosen from the T4 profile (controlled ~60-70 min, full ~5 h). N_BENIGN = unhinted prompts used to fit the label-free detectors.
     'tiny':       dict(N_TRAIN=48,   EPOCHS_PER_STAGE=1, N_MON_TRAIN=16,  N_MON_TEST=16,   N_BENIGN=16,   MIN_POS=1,   MIN_NEG=1,   ACC_MIN=0.0, N_VAL=8,   VAL_EVERY=1, N_SUITE=4),
     'mini':       dict(N_TRAIN=300,  EPOCHS_PER_STAGE=1, N_MON_TRAIN=60,  N_MON_TEST=80,   N_BENIGN=100,  MIN_POS=3,   MIN_NEG=3,   ACC_MIN=0.0, N_VAL=30,  VAL_EVERY=1, N_SUITE=20),   # ~15-20 min on a T4: checks the pipeline runs and behaves, not the science
-    'seeds':      dict(N_TRAIN=2000, EPOCHS_PER_STAGE=1, N_MON_TRAIN=300, N_MON_TEST=600,  N_BENIGN=500,  MIN_POS=20,  MIN_NEG=20,  ACC_MIN=0.6, N_VAL=100, VAL_EVERY=1, N_SUITE=80),    # v3 size, larger evaluation set (about 80 correct-hint positives); ~85 min per seed on a T4
+    'seeds':      dict(N_TRAIN=3000, EPOCHS_PER_STAGE=1, N_MON_TRAIN=300, N_MON_TEST=600,  N_BENIGN=500,  MIN_POS=20,  MIN_NEG=20,  ACC_MIN=0.6, N_VAL=150, VAL_EVERY=1, N_SUITE=80),    # 3000 training questions (seed 1 at 2000 left the explicit twin near chance), 150 held-out questions per learning check; ~2 h per seed on a T4
     'controlled': dict(N_TRAIN=2000, EPOCHS_PER_STAGE=1, N_MON_TRAIN=200, N_MON_TEST=300,  N_BENIGN=500,  MIN_POS=20,  MIN_NEG=20,  ACC_MIN=0.6, N_VAL=100, VAL_EVERY=1, N_SUITE=80),
     'full':       dict(N_TRAIN=6000, EPOCHS_PER_STAGE=2, N_MON_TRAIN=500, N_MON_TEST=2000, N_BENIGN=1000, MIN_POS=100, MIN_NEG=200, ACC_MIN=0.7, N_VAL=150, VAL_EVERY=2, N_SUITE=300),   # full: 2000 test questions -> ~1000 wrong-hint prompts, enough negatives for TPR@5%FPR (MIN_NEG gates it); extra questions are held out of ProsQA train
 }[MODE]
@@ -470,6 +470,7 @@ if RUN_SMOKE_FIRST:
     phase('smoke pass'); LOG_TAG = '[smoke] '
     t_smoke = time.time()
     ns = dict(globals()); ns.update(SMOKE_CFG)       # sandbox copy: smoke cells must not overwrite train/models/features of the real run
+    ns.update(TAG='smoke_', OUT_DIR=f'{OUT_DIR}/smoke_out'); os.makedirs(ns['OUT_DIR'], exist_ok=True)   # smoke files must never look like results
     try:
         for src in pipeline_sources(): exec(compile(src, '<smoke>', 'exec'), ns)
     finally:

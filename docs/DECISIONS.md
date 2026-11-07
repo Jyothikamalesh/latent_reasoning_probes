@@ -32,4 +32,5 @@
 | 28 | Add a "unhinted answer wrong" probe as the difficulty baseline for the correct-hint label | On v3 the explicit probes (0.74-0.77) are not clearly above it (0.65-0.73): the main validity question. |
 | 29 | Aggregator rejects runs whose generation count does not match the configuration | Smoke-pass output uses the real file names; an aborted run leaves misleading `status: OK` files. |
 | 30 | Do not change experiment code between seeds of one experiment | A changed code hash breaks comparability; known issues (tight guard threshold, smoke file names) wait for the next version unless they invalidate the science. |
+| 31 | seeds v2: N_TRAIN 3000, 150-question learning checks, smoke pass writes to `smoke_out/` with prefix `smoke_` | Seed 1 at 2000 questions left the explicit twin near chance (0.54, 0.50); the guard was already 'both of the last two checks below 0.55', so the fix is more training and less noisy checks, not a looser guard. All three seeds re-run on one code hash (seed 0 included). |
 

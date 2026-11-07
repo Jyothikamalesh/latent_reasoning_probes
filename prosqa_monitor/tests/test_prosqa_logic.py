@@ -209,6 +209,11 @@ def max_len_covers_data():
     rg = random.Random(1); L = [len(g('make_text_example')(g('plant')(i, rg), True)[0]) for i in g('_items')[:3000]]
     assert max(L) <= g('MAX_LEN'), (max(L), g('MAX_LEN'))
 
+@test
+def smoke_pass_writes_to_its_own_files():
+    src = open('prosqa_monitor.ipynb').read()
+    assert "TAG='smoke_'" in src and "smoke_out" in src, 'the smoke pass must write under a separate prefix and folder'
+
 if __name__ == '__main__':
     f = 0
     for t in TESTS:

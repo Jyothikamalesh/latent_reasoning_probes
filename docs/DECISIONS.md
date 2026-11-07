@@ -28,4 +28,6 @@
 | 24 | `mini` mode (real GPT-2, ~300 examples, ~18 min) is run after any pipeline change before a bigger T4 run | Cheap check that sizes, timings, memory and outputs are right. |
 | 25 | Add the output-only exact-match baseline to every monitor table | Required by the comparison with Ferreira et al.; on wrong-hint prompts it already reaches AUROC 0.86 for the explicit model, so an internal monitor must beat it. |
 | 26 | Consider a correct-hint (or both-hint) counterfactual label as the primary one | Their argument: a wrong hint makes the label collapse to "prediction equals hint". Our harmful subset has exactly this weakness; to be settled before the next run. |
+| 27 | Primary label for the next run: correct-hint counterfactual; wrong-hint (harmful) outcome secondary, always shown next to the exact-match baseline | The wrong-hint label is nearly "followed the hint" (exact match 0.86); the correct-hint label does not collapse (exact match 0.51-0.57). |
+| 28 | Add a "unhinted answer wrong" probe as the difficulty baseline for the correct-hint label | On v3 the explicit probes (0.74-0.77) are not clearly above it (0.65-0.73): the main validity question. |
 

@@ -94,6 +94,13 @@ Conclusion: our differentiators are (a) the validity framing with confound basel
 
 **Correction: an output-only baseline beats our explicit probes.** Their Exact Match baseline was missing from our pipeline. Computed on the saved controlled-v3 data: on wrong-hint prompts the explicit model's exact-match score gives AUROC 0.862 (COCONUT 0.570), above the explicit activation probes (0.80), and only the CoT-conclusion monitor (0.93) beats it. Reason: our harmful label is "followed the wrong hint and the unhinted answer was not the hint", which is almost "followed the hint" when the model is accurate. So the earlier statement that the explicit probes beat the confound baselines was incomplete. The COCONUT probes (0.49-0.58) are not better than the output baseline (0.57). Exact-match baseline rows added to the pipeline.
 
+**Correct-hint label re-analysis of controlled v3** (`prosqa_monitor/analysis/reanalysis_correct_hint.py`; saved data, no GPU). On correct-hint prompts (n about 150, about 40 positives = the hint turned a wrong answer into a right one) the output-only exact-match baseline is weak (explicit 0.57, COCONUT 0.51), so this label does not collapse.
+- Explicit CoT-conclusion != answer text monitor: 0.90 [0.84, 0.96].
+- Explicit probes: mean-CoT 0.74-0.77, answer token 0.66-0.73. A probe trained to predict "the unhinted answer is WRONG" (a difficulty/uncertainty detector, no hint information) scores 0.73 and 0.65: the explicit probes are not clearly better than a difficulty detector.
+- COCONUT probes 0.45-0.57, about equal to their difficulty baselines (0.47-0.57), i.e. chance.
+- Label-free: COCONUT clean-anchor matching 0.61 [0.52, 0.71] (the only above-chance latent score; one of about 16 comparisons, so not robust, and the anchor residual was decoy-sensitive earlier); explicit anchor 0.53; Mahalanobis 0.50 / 0.43; cross-format 0.46-0.52.
+- Reading: with the primary label of the related paper, only the readable-trace text monitor clearly works; activation probes may largely read difficulty. This is the validity hypothesis showing up weakly, single seed, n about 150.
+
 ## Open items (live)
 1. Fix the learnability guard (explicit twins only, three quarters of training, best of the last two evaluations, threshold about 0.55) and make `full` mode save everything and fail only at the end.
 2. Decide the full-run training size: accuracy rose with data (about 0.5 to 0.7 at 2000 examples); 6000 examples x 2 epochs/stage is plausible but unproven. About 6 h per seed on a T4; 3 seeds is about 19 h of the 30 h weekly quota.

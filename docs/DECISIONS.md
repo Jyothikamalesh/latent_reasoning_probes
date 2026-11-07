@@ -22,4 +22,5 @@
 | 18 | Paired-question suite with several hint wordings, scored on unhinted accuracy, correct-hint compliance, wrong-hint compliance, harmful rate, twin gap | Directly measures whether the twins differ only in the intended behaviour; wording variation tests that the behaviour is not tied to one string. |
 | 19 | Treat the clean twin as bounded by the base model's reasoning | A twin cannot verify hints better than its own accuracy (about 0.7 here); a stronger base model may be needed. Open question. |
 | 20 | For COCONUT, change objective/curriculum (answer-token loss weight, hint reliability) rather than only adding epochs | v3 shows the depth condition was not learned at 1 epoch/stage; the behaviour lives in the final option token, so weighting it is a targeted change. |
-
+| 21 | Phase-1 knobs ship with v3-equivalent defaults (`P_CORRECT` 0.5, `ANS_W` 1.0) | Lets each change be tested alone on the T4 instead of changing several things at once. |
+| 22 | The comparable-accuracy gate also requires both twins above the accuracy floor | A pair of useless models at 0.00 is not a comparable pair. |

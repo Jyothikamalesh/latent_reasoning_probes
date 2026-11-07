@@ -64,6 +64,16 @@ Agreed direction: not tied to arithmetic; **ProsQA** with GPT-2 small; two ideas
 
 **Phase 1 (build reliable behavioural twins), the priority.** Paired questions per item (no hint, correct hint, wrong hint, varied hint wording), measuring unhinted accuracy, correct-hint compliance, wrong-hint compliance, harmful hint-following rate and the twin gap. Exit criteria before anything else: both twins learn their policy, unhinted accuracy comparable, harmful rates clearly different, separation reproduces across seeds. For COCONUT, change the curriculum / training objective rather than only adding epochs. Implemented locally first (see the entry below); no Kaggle push without the user's yes.
 
+**Phase 1 implemented locally (no Kaggle push).** All knobs default to the v3 behaviour, so they change nothing until set.
+- Four hint wordings (three used in training, one never seen) and `make_prompt(..., wording)`.
+- `P_CORRECT` (default 0.5): fraction of hinted training prompts with a correct hint; above 0.5 hints become informative, which lets a clean twin learn to use correct hints.
+- `ANS_W` (default 1.0): loss weight on the answer sentence after `###`, for the COCONUT/explicit objective (`weighted_ce`; equals the old loss at 1.0, tested against the HF loss).
+- New phase `behaviour suite` (`build_suite`, `suite_metrics`): paired prompts (unhinted, correct hint, wrong hint per wording) on fresh questions, reporting unhinted accuracy, correct-hint accuracy, wrong-hint compliance (overall, deep vs shallow, seen vs unseen wording) and harmful rate; gates for the exit criteria (twin accuracy within 0.08 and both above the floor, harmful-rate gap >= 0.25, gap holds on the unseen wording, a correct hint does not hurt the clean twin). Saved as `s{seed}_suite.csv` / `_suite_items.jsonl`.
+- `aggregate_seeds.py` reports the suite across seeds and states whether the exit criteria are MET (needs >= 3 seeds).
+- 21 logic tests (8 new/extended); the tiny end-to-end run passes with the new cell. Test-writing mistake caught on the way: building a fresh `Random(seed)` per item made every item identical; tests now share one generator.
+- Gate loophole closed: "comparable accuracy" used to pass at 0.00 vs 0.00.
+- Not yet run on a GPU. Still open: the two guard fixes below.
+
 ## Open items (live)
 1. Fix the learnability guard (explicit twins only, three quarters of training, best of the last two evaluations, threshold about 0.55) and make `full` mode save everything and fail only at the end.
 2. Decide the full-run training size: accuracy rose with data (about 0.5 to 0.7 at 2000 examples); 6000 examples x 2 epochs/stage is plausible but unproven. About 6 h per seed on a T4; 3 seeds is about 19 h of the 30 h weekly quota.

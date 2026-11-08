@@ -1,0 +1,12 @@
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]Loading weights: 100%|██████████| 148/148 [00:00<00:00, 2837.21it/s]
+[transformers] The new embeddings will be initialized from a multivariate normal distribution that has old embeddings' mean and covariance. As described in this article: https://nlp.stanford.edu/~johnhew/vocab-expansion.html. To disable this, use `mean_resizing=False`
+Traceback (most recent call last):
+  File "/kaggle/working/run_patching.py", line 209, in <module>
+    if __name__ == '__main__': main()
+                               ~~~~^^
+  File "/kaggle/working/run_patching.py", line 112, in main
+    rows = build_rows(a.gens, a.model, tok, a.limit); R = Runner(tok, model, rows, a.device, a.bs)
+  File "/kaggle/working/run_patching.py", line 46, in build_rows
+    assert {true, hint} == {a, b}, (true, hint, a, b); assert ph in (a, b) and pu in (a, b), (ph, pu, a, b)       # answers are one of the two options
+                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('rorpus', 'horpus', 'hilpus', 'rorpus')

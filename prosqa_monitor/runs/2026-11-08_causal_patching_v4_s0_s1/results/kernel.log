@@ -1,0 +1,209 @@
+[{"stream_name":"stderr","time":8.479710037,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":8.479757391,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":8.479763339,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":8.47976719,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":9.103888525,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":9.103925222,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":9.103931099,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":9.103935411,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":31.024451131,"data":"Cloning into '/kaggle/working/coconut_repo'...\n"}
+,{"stream_name":"stdout","time":31.206680879,"data":"torch 2.11.0+cu130 transformers 5.20.2 gpus 2 ['Tesla T4', 'Tesla T4']\n"}
+,{"stream_name":"stderr","time":31.227118311,"data":"Cloning into '/kaggle/working/coconut_repo'...\n"}
+,{"stream_name":"stderr","time":31.227139717,"data":"\n"}
+,{"stream_name":"stderr","time":31.227143927,"data":"Cloning into '/kaggle/working/coconut_repo'...\n"}
+,{"stream_name":"stdout","time":33.109985242,"data":"inputs /kaggle/input/datasets/jyothikamaleshs/prosqa-coconut-b-twins ['s0_coconut_b.pt', 's0_generations.jsonl', 's1_coconut_b.pt', 's1_generations.jsonl', 's2_coconut_b.pt', 's2_generations.jsonl']\n"}
+,{"stream_name":"stdout","time":53.772541896999996,"data":" [transformers] Model config: bos_token_id must be `None` or an integer within the vocabulary (between 0 and 39), got 50256. This may result in unexpected behavior.\n"}
+,{"stream_name":"stdout","time":53.772616942,"data":"[transformers] Model config: eos_token_id must be `None` or an integer within the vocabulary (between 0 and 39), got 50256. This may result in unexpected behavior.\n"}
+,{"stream_name":"stdout","time":53.772625505,"data":"................\n"}
+,{"stream_name":"stdout","time":53.77263008,"data":"----------------------------------------------------------------------\n"}
+,{"stream_name":"stdout","time":53.772634572,"data":"Ran 16 tests in 0.890s\n"}
+,{"stream_name":"stdout","time":53.772639162,"data":"\n"}
+,{"stream_name":"stdout","time":53.772644219,"data":"OK\n"}
+,{"stream_name":"stdout","time":53.772648856,"data":"\n"}
+,{"stream_name":"stdout","time":1762.408215035,"data":"workers exited [1, 0] 28.5 min\n"}
+,{"stream_name":"stdout","time":1762.419400584,"data":"===== seed 0 =====\n"}
+,{"stream_name":"stdout","time":1762.419426425,"data":"00]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419433049,"data":"  full6                dM -0.001 [-0.002,-0.001]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419438114,"data":"  zero_full6           dM -0.034 [-0.052,-0.017]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419442199,"data":"  matched_full6        dM -0.000 [-0.002,+0.001]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.41944648,"data":"  full6_pm             dM -0.001 [-0.002,-0.001]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419450725,"data":"  block_answer         dM +3.581 [+3.344,+3.823]  P(true) 0.99  P(wrong) 0.01\n"}
+,{"stream_name":"stdout","time":1762.419455659,"data":"  block_latents        dM -0.001 [-0.002,-0.000]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419469797,"data":"  block_latents_pm     dM -0.001 [-0.002,-0.000]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419473944,"data":"  full6_block_answer   dM +3.581 [+3.352,+3.829]  P(true) 0.99  P(wrong) 0.01\n"}
+,{"stream_name":"stdout","time":1762.419477714,"data":"  both_blocked         dM +3.581 [+3.350,+3.822]  P(true) 0.99  P(wrong) 0.01\n"}
+,{"stream_name":"stdout","time":1762.419481042,"data":"  both_blocked_pm      dM +3.581 [+3.349,+3.835]  P(true) 0.99  P(wrong) 0.01\n"}
+,{"stream_name":"stdout","time":1762.419484339,"data":"  block_latents_mad    dM -0.001 [-0.002,-0.000]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419487696,"data":"  both_blocked_mad     dM +3.580 [+3.357,+3.832]  P(true) 0.99  P(wrong) 0.01\n"}
+,{"stream_name":"stdout","time":1762.419491237,"data":"  u_block_latents      dM -0.000 [-0.000,-0.000]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419494668,"data":"  u_block_answer       dM +0.002 [-0.001,+0.006]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419497882,"data":"  u_both_blocked       dM +0.002 [-0.002,+0.006]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419502055,"data":"  reverse_mean         dM +0.000 [-0.000,+0.000]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.4195063,"data":"\n"}
+,{"stream_name":"stdout","time":1762.419509422,"data":"[resistant] n=78  baseline {'M_hinted': 1.6374421119689941, 'M_unhinted': 4.685947457949321, 'p_true_hinted': 1.0}\n"}
+,{"stream_name":"stdout","time":1762.419513415,"data":"  single_mean          dM -0.000 [-0.001,-0.000]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419517125,"data":"  single_pm_mean       dM -0.000 [-0.001,-0.000]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419520785,"data":"  noise_mean           dM -0.063 [-0.083,-0.045]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419524778,"data":"  matched_mean         dM -0.001 [-0.001,-0.000]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419529059,"data":"  samecond_mean        dM -0.000 [-0.001,+0.000]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419533049,"data":"  persist_mean         dM -0.001 [-0.002,+0.001]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419536928,"data":"  full6                dM -0.001 [-0.002,+0.000]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419540197,"data":"  zero_full6           dM -0.023 [-0.042,-0.003]  P(true) 0.97  P(wrong) 0.03\n"}
+,{"stream_name":"stdout","time":1762.419544969,"data":"  matched_full6        dM -0.002 [-0.004,-0.000]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419548311,"data":"  full6_pm             dM -0.001 [-0.002,-0.000]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419551647,"data":"  block_answer         dM +3.056 [+2.833,+3.275]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419554946,"data":"  block_latents        dM -0.001 [-0.003,+0.001]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419558309,"data":"  block_latents_pm     dM -0.001 [-0.003,+0.001]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419561588,"data":"  full6_block_answer   dM +3.056 [+2.842,+3.277]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419564932,"data":"  both_blocked         dM +3.056 [+2.828,+3.284]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419568786,"data":"  both_blocked_pm      dM +3.056 [+2.828,+3.287]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419577428,"data":"  block_latents_mad    dM -0.001 [-0.003,+0.001]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419580934,"data":"  both_blocked_mad     dM +3.056 [+2.835,+3.297]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419584555,"data":"  u_block_latents      dM +0.000 [-0.000,+0.000]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419588063,"data":"  u_block_answer       dM +0.005 [-0.001,+0.011]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419591589,"data":"  u_both_blocked       dM +0.005 [-0.001,+0.010]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419595568,"data":"  reverse_mean         dM +0.000 [-0.000,+0.000]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419599113,"data":"\n"}
+,{"stream_name":"stdout","time":1762.419602185,"data":"[wrong_either] n=106  baseline {'M_hinted': -4.402506848551193, 'M_unhinted': -1.780024048292412, 'p_true_hinted': 0.0}\n"}
+,{"stream_name":"stdout","time":1762.419606028,"data":"  single_mean          dM -0.000 [-0.000,-0.000]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419609401,"data":"  single_pm_mean       dM -0.000 [-0.000,-0.000]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419613053,"data":"  noise_mean           dM +0.031 [+0.017,+0.046]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419617065,"data":"  matched_mean         dM +0.000 [-0.000,+0.000]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419620743,"data":"  samecond_mean        dM +0.000 [-0.000,+0.000]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419624618,"data":"  persist_mean         dM -0.000 [-0.001,+0.001]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419628475,"data":"  full6                dM -0.001 [-0.002,+0.000]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419632432,"data":"  zero_full6           dM -0.043 [-0.061,-0.025]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419635803,"data":"  matched_full6        dM +0.000 [-0.001,+0.002]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419639591,"data":"  full6_pm             dM -0.001 [-0.002,-0.000]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419644352,"data":"  block_answer         dM +2.617 [+2.397,+2.842]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419648409,"data":"  block_latents        dM +0.000 [-0.001,+0.002]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419652223,"data":"  block_latents_pm     dM +0.000 [-0.001,+0.001]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419656297,"data":"  full6_block_answer   dM +2.616 [+2.407,+2.841]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419660176,"data":"  both_blocked         dM +2.617 [+2.395,+2.834]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.41966356,"data":"  both_blocked_pm      dM +2.617 [+2.403,+2.844]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419686781,"data":"  block_latents_mad    dM +0.000 [-0.001,+0.002]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419690921,"data":"  both_blocked_mad     dM +2.617 [+2.386,+2.841]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419694813,"data":"  u_block_latents      dM -0.000 [-0.000,+0.000]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419698554,"data":"  u_block_answer       dM -0.004 [-0.008,-0.000]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419706721,"data":"  u_both_blocked       dM -0.004 [-0.008,-0.000]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419710073,"data":"  reverse_mean         dM +0.000 [-0.000,+0.000]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419713435,"data":"\n"}
+,{"stream_name":"stdout","time":1762.419716603,"data":"saved to /kaggle/working/patching_s0 in 28.0 min\n"}
+,{"stream_name":"stdout","time":1762.419719935,"data":"\n"}
+,{"stream_name":"stdout","time":1762.419722963,"data":"===== seed 1 =====\n"}
+,{"stream_name":"stdout","time":1762.419726187,"data":"]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419729288,"data":"  full6                dM +0.000 [-0.001,+0.001]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419732595,"data":"  zero_full6           dM +0.019 [+0.006,+0.033]  P(true) 0.02  P(wrong) 0.98\n"}
+,{"stream_name":"stdout","time":1762.419735914,"data":"  matched_full6        dM +0.001 [-0.000,+0.003]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419739277,"data":"  full6_pm             dM -0.000 [-0.001,+0.001]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419742776,"data":"  block_answer         dM +3.565 [+3.321,+3.821]  P(true) 0.97  P(wrong) 0.03\n"}
+,{"stream_name":"stdout","time":1762.41974656,"data":"  block_latents        dM -0.002 [-0.003,-0.001]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419750017,"data":"  block_latents_pm     dM -0.002 [-0.003,-0.001]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419753323,"data":"  full6_block_answer   dM +3.566 [+3.315,+3.810]  P(true) 0.97  P(wrong) 0.03\n"}
+,{"stream_name":"stdout","time":1762.41975654,"data":"  both_blocked         dM +3.567 [+3.314,+3.818]  P(true) 0.97  P(wrong) 0.03\n"}
+,{"stream_name":"stdout","time":1762.419760314,"data":"  both_blocked_pm      dM +3.567 [+3.321,+3.809]  P(true) 0.97  P(wrong) 0.03\n"}
+,{"stream_name":"stdout","time":1762.419764008,"data":"  block_latents_mad    dM -0.002 [-0.003,-0.001]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419767986,"data":"  both_blocked_mad     dM +3.566 [+3.316,+3.817]  P(true) 0.97  P(wrong) 0.03\n"}
+,{"stream_name":"stdout","time":1762.419771728,"data":"  u_block_latents      dM -0.001 [-0.001,-0.000]  P(true) 0.99  P(wrong) 0.01\n"}
+,{"stream_name":"stdout","time":1762.419777036,"data":"  u_block_answer       dM +0.004 [-0.000,+0.007]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419780563,"data":"  u_both_blocked       dM +0.003 [-0.001,+0.006]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419783896,"data":"  reverse_mean         dM -0.000 [-0.001,-0.000]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419787466,"data":"\n"}
+,{"stream_name":"stdout","time":1762.419791063,"data":"[resistant] n=68  baseline {'M_hinted': 1.4116144605419214, 'M_unhinted': 4.0641161913380905, 'p_true_hinted': 1.0}\n"}
+,{"stream_name":"stdout","time":1762.419794947,"data":"  single_mean          dM -0.001 [-0.001,-0.001]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419798864,"data":"  single_pm_mean       dM -0.001 [-0.001,-0.001]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419802476,"data":"  noise_mean           dM -0.004 [-0.019,+0.011]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419805827,"data":"  matched_mean         dM -0.001 [-0.001,-0.001]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419809311,"data":"  samecond_mean        dM -0.000 [-0.000,+0.000]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.4198174,"data":"  persist_mean         dM -0.003 [-0.004,-0.002]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419821402,"data":"  full6                dM -0.003 [-0.004,-0.001]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419824956,"data":"  zero_full6           dM +0.009 [-0.010,+0.028]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419828525,"data":"  matched_full6        dM -0.004 [-0.006,-0.002]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419832063,"data":"  full6_pm             dM -0.003 [-0.004,-0.002]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419835936,"data":"  block_answer         dM +2.661 [+2.344,+2.989]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419839775,"data":"  block_latents        dM -0.003 [-0.005,-0.002]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.41984315,"data":"  block_latents_pm     dM -0.004 [-0.005,-0.002]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419846798,"data":"  full6_block_answer   dM +2.659 [+2.333,+2.981]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419850761,"data":"  both_blocked         dM +2.659 [+2.340,+2.995]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419854829,"data":"  both_blocked_pm      dM +2.659 [+2.342,+2.994]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419858793,"data":"  block_latents_mad    dM -0.004 [-0.005,-0.002]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419862806,"data":"  both_blocked_mad     dM +2.660 [+2.337,+2.981]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419865893,"data":"  u_block_latents      dM -0.000 [-0.001,+0.000]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419869466,"data":"  u_block_answer       dM +0.000 [-0.004,+0.005]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419872742,"data":"  u_both_blocked       dM -0.000 [-0.005,+0.004]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419876216,"data":"  reverse_mean         dM +0.000 [-0.000,+0.001]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1762.419879651,"data":"\n"}
+,{"stream_name":"stdout","time":1762.419883768,"data":"[wrong_either] n=112  baseline {'M_hinted': -4.062148275119918, 'M_unhinted': -1.7295763442026717, 'p_true_hinted': 0.0}\n"}
+,{"stream_name":"stdout","time":1762.419887126,"data":"  single_mean          dM -0.001 [-0.001,-0.000]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.41989037,"data":"  single_pm_mean       dM -0.001 [-0.001,-0.000]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419893728,"data":"  noise_mean           dM +0.042 [+0.032,+0.052]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419897308,"data":"  matched_mean         dM -0.000 [-0.001,-0.000]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419900621,"data":"  samecond_mean        dM +0.000 [-0.000,+0.000]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.41990407,"data":"  persist_mean         dM -0.002 [-0.003,-0.002]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419907341,"data":"  full6                dM -0.002 [-0.003,-0.000]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419911151,"data":"  zero_full6           dM +0.026 [+0.011,+0.040]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419914757,"data":"  matched_full6        dM -0.001 [-0.002,+0.001]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419922797,"data":"  full6_pm             dM -0.002 [-0.003,-0.001]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419926035,"data":"  block_answer         dM +2.334 [+2.119,+2.560]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419929841,"data":"  block_latents        dM -0.003 [-0.004,-0.002]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419933832,"data":"  block_latents_pm     dM -0.003 [-0.004,-0.002]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419937782,"data":"  full6_block_answer   dM +2.334 [+2.111,+2.560]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419941301,"data":"  both_blocked         dM +2.334 [+2.115,+2.557]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419945214,"data":"  both_blocked_pm      dM +2.334 [+2.124,+2.562]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419948864,"data":"  block_latents_mad    dM -0.003 [-0.005,-0.002]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419952059,"data":"  both_blocked_mad     dM +2.334 [+2.119,+2.558]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419955244,"data":"  u_block_latents      dM +0.001 [+0.000,+0.001]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419958402,"data":"  u_block_answer       dM -0.002 [-0.005,+0.001]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419961539,"data":"  u_both_blocked       dM -0.002 [-0.004,+0.001]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.41996483,"data":"  reverse_mean         dM +0.000 [-0.000,+0.000]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1762.419968114,"data":"\n"}
+,{"stream_name":"stdout","time":1762.419971075,"data":"saved to /kaggle/working/patching_s1 in 27.3 min\n"}
+,{"stream_name":"stdout","time":1762.419974379,"data":"\n"}
+,{"stream_name":"stdout","time":1762.419977927,"data":"===== seed 2 =====\n"}
+,{"stream_name":"stdout","time":1762.419981186,"data":"\n"}
+,{"stream_name":"stdout","time":1762.419984331,"data":"Loading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\n"}
+,{"stream_name":"stdout","time":1762.419988195,"data":"Loading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 2837.21it/s]\n"}
+,{"stream_name":"stdout","time":1762.419993999,"data":"[transformers] The new embeddings will be initialized from a multivariate normal distribution that has old embeddings' mean and covariance. As described in this article: https://nlp.stanford.edu/~johnhew/vocab-expansion.html. To disable this, use `mean_resizing=False`\n"}
+,{"stream_name":"stdout","time":1762.41999873,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stdout","time":1762.42000205,"data":"  File \"/kaggle/working/run_patching.py\", line 209, in \u003cmodule\u003e\n"}
+,{"stream_name":"stdout","time":1762.420005751,"data":"    if __name__ == '__main__': main()\n"}
+,{"stream_name":"stdout","time":1762.420009136,"data":"                               ~~~~^^\n"}
+,{"stream_name":"stdout","time":1762.420012641,"data":"  File \"/kaggle/working/run_patching.py\", line 112, in main\n"}
+,{"stream_name":"stdout","time":1762.420020355,"data":"    rows = build_rows(a.gens, a.model, tok, a.limit); R = Runner(tok, model, rows, a.device, a.bs)\n"}
+,{"stream_name":"stdout","time":1762.420023888,"data":"  File \"/kaggle/working/run_patching.py\", line 46, in build_rows\n"}
+,{"stream_name":"stdout","time":1762.420028077,"data":"    assert {true, hint} == {a, b}, (true, hint, a, b); assert ph in (a, b) and pu in (a, b), (ph, pu, a, b)       # answers are one of the two options\n"}
+,{"stream_name":"stdout","time":1762.420036386,"data":"                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stdout","time":1762.420040105,"data":"AssertionError: ('rorpus', 'horpus', 'hilpus', 'rorpus')\n"}
+,{"stream_name":"stdout","time":1762.42004383,"data":"\n"}
+,{"stream_name":"stderr","time":1763.261305708,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":1763.262156405,"data":"  File \"\u003cstring\u003e\", line 1, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":1763.262186529,"data":"    import sys;import papermill as pm;pm.execute_notebook(\"__notebook__.ipynb\",\"__notebook__.ipynb\",progress_bar=False,log_output=True,stdout_file=sys.stdout,stderr_file=sys.stderr,allow_errors=False,timeout=43200)\n"}
+,{"stream_name":"stderr","time":1763.262192813,"data":"                                      ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":1763.262196935,"data":"  File \"/usr/local/lib/python3.13/dist-packages/papermill/execute.py\", line 131, in execute_notebook\n"}
+,{"stream_name":"stderr","time":1763.262201141,"data":"    raise_for_execution_errors(nb, output_path)\n"}
+,{"stream_name":"stderr","time":1763.262204829,"data":"    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":1763.262208447,"data":"  File \"/usr/local/lib/python3.13/dist-packages/papermill/execute.py\", line 251, in raise_for_execution_errors\n"}
+,{"stream_name":"stderr","time":1763.262212384,"data":"    raise error\n"}
+,{"stream_name":"stderr","time":1763.262215827,"data":"papermill.exceptions.PapermillExecutionError: \n"}
+,{"stream_name":"stderr","time":1763.262219258,"data":"---------------------------------------------------------------------------\n"}
+,{"stream_name":"stderr","time":1763.262223508,"data":"Exception encountered at \"In [6]\":\n"}
+,{"stream_name":"stderr","time":1763.262227645,"data":"---------------------------------------------------------------------------\n"}
+,{"stream_name":"stderr","time":1763.262231273,"data":"AssertionError                            Traceback (most recent call last)\n"}
+,{"stream_name":"stderr","time":1763.262235336,"data":"/tmp/ipykernel_23/4048542904.py in \u003ccell line: 0\u003e()\n"}
+,{"stream_name":"stderr","time":1763.262239224,"data":"----\u003e 1 assert all(p.returncode == 0 for p in procs), 'a worker failed: see the logs above'\n"}
+,{"stream_name":"stderr","time":1763.262242864,"data":"      2 for s in (0, 1, 2):\n"}
+,{"stream_name":"stderr","time":1763.262246297,"data":"      3     f = f'/kaggle/working/patching_s{s}/patching_summary.json'; assert os.path.exists(f), f'missing {f}'\n"}
+,{"stream_name":"stderr","time":1763.262250465,"data":"      4     assert json.load(open(f))['meta']['run_id'] == RUN_ID, f'seed {s} summary is not from this run'\n"}
+,{"stream_name":"stderr","time":1763.262254575,"data":"      5 print('all three summaries present and from this run', RUN_ID)\n"}
+,{"stream_name":"stderr","time":1763.262258484,"data":"\n"}
+,{"stream_name":"stderr","time":1763.262262709,"data":"AssertionError: a worker failed: see the logs above\n"}
+,{"stream_name":"stderr","time":1763.262266741,"data":"\n"}
+,{"stream_name":"stderr","time":1765.39937367,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":1765.399413945,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":1765.571030042,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":1765.571086963,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":1766.387047945,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":1766.463769773,"data":"[NbConvertApp] Writing 63669 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":1768.911813308,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":1769.424733134,"data":"[NbConvertApp] Writing 402167 bytes to __results__.html\n"}
+]

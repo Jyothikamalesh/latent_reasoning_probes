@@ -37,13 +37,14 @@ def depth_lookup():
 
 
 def build_rows(gens, model, tok, limit):
-    enc = lambda s: tok(s, add_special_tokens=False)['input_ids']; depth = depth_lookup(); rows = []
+    enc = lambda s: tok(s, add_special_tokens=False)['input_ids']; depth = depth_lookup(); rows = []; third = 0
     for l in (json.loads(x) for x in open(gens)):
         if l['model'] != model or l['split'] != 'te' or not l['hint_wrong'] or not l['ok']: continue
         ph, pu = (ANS_RE.search(l[k]) for k in ('text_hinted', 'text_unhinted'))
         if not ph or not pu: continue
         ph, pu = ph.group(1), pu.group(1); mq = Q_RE.search(l['q']); assert mq, l['q'][-80:]; subj, a, b = mq.groups(); true, hint = l['true'], l['hint']
-        assert {true, hint} == {a, b}, (true, hint, a, b); assert ph in (a, b) and pu in (a, b), (ph, pu, a, b)       # answers are one of the two options
+        assert {true, hint} == {a, b}, (true, hint, a, b)
+        if ph not in (a, b) or pu not in (a, b): third += 1; continue                     # a third-option answer belongs to none of the three registered groups (counted, not analysed)
         group = 'harmful' if (pu == true and ph == hint) else 'resistant' if (pu == true and ph == true) else 'wrong_either' if (pu == hint and ph == hint) else None
         if group is None: continue
         U, H = make_prompt(l['q'], None, l['decoy']), make_prompt(l['q'], hint, l['decoy'])
@@ -53,6 +54,7 @@ def build_rows(gens, model, tok, limit):
                          pU=enc(U), pH=enc(H), hl=lp.hint_span_len(enc, H, U),
                          ostart=len(enc(f'### {subj} is a')),
                          t_true=[tok.convert_tokens_to_ids('<eot>')] + enc(f'### {subj} is a {true}.'), t_wrong=[tok.convert_tokens_to_ids('<eot>')] + enc(f'### {subj} is a {hint}.')))
+    build_rows.third_option_skipped = third
     assert rows, 'no usable rows'; assert len({r['q'] for r in rows}) == len(rows), 'duplicate questions: one row per question expected'
     assert all(r['hl'] > 0 for r in rows), 'a wrong-hint row has an empty hint span'
     return rows[:limit] if limit else rows
@@ -192,7 +194,7 @@ def main():
             'both_blocked': 'all six inputs replaced by unhinted states, latents AND answer blocked from the hint span and <bot>: no route from the hint remains',
             'both_blocked_pm': 'as both_blocked with position-matched donor states', 'both_blocked_mad': 'as both_blocked with donor states produced under the same blocked-attention regime',
             'u_block_latents / u_block_answer / u_both_blocked': 'disruption baselines: the same blocks applied to UNHINTED prompts (<bot> blocked); change relative to the unhinted M, i.e. what blocking does with no hint present'}
-    meta = dict(run_id=a.run_id, ckpt=a.ckpt, model=a.model, n_rows=len(rows), counts=cnt, depth_known=int(sum(r['depth'] is not None for r in rows)), rebuild_agreement_hinted=agree, rebuild_agreement_unhinted=agreeU, rebuild_agreement_by_group=gagree,
+    meta = dict(third_option_rows_skipped=build_rows.third_option_skipped, run_id=a.run_id, ckpt=a.ckpt, model=a.model, n_rows=len(rows), counts=cnt, depth_known=int(sum(r['depth'] is not None for r in rows)), rebuild_agreement_hinted=agree, rebuild_agreement_unhinted=agreeU, rebuild_agreement_by_group=gagree,
                 identity_max_abs_diff=float(np.abs(idn - MH).max()), seed=a.seed, boot=a.boot, minutes=(time.time() - t0) / 60, torch=torch.__version__)
     json.dump(dict(meta=meta, condition_descriptions=DESC, summary=S), open(f'{a.out}/patching_summary.json', 'w'), indent=1)
     with open(f'{a.out}/patching_rows.jsonl', 'w') as f:

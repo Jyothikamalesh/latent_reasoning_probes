@@ -19,13 +19,21 @@ cells = [
  nbf.v4.new_code_cell("# two workers, one per GPU: GPU 0 takes seeds 0 and 2, GPU 1 takes seed 1 (seeds are independent; each worker sees a single device)\n"
    f"LIMIT, BOOT = {LIMIT}, {BOOT}\n"
    "PLAN = {0: [0, 2], 1: [1]} if torch.cuda.device_count() >= 2 else {0: [0, 1, 2]}\n"
+   "RUN_ID = str(int(time.time()))\n"
+   "import shutil\n"
+   "for s in (0, 1, 2): shutil.rmtree(f'/kaggle/working/patching_s{s}', ignore_errors=True)\n"
    "def worker(gpu, seeds):\n"
-   "    cmds = ' ; '.join(f\"{sys.executable} /kaggle/working/run_patching.py --ckpt {INP}/s{s}_coconut_b.pt --gens {INP}/s{s}_generations.jsonl --out /kaggle/working/patching_s{s} --device cuda --seed {s} --boot {BOOT} --bs 16\" + (f' --limit {LIMIT}' if LIMIT else '') + f' > /kaggle/working/patching_s{s}.log 2>&1' for s in seeds)\n"
+   "    cmds = ' && '.join(f\"{sys.executable} /kaggle/working/run_patching.py --ckpt {INP}/s{s}_coconut_b.pt --gens {INP}/s{s}_generations.jsonl --out /kaggle/working/patching_s{s} --device cuda --seed {s} --boot {BOOT} --bs 16 --run-id {RUN_ID}\" + (f' --limit {LIMIT}' if LIMIT else '') + f' > /kaggle/working/patching_s{s}.log 2>&1' for s in seeds)\n"
    "    return subprocess.Popen(['bash', '-c', cmds], env={**os.environ, 'CUDA_VISIBLE_DEVICES': str(gpu), 'PROSQA_DIR': DATA})\n"
    "t0 = time.time(); procs = [worker(g, s) for g, s in PLAN.items()]\n"
    "for p in procs: p.wait()\n"
    "print('workers exited', [p.returncode for p in procs], f'{(time.time() - t0) / 60:.1f} min')"),
  nbf.v4.new_code_cell("for s in (0, 1, 2):\n    f = f'/kaggle/working/patching_s{s}.log'\n    if os.path.exists(f): print(f'===== seed {s} =====\\n' + ''.join(l for l in open(f) if 'arn' not in l)[-5000:])"),
+ nbf.v4.new_code_cell("assert all(p.returncode == 0 for p in procs), 'a worker failed: see the logs above'\n"
+   "for s in (0, 1, 2):\n"
+   "    f = f'/kaggle/working/patching_s{s}/patching_summary.json'; assert os.path.exists(f), f'missing {f}'\n"
+   "    assert json.load(open(f))['meta']['run_id'] == RUN_ID, f'seed {s} summary is not from this run'\n"
+   "print('all three summaries present and from this run', RUN_ID)"),
 ]
 nb = nbf.v4.new_notebook(cells=cells); nb.metadata = {"kernelspec": {"display_name": "Python 3", "language": "python", "name": "python3"}, "language_info": {"name": "python"}}
 for i, c in enumerate(nb.cells): c['id'] = f'cell{i:03d}'

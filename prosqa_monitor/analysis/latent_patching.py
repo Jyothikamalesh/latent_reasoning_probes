@@ -71,10 +71,20 @@ def sentence_logprob(out):
     return (out['logp'] * out['mask']).sum(1)
 
 
-def margin(model, prompts, hint_lens, tail_true, tail_wrong, n, pad_id, bot, lat, patch=None, block_latents_from=None, block_answer=False, device='cpu', hide_hint=False, block_bot=False):
+def option_logprob(out, start):
+    """Summed log-probability and token count of the OPTION tokens only (the shared prefix '### subj is a' excluded). start[b] = index in the logp row where the option begins."""
+    idx = torch.arange(out['logp'].shape[1], device=out['logp'].device)[None]
+    m = out['mask'] & (idx >= torch.as_tensor(start, device=idx.device)[:, None])
+    return (out['logp'] * m).sum(1), m.sum(1)
+
+
+def margin(model, prompts, hint_lens, tail_true, tail_wrong, n, pad_id, bot, lat, patch=None, block_latents_from=None, block_answer=False, device='cpu', hide_hint=False, block_bot=False, opt_start=None):
     """M = S(true option sentence) - S(wrong option sentence), same context, same intervention. Returns M (B,) and the thoughts of the true-option pass (identical for both passes)."""
     res = []
     for tails in (tail_true, tail_wrong):
         bt = make_batch(prompts, hint_lens, tails, n, pad_id, bot, lat, device, hide_hint, block_bot)
         res.append(run(model, bt, patch, block_latents_from, block_answer))
-    return sentence_logprob(res[0]) - sentence_logprob(res[1]), res[0]['thoughts']
+    M = sentence_logprob(res[0]) - sentence_logprob(res[1])
+    if opt_start is None: return M, res[0]['thoughts']
+    (st, nt), (sw, nw) = option_logprob(res[0], opt_start), option_logprob(res[1], opt_start)
+    return M, res[0]['thoughts'], st / nt - sw / nw, nt - nw                # sensitivity: per-option-token mean log-prob margin, and the option token-count difference

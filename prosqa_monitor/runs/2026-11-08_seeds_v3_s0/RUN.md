@@ -7,7 +7,7 @@
 ## Behaviour twins (80 questions x 4 wordings)
 | | unhinted acc (b / c) | harmful rate (b / c) | unseen wording harmful (b / c) |
 |---|---|---|---|
-| explicit | 0.69 / 0.70 | 0.48 / 0.02 | 0.50 / 0.01 |
+| explicit | 0.69 / 0.70 | 0.47 / 0.02 | 0.50 / 0.01 |
 | COCONUT | 0.76 / 0.69 | 0.52 / 0.01 | 0.51 / 0.00 |
 
 Accuracy gaps 0.01 (explicit) and 0.07 (COCONUT), harmful-rate gaps 0.46 and 0.51: the Phase-1 criteria hold on this seed (they do not yet hold on 3 seeds of this version).

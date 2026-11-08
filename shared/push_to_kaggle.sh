@@ -30,7 +30,7 @@ case "${1:-push}" in
   "is_private": true,
   "enable_gpu": true,
   "enable_internet": true,
-  "dataset_sources": [],
+  "dataset_sources": [${DATASETS:+\"$DATASETS\"}],
   "competition_sources": [],
   "kernel_sources": []
 }

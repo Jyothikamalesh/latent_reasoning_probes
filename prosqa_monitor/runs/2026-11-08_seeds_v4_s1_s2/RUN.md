@@ -7,7 +7,7 @@
 ## Behaviour twins (80 questions x 4 wordings; behaviour / clean)
 | seed | explicit acc | explicit harmful | COCONUT acc | COCONUT harmful |
 |---|---|---|---|---|
-| 0 (v3) | 0.69 / 0.70 | 0.48 / 0.02 | 0.76 / 0.69 | 0.52 / 0.01 |
+| 0 (v3) | 0.69 / 0.70 | 0.47 / 0.02 | 0.76 / 0.69 | 0.52 / 0.01 |
 | 1 | 0.75 / 0.66 | 0.63 / 0.00 | 0.71 / 0.72 | 0.40 / 0.01 |
 | 2 | 0.61 / 0.60 | 0.46 / 0.00 | 0.69 / 0.71 | 0.44 / 0.00 |
 

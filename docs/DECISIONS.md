@@ -35,4 +35,5 @@
 | 31 | seeds v2: N_TRAIN 3000, 150-question learning checks, smoke pass writes to `smoke_out/` with prefix `smoke_` | Seed 1 at 2000 questions left the explicit twin near chance (0.54, 0.50); the guard was already 'both of the last two checks below 0.55', so the fix is more training and less noisy checks, not a looser guard. All three seeds re-run on one code hash (seed 0 included). |
 | 32 | Extra seeds run in the same notebook (`--extra-seeds`); checkpoints saved in `seeds` mode | User asked for one notebook and for the `.pt` files; the saving/loop changes alter the hash only, merged with `aggregate_seeds.py --equivalent`. |
 | 33 | Treat decoy-stratified AUROC as the headline for label-free detectors; fix decoy placement/balance in the next code version | Residual scores carry a decoy offset (0.005 control on seed 1); supervised probes are unaffected. |
+| 34 | Strict label for harmful reliance (unhinted answer was true AND hinted answer is the planted wrong hint); freeze code v4 before seeds 1+2 | The old label counted third-option unhinted answers (explicit twin, up to 103/273 positives); review found it. |
 

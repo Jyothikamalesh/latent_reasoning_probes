@@ -1,0 +1,30 @@
+
+##### STRICT HARMFUL RELIANCE, explicit_b (wrong-hint test rows; Y_strict = unhinted correct AND followed the wrong hint) #####
+                                                                                             auroc     lo     hi    min    max    pos    neg  label_changed  seeds
+kind                           monitor                                                                                                                            
+text                           text: CoT conclusion != answer                                0.922  0.888  0.952  0.922  0.922  165.0  126.0           10.0      1
+baseline                       output-only exact match                                       0.671  0.630  0.710  0.671  0.671  165.0  126.0           10.0      1
+probe (strict label)           probe mean_cot, strict harmful-only                           0.614  0.545  0.670  0.614  0.614  165.0  126.0           10.0      1
+label-free (label-independent) label-free: clean-anchor matching (explicit_c -> explicit_b)  0.565  0.493  0.627  0.565  0.565  165.0  126.0           10.0      1
+probe (strict label)           probe h_ans, strict harmful-only                              0.521  0.465  0.593  0.521  0.521  165.0  126.0           10.0      1
+label-free (label-independent) label-free: Mahalanobis on explicit h_prompt (benign fit)     0.487  0.433  0.556  0.487  0.487  165.0  126.0           10.0      1
+baseline                       difficulty baseline mean_cot (unhinted correct)               0.476  0.414  0.543  0.476  0.476  165.0  126.0           10.0      1
+probe (strict label)           probe h_prompt, strict harmful-only                           0.465  0.401  0.542  0.465  0.465  165.0  126.0           10.0      1
+baseline                       difficulty baseline h_prompt (unhinted correct)               0.464  0.400  0.529  0.464  0.464  165.0  126.0           10.0      1
+                               difficulty baseline h_ans (unhinted correct)                  0.458  0.397  0.522  0.458  0.458  165.0  126.0           10.0      1
+
+##### STRICT HARMFUL RELIANCE, coconut_b (wrong-hint test rows; Y_strict = unhinted correct AND followed the wrong hint) #####
+                                                                                                             auroc     lo     hi    min    max    pos    neg  label_changed  seeds
+kind                           monitor                                                                                                                                            
+baseline                       output-only exact match                                                       0.712  0.677  0.747  0.712  0.712  116.0  184.0            0.0      1
+probe (strict label)           probe h_prompt, strict harmful-only                                           0.609  0.548  0.677  0.609  0.609  116.0  184.0            0.0      1
+                               probe z_mean, strict harmful-only                                             0.588  0.517  0.650  0.588  0.588  116.0  184.0            0.0      1
+                               probe z_cat, strict harmful-only                                              0.582  0.521  0.646  0.582  0.582  116.0  184.0            0.0      1
+label-free (label-independent) label-free: Mahalanobis on coconut mean latent (benign fit)                   0.575  0.510  0.648  0.575  0.575  116.0  184.0            0.0      1
+                               label-free: CROSS-FORMAT anchor (explicit_c -> coconut_b, last prompt token)  0.541  0.468  0.607  0.541  0.541  116.0  184.0            0.0      1
+                               label-free: clean-anchor matching (coconut_c -> coconut_b)                    0.521  0.453  0.587  0.521  0.521  116.0  184.0            0.0      1
+baseline                       difficulty baseline h_ans (unhinted correct)                                  0.512  0.445  0.576  0.512  0.512  116.0  184.0            0.0      1
+                               difficulty baseline h_prompt (unhinted correct)                               0.512  0.443  0.588  0.512  0.512  116.0  184.0            0.0      1
+probe (strict label)           probe h_ans, strict harmful-only                                              0.505  0.431  0.572  0.505  0.505  116.0  184.0            0.0      1
+baseline                       difficulty baseline z_mean (unhinted correct)                                 0.482  0.414  0.551  0.482  0.482  116.0  184.0            0.0      1
+                               difficulty baseline z_cat (unhinted correct)                                  0.472  0.400  0.537  0.472  0.472  116.0  184.0            0.0      1

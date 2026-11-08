@@ -1,0 +1,40 @@
+
+=== seed 0 explicit_b ===  decoy~hint_wrong corr +0.00 | P(y=1|decoy) 0.38 vs no-decoy 0.40 (test), train 0.38 vs 0.41
+  h_prompt  decoy readable AUROC 1.00 | [correct-hint] AUROC 0.549 | within decoy 0.592 | within no-decoy 0.518 | decoy direction removed 0.538
+  h_ans     decoy readable AUROC 1.00 | [correct-hint] AUROC 0.647 | within decoy 0.717 | within no-decoy 0.600 | decoy direction removed 0.649
+  mean_cot  decoy readable AUROC 0.92 | [correct-hint] AUROC 0.681 | within decoy 0.691 | within no-decoy 0.666 | decoy direction removed 0.677
+
+=== seed 0 coconut_b ===  decoy~hint_wrong corr +0.00 | P(y=1|decoy) 0.28 vs no-decoy 0.29 (test), train 0.30 vs 0.30
+  h_prompt  decoy readable AUROC 1.00 | [correct-hint] AUROC 0.507 | within decoy 0.551 | within no-decoy 0.463 | decoy direction removed 0.508
+  h_ans     decoy readable AUROC 0.99 | [correct-hint] AUROC 0.513 | within decoy 0.491 | within no-decoy 0.527 | decoy direction removed 0.512
+  z_mean    decoy readable AUROC 1.00 | [correct-hint] AUROC 0.528 | within decoy 0.540 | within no-decoy 0.513 | decoy direction removed 0.527
+
+=== seed 1 explicit_b ===  decoy~hint_wrong corr +0.00 | P(y=1|decoy) 0.40 vs no-decoy 0.42 (test), train 0.50 vs 0.39
+  h_prompt  decoy readable AUROC 1.00 | [correct-hint] AUROC 0.540 | within decoy 0.586 | within no-decoy 0.560 | decoy direction removed 0.568
+  h_ans     decoy readable AUROC 1.00 | [correct-hint] AUROC 0.700 | within decoy 0.766 | within no-decoy 0.657 | decoy direction removed 0.712
+  mean_cot  decoy readable AUROC 0.97 | [correct-hint] AUROC 0.693 | within decoy 0.761 | within no-decoy 0.654 | decoy direction removed 0.696
+
+=== seed 1 coconut_b ===  decoy~hint_wrong corr +0.00 | P(y=1|decoy) 0.32 vs no-decoy 0.37 (test), train 0.45 vs 0.39
+  h_prompt  decoy readable AUROC 1.00 | [correct-hint] AUROC 0.493 | within decoy 0.481 | within no-decoy 0.508 | decoy direction removed 0.501
+  h_ans     decoy readable AUROC 1.00 | [correct-hint] AUROC 0.485 | within decoy 0.476 | within no-decoy 0.510 | decoy direction removed 0.487
+  z_mean    decoy readable AUROC 1.00 | [correct-hint] AUROC 0.535 | within decoy 0.538 | within no-decoy 0.540 | decoy direction removed 0.536
+
+=== seed 2 explicit_b ===  decoy~hint_wrong corr +0.00 | P(y=1|decoy) 0.42 vs no-decoy 0.44 (test), train 0.51 vs 0.39
+  h_prompt  decoy readable AUROC 1.00 | [correct-hint] AUROC 0.471 | within decoy 0.464 | within no-decoy 0.464 | decoy direction removed 0.463
+  h_ans     decoy readable AUROC 1.00 | [correct-hint] AUROC 0.817 | within decoy 0.840 | within no-decoy 0.812 | decoy direction removed 0.825
+  mean_cot  decoy readable AUROC 0.94 | [correct-hint] AUROC 0.754 | within decoy 0.764 | within no-decoy 0.749 | decoy direction removed 0.756
+
+=== seed 2 coconut_b ===  decoy~hint_wrong corr +0.00 | P(y=1|decoy) 0.23 vs no-decoy 0.24 (test), train 0.21 vs 0.29
+  h_prompt  decoy readable AUROC 1.00 | [correct-hint] AUROC 0.591 | within decoy 0.571 | within no-decoy 0.590 | decoy direction removed 0.585
+  h_ans     decoy readable AUROC 1.00 | [correct-hint] AUROC 0.524 | within decoy 0.510 | within no-decoy 0.506 | decoy direction removed 0.517
+  z_mean    decoy readable AUROC 0.99 | [correct-hint] AUROC 0.561 | within decoy 0.528 | within no-decoy 0.573 | decoy direction removed 0.559
+
+=== mean over seeds ===
+                     decoy_readable  auroc  within_decoy  within_nodecoy  decoy_removed
+model      feature                                                                     
+coconut_b  h_ans              0.997  0.507         0.492           0.514          0.505
+           h_prompt           1.000  0.530         0.535           0.520          0.531
+           z_mean             0.997  0.541         0.535           0.542          0.541
+explicit_b h_ans              0.997  0.722         0.774           0.690          0.729
+           h_prompt           1.000  0.520         0.547           0.514          0.523
+           mean_cot           0.945  0.709         0.739           0.689          0.709

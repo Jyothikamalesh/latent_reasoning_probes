@@ -1,0 +1,9 @@
+seed 0 coconut_c -> coconut_b     all 0.592 | decoy 0.579 | no-decoy 0.607 | mean score decoy 0.0111 vs no-decoy 0.0109
+seed 0 CROSS-FORMAT               all 0.539 | decoy 0.568 | no-decoy 0.509 | mean score decoy 0.0037 vs no-decoy 0.0042
+seed 0 explicit_c -> explicit_b   all 0.481 | decoy 0.438 | no-decoy 0.476 | mean score decoy 0.0039 vs no-decoy 0.0047
+seed 1 coconut_c -> coconut_b     all 0.550 | decoy 0.496 | no-decoy 0.605 | mean score decoy 0.0194 vs no-decoy 0.0534
+seed 1 CROSS-FORMAT               all 0.551 | decoy 0.519 | no-decoy 0.581 | mean score decoy 0.0095 vs no-decoy 0.0234
+seed 1 explicit_c -> explicit_b   all 0.510 | decoy 0.522 | no-decoy 0.417 | mean score decoy 0.0025 vs no-decoy 0.0044
+seed 2 coconut_c -> coconut_b     all 0.553 | decoy 0.460 | no-decoy 0.586 | mean score decoy 0.0040 vs no-decoy 0.0052
+seed 2 CROSS-FORMAT               all 0.503 | decoy 0.440 | no-decoy 0.515 | mean score decoy 0.0040 vs no-decoy 0.0049
+seed 2 explicit_c -> explicit_b   all 0.509 | decoy 0.552 | no-decoy 0.435 | mean score decoy 0.0067 vs no-decoy 0.0142

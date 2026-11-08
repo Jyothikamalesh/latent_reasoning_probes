@@ -1,0 +1,102 @@
+[{"stream_name":"stderr","time":7.63080017,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":7.63084771,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":7.63085253,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":7.63085548,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":8.233041541,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":8.233075819,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":8.233079636,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":8.233082303,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":28.685954095,"data":"Cloning into '/kaggle/working/coconut_repo'...\n"}
+,{"stream_name":"stdout","time":28.858180813,"data":"torch 2.11.0+cu130 transformers 5.20.2 gpus 2 ['Tesla T4', 'Tesla T4']\n"}
+,{"stream_name":"stderr","time":28.888378897,"data":"Cloning into '/kaggle/working/coconut_repo'...\n"}
+,{"stream_name":"stderr","time":28.888397864,"data":"\n"}
+,{"stream_name":"stderr","time":28.888402849,"data":"Cloning into '/kaggle/working/coconut_repo'...\n"}
+,{"stream_name":"stdout","time":29.990327335,"data":"inputs /kaggle/input/datasets/jyothikamaleshs/prosqa-coconut-b-twins ['s0_coconut_b.pt', 's0_generations.jsonl', 's1_coconut_b.pt', 's1_generations.jsonl', 's2_coconut_b.pt', 's2_generations.jsonl']\n"}
+,{"stream_name":"stdout","time":49.90966614,"data":" [transformers] Model config: bos_token_id must be `None` or an integer within the vocabulary (between 0 and 39), got 50256. This may result in unexpected behavior.\n"}
+,{"stream_name":"stdout","time":49.909707312,"data":"[transformers] Model config: eos_token_id must be `None` or an integer within the vocabulary (between 0 and 39), got 50256. This may result in unexpected behavior.\n"}
+,{"stream_name":"stdout","time":49.909714059,"data":"................\n"}
+,{"stream_name":"stdout","time":49.909720741,"data":"----------------------------------------------------------------------\n"}
+,{"stream_name":"stdout","time":49.909747373,"data":"Ran 16 tests in 0.855s\n"}
+,{"stream_name":"stdout","time":49.909752727,"data":"\n"}
+,{"stream_name":"stdout","time":49.909757678,"data":"OK\n"}
+,{"stream_name":"stdout","time":49.909762133,"data":"\n"}
+,{"stream_name":"stdout","time":1694.052569507,"data":"workers exited [0] 27.4 min\n"}
+,{"stream_name":"stdout","time":1694.063166129,"data":"===== seed 2 =====\n"}
+,{"stream_name":"stdout","time":1694.063191051,"data":"  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1694.063196569,"data":"  full6                dM +0.000 [-0.001,+0.001]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1694.063201349,"data":"  zero_full6           dM +0.041 [+0.025,+0.056]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1694.063205859,"data":"  matched_full6        dM -0.000 [-0.001,+0.001]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1694.063210298,"data":"  full6_pm             dM +0.000 [-0.001,+0.001]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1694.063215631,"data":"  block_answer         dM +2.330 [+2.156,+2.507]  P(true) 0.99  P(wrong) 0.01\n"}
+,{"stream_name":"stdout","time":1694.063220994,"data":"  block_latents        dM +0.000 [-0.000,+0.001]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1694.063236976,"data":"  block_latents_pm     dM +0.001 [-0.000,+0.001]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1694.063241337,"data":"  full6_block_answer   dM +2.328 [+2.174,+2.502]  P(true) 0.99  P(wrong) 0.01\n"}
+,{"stream_name":"stdout","time":1694.063244908,"data":"  both_blocked         dM +2.328 [+2.176,+2.509]  P(true) 0.99  P(wrong) 0.01\n"}
+,{"stream_name":"stdout","time":1694.063249187,"data":"  both_blocked_pm      dM +2.329 [+2.164,+2.497]  P(true) 0.99  P(wrong) 0.01\n"}
+,{"stream_name":"stdout","time":1694.063253239,"data":"  block_latents_mad    dM +0.001 [-0.000,+0.001]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1694.063257376,"data":"  both_blocked_mad     dM +2.329 [+2.164,+2.496]  P(true) 0.99  P(wrong) 0.01\n"}
+,{"stream_name":"stdout","time":1694.063261194,"data":"  u_block_latents      dM +0.001 [+0.000,+0.001]  P(true) 0.99  P(wrong) 0.01\n"}
+,{"stream_name":"stdout","time":1694.063264987,"data":"  u_block_answer       dM +0.000 [-0.005,+0.005]  P(true) 0.99  P(wrong) 0.01\n"}
+,{"stream_name":"stdout","time":1694.063268169,"data":"  u_both_blocked       dM +0.000 [-0.005,+0.005]  P(true) 0.99  P(wrong) 0.01\n"}
+,{"stream_name":"stdout","time":1694.063271561,"data":"  reverse_mean         dM +0.000 [+0.000,+0.001]  P(true) 0.99  P(wrong) 0.01\n"}
+,{"stream_name":"stdout","time":1694.063275648,"data":"\n"}
+,{"stream_name":"stdout","time":1694.06328024,"data":"[resistant] n=86  baseline {'M_hinted': 1.2157263561736706, 'M_unhinted': 3.2423018466594606, 'p_true_hinted': 1.0}\n"}
+,{"stream_name":"stdout","time":1694.063284416,"data":"  single_mean          dM +0.000 [+0.000,+0.001]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1694.06328846,"data":"  single_pm_mean       dM +0.000 [+0.000,+0.001]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1694.063292015,"data":"  noise_mean           dM -0.085 [-0.098,-0.073]  P(true) 0.95  P(wrong) 0.05\n"}
+,{"stream_name":"stdout","time":1694.063295506,"data":"  matched_mean         dM +0.000 [+0.000,+0.001]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1694.063299714,"data":"  samecond_mean        dM -0.000 [-0.000,+0.000]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1694.063303927,"data":"  persist_mean         dM +0.001 [+0.000,+0.002]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1694.063308219,"data":"  full6                dM +0.002 [+0.001,+0.003]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1694.063312511,"data":"  zero_full6           dM +0.009 [-0.010,+0.027]  P(true) 0.99  P(wrong) 0.01\n"}
+,{"stream_name":"stdout","time":1694.063317939,"data":"  matched_full6        dM +0.002 [+0.001,+0.004]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1694.063322099,"data":"  full6_pm             dM +0.002 [+0.001,+0.003]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1694.063326411,"data":"  block_answer         dM +2.026 [+1.873,+2.178]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1694.063330177,"data":"  block_latents        dM +0.002 [+0.001,+0.002]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1694.063333645,"data":"  block_latents_pm     dM +0.002 [+0.001,+0.002]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1694.063337183,"data":"  full6_block_answer   dM +2.026 [+1.868,+2.178]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1694.063340633,"data":"  both_blocked         dM +2.026 [+1.877,+2.189]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1694.063344167,"data":"  both_blocked_pm      dM +2.026 [+1.874,+2.189]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1694.063352319,"data":"  block_latents_mad    dM +0.002 [+0.001,+0.002]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1694.063356007,"data":"  both_blocked_mad     dM +2.026 [+1.869,+2.178]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1694.063359559,"data":"  u_block_latents      dM +0.000 [-0.000,+0.000]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1694.063363044,"data":"  u_block_answer       dM -0.003 [-0.009,+0.004]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1694.063366494,"data":"  u_both_blocked       dM -0.002 [-0.008,+0.004]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1694.063369913,"data":"  reverse_mean         dM -0.000 [-0.000,+0.000]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":1694.063373363,"data":"\n"}
+,{"stream_name":"stdout","time":1694.063378275,"data":"[wrong_either] n=108  baseline {'M_hinted': -3.2073068718115487, 'M_unhinted': -1.3623904480978295, 'p_true_hinted': 0.0}\n"}
+,{"stream_name":"stdout","time":1694.063386381,"data":"  single_mean          dM +0.000 [+0.000,+0.001]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1694.063405909,"data":"  single_pm_mean       dM +0.000 [+0.000,+0.001]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1694.063410221,"data":"  noise_mean           dM -0.014 [-0.023,-0.004]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1694.063414385,"data":"  matched_mean         dM +0.001 [+0.000,+0.001]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1694.063418601,"data":"  samecond_mean        dM +0.000 [-0.000,+0.000]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1694.063422767,"data":"  persist_mean         dM +0.001 [+0.000,+0.001]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1694.063437478,"data":"  full6                dM +0.002 [+0.001,+0.003]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1694.063441014,"data":"  zero_full6           dM +0.035 [+0.021,+0.050]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1694.063444882,"data":"  matched_full6        dM +0.002 [+0.001,+0.004]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1694.063448384,"data":"  full6_pm             dM +0.002 [+0.001,+0.003]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1694.063452248,"data":"  block_answer         dM +1.839 [+1.726,+1.958]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1694.063455547,"data":"  block_latents        dM +0.001 [+0.000,+0.002]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1694.063458817,"data":"  block_latents_pm     dM +0.001 [+0.001,+0.002]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1694.063462233,"data":"  full6_block_answer   dM +1.839 [+1.724,+1.962]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1694.063465466,"data":"  both_blocked         dM +1.839 [+1.722,+1.963]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1694.063468744,"data":"  both_blocked_pm      dM +1.839 [+1.722,+1.953]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1694.063472004,"data":"  block_latents_mad    dM +0.001 [+0.001,+0.002]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1694.06347541,"data":"  both_blocked_mad     dM +1.839 [+1.720,+1.967]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1694.063478646,"data":"  u_block_latents      dM +0.000 [-0.000,+0.001]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1694.063481878,"data":"  u_block_answer       dM +0.002 [-0.003,+0.006]  P(true) 0.01  P(wrong) 0.99\n"}
+,{"stream_name":"stdout","time":1694.06348929,"data":"  u_both_blocked       dM +0.002 [-0.003,+0.006]  P(true) 0.01  P(wrong) 0.99\n"}
+,{"stream_name":"stdout","time":1694.063492613,"data":"  reverse_mean         dM +0.000 [-0.000,+0.000]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":1694.063496575,"data":"\n"}
+,{"stream_name":"stdout","time":1694.063500917,"data":"saved to /kaggle/working/patching_s2 in 27.3 min\n"}
+,{"stream_name":"stdout","time":1694.063505106,"data":"\n"}
+,{"stream_name":"stdout","time":1694.074008175,"data":"all requested summaries present and from this run 1794158736 [2]\n"}
+,{"stream_name":"stderr","time":1697.211718014,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":1697.211748773,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":1697.382221283,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":1697.382245081,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":1698.179179681,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":1698.255495621,"data":"[NbConvertApp] Writing 54362 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":1700.831042251,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":1701.406449776,"data":"[NbConvertApp] Writing 394030 bytes to __results__.html\n"}
+]

@@ -1,6 +1,8 @@
 """Difficulty-matched and decoy-stratified AUROCs from saved scores (s{seed}_monitor_scores.json + generations; no model needed).
-[correct-hint]: positives are hints that fixed a wrong unhinted answer, so the matched subset is "unhinted answer wrong" (positives vs hint ignored).
-[harmful]: positives are wrong hints that broke a right answer, so the matched subset is "unhinted answer right".
+Two SEPARATE analyses; their AUROCs must not be pooled or described as one behaviour:
+  HINT SUSCEPTIBILITY ([correct-hint] rows, correct hints; matched on "unhinted answer wrong"): does the monitor detect that a hint was followed, at fixed baseline difficulty?
+  HARMFUL RELIANCE ([harmful] rows, wrong hints; matched on "unhinted answer right"): does it detect switching from a correct unhinted answer to the planted wrong one? (This is Y_harmful: options are binary, so
+  "unhinted != wrong hint" means the unhinted answer was the correct one.)
     python -I prosqa_monitor/analysis/matched_evaluation.py <results_dir> [...]"""
 import json, sys, glob, re, numpy as np, pandas as pd
 from sklearn.metrics import roc_auc_score
@@ -26,8 +28,12 @@ for d in sys.argv[1:]:
                 sel = I['ok'] & (~I['w'] if m.group(1) == 'correct-hint' else I['w'])
                 if len(y) != sel.sum() or not np.array_equal(I['y'][sel], y): continue
                 matched = I['uw'][sel] if m.group(1) == 'correct-hint' else ~I['uw'][sel]; dc = I['dec'][sel]
-                out.append(dict(seed=seed, outcome=m.group(1), monitor=k[:k.rindex(' [')], all=auc(y, s), matched=auc(y[matched], s[matched]), n_matched=int(matched.sum()), pos_matched=int(y[matched].sum()),
+                out.append(dict(seed=seed, outcome=m.group(1), monitor=k[:k.rindex(' [')], all=auc(y, s), matched=auc(y[matched], s[matched]), n_matched=int(matched.sum()), pos_matched=int(y[matched].sum()), neg_matched=int(matched.sum() - y[matched].sum()),
                                 no_decoy=auc(y[~dc], s[~dc]), decoy=auc(y[dc], s[dc]))); break
 df = pd.DataFrame(out); pd.set_option('display.width', 250); pd.set_option('display.max_colwidth', 80)
-g = df.groupby(['outcome', 'monitor']).agg(all=('all', 'mean'), matched=('matched', 'mean'), matched_min=('matched', 'min'), matched_max=('matched', 'max'), no_decoy=('no_decoy', 'mean'), decoy=('decoy', 'mean'), n_matched=('n_matched', 'mean'), pos=('pos_matched', 'mean'), seeds=('seed', 'nunique')).round(3)
-print(g.sort_values(['outcome', 'all'], ascending=[True, False]).to_string())
+TITLES = {'correct-hint': 'HINT SUSCEPTIBILITY (correct hints, matched on unhinted-wrong)', 'harmful': 'HARMFUL RELIANCE (wrong hints, matched on unhinted-right = switched from correct to wrong)'}
+for oc in ('correct-hint', 'harmful'):
+    x = df[df.outcome == oc]; print(f'\n##### {TITLES[oc]} #####\n--- per seed (matched subset sizes included) ---')
+    print(x.sort_values(['monitor', 'seed'])[['monitor', 'seed', 'all', 'matched', 'pos_matched', 'neg_matched', 'no_decoy', 'decoy']].round(3).to_string(index=False))
+    g = x.groupby('monitor').agg(all=('all', 'mean'), matched=('matched', 'mean'), matched_min=('matched', 'min'), matched_max=('matched', 'max'), no_decoy=('no_decoy', 'mean'), decoy=('decoy', 'mean'), pos=('pos_matched', 'mean'), neg=('neg_matched', 'mean'), seeds=('seed', 'nunique')).round(3)
+    print('--- mean over seeds ---'); print(g.sort_values('matched', ascending=False).to_string())

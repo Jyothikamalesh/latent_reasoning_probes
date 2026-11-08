@@ -133,10 +133,10 @@ class T(unittest.TestCase):
         self.assertFalse(torch.allclose(base['logp'], lp.run(self.m, bt, block_answer=True)['logp']))      # blocking <bot> alone disturbs the model: the disruption baseline is non-zero
 
     def test_option_only_normalised_margin(self):
-        tt, tw = [[EOT, 20, 21, 22, 23]] * 2, [[EOT, 20, 21, 25]] * 2                      # shared prefix 20,21; options (22,23) and (25,): different token counts
+        tt, tw = [[EOT, 20, 21, 22, 23, 9]] * 2, [[EOT, 20, 21, 25, 9]] * 2               # shared prefix 20,21; option words (22,23) and (25,); terminal period token 9 excluded
         M, _, Mn, dn = lp.margin(self.m, PROMPTS, HINTS, tt, tw, N, PAD, BOT, LAT, opt_start=[2, 2])
         ot, ow = lp.run(self.m, batch(tails=tt)), lp.run(self.m, batch(tails=tw))
-        exp = (ot['logp'][:, 2:].sum(1) / 2) - (ow['logp'][:, 2:].sum(1) / 1)
+        exp = (ot['logp'][:, 2:4].sum(1) / 2) - (ow['logp'][:, 2:3].sum(1) / 1)
         self.assertTrue(torch.allclose(Mn, exp, atol=1e-5)); self.assertEqual(dn.tolist(), [1, 1])
         self.assertTrue(torch.allclose(M, lp.sentence_logprob(ot) - lp.sentence_logprob(ow), atol=1e-5))   # summed M is unchanged by the extra argument
 

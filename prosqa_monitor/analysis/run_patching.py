@@ -47,6 +47,7 @@ def build_rows(gens, model, tok, limit):
         group = 'harmful' if (pu == true and ph == hint) else 'resistant' if (pu == true and ph == true) else 'wrong_either' if (pu == hint and ph == hint) else None
         if group is None: continue
         U, H = make_prompt(l['q'], None, l['decoy']), make_prompt(l['q'], hint, l['decoy'])
+        assert enc(f'### {subj} is a {true}.')[-1] == enc(f'### {subj} is a {hint}.')[-1] == enc('.')[0] and len(enc('.')) == 1, 'the sentence must end in a standalone period token'
         _pre = enc(f'### {subj} is a'); assert enc(f'### {subj} is a {true}.')[:len(_pre)] == _pre and enc(f'### {subj} is a {hint}.')[:len(_pre)] == _pre, 'option tokens do not start at a clean boundary'
         rows.append(dict(q=l['q'], group=group, ph=ph, pu=pu, true=true, hint=hint, depth=depth.get(l['q'].strip()),
                          pU=enc(U), pH=enc(H), hl=lp.hint_span_len(enc, H, U),

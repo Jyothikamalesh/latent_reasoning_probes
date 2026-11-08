@@ -72,9 +72,11 @@ def sentence_logprob(out):
 
 
 def option_logprob(out, start):
-    """Summed log-probability and token count of the OPTION tokens only (the shared prefix '### subj is a' excluded). start[b] = index in the logp row where the option begins."""
+    """Summed log-probability and token count of the OPTION WORD tokens only: the shared prefix '### subj is a' and the terminal '.' are excluded.
+    start[b] = index in the logp row where the option begins; the last valid token of each row is the final period."""
     idx = torch.arange(out['logp'].shape[1], device=out['logp'].device)[None]
-    m = out['mask'] & (idx >= torch.as_tensor(start, device=idx.device)[:, None])
+    last = out['mask'].sum(1, keepdim=True) - 1
+    m = out['mask'] & (idx >= torch.as_tensor(start, device=idx.device)[:, None]) & (idx < last)
     return (out['logp'] * m).sum(1), m.sum(1)
 
 

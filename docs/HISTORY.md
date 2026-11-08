@@ -139,6 +139,9 @@ Protocol fixed before any patching result in `docs/causal_protocol.md` (primary 
 ### Seeds v4: 3 seeds with strict labels (2026-11-08, `runs/2026-11-08_seeds_v4_s1_s2`)
 Seeds 1+2 ran in one notebook (111.5 + 99.5 min); with v3 seed 0 that is 3 seeds. **Phase-1 exit criteria: COCONUT met on 3 seeds; explicit not met** (accuracy gap 0.09 on seed 1; seed 2's explicit twins only 0.60-0.61). The depth condition is still not learned (gates fail on all seeds). Monitors: explicit text 0.918 (strict harmful 0.890); COCONUT pre-answer probes 0.58-0.60 on hint uptake (replicated, difficulty baselines at chance) but only 0.56-0.57 on strict harmful reliance versus the output-only exact match 0.707; explicit probes do not beat difficulty baselines. Decoy: the explicit-probe control is fixed (0.47-0.52), the COCONUT anchor residual is not (0.294 / 0.295 on seeds 1 and 2): the hypothesis that the decoy after the hint masked the signal was wrong or incomplete. Eight twins (`s1`, `s2`) are saved for the causal experiment. Two-GPU training exists on branch `two-gpu-training` (not run on Kaggle).
 
+### Two-GPU mini test on Kaggle (2026-11-08, `runs/2026-11-08_twogpu_mini_test`)
+Branch `two-gpu-training`, mini mode: the session exposes two T4s; the COCONUT worker ran on device 1 while the explicit twins trained on device 0 (both GPUs busy in the worker's nvidia-smi report), exit code 0, 0.2 min wait after the explicit twins, 13.8 min total. The path works. Speed-up not measured (mini too small); the path is not merged into the v4 line.
+
 ## Open items (live, updated 2026-11-08 after the 3-seed v4 run)
 1. **Causal latent-restoration experiment** (design pre-registered in `docs/causal_protocol.md`; nothing run). Build and test the patching code locally on a tiny model, smoke-test on the saved seed-0 twin, run the full controls on seed 0, then replicate on seeds 1 and 2. Needs a GPU push (ask first) and the checkpoints uploaded as a dataset.
 2. **Explicit twin pair** does not meet the accuracy criterion (seed 1 gap 0.09; seed 2 twins at 0.60-0.61). Decide: larger suite to see whether the gap is noise (about 400 questions on the saved twins), or a training change.
@@ -146,5 +149,5 @@ Seeds 1+2 ran in one notebook (111.5 + 99.5 min); with v3 seed 0 that is 3 seeds
 4. **Clean-anchor detector** is decoy-sensitive (control 0.294 / 0.295 on seeds 1-2) and 0.49 on strict harmful reliance: stop treating it as a signal unless a fix is found.
 5. **Wider novelty audit** against Mirtaheri and Belkin (2603.17199), Li et al. (ICML 2026), Zhang et al. (2512.21711), Ferreira et al. (2608.04928), Duzan and Stickland (2608.04735), Liang and Pan (2602.00449): not yet read in full.
 6. **Scale**: GPT-2 small on a synthetic task is the main-track risk; a 1B model (LoRA or rented GPU) comes only after the causal result.
-7. **Two-GPU training** is on branch `two-gpu-training` (identical generations to sequential on a tiny CPU test); unverified on Kaggle (unknown whether the session has two GPUs; needs a 2-minute device-count probe, and the user's yes).
+7. **Two-GPU training** works on Kaggle in mini mode (see the entry above); on branch `two-gpu-training`, not merged; speed-up on a full seed still unmeasured.
 8. Kaggle: the OAuth login expires after about 2-3 hours (fix: `! .venv/bin/kaggle auth login --force`); every push needs the user's yes.

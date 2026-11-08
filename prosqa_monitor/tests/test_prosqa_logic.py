@@ -214,6 +214,42 @@ def smoke_pass_writes_to_its_own_files():
     src = open('prosqa_monitor.ipynb').read()
     assert "TAG='smoke_'" in src and "smoke_out" in src, 'the smoke pass must write under a separate prefix and folder'
 
+def _pipeline_text():
+    return '\n'.join(''.join(c['source']) for c in json.load(open('prosqa_monitor.ipynb'))['cells'] if c['cell_type'] == 'code')
+
+@test
+def decoy_before_hint():
+    mp = g('make_prompt')('Q?', 'grimpus', True, 0).split('\n')
+    assert mp[1].startswith('Reviewer') and mp[2].startswith(('Hint', 'Note', 'The answer', 'Someone')), mp
+
+@test
+def balanced_weights_remove_decoy_shortcut():
+    src = _pipeline_text(); i = src.index('lin = lambda'); j = src.index('def feats_of')
+    from sklearn.linear_model import LogisticRegression; from sklearn.pipeline import make_pipeline; from sklearn.preprocessing import StandardScaler
+    sub = {'np': np, 'LogisticRegression': LogisticRegression, 'make_pipeline': make_pipeline, 'StandardScaler': StandardScaler}; exec(src[i:j], sub)
+    rs = np.random.RandomState(0); X = rs.randn(400, 5); d = (rs.rand(400) < .5).astype(int); y = np.where(d == 1, rs.rand(400) < .8, rs.rand(400) < .2).astype(int); X[:, 0] += 3 * d
+    a = sub['fit_score'](X[:200], y[:200], X[200:]); b = sub['fit_score'](X[:200], y[:200], X[200:], d=d[:200])
+    assert np.corrcoef(a, d[200:])[0, 1] > np.corrcoef(b, d[200:])[0, 1] + .2, 'cell weights must remove the decoy shortcut'
+
+@test
+def hint_type_specific_probes_run():
+    src = _pipeline_text(); i = src.index('# hint-type-specific probes'); j = src.index('\n# --- cross-format')
+    rs = np.random.RandomState(1); N = 120; rows = []
+    class Fake: pass
+    WR = {s: (np.arange(N) % 2 == 0) for s in ('tr', 'te')}; dec = {s: ((np.arange(N) // 2) % 2 == 0) for s in ('tr', 'te')}
+    y = {s: rs.randint(0, 2, N) for s in ('tr', 'te')}
+    ns = dict(np=np, EXP='e', COCO='c', WR=WR, dec=dec, L={(n, s): {'y': y[s]} for n in ('e', 'c') for s in ('tr', 'te')}, feats_of=lambda n, s, k: rs.randn(N, 6) + y[s][:, None],
+              valid_mask=lambda n, s, X: np.ones(N, bool), _report=lambda name, yy, ss: rows.append((name, len(yy))), fit_score=g_fit(), probe=None)
+    exec(src[i:j], ns)
+    names = [r[0] for r in rows]
+    assert len(names) == 14 and sum(n.endswith('[harmful]') for n in names) == 7 and sum(n.endswith('[correct-hint]') for n in names) == 7, names
+    assert all(n_ == N // 2 for _, n_ in rows)
+
+def g_fit():
+    src = _pipeline_text(); i = src.index('lin = lambda'); j = src.index('def feats_of')
+    from sklearn.linear_model import LogisticRegression; from sklearn.pipeline import make_pipeline; from sklearn.preprocessing import StandardScaler
+    sub = {'np': np, 'LogisticRegression': LogisticRegression, 'make_pipeline': make_pipeline, 'StandardScaler': StandardScaler}; exec(src[i:j], sub); return sub['fit_score']
+
 if __name__ == '__main__':
     f = 0
     for t in TESTS:

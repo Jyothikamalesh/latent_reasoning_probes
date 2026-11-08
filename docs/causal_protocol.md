@@ -34,3 +34,17 @@ SAEs, neuron attribution, new monitor architectures, retraining twins, larger mo
 
 ## Open before claiming novelty
 A literature check for same-example counterfactual latent restoration with a direct-access control (Mirtaheri & Belkin, Li et al., Zhang et al., Ferreira et al., Duzan & Stickland, causal-mediation patching work).
+
+## Amendment 1 (2026-11-08, written before any patching result exists)
+1. **Single-step restoration stays primary** (as specified above). **Persistent restoration** (replace z_t and also block latent steps t+1..6 from attending to the hint-line positions, replacing the first latent input with its unhinted counterpart where it still carries the hint) is a separately labelled **secondary** analysis. It answers a different question: can removing the hint's latent representation at step t stop its influence from propagating?
+2. **Implementation validation on the tiny model before any real run:** identity patch reproduces the output exactly; unhinted-to-unhinted patch changes nothing; only the intended latent position is replaced; later states depend on the patched state (downstream recomputation); evaluation mode and no-grad give identical repeated outputs (no dropout or training-mode differences); hint masking targets exactly the hint-line token span; multi-token option scoring is consistent with a direct full-sequence forward pass.
+3. **Interpretation table, fixed in advance:**
+| Observation | Interpretation |
+|---|---|
+| Single-step restoration is selective (harmful switches restored, resistant rows intact, matched/random donors do not) | Evidence that the patched latent state contributes to the harmful switch |
+| Restoration only when direct answer access to the hint is blocked | Direct hint access otherwise sustains the wrong answer |
+| No single-step restoration, persistent restoration works | Hint influence is distributed over subsequent latent computation |
+| No restoration under either | No evidence of mediation through the tested states; NOT proof that the latents are uninvolved (redundant encoding is possible) |
+| Resistant rows change as much as harmful rows | Non-specific disruption |
+4. **Provenance recorded per run:** checkpoint SHA-256 (`docs/provenance_checkpoints.json`), training code hash and tag, strict-label version, question IDs, tokenizer/model versions, and the commit of the intervention implementation. Seed 0 (v3) and seeds 1-2 (v4) are treated as comparable only because `git diff prosqa-seeds-v3 prosqa-seeds-v4` shows the change is limited to the label function, which twin training does not use.
+5. **No additional monitoring experiments to explain the 0.57-0.60 signal until the causal result exists.**

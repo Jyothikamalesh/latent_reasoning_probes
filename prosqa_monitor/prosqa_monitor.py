@@ -39,7 +39,9 @@ print(f'mode={MODE} device={dev} {torch.cuda.get_device_name(0) if dev == "cuda"
 SEED_OVERRIDE = None               # build_prosqa_nb.py --seed N sets this for Kaggle pushes (kernels cannot take env vars)
 EXTRA_SEEDS_OVERRIDE = None        # build_notebook.py --extra-seeds 2,3 sets this: those seeds run after SEED, in this same notebook and session
 EXTRA_SEEDS = EXTRA_SEEDS_OVERRIDE or ()
-SEED = SEED_OVERRIDE if SEED_OVERRIDE is not None else int(os.environ.get('SEED', 0))
+SEED = int(os.environ['PROSQA_WORKER_SEED']) if os.environ.get('PROSQA_WORKER_SEED') else SEED_OVERRIDE if SEED_OVERRIDE is not None else int(os.environ.get('SEED', 0))
+WORKER = os.environ.get('PROSQA_WORKER')    # 'coconut' inside the second-GPU worker process that trains the two COCONUT twins; None in the main process
+PARALLEL_TRAIN = WORKER is None and (os.environ.get('FORCE_PARALLEL_TRAIN') == '1' or (dev == 'cuda' and torch.cuda.device_count() >= 2 and MODE in ('seeds', 'full')))   # explicit twins on GPU 0, COCONUT twins on GPU 1
 SPLIT_SEED = 1234                  # fixes the evaluation questions; identical for every seed
 OBEY_MIN_STEPS = 4                 # behaviour twins follow a hint only when the problem has >= this many steps
 TAG = f's{SEED}_'                  # prefix of every output file
@@ -457,7 +459,7 @@ gc.collect()
 {'cuda': torch.cuda.empty_cache, 'mps': torch.mps.empty_cache}.get(dev, lambda: None)()
 
 # %%
-RUN_SMOKE_FIRST = (dev == 'cuda' and MODE != 'tiny') or os.environ.get('FORCE_SMOKE_FIRST') == '1'
+RUN_SMOKE_FIRST = ((dev == 'cuda' and MODE != 'tiny') or os.environ.get('FORCE_SMOKE_FIRST') == '1') and WORKER is None
 SMOKE_ONLY = os.environ.get('SMOKE_ONLY') == '1'
 SMOKE_CFG = dict(N_TRAIN=48, EPOCHS_PER_STAGE=1, EPOCHS_TEXT=1, N_MON_TRAIN=16, N_MON_TEST=16, N_BENIGN=16, N_VAL=8, VAL_EVERY=1, N_SUITE=4)
 
@@ -472,7 +474,7 @@ if RUN_SMOKE_FIRST:
     phase('smoke pass'); LOG_TAG = '[smoke] '
     t_smoke = time.time()
     ns = dict(globals()); ns.update(SMOKE_CFG)       # sandbox copy: smoke cells must not overwrite train/models/features of the real run
-    ns.update(TAG='smoke_', OUT_DIR=f'{OUT_DIR}/smoke_out'); os.makedirs(ns['OUT_DIR'], exist_ok=True)   # smoke files must never look like results
+    ns.update(PARALLEL_TRAIN=False, TAG='smoke_', OUT_DIR=f'{OUT_DIR}/smoke_out'); os.makedirs(ns['OUT_DIR'], exist_ok=True)   # smoke files must never look like results
     try:
         for src in pipeline_sources(): exec(compile(src, '<smoke>', 'exec'), ns)
     finally:
@@ -496,11 +498,35 @@ def train_explicit(follow, name):
     train_loop(m, data, EPOCHS_TEXT, text_fwd, collate_text, BS, ACCUM, name, on_epoch=lambda ep: learn_check(name, ep + 1, EPOCHS_TEXT, m, 'explicit'))
     if SAVE_CKPT: torch.save({k: v.half() for k, v in m.state_dict().items()}, f'{OUT_DIR}/{TAG}{name.split()[-1]}.pt')
     return m.eval()
-explicit_b = train_explicit(True, 'train explicit_b')
+WORKER_BOOT = '''
+import json, os
+p = next(q for q in ('__notebook__.ipynb', 'prosqa_monitor.ipynb') if os.path.exists(q)); g = {'__name__': '__main__'}
+for c in json.load(open(p))['cells']:
+    if c['cell_type'] == 'code': exec(compile(''.join(c['source']), '<worker>', 'exec'), g)
+'''
+def launch_worker():
+    """Second process (own GPU when two exist) that re-runs this notebook's cells with PROSQA_WORKER set: it trains the two COCONUT twins from the same seed and hands the fp32 weights back."""
+    import tempfile
+    d = tempfile.mkdtemp(prefix='prosqa_handoff_'); env = dict(os.environ, PROSQA_WORKER='coconut', PROSQA_WORKER_SEED=str(SEED), PROSQA_HANDOFF=d)
+    if dev == 'cuda' and torch.cuda.device_count() >= 2: env['CUDA_VISIBLE_DEVICES'] = '1'
+    lf = open(f'{d}/worker.log', 'w'); pr = subprocess.Popen([sys.executable, '-c', WORKER_BOOT], env=env, stdout=lf, stderr=subprocess.STDOUT)
+    log(f'started the COCONUT worker process (pid {pr.pid}, device {env.get("CUDA_VISIBLE_DEVICES", dev)}); explicit twins train here in the meantime'); return pr, d
+def collect_worker(pr, d):
+    t0 = time.time(); rc = pr.wait(); print(open(f'{d}/worker.log').read()[-20000:]); log(f'COCONUT worker exited with code {rc}; waited {(time.time() - t0) / 60:.1f}m after the explicit twins')
+    assert rc == 0, 'the COCONUT worker failed; see its log above'
+    out = []
+    for nm in ('coconut_b', 'coconut_c'):
+        m = new_model(); m.load_state_dict(torch.load(f'{d}/{nm}.pt')); m = m.to(dev).eval(); out.append(m)
+        if SAVE_CKPT: torch.save({k: v.half() for k, v in m.state_dict().items()}, f'{OUT_DIR}/{TAG}{nm}.pt')
+    import shutil; shutil.rmtree(d, ignore_errors=True); return out
+def handoff_save(models):
+    for nm, m in zip(('coconut_b', 'coconut_c'), models): torch.save({k: v.cpu() for k, v in m.state_dict().items()}, f"{os.environ['PROSQA_HANDOFF']}/{nm}.pt")
+WORKER_PROC = launch_worker() if PARALLEL_TRAIN else None
+if not WORKER: explicit_b = train_explicit(True, 'train explicit_b')
 
 # %%
 # [pipeline]
-explicit_c = train_explicit(False, 'train explicit_c')
+if not WORKER: explicit_c = train_explicit(False, 'train explicit_c')
 
 # %%
 # [pipeline]
@@ -515,11 +541,14 @@ def train_coconut(follow, name):
         log(f'finished {name} stage {stage} ({stage + 1}/{N_STAGES + 1}) after {(time.time() - t0) / 60:.1f}m')
     if SAVE_CKPT: torch.save({k: v.half() for k, v in m.state_dict().items()}, f'{OUT_DIR}/{TAG}{name.split()[-1]}.pt')
     return m.eval()
-coconut_b = train_coconut(True, 'train coconut_b')
+if WORKER or not PARALLEL_TRAIN: coconut_b = train_coconut(True, 'train coconut_b')
 
 # %%
 # [pipeline]
-coconut_c = train_coconut(False, 'train coconut_c')
+if PARALLEL_TRAIN: coconut_b, coconut_c = collect_worker(*WORKER_PROC)
+else:
+    coconut_c = train_coconut(False, 'train coconut_c')
+    if WORKER: handoff_save([coconut_b, coconut_c]); sys.stdout.flush(); os._exit(0)
 
 # %% [markdown]
 # ## Generate on held-out questions: every question is run hinted and unhinted

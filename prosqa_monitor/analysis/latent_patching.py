@@ -4,6 +4,7 @@ Standalone: works on any GPT-2 LM whose vocabulary has the <bot>, <eot>, <latent
 Sequence layout, as in the notebook: [left pad][prompt][<bot>] [latent slot 0 .. n-1] [<eot> answer sentence (right pad)].
 Latent slot i takes as its INPUT embedding the final-layer hidden state of the previous position (slot 0: the <bot> position). A patch replaces that input vector for one slot,
 so the slot's cached keys/values, every later slot and the answer all see the patched state (downstream states are recomputed, nothing is cached across interventions).
+Blocking the hint (note): masking attention to the hint span and <bot> is NOT enough to cut the latent pathway, because slot 0's INPUT is the <bot> hidden state, which was computed while attending to the hint; replace slot 0 as well (run_patching does).
 Blocking the hint: the hint line is the last segment of the prompt and <bot> follows it, so the positions that can carry the hint are the hint-line span AND <bot>."""
 import torch
 import torch.nn.functional as F
@@ -24,16 +25,19 @@ def hint_span_len(enc, hinted_prompt, unhinted_prompt):
     return len(h) - len(u)
 
 
-def make_batch(prompts, hint_lens, tails, n, pad_id, bot, lat, device='cpu'):
-    """prompts[b]: prompt token ids (no <bot>); hint_lens[b]: trailing prompt tokens that are the hint line (0 if unhinted); tails[b]: [<eot>] + answer-sentence token ids."""
+def make_batch(prompts, hint_lens, tails, n, pad_id, bot, lat, device='cpu', hide_hint=False):
+    """prompts[b]: prompt token ids (no <bot>); hint_lens[b]: trailing prompt tokens that are the hint line (0 if unhinted); tails[b]: [<eot>] + answer-sentence token ids.
+    hide_hint: the hint-line tokens stay in the sequence (so every later position id equals the hinted run's) but are removed from attention: a position-matched 'unhinted' run."""
     pre_ids, pre_att = left_pad([p + [bot] for p in prompts], pad_id); a = pre_ids.shape[1]; B = len(prompts)
     T = max(len(t) for t in tails)
     tail_ids = torch.full((B, T), pad_id); tail_att = torch.zeros(B, T, dtype=torch.long)
     for b, t in enumerate(tails): tail_ids[b, :len(t)] = torch.tensor(t); tail_att[b, :len(t)] = 1
     ids = torch.cat([pre_ids, torch.full((B, n), lat), tail_ids], 1); att = torch.cat([pre_att, torch.ones(B, n, dtype=torch.long), tail_att], 1)
-    pos = (att.cumsum(1) - 1).clamp(min=0)
+    pos = (att.cumsum(1) - 1).clamp(min=0)                                       # position ids are computed BEFORE any hiding
     block = torch.zeros(B, ids.shape[1], dtype=torch.bool)
-    for b, h in enumerate(hint_lens): block[b, a - 1 - h:a] = True             # hint-line tokens [a-1-h, a-1) and the <bot> position a-1
+    for b, h in enumerate(hint_lens):
+        if h > 0: block[b, a - 1 - h:a] = True                                  # hint-line tokens [a-1-h, a-1) and the <bot> position a-1 (nothing to block in an unhinted prompt)
+        if hide_hint and h > 0: att[b, a - 1 - h:a - 1] = 0
     return dict(ids=ids.to(device), att=att.to(device), pos=pos.to(device), block=block.to(device), a=a, n=n, tail_att=tail_att.to(device), tail_ids=tail_ids.to(device))
 
 
@@ -65,10 +69,10 @@ def sentence_logprob(out):
     return (out['logp'] * out['mask']).sum(1)
 
 
-def margin(model, prompts, hint_lens, tail_true, tail_wrong, n, pad_id, bot, lat, patch=None, block_latents_from=None, block_answer=False, device='cpu'):
+def margin(model, prompts, hint_lens, tail_true, tail_wrong, n, pad_id, bot, lat, patch=None, block_latents_from=None, block_answer=False, device='cpu', hide_hint=False):
     """M = S(true option sentence) - S(wrong option sentence), same context, same intervention. Returns M (B,) and the thoughts of the true-option pass (identical for both passes)."""
     res = []
     for tails in (tail_true, tail_wrong):
-        bt = make_batch(prompts, hint_lens, tails, n, pad_id, bot, lat, device)
+        bt = make_batch(prompts, hint_lens, tails, n, pad_id, bot, lat, device, hide_hint)
         res.append(run(model, bt, patch, block_latents_from, block_answer))
     return sentence_logprob(res[0]) - sentence_logprob(res[1]), res[0]['thoughts']

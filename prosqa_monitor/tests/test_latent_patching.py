@@ -96,4 +96,35 @@ class T(unittest.TestCase):
         self.assertTrue(torch.allclose(M, s_t - s_w))
 
 
+    def test_zero_hint_blocks_nothing(self):
+        bt = batch(PROMPTS, [0, 0]); self.assertFalse(bt['block'].any())
+
+    def test_hide_hint_keeps_positions_removes_content(self):
+        hid = batch(); hid2 = lp.make_batch(PROMPTS, HINTS, TAILS, N, PAD, BOT, LAT, hide_hint=True); a = hid['a']
+        self.assertTrue(torch.equal(hid['pos'], hid2['pos']))                              # position ids identical to the hinted run
+        for b, h in enumerate(HINTS):
+            self.assertEqual(hid2['att'][b, a - 1 - h:a - 1].sum().item(), 0)               # hint tokens hidden
+            self.assertEqual(hid2['att'][b, a - 1].item(), 1)                               # <bot> still visible
+        other = [p[:-h] + [30 + j for j in range(h)] for p, h in zip(PROMPTS, HINTS)]       # different hint content, same length
+        o1 = lp.run(self.m, hid2); o2 = lp.run(self.m, lp.make_batch(other, HINTS, TAILS, N, PAD, BOT, LAT, hide_hint=True))
+        self.assertTrue(torch.allclose(o1['logp'], o2['logp'], atol=1e-5))                  # hidden hint content cannot matter
+
+    def test_blocking_needs_slot0_replacement(self):
+        other = [p[:-h] + [30 + j for j in range(h)] for p, h in zip(PROMPTS, HINTS)]
+        a, b = batch(), lp.make_batch(other, HINTS, TAILS, N, PAD, BOT, LAT)
+        z0 = torch.randn(2, 32)
+        leak = lambda bt: lp.run(self.m, bt, block_latents_from=0)['thoughts']
+        self.assertFalse(torch.allclose(leak(a), leak(b)))                                   # masking alone leaks the hint through slot 0's input
+        held = lambda bt: lp.run(self.m, bt, patch={0: z0}, block_latents_from=0)['thoughts']
+        self.assertTrue(torch.allclose(held(a), held(b), atol=1e-5))                         # with slot 0 replaced, the latents cannot see the hint
+
+    def test_both_blocked_is_hint_independent(self):
+        other = [p[:-h] + [30 + j for j in range(h)] for p, h in zip(PROMPTS, HINTS)]
+        z = {i: torch.randn(2, 32) for i in range(N)}
+        f = lambda ps: lp.run(self.m, lp.make_batch(ps, HINTS, TAILS, N, PAD, BOT, LAT), patch=z, block_latents_from=0, block_answer=True)['logp']
+        self.assertTrue(torch.allclose(f(PROMPTS), f(other), atol=1e-5))
+        g = lambda ps: lp.run(self.m, lp.make_batch(ps, HINTS, TAILS, N, PAD, BOT, LAT), patch=z)['logp']
+        self.assertFalse(torch.allclose(g(PROMPTS), g(other)))                              # without the blocks the hint still reaches the answer
+
+
 if __name__ == '__main__': unittest.main()

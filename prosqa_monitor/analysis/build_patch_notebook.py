@@ -23,7 +23,7 @@ cells = [
    "import shutil\n"
    "for s in (0, 1, 2): shutil.rmtree(f'/kaggle/working/patching_s{s}', ignore_errors=True)\n"
    "def worker(gpu, seeds):\n"
-   "    cmds = ' && '.join(f\"{sys.executable} /kaggle/working/run_patching.py --ckpt {INP}/s{s}_coconut_b.pt --gens {INP}/s{s}_generations.jsonl --out /kaggle/working/patching_s{s} --device cuda --seed {s} --boot {BOOT} --bs 16 --run-id {RUN_ID}\" + (f' --limit {LIMIT}' if LIMIT else '') + f' > /kaggle/working/patching_s{s}.log 2>&1' for s in seeds)\n"
+   "    cmds = ' && '.join(f\"{sys.executable} /kaggle/working/run_patching.py --ckpt {INP}/s{s}_coconut_b.pt --gens {INP}/s{s}_generations.jsonl --out /kaggle/working/patching_s{s} --device cuda --seed {s} --boot {BOOT} --bs 32 --run-id {RUN_ID}\" + (f' --limit {LIMIT}' if LIMIT else '') + f' > /kaggle/working/patching_s{s}.log 2>&1' for s in seeds)\n"
    "    return subprocess.Popen(['bash', '-c', cmds], env={**os.environ, 'CUDA_VISIBLE_DEVICES': str(gpu), 'PROSQA_DIR': DATA})\n"
    "t0 = time.time(); procs = [worker(g, s) for g, s in PLAN.items()]\n"
    "for p in procs: p.wait()\n"

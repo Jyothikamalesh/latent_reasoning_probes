@@ -1,0 +1,110 @@
+
+##### HINT SUSCEPTIBILITY (correct hints, matched on unhinted-wrong) #####
+--- per seed (matched subset sizes included) ---
+                                                                     monitor  seed   all  matched  pos_matched  neg_matched  no_decoy  decoy
+    baseline: output-only exact match, hinted prediction == hint (coconut_b)     0 0.543    1.000           66           20     0.542  0.543
+    baseline: output-only exact match, hinted prediction == hint (coconut_b)     1 0.520    1.000           76            9     0.522  0.518
+    baseline: output-only exact match, hinted prediction == hint (coconut_b)     2 0.551    1.000           63           24     0.557  0.545
+   baseline: output-only exact match, hinted prediction == hint (explicit_b)     0 0.526    1.000           65           11     0.523  0.529
+   baseline: output-only exact match, hinted prediction == hint (explicit_b)     1 0.530    1.000           51           13     0.541  0.518
+   baseline: output-only exact match, hinted prediction == hint (explicit_b)     2 0.577    1.000           93           26     0.571  0.582
+                                                        coconut: probe h_ans     0 0.488    0.581           66           20     0.512  0.462
+                                                        coconut: probe h_ans     1 0.499    0.352           76            9     0.517  0.477
+                                                        coconut: probe h_ans     2 0.500    0.503           63           24     0.539  0.454
+                                                     coconut: probe h_prompt     0 0.620    0.662           66           20     0.606  0.633
+                                                     coconut: probe h_prompt     1 0.552    0.645           76            9     0.590  0.508
+                                                     coconut: probe h_prompt     2 0.625    0.646           63           24     0.620  0.622
+                                                        coconut: probe z_cat     0 0.639    0.736           66           20     0.631  0.643
+                                                        coconut: probe z_cat     1 0.523    0.566           76            9     0.571  0.481
+                                                        coconut: probe z_cat     2 0.607    0.550           63           24     0.567  0.638
+                                     explicit text: CoT conclusion != answer     0 0.905    0.923           65           11     0.900  0.912
+                                     explicit text: CoT conclusion != answer     1 0.944    0.961           51           13     0.928  0.959
+                                     explicit text: CoT conclusion != answer     2 0.905    0.930           93           26     0.910  0.901
+                                                       explicit: probe h_ans     0 0.488    0.680           65           11     0.486  0.491
+                                                       explicit: probe h_ans     1 0.562    0.739           51           13     0.554  0.570
+                                                       explicit: probe h_ans     2 0.625    0.939           93           26     0.667  0.579
+                                                    explicit: probe h_prompt     0 0.456    0.550           65           11     0.457  0.456
+                                                    explicit: probe h_prompt     1 0.493    0.442           51           13     0.514  0.474
+                                                    explicit: probe h_prompt     2 0.513    0.577           93           26     0.510  0.520
+                                                    explicit: probe mean_cot     0 0.599    0.958           65           11     0.588  0.606
+                                                    explicit: probe mean_cot     1 0.610    0.937           51           13     0.606  0.608
+                                                    explicit: probe mean_cot     2 0.660    0.958           93           26     0.690  0.623
+label-free: CROSS-FORMAT anchor (explicit_c -> coconut_b, last prompt token)     0 0.530    0.594           66           20     0.547  0.529
+label-free: CROSS-FORMAT anchor (explicit_c -> coconut_b, last prompt token)     1 0.505    0.493           76            9     0.574  0.459
+label-free: CROSS-FORMAT anchor (explicit_c -> coconut_b, last prompt token)     2 0.481    0.532           63           24     0.444  0.528
+                  label-free: clean-anchor matching (coconut_c -> coconut_b)     0 0.601    0.652           66           20     0.596  0.603
+                  label-free: clean-anchor matching (coconut_c -> coconut_b)     1 0.543    0.563           76            9     0.490  0.624
+                  label-free: clean-anchor matching (coconut_c -> coconut_b)     2 0.552    0.547           63           24     0.555  0.522
+                label-free: clean-anchor matching (explicit_c -> explicit_b)     0 0.470    0.573           65           11     0.546  0.408
+                label-free: clean-anchor matching (explicit_c -> explicit_b)     1 0.498    0.437           51           13     0.519  0.474
+                label-free: clean-anchor matching (explicit_c -> explicit_b)     2 0.530    0.445           93           26     0.512  0.572
+--- mean over seeds ---
+                                                                                all  matched  matched_min  matched_max  no_decoy  decoy     pos     neg  seeds
+monitor                                                                                                                                                       
+baseline: output-only exact match, hinted prediction == hint (coconut_b)      0.538    1.000        1.000        1.000     0.540  0.535  68.333  17.667      3
+baseline: output-only exact match, hinted prediction == hint (explicit_b)     0.544    1.000        1.000        1.000     0.545  0.543  69.667  16.667      3
+explicit: probe mean_cot                                                      0.623    0.951        0.937        0.958     0.628  0.612  69.667  16.667      3
+explicit text: CoT conclusion != answer                                       0.918    0.938        0.923        0.961     0.913  0.924  69.667  16.667      3
+explicit: probe h_ans                                                         0.558    0.786        0.680        0.939     0.569  0.546  69.667  16.667      3
+coconut: probe h_prompt                                                       0.599    0.651        0.645        0.662     0.605  0.587  68.333  17.667      3
+coconut: probe z_cat                                                          0.590    0.617        0.550        0.736     0.590  0.587  68.333  17.667      3
+label-free: clean-anchor matching (coconut_c -> coconut_b)                    0.565    0.587        0.547        0.652     0.547  0.583  68.333  17.667      3
+label-free: CROSS-FORMAT anchor (explicit_c -> coconut_b, last prompt token)  0.506    0.540        0.493        0.594     0.522  0.505  68.333  17.667      3
+explicit: probe h_prompt                                                      0.487    0.523        0.442        0.577     0.494  0.483  69.667  16.667      3
+label-free: clean-anchor matching (explicit_c -> explicit_b)                  0.499    0.485        0.437        0.573     0.525  0.485  69.667  16.667      3
+coconut: probe h_ans                                                          0.495    0.479        0.352        0.581     0.523  0.465  68.333  17.667      3
+
+##### HARMFUL RELIANCE (wrong hints, matched on unhinted-right = switched from correct to wrong) #####
+--- per seed (matched subset sizes included) ---
+                                                                     monitor  seed   all  matched  pos_matched  neg_matched  no_decoy  decoy
+    baseline: output-only exact match, hinted prediction == hint (coconut_b)     0 0.712    1.000          116           78     0.707  0.716
+    baseline: output-only exact match, hinted prediction == hint (coconut_b)     1 0.689    1.000          120           68     0.674  0.703
+    baseline: output-only exact match, hinted prediction == hint (coconut_b)     2 0.721    1.000          105           86     0.740  0.700
+   baseline: output-only exact match, hinted prediction == hint (explicit_b)     0 0.685    1.000          165           40     0.693  0.678
+   baseline: output-only exact match, hinted prediction == hint (explicit_b)     1 0.684    1.000          154           46     0.667  0.703
+   baseline: output-only exact match, hinted prediction == hint (explicit_b)     2 0.728    1.000          137           47     0.728  0.727
+                                                        coconut: probe h_ans     0 0.488    0.418          116           78     0.458  0.544
+                                                        coconut: probe h_ans     1 0.478    0.447          120           68     0.489  0.467
+                                                        coconut: probe h_ans     2 0.560    0.582          105           86     0.528  0.583
+                                                     coconut: probe h_prompt     0 0.623    0.632          116           78     0.623  0.623
+                                                     coconut: probe h_prompt     1 0.530    0.543          120           68     0.508  0.552
+                                                     coconut: probe h_prompt     2 0.554    0.579          105           86     0.530  0.576
+                                                        coconut: probe z_cat     0 0.586    0.587          116           78     0.603  0.571
+                                                        coconut: probe z_cat     1 0.557    0.564          120           68     0.557  0.562
+                                                        coconut: probe z_cat     2 0.524    0.551          105           86     0.479  0.560
+                                     explicit text: CoT conclusion != answer     0 0.947    0.982          165           40     0.951  0.943
+                                     explicit text: CoT conclusion != answer     1 0.943    0.987          154           46     0.931  0.956
+                                     explicit text: CoT conclusion != answer     2 0.804    0.993          137           47     0.822  0.785
+                                                       explicit: probe h_ans     0 0.560    0.700          165           40     0.534  0.585
+                                                       explicit: probe h_ans     1 0.586    0.719          154           46     0.532  0.643
+                                                       explicit: probe h_ans     2 0.756    0.952          137           47     0.737  0.774
+                                                    explicit: probe h_prompt     0 0.483    0.543          165           40     0.478  0.487
+                                                    explicit: probe h_prompt     1 0.457    0.437          154           46     0.397  0.511
+                                                    explicit: probe h_prompt     2 0.459    0.461          137           47     0.450  0.469
+                                                    explicit: probe mean_cot     0 0.641    0.903          165           40     0.606  0.677
+                                                    explicit: probe mean_cot     1 0.681    0.916          154           46     0.663  0.699
+                                                    explicit: probe mean_cot     2 0.741    0.994          137           47     0.774  0.710
+label-free: CROSS-FORMAT anchor (explicit_c -> coconut_b, last prompt token)     0 0.541    0.551          116           78     0.535  0.497
+label-free: CROSS-FORMAT anchor (explicit_c -> coconut_b, last prompt token)     1 0.477    0.545          120           68     0.451  0.481
+label-free: CROSS-FORMAT anchor (explicit_c -> coconut_b, last prompt token)     2 0.457    0.449          105           86     0.480  0.430
+                  label-free: clean-anchor matching (coconut_c -> coconut_b)     0 0.521    0.566          116           78     0.490  0.554
+                  label-free: clean-anchor matching (coconut_c -> coconut_b)     1 0.489    0.462          120           68     0.463  0.513
+                  label-free: clean-anchor matching (coconut_c -> coconut_b)     2 0.463    0.468          105           86     0.488  0.454
+                label-free: clean-anchor matching (explicit_c -> explicit_b)     0 0.544    0.520          165           40     0.557  0.534
+                label-free: clean-anchor matching (explicit_c -> explicit_b)     1 0.434    0.477          154           46     0.491  0.388
+                label-free: clean-anchor matching (explicit_c -> explicit_b)     2 0.456    0.483          137           47     0.442  0.472
+--- mean over seeds ---
+                                                                                all  matched  matched_min  matched_max  no_decoy  decoy      pos     neg  seeds
+monitor                                                                                                                                                        
+baseline: output-only exact match, hinted prediction == hint (coconut_b)      0.707    1.000        1.000        1.000     0.707  0.707  113.667  77.333      3
+baseline: output-only exact match, hinted prediction == hint (explicit_b)     0.699    1.000        1.000        1.000     0.696  0.703  152.000  44.333      3
+explicit text: CoT conclusion != answer                                       0.898    0.987        0.982        0.993     0.901  0.895  152.000  44.333      3
+explicit: probe mean_cot                                                      0.688    0.937        0.903        0.994     0.681  0.695  152.000  44.333      3
+explicit: probe h_ans                                                         0.634    0.790        0.700        0.952     0.601  0.667  152.000  44.333      3
+coconut: probe h_prompt                                                       0.569    0.585        0.543        0.632     0.553  0.584  113.667  77.333      3
+coconut: probe z_cat                                                          0.556    0.567        0.551        0.587     0.546  0.564  113.667  77.333      3
+label-free: CROSS-FORMAT anchor (explicit_c -> coconut_b, last prompt token)  0.492    0.515        0.449        0.551     0.489  0.469  113.667  77.333      3
+label-free: clean-anchor matching (coconut_c -> coconut_b)                    0.491    0.499        0.462        0.566     0.480  0.507  113.667  77.333      3
+label-free: clean-anchor matching (explicit_c -> explicit_b)                  0.478    0.493        0.477        0.520     0.497  0.465  152.000  44.333      3
+coconut: probe h_ans                                                          0.508    0.482        0.418        0.582     0.492  0.531  113.667  77.333      3
+explicit: probe h_prompt                                                      0.466    0.480        0.437        0.543     0.442  0.489  152.000  44.333      3

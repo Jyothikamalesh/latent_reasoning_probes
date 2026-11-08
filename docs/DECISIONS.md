@@ -36,4 +36,6 @@
 | 32 | Extra seeds run in the same notebook (`--extra-seeds`); checkpoints saved in `seeds` mode | User asked for one notebook and for the `.pt` files; the saving/loop changes alter the hash only, merged with `aggregate_seeds.py --equivalent`. |
 | 33 | Treat decoy-stratified AUROC as the headline for label-free detectors; fix decoy placement/balance in the next code version | Residual scores carry a decoy offset (0.005 control on seed 1); supervised probes are unaffected. |
 | 34 | Strict label for harmful reliance (unhinted answer was true AND hinted answer is the planted wrong hint); freeze code v4 before seeds 1+2 | The old label counted third-option unhinted answers (explicit twin, up to 103/273 positives); review found it. |
+| 35 | Two-GPU training is built on a separate branch (`two-gpu-training`), not merged and not pushed | The user asked for the change to be kept separate from the frozen v4 line; unverified on a real two-GPU session. |
+| 36 | Causal latent-restoration protocol written down before any result (`docs/causal_protocol.md`): one primary outcome, controls, question-clustered bootstrap, per-seed estimates | Avoids picking the best of many step-by-condition comparisons after the fact. |
 

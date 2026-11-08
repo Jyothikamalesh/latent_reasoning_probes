@@ -126,5 +126,11 @@ class T(unittest.TestCase):
         g = lambda ps: lp.run(self.m, lp.make_batch(ps, HINTS, TAILS, N, PAD, BOT, LAT), patch=z)['logp']
         self.assertFalse(torch.allclose(g(PROMPTS), g(other)))                              # without the blocks the hint still reaches the answer
 
+    def test_block_bot_on_unhinted(self):
+        bt = lp.make_batch(PROMPTS, [0, 0], TAILS, N, PAD, BOT, LAT, block_bot=True); a = bt['a']
+        self.assertEqual(bt['block'].sum().item(), 2); self.assertTrue(bt['block'][:, a - 1].all())
+        base = lp.run(self.m, bt)
+        self.assertFalse(torch.allclose(base['logp'], lp.run(self.m, bt, block_answer=True)['logp']))      # blocking <bot> alone disturbs the model: the disruption baseline is non-zero
+
 
 if __name__ == '__main__': unittest.main()

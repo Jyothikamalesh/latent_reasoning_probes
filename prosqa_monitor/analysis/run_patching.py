@@ -128,11 +128,24 @@ def main():
         add(f'persist_t{t}', R.all('h', lambda idx, t=t: {s: ZU[idx, s] for s in {0, t}}, block_latents_from=min(t + 1, N))[0], MH)
     allU = lambda idx: {t: ZU[idx, t] for t in range(N)}
     add('full6', R.all('h', allU)[0], MH)
+    # scale / positive controls (Amendment 3): if destroying or swapping ALL latents also leaves M unchanged, the answer is not reading the latents and a null restoration is expected
+    add('zero_full6', R.all('h', lambda idx: {t: torch.zeros_like(ZU[idx, t]) for t in range(N)})[0], MH)
+    add('matched_full6', R.all('h', lambda idx: {t: ZU[np.where(don[idx] >= 0, don[idx], idx), t] for t in range(N)})[0], MH)
     add('block_answer', R.all('h', block_answer=True)[0], MH)
     allP = lambda idx: {t: ZP[idx, t] for t in range(N)}
     add('full6_pm', R.all('h', allP)[0], MH)
     add('block_latents', R.all('h', lambda idx: {0: ZU[idx, 0]}, block_latents_from=0)[0], MH)                  # slot 0 replaced too: otherwise the hint-contaminated <bot> state leaks in
     add('block_latents_pm', R.all('h', lambda idx: {0: ZP[idx, 0]}, block_latents_from=0)[0], MH)
+    # matched-attention controls (Amendment 3). (a) disruption baseline: the same blocks on UNHINTED prompts (<bot> blocked, nothing else to block), compared with the unhinted M:
+    # a shift here is caused by the blocking itself, not by removing a hint. Identity patches (own states) keep slot inputs unchanged.
+    allUid = lambda idx: {t: ZU[idx, t] for t in range(N)}
+    add('u_block_latents', R.all('u', lambda idx: {0: ZU[idx, 0]}, block_latents_from=0, block_bot=True)[0], MU)
+    add('u_block_answer', R.all('u', block_answer=True, block_bot=True)[0], MU)
+    add('u_both_blocked', R.all('u', allUid, block_latents_from=0, block_answer=True, block_bot=True)[0], MU)
+    # (b) donor trajectories produced under the SAME attention regime as the blocked recipient (hint hidden, <bot> blocked from every latent step)
+    _, ZB = R.all('m', block_latents_from=0, block_bot=True); allB = lambda idx: {t: ZB[idx, t] for t in range(N)}
+    add('block_latents_mad', R.all('h', lambda idx: {0: ZB[idx, 0]}, block_latents_from=0)[0], MH)
+    add('both_blocked_mad', R.all('h', allB, block_latents_from=0, block_answer=True)[0], MH)
     add('both_blocked_pm', R.all('h', allP, block_latents_from=0, block_answer=True)[0], MH)
     add('full6_block_answer', R.all('h', allU, block_answer=True)[0], MH)
     add('both_blocked', R.all('h', allU, block_latents_from=0, block_answer=True)[0], MH)
@@ -159,7 +172,7 @@ def main():
     print(f"\nPRIMARY (harmful switches, single-step same-question restoration, mean over steps): dM = {h['single_mean']['mean_dM']:.3f} [{h['single_mean']['lo']:.3f}, {h['single_mean']['hi']:.3f}], n = {h['single_mean']['n']}" if 'single_mean' in h else 'no harmful rows')
     for g in S:
         print(f'\n[{g}] n={cnt[g]}  baseline {S[g]["_baseline"]}')
-        for k in ('single_mean', 'single_pm_mean', 'noise_mean', 'matched_mean', 'samecond_mean', 'persist_mean', 'full6', 'full6_pm', 'block_answer', 'block_latents', 'block_latents_pm', 'full6_block_answer', 'both_blocked', 'both_blocked_pm', 'reverse_mean'):
+        for k in ('single_mean', 'single_pm_mean', 'noise_mean', 'matched_mean', 'samecond_mean', 'persist_mean', 'full6', 'zero_full6', 'matched_full6', 'full6_pm', 'block_answer', 'block_latents', 'block_latents_pm', 'full6_block_answer', 'both_blocked', 'both_blocked_pm', 'block_latents_mad', 'both_blocked_mad', 'u_block_latents', 'u_block_answer', 'u_both_blocked', 'reverse_mean'):
             if k in S[g]: e = S[g][k]; print(f'  {k:20s} dM {e["mean_dM"]:+.3f} [{e["lo"]:+.3f},{e["hi"]:+.3f}]  P(true) {e["p_true"]:.2f}  P(wrong) {e["p_flip_to_wrong"]:.2f}')
     print(f'\nsaved to {a.out} in {meta["minutes"]:.1f} min')
 

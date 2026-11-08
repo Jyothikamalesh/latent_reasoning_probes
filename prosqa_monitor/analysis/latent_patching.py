@@ -25,8 +25,9 @@ def hint_span_len(enc, hinted_prompt, unhinted_prompt):
     return len(h) - len(u)
 
 
-def make_batch(prompts, hint_lens, tails, n, pad_id, bot, lat, device='cpu', hide_hint=False):
+def make_batch(prompts, hint_lens, tails, n, pad_id, bot, lat, device='cpu', hide_hint=False, block_bot=False):
     """prompts[b]: prompt token ids (no <bot>); hint_lens[b]: trailing prompt tokens that are the hint line (0 if unhinted); tails[b]: [<eot>] + answer-sentence token ids.
+    block_bot: also mark the <bot> position as blockable in prompts without a hint (the matched-attention disruption control on unhinted runs).
     hide_hint: the hint-line tokens stay in the sequence (so every later position id equals the hinted run's) but are removed from attention: a position-matched 'unhinted' run."""
     pre_ids, pre_att = left_pad([p + [bot] for p in prompts], pad_id); a = pre_ids.shape[1]; B = len(prompts)
     T = max(len(t) for t in tails)
@@ -37,6 +38,7 @@ def make_batch(prompts, hint_lens, tails, n, pad_id, bot, lat, device='cpu', hid
     block = torch.zeros(B, ids.shape[1], dtype=torch.bool)
     for b, h in enumerate(hint_lens):
         if h > 0: block[b, a - 1 - h:a] = True                                  # hint-line tokens [a-1-h, a-1) and the <bot> position a-1 (nothing to block in an unhinted prompt)
+        if block_bot: block[b, a - 1] = True
         if hide_hint and h > 0: att[b, a - 1 - h:a - 1] = 0
     return dict(ids=ids.to(device), att=att.to(device), pos=pos.to(device), block=block.to(device), a=a, n=n, tail_att=tail_att.to(device), tail_ids=tail_ids.to(device))
 
@@ -69,10 +71,10 @@ def sentence_logprob(out):
     return (out['logp'] * out['mask']).sum(1)
 
 
-def margin(model, prompts, hint_lens, tail_true, tail_wrong, n, pad_id, bot, lat, patch=None, block_latents_from=None, block_answer=False, device='cpu', hide_hint=False):
+def margin(model, prompts, hint_lens, tail_true, tail_wrong, n, pad_id, bot, lat, patch=None, block_latents_from=None, block_answer=False, device='cpu', hide_hint=False, block_bot=False):
     """M = S(true option sentence) - S(wrong option sentence), same context, same intervention. Returns M (B,) and the thoughts of the true-option pass (identical for both passes)."""
     res = []
     for tails in (tail_true, tail_wrong):
-        bt = make_batch(prompts, hint_lens, tails, n, pad_id, bot, lat, device, hide_hint)
+        bt = make_batch(prompts, hint_lens, tails, n, pad_id, bot, lat, device, hide_hint, block_bot)
         res.append(run(model, bt, patch, block_latents_from, block_answer))
     return sentence_logprob(res[0]) - sentence_logprob(res[1]), res[0]['thoughts']

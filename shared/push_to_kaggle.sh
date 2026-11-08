@@ -12,6 +12,7 @@ NB=${NB:-prosqa_monitor/notebooks/prosqa_monitor}
 SLUG=${SLUG:-prosqa-monitorability-controlled}
 OUT=${OUT:-$ROOT/kaggle_output/$SLUG}
 
+Q='"'
 USER_NAME=$($KAGGLE config view 2>/dev/null | awk -F': ' '/username/{print $2}' | tr -d ' ')
 [ -n "$USER_NAME" ] || { echo "No Kaggle username found. Run: .venv/bin/kaggle auth login (see shared/README_kaggle.md)"; exit 1; }
 
@@ -30,7 +31,7 @@ case "${1:-push}" in
   "is_private": true,
   "enable_gpu": true,
   "enable_internet": true,
-  "dataset_sources": [${DATASETS:+\"$DATASETS\"}],
+  "dataset_sources": [${DATASETS:+$Q$DATASETS$Q}],
   "competition_sources": [],
   "kernel_sources": []
 }

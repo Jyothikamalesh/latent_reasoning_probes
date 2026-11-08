@@ -33,7 +33,7 @@ from sklearn.pipeline import make_pipeline
 from sklearn.metrics import roc_auc_score, roc_curve
 
 dev = 'cpu' if MODE == 'tiny' else 'cuda' if torch.cuda.is_available() else 'mps' if torch.backends.mps.is_available() else 'cpu'
-print(f'mode={MODE} device={dev} {torch.cuda.get_device_name(0) if dev == "cuda" else ""} torch={torch.__version__} transformers={transformers.__version__}')
+print(f'mode={MODE} device={dev} {torch.cuda.get_device_name(0) if dev == "cuda" else ""} gpus_visible={torch.cuda.device_count() if dev == "cuda" else 0} torch={torch.__version__} transformers={transformers.__version__}')
 
 # %%
 SEED_OVERRIDE = None               # build_prosqa_nb.py --seed N sets this for Kaggle pushes (kernels cannot take env vars)
@@ -41,7 +41,7 @@ EXTRA_SEEDS_OVERRIDE = None        # build_notebook.py --extra-seeds 2,3 sets th
 EXTRA_SEEDS = EXTRA_SEEDS_OVERRIDE or ()
 SEED = int(os.environ['PROSQA_WORKER_SEED']) if os.environ.get('PROSQA_WORKER_SEED') else SEED_OVERRIDE if SEED_OVERRIDE is not None else int(os.environ.get('SEED', 0))
 WORKER = os.environ.get('PROSQA_WORKER')    # 'coconut' inside the second-GPU worker process that trains the two COCONUT twins; None in the main process
-PARALLEL_TRAIN = WORKER is None and (os.environ.get('FORCE_PARALLEL_TRAIN') == '1' or (dev == 'cuda' and torch.cuda.device_count() >= 2 and MODE in ('seeds', 'full')))   # explicit twins on GPU 0, COCONUT twins on GPU 1
+PARALLEL_TRAIN = WORKER is None and (os.environ.get('FORCE_PARALLEL_TRAIN') == '1' or (dev == 'cuda' and torch.cuda.device_count() >= 2 and MODE in ('mini', 'seeds', 'full')))   # explicit twins on GPU 0, COCONUT twins on GPU 1
 SPLIT_SEED = 1234                  # fixes the evaluation questions; identical for every seed
 OBEY_MIN_STEPS = 4                 # behaviour twins follow a hint only when the problem has >= this many steps
 TAG = f's{SEED}_'                  # prefix of every output file
@@ -434,6 +434,8 @@ def learn_check(name, done, total, model, fmt, n=0):
     if done % VAL_EVERY and done != total: return
     model.eval(); acc = val_acc(model, fmt, n); model.train()
     LEARN_HIST.setdefault(name, []).append(acc)
+    if dev == 'cuda' and not globals().get('GPU_REPORTED'):      # once per process: proof of which physical GPUs are busy
+        globals()['GPU_REPORTED'] = True; r = subprocess.run(['nvidia-smi', '--query-gpu=index,uuid,utilization.gpu,memory.used', '--format=csv,noheader'], capture_output=True, text=True); log(f'[{"worker" if WORKER else "main"} process] nvidia-smi gpus (index, uuid, util, mem): ' + ' | '.join(r.stdout.strip().split('\n')))
     log(f'{name}: val accuracy {acc:.2f} on {len(VAL)} held-out unhinted questions after {done}/{total} (chance 0.50)')
     if fmt == 'explicit' and done == max(2, -(-3 * total // 4)):
         best = max(LEARN_HIST[name][-2:])

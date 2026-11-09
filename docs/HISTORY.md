@@ -160,6 +160,9 @@ Because the seed-0 twin's latents are inert even without a hint, a new `MODE=lon
 ### Longer-trained COCONUT twins, seeds 0 and 1 (2026-11-09, `runs/2026-11-09_long_b_s0_s1`)
 Both twins pass the pre-registered gates: unhinted accuracy 0.845 / 0.855 (the frozen twins were far lower), harmful switches 200 / 126 of 300 wrong-hint test prompts. Wrong-hint follow rate 0.84 / 0.59. Whether the latents are now used is NOT yet known; the Amendment 7 diagnostic is the next step.
 
+### Latent-dependence + patching on the longer-trained twins: pushed (2026-11-09)
+Kernel `jyothikamaleshs/prosqa-long-patching` v1 (notebook sha1 e0fd15605b, tag `prosqa-long-patching-v1-pushed`), pushed with the user's yes; inputs are the output of kernel `prosqa-long-b` (kernel_sources, no dataset upload). Per seed, one GPU each: the Amendment 7 diagnostic first, then the frozen patching protocol. Local 12-row check on seed 1: rebuild agreement 1.0. Patching results are only interpreted if the diagnostic says the latents are used (rule in `docs/long_twin_protocol.md`).
+
 ## Open items (live, updated 2026-11-08 after the 3-seed v4 run)
 1. **Causal latent-restoration experiment: done for 3 seeds (see the two entries above).** Follow-ups, not part of the frozen protocol: separate the hint tokens from `<bot>` in the blocked route (block only one), test whether the same holds in the explicit twin (patch CoT text), and check a twin whose latents are causally used (the depth condition is not learned, which may be why they are inert). Full-text novelty audit still open.
 2. **Explicit twin pair** does not meet the accuracy criterion (seed 1 gap 0.09; seed 2 twins at 0.60-0.61). Decide: larger suite to see whether the gap is noise (about 400 questions on the saved twins), or a training change.

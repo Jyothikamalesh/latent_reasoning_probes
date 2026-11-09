@@ -1,0 +1,38 @@
+W1109 10:45:27.275000 84964 torch/distributed/elastic/multiprocessing/redirects.py:29] NOTE: Redirects are currently not supported in Windows or MacOs.
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]Loading weights: 100%|██████████| 148/148 [00:00<00:00, 9388.48it/s]
+[transformers] The new embeddings will be initialized from a multivariate normal distribution that has old embeddings' mean and covariance. As described in this article: https://nlp.stanford.edu/~johnhew/vocab-expansion.html. To disable this, use `mean_resizing=False`
+rows 300 {'harmful': 116, 'resistant': 78, 'wrong_either': 106} depth known 300
+rebuild check: sign(M) agrees with the saved prediction on 1.000 (hinted) / 1.000 (unhinted); by group (hinted, unhinted): {'harmful': (1.0, 1.0), 'resistant': (1.0, 1.0), 'wrong_either': (1.0, 1.0)}
+no harmful rows
+
+[harmful] n=116  baseline {'M_hinted': -1.8444118808055747, 'M_unhinted': 1.7296608578542183, 'p_true_hinted': 0.0}
+  u_zero_full6         dM -0.005 [-0.021,+0.011]  P(true) 0.98  P(wrong) 0.02
+  u_matched_full6      dM +0.001 [+0.000,+0.002]  P(true) 1.00  P(wrong) 0.00
+  u_zero_t0            dM +0.002 [-0.002,+0.007]  P(true) 1.00  P(wrong) 0.00
+  u_zero_t1            dM +0.003 [-0.001,+0.007]  P(true) 1.00  P(wrong) 0.00
+  u_zero_t2            dM +0.003 [-0.001,+0.007]  P(true) 1.00  P(wrong) 0.00
+  u_zero_t3            dM +0.003 [-0.001,+0.007]  P(true) 1.00  P(wrong) 0.00
+  u_zero_t4            dM +0.002 [-0.002,+0.007]  P(true) 1.00  P(wrong) 0.00
+  u_zero_t5            dM -0.000 [-0.003,+0.003]  P(true) 1.00  P(wrong) 0.00
+
+[resistant] n=78  baseline {'M_hinted': 1.6374430992664435, 'M_unhinted': 4.68594539929659, 'p_true_hinted': 1.0}
+  u_zero_full6         dM +0.016 [-0.004,+0.034]  P(true) 1.00  P(wrong) 0.00
+  u_matched_full6      dM -0.001 [-0.002,+0.000]  P(true) 1.00  P(wrong) 0.00
+  u_zero_t0            dM +0.005 [-0.000,+0.010]  P(true) 1.00  P(wrong) 0.00
+  u_zero_t1            dM +0.004 [-0.002,+0.009]  P(true) 1.00  P(wrong) 0.00
+  u_zero_t2            dM +0.004 [-0.001,+0.009]  P(true) 1.00  P(wrong) 0.00
+  u_zero_t3            dM +0.006 [+0.002,+0.011]  P(true) 1.00  P(wrong) 0.00
+  u_zero_t4            dM +0.006 [-0.000,+0.011]  P(true) 1.00  P(wrong) 0.00
+  u_zero_t5            dM +0.004 [-0.000,+0.009]  P(true) 1.00  P(wrong) 0.00
+
+[wrong_either] n=106  baseline {'M_hinted': -4.402506715846512, 'M_unhinted': -1.7800243569994874, 'p_true_hinted': 0.0}
+  u_zero_full6         dM -0.014 [-0.033,+0.003]  P(true) 0.01  P(wrong) 0.99
+  u_matched_full6      dM -0.000 [-0.001,+0.001]  P(true) 0.00  P(wrong) 1.00
+  u_zero_t0            dM -0.005 [-0.010,-0.000]  P(true) 0.00  P(wrong) 1.00
+  u_zero_t1            dM -0.004 [-0.008,-0.000]  P(true) 0.00  P(wrong) 1.00
+  u_zero_t2            dM -0.004 [-0.008,-0.001]  P(true) 0.00  P(wrong) 1.00
+  u_zero_t3            dM -0.004 [-0.008,+0.000]  P(true) 0.00  P(wrong) 1.00
+  u_zero_t4            dM -0.003 [-0.007,+0.000]  P(true) 0.00  P(wrong) 1.00
+  u_zero_t5            dM -0.001 [-0.004,+0.002]  P(true) 0.00  P(wrong) 1.00
+
+saved to prosqa_monitor/runs/2026-11-09_latentdep_local/results/latentdep_s0 in 96.5 min

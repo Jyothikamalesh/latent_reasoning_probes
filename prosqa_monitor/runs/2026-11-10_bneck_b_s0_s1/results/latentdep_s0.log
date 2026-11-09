@@ -1,0 +1,37 @@
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]Loading weights: 100%|██████████| 148/148 [00:00<00:00, 3131.58it/s]
+[transformers] The new embeddings will be initialized from a multivariate normal distribution that has old embeddings' mean and covariance. As described in this article: https://nlp.stanford.edu/~johnhew/vocab-expansion.html. To disable this, use `mean_resizing=False`
+rows 299 {'harmful': 116, 'resistant': 137, 'wrong_either': 46} depth known 299
+rebuild check: sign(M) agrees with the saved prediction on 1.000 (hinted) / 1.000 (unhinted); by group (hinted, unhinted): {'harmful': (1.0, 1.0), 'resistant': (1.0, 1.0), 'wrong_either': (1.0, 1.0)}
+no harmful rows
+
+[harmful] n=116  baseline {'M_hinted': -2.2919449562142633, 'M_unhinted': 5.442751450785275, 'p_true_hinted': 0.0}
+  u_zero_full6         dM -5.847 [-6.616,-5.036]  P(true) 0.41  P(wrong) 0.59
+  u_matched_full6      dM -4.548 [-5.325,-3.780]  P(true) 0.69  P(wrong) 0.31
+  u_zero_t0            dM -0.062 [-0.100,-0.028]  P(true) 0.99  P(wrong) 0.01
+  u_zero_t1            dM -0.046 [-0.104,+0.016]  P(true) 0.99  P(wrong) 0.01
+  u_zero_t2            dM -0.248 [-0.396,-0.111]  P(true) 0.97  P(wrong) 0.03
+  u_zero_t3            dM -0.184 [-0.348,-0.041]  P(true) 0.97  P(wrong) 0.03
+  u_zero_t4            dM -0.032 [-0.106,+0.039]  P(true) 0.98  P(wrong) 0.02
+  u_zero_t5            dM -0.024 [-0.071,+0.017]  P(true) 0.99  P(wrong) 0.01
+
+[resistant] n=137  baseline {'M_hinted': 2.4824356571601256, 'M_unhinted': 8.696049876456714, 'p_true_hinted': 1.0}
+  u_zero_full6         dM -8.264 [-8.842,-7.671]  P(true) 0.60  P(wrong) 0.40
+  u_matched_full6      dM -6.787 [-7.443,-6.120]  P(true) 0.77  P(wrong) 0.23
+  u_zero_t0            dM -0.098 [-0.129,-0.067]  P(true) 1.00  P(wrong) 0.00
+  u_zero_t1            dM -0.135 [-0.186,-0.085]  P(true) 1.00  P(wrong) 0.00
+  u_zero_t2            dM -0.443 [-0.535,-0.357]  P(true) 1.00  P(wrong) 0.00
+  u_zero_t3            dM -0.326 [-0.437,-0.221]  P(true) 1.00  P(wrong) 0.00
+  u_zero_t4            dM -0.121 [-0.175,-0.066]  P(true) 1.00  P(wrong) 0.00
+  u_zero_t5            dM -0.063 [-0.108,-0.026]  P(true) 1.00  P(wrong) 0.00
+
+[wrong_either] n=46  baseline {'M_hinted': -4.859322572531908, 'M_unhinted': -3.1225492733976115, 'p_true_hinted': 0.0}
+  u_zero_full6         dM +3.064 [+2.100,+4.048]  P(true) 0.48  P(wrong) 0.52
+  u_matched_full6      dM +2.534 [+1.689,+3.336]  P(true) 0.43  P(wrong) 0.57
+  u_zero_t0            dM -0.018 [-0.097,+0.045]  P(true) 0.02  P(wrong) 0.98
+  u_zero_t1            dM +0.072 [-0.027,+0.171]  P(true) 0.02  P(wrong) 0.98
+  u_zero_t2            dM +0.277 [+0.114,+0.432]  P(true) 0.09  P(wrong) 0.91
+  u_zero_t3            dM +0.202 [+0.009,+0.407]  P(true) 0.09  P(wrong) 0.91
+  u_zero_t4            dM +0.045 [-0.065,+0.152]  P(true) 0.02  P(wrong) 0.98
+  u_zero_t5            dM +0.004 [-0.040,+0.046]  P(true) 0.00  P(wrong) 1.00
+
+saved to /kaggle/working/latentdep_s0 in 5.2 min

@@ -1,0 +1,239 @@
+mode=long device=cuda Tesla T4 torch=2.11.0+cu130 transformers=5.22.2
+[18:18:22 +  0.0m] seed=1 split_seed=1234 code_hash=0fb349f4f7 (runs are only comparable when the hash matches)
+[18:18:22 +  0.0m] MODE=long: N_TRAIN=15000, epochs/stage=2, explicit epochs=14, monitor sets 300/600, benign 500
+[18:18:22 +  0.0m] plan: preflight -> smoke pass -> train explicit_b -> train explicit_c -> train coconut_b -> train coconut_c -> generation + features -> behaviour suite -> monitors; total expected ~837m (from T4 profile). gpu mem 0.0G (peak 0.0/14.6G) util 0
+0% | cpu 44% ram 2.2/31.3G
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+15000 train questions; hints: 7547 none, 3703 correct, 3750 wrong | decoy 0.50
+example prompt tail:  a gorpus. Carol is a hilpus. Is Stella a worpus or storpus? | hint worpus | true storpus | steps 4
+[18:18:23 +  0.0m] === PHASE 1/9: preflight | expected ~0.5m | total elapsed 0.0m ===
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]Loading weights: 100%|██████████| 148/148 [00:00<00:00, 5386.79it/s]
+[transformers] The new embeddings will be initialized from a multivariate normal distribution that has old embeddings' mean and covariance. As described in this article: https://nlp.stanford.edu/~johnhew/vocab-expansion.html. To disable this, use `mean_resizing=False`
+[18:18:32 +  0.2m] preflight OK: worst-case COCONUT batch (len 720, 6 latents, micro-batch 8) peak 6.7 GiB of 14.6
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]Loading weights: 100%|██████████| 148/148 [00:00<00:00, 2734.20it/s]
+[18:18:45 +  0.4m] gen coconut 10/10 (100%) elapsed 0.1m eta 0.0m | gpu mem 0.7G (peak 6.7/14.6G) util 88
+73% | cpu 44% ram 5.1/31.3G
+[18:18:45 +  0.4m] bottleneck ON, BEFORE fine-tuning: val accuracy 0.00 (the unmodified twin answers from the prompt, so it should collapse)
+[18:18:45 +  0.4m] <<< done preflight in 0.4m (expected ~0.5m)
+[18:18:45 +  0.4m] === PHASE 5/9: train coconut_b | expected ~208.5m | total elapsed 0.4m ===
+[18:18:54 +  0.5m] bottleneck fine-tuning on stage 6: 15000/15000 examples, 3 epochs
+[18:19:26 +  1.1m] bneck stage 6 ep0 61/1875 (3%) elapsed 0.5m eta 14.9m | loss 1.3066 | gpu mem 1.9G (peak 7.2/14.6G) util 95
+84% | cpu 51% ram 5.2/31.3G
+[18:19:56 +  1.6m] bneck stage 6 ep0 121/1875 (6%) elapsed 1.0m eta 14.5m | loss 0.8673 | gpu mem 1.9G (peak 7.2/14.6G) util 75
+61% | cpu 51% ram 4.9/31.3G
+[18:20:26 +  2.1m] bneck stage 6 ep0 179/1875 (10%) elapsed 1.5m eta 14.2m | loss 0.7053 | gpu mem 1.9G (peak 7.2/14.6G) util 65
+56% | cpu 51% ram 4.9/31.3G
+[18:20:56 +  2.6m] bneck stage 6 ep0 238/1875 (13%) elapsed 2.0m eta 13.8m | loss 0.5656 | gpu mem 1.4G (peak 7.2/14.6G) util 97
+93% | cpu 51% ram 4.8/31.3G
+[18:21:27 +  3.1m] bneck stage 6 ep0 298/1875 (16%) elapsed 2.5m eta 13.3m | loss 0.4688 | gpu mem 1.4G (peak 7.2/14.6G) util 96
+98% | cpu 51% ram 4.9/31.3G
+[18:21:57 +  3.6m] bneck stage 6 ep0 358/1875 (19%) elapsed 3.0m eta 12.8m | loss 0.3997 | gpu mem 1.4G (peak 7.2/14.6G) util 71
+99% | cpu 51% ram 4.9/31.3G
+[18:22:27 +  4.1m] bneck stage 6 ep0 418/1875 (22%) elapsed 3.5m eta 12.3m | loss 0.3489 | gpu mem 1.4G (peak 7.6/14.6G) util 57
+74% | cpu 51% ram 4.8/31.3G
+[18:22:58 +  4.6m] bneck stage 6 ep0 478/1875 (25%) elapsed 4.0m eta 11.8m | loss 0.3112 | gpu mem 1.4G (peak 7.6/14.6G) util 66
+91% | cpu 51% ram 4.9/31.3G
+[18:23:28 +  5.1m] bneck stage 6 ep0 538/1875 (29%) elapsed 4.5m eta 11.3m | loss 0.2813 | gpu mem 1.4G (peak 7.6/14.6G) util 99
+89% | cpu 51% ram 4.9/31.3G
+[18:23:58 +  5.6m] bneck stage 6 ep0 598/1875 (32%) elapsed 5.0m eta 10.8m | loss 0.2588 | gpu mem 1.4G (peak 7.6/14.6G) util 67
+94% | cpu 51% ram 4.9/31.3G
+[18:24:29 +  6.1m] bneck stage 6 ep0 657/1875 (35%) elapsed 5.5m eta 10.3m | loss 0.2405 | gpu mem 1.9G (peak 7.6/14.6G) util 72
+97% | cpu 51% ram 4.8/31.3G
+[18:24:59 +  6.6m] bneck stage 6 ep0 717/1875 (38%) elapsed 6.0m eta 9.8m | loss 0.2246 | gpu mem 1.9G (peak 7.6/14.6G) util 82
+96% | cpu 51% ram 4.8/31.3G
+[18:25:29 +  7.1m] bneck stage 6 ep0 776/1875 (41%) elapsed 6.5m eta 9.3m | loss 0.2116 | gpu mem 1.4G (peak 7.6/14.6G) util 98
+98% | cpu 51% ram 4.8/31.3G
+[18:25:59 +  7.6m] bneck stage 6 ep0 836/1875 (45%) elapsed 7.0m eta 8.8m | loss 0.1993 | gpu mem 1.4G (peak 7.6/14.6G) util 95
+99% | cpu 51% ram 4.8/31.3G
+[18:26:29 +  8.1m] bneck stage 6 ep0 896/1875 (48%) elapsed 7.6m eta 8.3m | loss 0.1893 | gpu mem 1.4G (peak 7.6/14.6G) util 64
+88% | cpu 51% ram 4.8/31.3G
+[18:26:59 +  8.6m] bneck stage 6 ep0 955/1875 (51%) elapsed 8.1m eta 7.8m | loss 0.1804 | gpu mem 1.9G (peak 7.6/14.6G) util 99
+55% | cpu 51% ram 4.8/31.3G
+[18:27:30 +  9.1m] bneck stage 6 ep0 1015/1875 (54%) elapsed 8.6m eta 7.3m | loss 0.1726 | gpu mem 1.9G (peak 7.6/14.6G) util 99
+58% | cpu 51% ram 4.8/31.3G
+[18:28:00 +  9.6m] bneck stage 6 ep0 1075/1875 (57%) elapsed 9.1m eta 6.7m | loss 0.1654 | gpu mem 1.9G (peak 7.6/14.6G) util 99
+69% | cpu 51% ram 4.8/31.3G
+[18:28:30 + 10.1m] bneck stage 6 ep0 1135/1875 (61%) elapsed 9.6m eta 6.2m | loss 0.1589 | gpu mem 1.9G (peak 7.6/14.6G) util 90
+99% | cpu 51% ram 4.9/31.3G
+[18:29:01 + 10.6m] bneck stage 6 ep0 1194/1875 (64%) elapsed 10.1m eta 5.7m | loss 0.1531 | gpu mem 1.4G (peak 7.6/14.6G) util 79
+92% | cpu 51% ram 4.8/31.3G
+[18:29:31 + 11.2m] bneck stage 6 ep0 1254/1875 (67%) elapsed 10.6m eta 5.2m | loss 0.1479 | gpu mem 1.4G (peak 7.6/14.6G) util 94
+99% | cpu 51% ram 4.8/31.3G
+[18:30:02 + 11.7m] bneck stage 6 ep0 1314/1875 (70%) elapsed 11.1m eta 4.7m | loss 0.1435 | gpu mem 1.4G (peak 7.6/14.6G) util 97
+97% | cpu 51% ram 4.8/31.3G
+[18:30:32 + 12.2m] bneck stage 6 ep0 1374/1875 (73%) elapsed 11.6m eta 4.2m | loss 0.1392 | gpu mem 1.4G (peak 7.6/14.6G) util 89
+85% | cpu 51% ram 4.8/31.3G
+[18:31:02 + 12.7m] bneck stage 6 ep0 1434/1875 (76%) elapsed 12.1m eta 3.7m | loss 0.1350 | gpu mem 1.4G (peak 7.6/14.6G) util 99
+71% | cpu 51% ram 4.8/31.3G
+[18:31:33 + 13.2m] bneck stage 6 ep0 1494/1875 (80%) elapsed 12.6m eta 3.2m | loss 0.1315 | gpu mem 1.4G (peak 7.6/14.6G) util 99
+90% | cpu 51% ram 4.8/31.3G
+[18:32:03 + 13.7m] bneck stage 6 ep0 1554/1875 (83%) elapsed 13.1m eta 2.7m | loss 0.1281 | gpu mem 1.4G (peak 7.6/14.6G) util 68
+83% | cpu 51% ram 4.8/31.3G
+[18:32:33 + 14.2m] bneck stage 6 ep0 1613/1875 (86%) elapsed 13.6m eta 2.2m | loss 0.1250 | gpu mem 1.9G (peak 7.6/14.6G) util 75
+98% | cpu 51% ram 4.8/31.3G
+[18:33:03 + 14.7m] bneck stage 6 ep0 1672/1875 (89%) elapsed 14.1m eta 1.7m | loss 0.1217 | gpu mem 1.4G (peak 7.6/14.6G) util 99
+96% | cpu 51% ram 4.8/31.3G
+[18:33:33 + 15.2m] bneck stage 6 ep0 1732/1875 (92%) elapsed 14.6m eta 1.2m | loss 0.1189 | gpu mem 1.4G (peak 7.6/14.6G) util 99
+74% | cpu 51% ram 4.8/31.3G
+[18:34:04 + 15.7m] bneck stage 6 ep0 1792/1875 (96%) elapsed 15.1m eta 0.7m | loss 0.1163 | gpu mem 1.4G (peak 7.6/14.6G) util 97
+69% | cpu 51% ram 4.8/31.3G
+[18:34:34 + 16.2m] bneck stage 6 ep0 1851/1875 (99%) elapsed 15.6m eta 0.2m | loss 0.1139 | gpu mem 1.9G (peak 7.6/14.6G) util 92
+91% | cpu 51% ram 4.8/31.3G
+[18:34:46 + 16.4m] bneck stage 6 ep0 1875/1875 (100%) elapsed 15.8m eta 0.0m | loss 0.1128 | gpu mem 1.4G (peak 7.6/14.6G) util 69
+75% | cpu 51% ram 5.1/31.3G
+[18:34:46 + 16.4m] bneck stage 6 ep0 done: mean loss 0.1128 (15000 examples)
+[18:34:54 + 16.5m] gen coconut 10/10 (100%) elapsed 0.1m eta 0.0m | gpu mem 1.6G (peak 7.6/14.6G) util 64
+98% | cpu 51% ram 5.1/31.3G
+[18:34:54 + 16.5m] bneck: val accuracy 0.83 on 150 held-out unhinted questions after 1/3 (chance 0.50)
+[18:35:27 + 17.1m] bneck stage 6 ep1 59/1875 (3%) elapsed 0.5m eta 15.4m | loss 0.0297 | gpu mem 1.9G (peak 7.0/14.6G) util 86
+59% | cpu 51% ram 5.3/31.3G
+[18:35:57 + 17.6m] bneck stage 6 ep1 119/1875 (6%) elapsed 1.0m eta 14.9m | loss 0.0281 | gpu mem 1.9G (peak 7.2/14.6G) util 88
+96% | cpu 51% ram 5.3/31.3G
+[18:36:27 + 18.1m] bneck stage 6 ep1 178/1875 (9%) elapsed 1.5m eta 14.4m | loss 0.0308 | gpu mem 1.4G (peak 7.2/14.6G) util 78
+99% | cpu 51% ram 5.3/31.3G
+[18:36:58 + 18.6m] bneck stage 6 ep1 238/1875 (13%) elapsed 2.0m eta 13.9m | loss 0.0320 | gpu mem 1.4G (peak 7.2/14.6G) util 98
+87% | cpu 51% ram 5.3/31.3G
+[18:37:28 + 19.1m] bneck stage 6 ep1 297/1875 (16%) elapsed 2.5m eta 13.4m | loss 0.0315 | gpu mem 1.9G (peak 7.2/14.6G) util 48
+99% | cpu 51% ram 5.3/31.3G
+[18:37:58 + 19.6m] bneck stage 6 ep1 357/1875 (19%) elapsed 3.0m eta 12.9m | loss 0.0321 | gpu mem 1.9G (peak 7.2/14.6G) util 96
+87% | cpu 51% ram 5.3/31.3G
+[18:38:29 + 20.1m] bneck stage 6 ep1 416/1875 (22%) elapsed 3.5m eta 12.4m | loss 0.0319 | gpu mem 1.4G (peak 7.2/14.6G) util 69
+85% | cpu 51% ram 5.3/31.3G
+[18:38:59 + 20.6m] bneck stage 6 ep1 476/1875 (25%) elapsed 4.0m eta 11.9m | loss 0.0321 | gpu mem 1.4G (peak 7.2/14.6G) util 99
+99% | cpu 51% ram 5.3/31.3G
+[18:39:29 + 21.1m] bneck stage 6 ep1 536/1875 (29%) elapsed 4.5m eta 11.4m | loss 0.0327 | gpu mem 1.4G (peak 7.2/14.6G) util 76
+99% | cpu 51% ram 5.3/31.3G
+[18:39:59 + 21.6m] bneck stage 6 ep1 595/1875 (32%) elapsed 5.0m eta 10.9m | loss 0.0319 | gpu mem 1.9G (peak 7.6/14.6G) util 99
+93% | cpu 51% ram 5.3/31.3G
+[18:40:30 + 22.1m] bneck stage 6 ep1 655/1875 (35%) elapsed 5.6m eta 10.3m | loss 0.0325 | gpu mem 1.9G (peak 7.6/14.6G) util 90
+93% | cpu 51% ram 5.3/31.3G
+[18:41:00 + 22.6m] bneck stage 6 ep1 714/1875 (38%) elapsed 6.1m eta 9.9m | loss 0.0324 | gpu mem 1.4G (peak 7.6/14.6G) util 57
+84% | cpu 51% ram 5.3/31.3G
+[18:41:30 + 23.1m] bneck stage 6 ep1 774/1875 (41%) elapsed 6.6m eta 9.3m | loss 0.0323 | gpu mem 1.4G (peak 7.6/14.6G) util 75
+96% | cpu 51% ram 5.3/31.3G
+[18:42:01 + 23.6m] bneck stage 6 ep1 833/1875 (44%) elapsed 7.1m eta 8.8m | loss 0.0318 | gpu mem 1.9G (peak 7.6/14.6G) util 66
+83% | cpu 51% ram 5.3/31.3G
+[18:42:31 + 24.2m] bneck stage 6 ep1 892/1875 (48%) elapsed 7.6m eta 8.4m | loss 0.0322 | gpu mem 1.4G (peak 7.6/14.6G) util 67
+90% | cpu 51% ram 5.3/31.3G
+[18:43:02 + 24.7m] bneck stage 6 ep1 952/1875 (51%) elapsed 8.1m eta 7.8m | loss 0.0325 | gpu mem 1.4G (peak 7.6/14.6G) util 66
+96% | cpu 51% ram 5.3/31.3G
+[18:43:32 + 25.2m] bneck stage 6 ep1 1011/1875 (54%) elapsed 8.6m eta 7.3m | loss 0.0325 | gpu mem 1.9G (peak 7.6/14.6G) util 97
+89% | cpu 51% ram 5.3/31.3G
+[18:44:02 + 25.7m] bneck stage 6 ep1 1070/1875 (57%) elapsed 9.1m eta 6.8m | loss 0.0329 | gpu mem 1.4G (peak 7.6/14.6G) util 81
+88% | cpu 51% ram 5.3/31.3G
+[18:44:32 + 26.2m] bneck stage 6 ep1 1130/1875 (60%) elapsed 9.6m eta 6.3m | loss 0.0329 | gpu mem 1.4G (peak 7.6/14.6G) util 75
+94% | cpu 51% ram 5.3/31.3G
+[18:45:02 + 26.7m] bneck stage 6 ep1 1189/1875 (63%) elapsed 10.1m eta 5.8m | loss 0.0335 | gpu mem 1.9G (peak 7.6/14.6G) util 77
+88% | cpu 51% ram 5.3/31.3G
+[18:45:33 + 27.2m] bneck stage 6 ep1 1249/1875 (67%) elapsed 10.6m eta 5.3m | loss 0.0338 | gpu mem 1.9G (peak 7.6/14.6G) util 79
+83% | cpu 51% ram 5.3/31.3G
+[18:46:03 + 27.7m] bneck stage 6 ep1 1308/1875 (70%) elapsed 11.1m eta 4.8m | loss 0.0339 | gpu mem 1.4G (peak 7.6/14.6G) util 74
+99% | cpu 51% ram 5.3/31.3G
+[18:46:33 + 28.2m] bneck stage 6 ep1 1368/1875 (73%) elapsed 11.6m eta 4.3m | loss 0.0342 | gpu mem 1.4G (peak 7.6/14.6G) util 89
+99% | cpu 51% ram 5.3/31.3G
+[18:47:04 + 28.7m] bneck stage 6 ep1 1428/1875 (76%) elapsed 12.1m eta 3.8m | loss 0.0340 | gpu mem 1.4G (peak 7.6/14.6G) util 99
+93% | cpu 51% ram 5.3/31.3G
+[18:47:34 + 29.2m] bneck stage 6 ep1 1488/1875 (79%) elapsed 12.6m eta 3.3m | loss 0.0341 | gpu mem 1.4G (peak 7.6/14.6G) util 60
+83% | cpu 51% ram 5.3/31.3G
+[18:48:04 + 29.7m] bneck stage 6 ep1 1547/1875 (83%) elapsed 13.1m eta 2.8m | loss 0.0341 | gpu mem 1.9G (peak 7.6/14.6G) util 93
+95% | cpu 51% ram 5.3/31.3G
+[18:48:34 + 30.2m] bneck stage 6 ep1 1606/1875 (86%) elapsed 13.6m eta 2.3m | loss 0.0342 | gpu mem 1.4G (peak 7.6/14.6G) util 81
+92% | cpu 51% ram 5.3/31.3G
+[18:49:05 + 30.7m] bneck stage 6 ep1 1666/1875 (89%) elapsed 14.1m eta 1.8m | loss 0.0344 | gpu mem 1.4G (peak 7.6/14.6G) util 62
+95% | cpu 51% ram 5.3/31.3G
+[18:49:35 + 31.2m] bneck stage 6 ep1 1726/1875 (92%) elapsed 14.6m eta 1.3m | loss 0.0347 | gpu mem 1.4G (peak 7.6/14.6G) util 66
+99% | cpu 51% ram 5.3/31.3G
+[18:50:06 + 31.7m] bneck stage 6 ep1 1785/1875 (95%) elapsed 15.2m eta 0.8m | loss 0.0347 | gpu mem 1.9G (peak 7.6/14.6G) util 83
+88% | cpu 51% ram 5.3/31.3G
+[18:50:36 + 32.2m] bneck stage 6 ep1 1844/1875 (98%) elapsed 15.7m eta 0.3m | loss 0.0349 | gpu mem 1.4G (peak 7.6/14.6G) util 99
+96% | cpu 51% ram 5.3/31.3G
+[18:50:51 + 32.5m] bneck stage 6 ep1 1875/1875 (100%) elapsed 15.9m eta 0.0m | loss 0.0350 | gpu mem 1.4G (peak 7.6/14.6G) util 73
+88% | cpu 51% ram 5.3/31.3G
+[18:50:51 + 32.5m] bneck stage 6 ep1 done: mean loss 0.0350 (15000 examples)
+[18:50:59 + 32.6m] gen coconut 10/10 (100%) elapsed 0.1m eta 0.0m | gpu mem 1.6G (peak 7.6/14.6G) util 90
+92% | cpu 51% ram 5.3/31.3G
+[18:50:59 + 32.6m] bneck: val accuracy 0.83 on 150 held-out unhinted questions after 2/3 (chance 0.50)
+[18:51:32 + 33.2m] bneck stage 6 ep2 60/1875 (3%) elapsed 0.5m eta 15.2m | loss 0.0310 | gpu mem 1.4G (peak 7.2/14.6G) util 62
+99% | cpu 51% ram 5.3/31.3G
+[18:52:02 + 33.7m] bneck stage 6 ep2 119/1875 (6%) elapsed 1.0m eta 14.8m | loss 0.0311 | gpu mem 1.9G (peak 7.2/14.6G) util 100
+91% | cpu 51% ram 5.3/31.3G
+[18:52:32 + 34.2m] bneck stage 6 ep2 178/1875 (9%) elapsed 1.5m eta 14.4m | loss 0.0314 | gpu mem 1.4G (peak 7.2/14.6G) util 72
+92% | cpu 51% ram 5.3/31.3G
+[18:53:02 + 34.7m] bneck stage 6 ep2 238/1875 (13%) elapsed 2.0m eta 13.9m | loss 0.0314 | gpu mem 1.4G (peak 7.2/14.6G) util 99
+85% | cpu 51% ram 5.3/31.3G
+[18:53:32 + 35.2m] bneck stage 6 ep2 297/1875 (16%) elapsed 2.5m eta 13.4m | loss 0.0313 | gpu mem 1.9G (peak 7.2/14.6G) util 76
+94% | cpu 51% ram 5.3/31.3G
+[18:54:03 + 35.7m] bneck stage 6 ep2 357/1875 (19%) elapsed 3.0m eta 12.8m | loss 0.0297 | gpu mem 1.9G (peak 7.2/14.6G) util 73
+80% | cpu 51% ram 5.3/31.3G
+[18:54:33 + 36.2m] bneck stage 6 ep2 416/1875 (22%) elapsed 3.5m eta 12.3m | loss 0.0287 | gpu mem 1.4G (peak 7.2/14.6G) util 98
+99% | cpu 51% ram 5.3/31.3G
+[18:55:03 + 36.7m] bneck stage 6 ep2 475/1875 (25%) elapsed 4.0m eta 11.9m | loss 0.0283 | gpu mem 1.9G (peak 7.2/14.6G) util 66
+85% | cpu 51% ram 5.3/31.3G
+[18:55:33 + 37.2m] bneck stage 6 ep2 535/1875 (29%) elapsed 4.5m eta 11.4m | loss 0.0286 | gpu mem 1.9G (peak 7.2/14.6G) util 82
+71% | cpu 51% ram 5.3/31.3G
+[18:56:04 + 37.7m] bneck stage 6 ep2 594/1875 (32%) elapsed 5.0m eta 10.9m | loss 0.0287 | gpu mem 1.4G (peak 7.2/14.6G) util 97
+99% | cpu 51% ram 5.3/31.3G
+[18:56:34 + 38.2m] bneck stage 6 ep2 653/1875 (35%) elapsed 5.5m eta 10.4m | loss 0.0290 | gpu mem 1.9G (peak 7.2/14.6G) util 99
+95% | cpu 51% ram 5.3/31.3G
+[18:57:04 + 38.7m] bneck stage 6 ep2 712/1875 (38%) elapsed 6.0m eta 9.9m | loss 0.0293 | gpu mem 1.4G (peak 7.2/14.6G) util 89
+96% | cpu 51% ram 5.3/31.3G
+[18:57:34 + 39.2m] bneck stage 6 ep2 771/1875 (41%) elapsed 6.5m eta 9.4m | loss 0.0294 | gpu mem 1.9G (peak 7.2/14.6G) util 95
+87% | cpu 51% ram 5.3/31.3G
+[18:58:04 + 39.7m] bneck stage 6 ep2 830/1875 (44%) elapsed 7.0m eta 8.9m | loss 0.0292 | gpu mem 1.4G (peak 7.2/14.6G) util 73
+95% | cpu 51% ram 5.3/31.3G
+[18:58:34 + 40.2m] bneck stage 6 ep2 889/1875 (47%) elapsed 7.5m eta 8.4m | loss 0.0292 | gpu mem 1.9G (peak 7.2/14.6G) util 91
+81% | cpu 51% ram 5.3/31.3G
+[18:59:05 + 40.7m] bneck stage 6 ep2 948/1875 (51%) elapsed 8.1m eta 7.9m | loss 0.0292 | gpu mem 1.4G (peak 7.2/14.6G) util 92
+97% | cpu 51% ram 5.3/31.3G
+[18:59:35 + 41.2m] bneck stage 6 ep2 1008/1875 (54%) elapsed 8.6m eta 7.4m | loss 0.0295 | gpu mem 1.4G (peak 7.2/14.6G) util 93
+93% | cpu 51% ram 5.3/31.3G
+[19:00:05 + 41.7m] bneck stage 6 ep2 1067/1875 (57%) elapsed 9.1m eta 6.9m | loss 0.0296 | gpu mem 1.9G (peak 7.2/14.6G) util 64
+91% | cpu 51% ram 5.3/31.3G
+[19:00:35 + 42.2m] bneck stage 6 ep2 1125/1875 (60%) elapsed 9.6m eta 6.4m | loss 0.0298 | gpu mem 1.9G (peak 7.6/14.6G) util 70
+90% | cpu 51% ram 5.3/31.3G
+[19:01:06 + 42.7m] bneck stage 6 ep2 1184/1875 (63%) elapsed 10.1m eta 5.9m | loss 0.0299 | gpu mem 1.4G (peak 7.6/14.6G) util 90
+96% | cpu 51% ram 5.3/31.3G
+[19:01:36 + 43.2m] bneck stage 6 ep2 1243/1875 (66%) elapsed 10.6m eta 5.4m | loss 0.0298 | gpu mem 1.9G (peak 7.6/14.6G) util 87
+91% | cpu 51% ram 5.3/31.3G
+[19:02:06 + 43.7m] bneck stage 6 ep2 1303/1875 (69%) elapsed 11.1m eta 4.9m | loss 0.0296 | gpu mem 1.9G (peak 7.6/14.6G) util 63
+94% | cpu 51% ram 5.3/31.3G
+[19:02:36 + 44.2m] bneck stage 6 ep2 1362/1875 (73%) elapsed 11.6m eta 4.4m | loss 0.0300 | gpu mem 1.4G (peak 7.6/14.6G) util 86
+90% | cpu 51% ram 5.3/31.3G
+[19:03:06 + 44.7m] bneck stage 6 ep2 1421/1875 (76%) elapsed 12.1m eta 3.9m | loss 0.0303 | gpu mem 1.9G (peak 7.6/14.6G) util 72
+82% | cpu 51% ram 5.3/31.3G
+[19:03:36 + 45.2m] bneck stage 6 ep2 1480/1875 (79%) elapsed 12.6m eta 3.4m | loss 0.0306 | gpu mem 1.4G (peak 7.6/14.6G) util 75
+99% | cpu 51% ram 5.3/31.3G
+[19:04:07 + 45.7m] bneck stage 6 ep2 1540/1875 (82%) elapsed 13.1m eta 2.8m | loss 0.0307 | gpu mem 1.4G (peak 7.6/14.6G) util 71
+99% | cpu 51% ram 5.3/31.3G
+[19:04:37 + 46.3m] bneck stage 6 ep2 1600/1875 (85%) elapsed 13.6m eta 2.3m | loss 0.0308 | gpu mem 1.4G (peak 7.6/14.6G) util 99
+82% | cpu 51% ram 5.3/31.3G
+[19:05:07 + 46.8m] bneck stage 6 ep2 1659/1875 (88%) elapsed 14.1m eta 1.8m | loss 0.0310 | gpu mem 1.9G (peak 7.6/14.6G) util 89
+92% | cpu 51% ram 5.3/31.3G
+[19:05:37 + 47.3m] bneck stage 6 ep2 1718/1875 (92%) elapsed 14.6m eta 1.3m | loss 0.0314 | gpu mem 1.4G (peak 7.6/14.6G) util 93
+98% | cpu 51% ram 5.3/31.3G
+[19:06:08 + 47.8m] bneck stage 6 ep2 1778/1875 (95%) elapsed 15.1m eta 0.8m | loss 0.0317 | gpu mem 1.4G (peak 7.6/14.6G) util 85
+99% | cpu 51% ram 5.3/31.3G
+[19:06:38 + 48.3m] bneck stage 6 ep2 1837/1875 (98%) elapsed 15.6m eta 0.3m | loss 0.0318 | gpu mem 1.9G (peak 7.6/14.6G) util 88
+61% | cpu 51% ram 5.3/31.3G
+[19:06:57 + 48.6m] bneck stage 6 ep2 1875/1875 (100%) elapsed 15.9m eta 0.0m | loss 0.0316 | gpu mem 1.4G (peak 7.6/14.6G) util 100
+83% | cpu 51% ram 5.3/31.3G
+[19:06:57 + 48.6m] bneck stage 6 ep2 done: mean loss 0.0316 (15000 examples)
+[19:07:05 + 48.7m] gen coconut 10/10 (100%) elapsed 0.1m eta 0.0m | gpu mem 1.6G (peak 7.6/14.6G) util 100
+96% | cpu 51% ram 5.3/31.3G
+[19:07:05 + 48.7m] bneck: val accuracy 0.85 on 150 held-out unhinted questions after 3/3 (chance 0.50)
+[19:07:06 + 48.7m] <<< done train coconut_b in 48.3m (expected ~208.5m)
+[19:07:06 + 48.7m] === PHASE 7/9: generation + features | expected ~19.6m | total elapsed 48.7m ===
+[19:07:22 + 49.0m] gen coconut 19/19 (100%) elapsed 0.3m eta 0.0m | gpu mem 0.9G (peak 7.6/14.6G) util 92
+94% | cpu 51% ram 5.3/31.3G
+[19:07:38 + 49.3m] gen coconut 19/19 (100%) elapsed 0.3m eta 0.0m | gpu mem 0.9G (peak 7.6/14.6G) util 100
+78% | cpu 51% ram 5.3/31.3G
+[19:08:08 + 49.8m] gen coconut 36/38 (95%) elapsed 0.5m eta 0.0m | gpu mem 1.1G (peak 7.6/14.6G) util 0
+94% | cpu 52% ram 3.9/31.3G
+[19:08:10 + 49.8m] gen coconut 38/38 (100%) elapsed 0.5m eta 0.0m | gpu mem 0.8G (peak 7.6/14.6G) util 6
+99% | cpu 64% ram 5.1/31.3G
+[19:08:40 + 50.3m] gen coconut 36/38 (95%) elapsed 0.5m eta 0.0m | gpu mem 1.1G (peak 7.6/14.6G) util 99
+95% | cpu 51% ram 4.4/31.3G
+[19:08:42 + 50.3m] gen coconut 38/38 (100%) elapsed 0.5m eta 0.0m | gpu mem 0.8G (peak 7.6/14.6G) util 99
+89% | cpu 50% ram 4.4/31.3G
+[19:08:42 + 50.3m] coconut_b generations (900 rows): {"tr": {"n": 300, "unhinted_acc": 0.8566666666666667, "hinted_acc_correct_hint": 0.9733333333333334, "follow_rate_wrong_hint": 0.6933333333333334}, "te": {"n": 600, "unhinted_acc": 0.8433333333333334, "hinted_acc_correct_hint": 0.9666666666666667, "follow_rate_wrong_hint": 0.7533333333333333}}
+[19:08:42 + 50.3m] ALL DONE in 50.3m

@@ -1,0 +1,190 @@
+[{"stream_name":"stderr","time":7.99035022,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":7.9903935310000005,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":7.9903994990000005,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":7.990403734,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":8.569678215,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":8.569731498,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":8.569737835,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":8.569741759,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":44.258232463,"data":" [transformers] Model config: bos_token_id must be `None` or an integer within the vocabulary (between 0 and 39), got 50256. This may result in unexpected behavior.\n"}
+,{"stream_name":"stdout","time":44.258283509,"data":"[transformers] Model config: eos_token_id must be `None` or an integer within the vocabulary (between 0 and 39), got 50256. This may result in unexpected behavior.\n"}
+,{"stream_name":"stdout","time":44.258289626,"data":"..................\n"}
+,{"stream_name":"stdout","time":44.258294326,"data":"----------------------------------------------------------------------\n"}
+,{"stream_name":"stdout","time":44.258299057,"data":"Ran 18 tests in 1.115s\n"}
+,{"stream_name":"stdout","time":44.258303643,"data":"\n"}
+,{"stream_name":"stdout","time":44.258308241,"data":"OK\n"}
+,{"stream_name":"stdout","time":44.258312737,"data":"\n"}
+,{"stream_name":"stdout","time":44.458961186,"data":"gpus 2\n"}
+,{"stream_name":"stderr","time":56.750311111,"data":"Cloning into '/kaggle/working/coconut_repo'...\n"}
+,{"stream_name":"stderr","time":56.952390924,"data":"Cloning into '/kaggle/working/coconut_repo'...\n"}
+,{"stream_name":"stderr","time":56.952419668,"data":"\n"}
+,{"stream_name":"stderr","time":56.952423639,"data":"Cloning into '/kaggle/working/coconut_repo'...\n"}
+,{"stream_name":"stdout","time":5135.198569397,"data":"workers exited [0, 0] 84.6 min\n"}
+,{"stream_name":"stdout","time":5135.210921173,"data":"===== seed 0 =====\n"}
+,{"stream_name":"stdout","time":5135.21094626,"data":"lapsed 2.5m eta 13.2m | loss 0.0246 | gpu mem 1.4G (peak 7.4/14.6G) util 99\n"}
+,{"stream_name":"stdout","time":5135.210951375,"data":"63% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.210955754,"data":"[18:53:37 + 35.3m] bneck stage 6 ep2 363/1875 (19%) elapsed 3.0m eta 12.6m | loss 0.0256 | gpu mem 1.9G (peak 7.4/14.6G) util 96\n"}
+,{"stream_name":"stdout","time":5135.210961674,"data":"98% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.210969508,"data":"[18:54:07 + 35.8m] bneck stage 6 ep2 423/1875 (23%) elapsed 3.5m eta 12.1m | loss 0.0257 | gpu mem 1.9G (peak 7.4/14.6G) util 92\n"}
+,{"stream_name":"stdout","time":5135.210973622,"data":"99% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.210976368,"data":"[18:54:38 + 36.3m] bneck stage 6 ep2 484/1875 (26%) elapsed 4.0m eta 11.6m | loss 0.0256 | gpu mem 1.4G (peak 7.4/14.6G) util 99\n"}
+,{"stream_name":"stdout","time":5135.210979768,"data":"99% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.210982485,"data":"[18:55:08 + 36.8m] bneck stage 6 ep2 545/1875 (29%) elapsed 4.6m eta 11.1m | loss 0.0260 | gpu mem 1.9G (peak 7.4/14.6G) util 72\n"}
+,{"stream_name":"stdout","time":5135.210993996,"data":"86% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.210996416,"data":"[18:55:38 + 37.3m] bneck stage 6 ep2 605/1875 (32%) elapsed 5.1m eta 10.6m | loss 0.0275 | gpu mem 1.9G (peak 7.4/14.6G) util 96\n"}
+,{"stream_name":"stdout","time":5135.210998833,"data":"100% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211001004,"data":"[18:56:08 + 37.8m] bneck stage 6 ep2 665/1875 (35%) elapsed 5.6m eta 10.1m | loss 0.0274 | gpu mem 1.9G (peak 7.4/14.6G) util 96\n"}
+,{"stream_name":"stdout","time":5135.211003336,"data":"79% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211005522,"data":"[18:56:39 + 38.3m] bneck stage 6 ep2 726/1875 (39%) elapsed 6.1m eta 9.6m | loss 0.0280 | gpu mem 1.4G (peak 7.4/14.6G) util 69\n"}
+,{"stream_name":"stdout","time":5135.211007944,"data":"97% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211010118,"data":"[18:57:09 + 38.8m] bneck stage 6 ep2 786/1875 (42%) elapsed 6.6m eta 9.1m | loss 0.0281 | gpu mem 1.4G (peak 7.4/14.6G) util 100\n"}
+,{"stream_name":"stdout","time":5135.211012446,"data":"53% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211014687,"data":"[18:57:39 + 39.3m] bneck stage 6 ep2 846/1875 (45%) elapsed 7.1m eta 8.6m | loss 0.0283 | gpu mem 1.4G (peak 7.4/14.6G) util 97\n"}
+,{"stream_name":"stdout","time":5135.211017026,"data":"98% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211019181,"data":"[18:58:10 + 39.8m] bneck stage 6 ep2 907/1875 (48%) elapsed 7.6m eta 8.1m | loss 0.0285 | gpu mem 1.9G (peak 7.4/14.6G) util 99\n"}
+,{"stream_name":"stdout","time":5135.211021582,"data":"73% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211023743,"data":"[18:58:40 + 40.3m] bneck stage 6 ep2 968/1875 (52%) elapsed 8.1m eta 7.6m | loss 0.0287 | gpu mem 1.4G (peak 7.4/14.6G) util 94\n"}
+,{"stream_name":"stdout","time":5135.21102611,"data":"96% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211028284,"data":"[18:59:11 + 40.8m] bneck stage 6 ep2 1030/1875 (55%) elapsed 8.6m eta 7.0m | loss 0.0292 | gpu mem 1.4G (peak 7.4/14.6G) util 82\n"}
+,{"stream_name":"stdout","time":5135.211030678,"data":"63% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211033738,"data":"[18:59:41 + 41.3m] bneck stage 6 ep2 1090/1875 (58%) elapsed 9.1m eta 6.5m | loss 0.0293 | gpu mem 1.4G (peak 7.4/14.6G) util 99\n"}
+,{"stream_name":"stdout","time":5135.211036144,"data":"63% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211038357,"data":"[19:00:11 + 41.8m] bneck stage 6 ep2 1150/1875 (61%) elapsed 9.6m eta 6.0m | loss 0.0292 | gpu mem 1.4G (peak 7.4/14.6G) util 81\n"}
+,{"stream_name":"stdout","time":5135.211040733,"data":"83% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211042931,"data":"[19:00:41 + 42.3m] bneck stage 6 ep2 1209/1875 (64%) elapsed 10.1m eta 5.6m | loss 0.0293 | gpu mem 1.9G (peak 7.4/14.6G) util 87\n"}
+,{"stream_name":"stdout","time":5135.211045293,"data":"96% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211067447,"data":"[19:01:11 + 42.8m] bneck stage 6 ep2 1269/1875 (68%) elapsed 10.6m eta 5.1m | loss 0.0295 | gpu mem 1.9G (peak 7.4/14.6G) util 87\n"}
+,{"stream_name":"stdout","time":5135.211071712,"data":"88% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211075415,"data":"[19:01:41 + 43.3m] bneck stage 6 ep2 1330/1875 (71%) elapsed 11.1m eta 4.5m | loss 0.0293 | gpu mem 1.4G (peak 7.4/14.6G) util 90\n"}
+,{"stream_name":"stdout","time":5135.211079076,"data":"99% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211082851,"data":"[19:02:11 + 43.8m] bneck stage 6 ep2 1388/1875 (74%) elapsed 11.6m eta 4.1m | loss 0.0293 | gpu mem 1.4G (peak 7.7/14.6G) util 93\n"}
+,{"stream_name":"stdout","time":5135.211090831,"data":"99% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211094389,"data":"[19:02:41 + 44.3m] bneck stage 6 ep2 1448/1875 (77%) elapsed 12.1m eta 3.6m | loss 0.0295 | gpu mem 1.4G (peak 7.7/14.6G) util 92\n"}
+,{"stream_name":"stdout","time":5135.211098109,"data":"96% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211101296,"data":"[19:03:12 + 44.8m] bneck stage 6 ep2 1509/1875 (80%) elapsed 12.6m eta 3.1m | loss 0.0298 | gpu mem 1.9G (peak 7.7/14.6G) util 97\n"}
+,{"stream_name":"stdout","time":5135.211105451,"data":"72% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211109281,"data":"[19:03:42 + 45.3m] bneck stage 6 ep2 1570/1875 (84%) elapsed 13.1m eta 2.5m | loss 0.0297 | gpu mem 1.4G (peak 7.7/14.6G) util 93\n"}
+,{"stream_name":"stdout","time":5135.211113231,"data":"87% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211116893,"data":"[19:04:12 + 45.8m] bneck stage 6 ep2 1630/1875 (87%) elapsed 13.6m eta 2.0m | loss 0.0295 | gpu mem 1.4G (peak 7.7/14.6G) util 90\n"}
+,{"stream_name":"stdout","time":5135.211121014,"data":"67% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211124776,"data":"[19:04:42 + 46.3m] bneck stage 6 ep2 1691/1875 (90%) elapsed 14.1m eta 1.5m | loss 0.0296 | gpu mem 1.9G (peak 7.7/14.6G) util 73\n"}
+,{"stream_name":"stdout","time":5135.211129087,"data":"99% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211132904,"data":"[19:05:13 + 46.9m] bneck stage 6 ep2 1752/1875 (93%) elapsed 14.6m eta 1.0m | loss 0.0296 | gpu mem 1.4G (peak 7.7/14.6G) util 87\n"}
+,{"stream_name":"stdout","time":5135.211136782,"data":"63% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211140851,"data":"[19:05:43 + 47.4m] bneck stage 6 ep2 1812/1875 (97%) elapsed 15.1m eta 0.5m | loss 0.0295 | gpu mem 1.4G (peak 7.7/14.6G) util 99\n"}
+,{"stream_name":"stdout","time":5135.211145035,"data":"62% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211149349,"data":"[19:06:13 + 47.9m] bneck stage 6 ep2 1872/1875 (100%) elapsed 15.6m eta 0.0m | loss 0.0295 | gpu mem 1.4G (peak 7.7/14.6G) util 96\n"}
+,{"stream_name":"stdout","time":5135.211152926,"data":"99% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.21115616,"data":"[19:06:15 + 47.9m] bneck stage 6 ep2 1875/1875 (100%) elapsed 15.7m eta 0.0m | loss 0.0295 | gpu mem 1.4G (peak 7.7/14.6G) util 91\n"}
+,{"stream_name":"stdout","time":5135.211159644,"data":"95% | cpu 50% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211162832,"data":"[19:06:15 + 47.9m] bneck stage 6 ep2 done: mean loss 0.0295 (15000 examples)\n"}
+,{"stream_name":"stdout","time":5135.211166213,"data":"[19:06:22 + 48.0m] gen coconut 10/10 (100%) elapsed 0.1m eta 0.0m | gpu mem 1.6G (peak 7.7/14.6G) util 99\n"}
+,{"stream_name":"stdout","time":5135.211170214,"data":"99% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211173882,"data":"[19:06:22 + 48.0m] bneck: val accuracy 0.85 on 150 held-out unhinted questions after 3/3 (chance 0.50)\n"}
+,{"stream_name":"stdout","time":5135.211177838,"data":"[19:06:23 + 48.0m] \u003c\u003c\u003c done train coconut_b in 47.6m (expected ~208.5m)\n"}
+,{"stream_name":"stdout","time":5135.211182915,"data":"[19:06:23 + 48.0m] === PHASE 7/9: generation + features | expected ~19.6m | total elapsed 48.0m ===\n"}
+,{"stream_name":"stdout","time":5135.211186517,"data":"[19:06:39 + 48.3m] gen coconut 19/19 (100%) elapsed 0.3m eta 0.0m | gpu mem 0.9G (peak 7.7/14.6G) util 93\n"}
+,{"stream_name":"stdout","time":5135.211190471,"data":"99% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211196949,"data":"[19:06:55 + 48.6m] gen coconut 19/19 (100%) elapsed 0.3m eta 0.0m | gpu mem 0.9G (peak 7.7/14.6G) util 93\n"}
+,{"stream_name":"stdout","time":5135.21120031,"data":"93% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211203504,"data":"[19:07:26 + 49.1m] gen coconut 36/38 (95%) elapsed 0.5m eta 0.0m | gpu mem 1.1G (peak 7.7/14.6G) util 96\n"}
+,{"stream_name":"stdout","time":5135.211206853,"data":"99% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211209659,"data":"[19:07:27 + 49.1m] gen coconut 38/38 (100%) elapsed 0.5m eta 0.0m | gpu mem 0.8G (peak 7.7/14.6G) util 94\n"}
+,{"stream_name":"stdout","time":5135.211212968,"data":"88% | cpu 50% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211216227,"data":"[19:07:58 + 49.6m] gen coconut 37/38 (97%) elapsed 0.5m eta 0.0m | gpu mem 1.0G (peak 7.7/14.6G) util 96\n"}
+,{"stream_name":"stdout","time":5135.211219881,"data":"99% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211223404,"data":"[19:07:58 + 49.6m] gen coconut 38/38 (100%) elapsed 0.5m eta 0.0m | gpu mem 0.8G (peak 7.7/14.6G) util 89\n"}
+,{"stream_name":"stdout","time":5135.211227151,"data":"89% | cpu 52% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211231376,"data":"[19:07:58 + 49.6m] coconut_b generations (900 rows): {\"tr\": {\"n\": 300, \"unhinted_acc\": 0.8433333333333334, \"hinted_acc_correct_hint\": 0.9533333333333334, \"follow_rate_wrong_hint\": 0.62}, \"te\": {\"n\": 600, \"unhinted_acc\": 0.8516666666666667, \"hinted_acc_correct_hint\": 0.9433333333333334, \"follow_rate_wrong_hint\": 0.54}}\n"}
+,{"stream_name":"stdout","time":5135.21123792,"data":"[19:07:58 + 49.6m] ALL DONE in 49.6m\n"}
+,{"stream_name":"stdout","time":5135.211241842,"data":"\n"}
+,{"stream_name":"stdout","time":5135.211245347,"data":"===== seed 1 =====\n"}
+,{"stream_name":"stdout","time":5135.211249094,"data":"ss 0.0313 | gpu mem 1.9G (peak 7.2/14.6G) util 76\n"}
+,{"stream_name":"stdout","time":5135.211252962,"data":"94% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211257192,"data":"[18:54:03 + 35.7m] bneck stage 6 ep2 357/1875 (19%) elapsed 3.0m eta 12.8m | loss 0.0297 | gpu mem 1.9G (peak 7.2/14.6G) util 73\n"}
+,{"stream_name":"stdout","time":5135.211260914,"data":"80% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211264683,"data":"[18:54:33 + 36.2m] bneck stage 6 ep2 416/1875 (22%) elapsed 3.5m eta 12.3m | loss 0.0287 | gpu mem 1.4G (peak 7.2/14.6G) util 98\n"}
+,{"stream_name":"stdout","time":5135.211268991,"data":"99% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211272624,"data":"[18:55:03 + 36.7m] bneck stage 6 ep2 475/1875 (25%) elapsed 4.0m eta 11.9m | loss 0.0283 | gpu mem 1.9G (peak 7.2/14.6G) util 66\n"}
+,{"stream_name":"stdout","time":5135.211276137,"data":"85% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211279599,"data":"[18:55:33 + 37.2m] bneck stage 6 ep2 535/1875 (29%) elapsed 4.5m eta 11.4m | loss 0.0286 | gpu mem 1.9G (peak 7.2/14.6G) util 82\n"}
+,{"stream_name":"stdout","time":5135.211283855,"data":"71% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211287698,"data":"[18:56:04 + 37.7m] bneck stage 6 ep2 594/1875 (32%) elapsed 5.0m eta 10.9m | loss 0.0287 | gpu mem 1.4G (peak 7.2/14.6G) util 97\n"}
+,{"stream_name":"stdout","time":5135.211291734,"data":"99% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211295039,"data":"[18:56:34 + 38.2m] bneck stage 6 ep2 653/1875 (35%) elapsed 5.5m eta 10.4m | loss 0.0290 | gpu mem 1.9G (peak 7.2/14.6G) util 99\n"}
+,{"stream_name":"stdout","time":5135.211298969,"data":"95% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211302149,"data":"[18:57:04 + 38.7m] bneck stage 6 ep2 712/1875 (38%) elapsed 6.0m eta 9.9m | loss 0.0293 | gpu mem 1.4G (peak 7.2/14.6G) util 89\n"}
+,{"stream_name":"stdout","time":5135.211310099,"data":"96% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.21131373,"data":"[18:57:34 + 39.2m] bneck stage 6 ep2 771/1875 (41%) elapsed 6.5m eta 9.4m | loss 0.0294 | gpu mem 1.9G (peak 7.2/14.6G) util 95\n"}
+,{"stream_name":"stdout","time":5135.211317588,"data":"87% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211321273,"data":"[18:58:04 + 39.7m] bneck stage 6 ep2 830/1875 (44%) elapsed 7.0m eta 8.9m | loss 0.0292 | gpu mem 1.4G (peak 7.2/14.6G) util 73\n"}
+,{"stream_name":"stdout","time":5135.21146581,"data":"95% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.21147143,"data":"[18:58:34 + 40.2m] bneck stage 6 ep2 889/1875 (47%) elapsed 7.5m eta 8.4m | loss 0.0292 | gpu mem 1.9G (peak 7.2/14.6G) util 91\n"}
+,{"stream_name":"stdout","time":5135.211475511,"data":"81% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211479668,"data":"[18:59:05 + 40.7m] bneck stage 6 ep2 948/1875 (51%) elapsed 8.1m eta 7.9m | loss 0.0292 | gpu mem 1.4G (peak 7.2/14.6G) util 92\n"}
+,{"stream_name":"stdout","time":5135.211483704,"data":"97% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211486553,"data":"[18:59:35 + 41.2m] bneck stage 6 ep2 1008/1875 (54%) elapsed 8.6m eta 7.4m | loss 0.0295 | gpu mem 1.4G (peak 7.2/14.6G) util 93\n"}
+,{"stream_name":"stdout","time":5135.211489716,"data":"93% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211492784,"data":"[19:00:05 + 41.7m] bneck stage 6 ep2 1067/1875 (57%) elapsed 9.1m eta 6.9m | loss 0.0296 | gpu mem 1.9G (peak 7.2/14.6G) util 64\n"}
+,{"stream_name":"stdout","time":5135.211495946,"data":"91% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211499584,"data":"[19:00:35 + 42.2m] bneck stage 6 ep2 1125/1875 (60%) elapsed 9.6m eta 6.4m | loss 0.0298 | gpu mem 1.9G (peak 7.6/14.6G) util 70\n"}
+,{"stream_name":"stdout","time":5135.211502821,"data":"90% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211505939,"data":"[19:01:06 + 42.7m] bneck stage 6 ep2 1184/1875 (63%) elapsed 10.1m eta 5.9m | loss 0.0299 | gpu mem 1.4G (peak 7.6/14.6G) util 90\n"}
+,{"stream_name":"stdout","time":5135.211509524,"data":"96% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211512669,"data":"[19:01:36 + 43.2m] bneck stage 6 ep2 1243/1875 (66%) elapsed 10.6m eta 5.4m | loss 0.0298 | gpu mem 1.9G (peak 7.6/14.6G) util 87\n"}
+,{"stream_name":"stdout","time":5135.211516014,"data":"91% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211519173,"data":"[19:02:06 + 43.7m] bneck stage 6 ep2 1303/1875 (69%) elapsed 11.1m eta 4.9m | loss 0.0296 | gpu mem 1.9G (peak 7.6/14.6G) util 63\n"}
+,{"stream_name":"stdout","time":5135.211522671,"data":"94% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211526004,"data":"[19:02:36 + 44.2m] bneck stage 6 ep2 1362/1875 (73%) elapsed 11.6m eta 4.4m | loss 0.0300 | gpu mem 1.4G (peak 7.6/14.6G) util 86\n"}
+,{"stream_name":"stdout","time":5135.211530419,"data":"90% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211534454,"data":"[19:03:06 + 44.7m] bneck stage 6 ep2 1421/1875 (76%) elapsed 12.1m eta 3.9m | loss 0.0303 | gpu mem 1.9G (peak 7.6/14.6G) util 72\n"}
+,{"stream_name":"stdout","time":5135.211538334,"data":"82% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211541384,"data":"[19:03:36 + 45.2m] bneck stage 6 ep2 1480/1875 (79%) elapsed 12.6m eta 3.4m | loss 0.0306 | gpu mem 1.4G (peak 7.6/14.6G) util 75\n"}
+,{"stream_name":"stdout","time":5135.211544987,"data":"99% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211558408,"data":"[19:04:07 + 45.7m] bneck stage 6 ep2 1540/1875 (82%) elapsed 13.1m eta 2.8m | loss 0.0307 | gpu mem 1.4G (peak 7.6/14.6G) util 71\n"}
+,{"stream_name":"stdout","time":5135.211562372,"data":"99% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211565594,"data":"[19:04:37 + 46.3m] bneck stage 6 ep2 1600/1875 (85%) elapsed 13.6m eta 2.3m | loss 0.0308 | gpu mem 1.4G (peak 7.6/14.6G) util 99\n"}
+,{"stream_name":"stdout","time":5135.211569046,"data":"82% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211572165,"data":"[19:05:07 + 46.8m] bneck stage 6 ep2 1659/1875 (88%) elapsed 14.1m eta 1.8m | loss 0.0310 | gpu mem 1.9G (peak 7.6/14.6G) util 89\n"}
+,{"stream_name":"stdout","time":5135.211576216,"data":"92% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211579283,"data":"[19:05:37 + 47.3m] bneck stage 6 ep2 1718/1875 (92%) elapsed 14.6m eta 1.3m | loss 0.0314 | gpu mem 1.4G (peak 7.6/14.6G) util 93\n"}
+,{"stream_name":"stdout","time":5135.211582839,"data":"98% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.21158601,"data":"[19:06:08 + 47.8m] bneck stage 6 ep2 1778/1875 (95%) elapsed 15.1m eta 0.8m | loss 0.0317 | gpu mem 1.4G (peak 7.6/14.6G) util 85\n"}
+,{"stream_name":"stdout","time":5135.211590115,"data":"99% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211593318,"data":"[19:06:38 + 48.3m] bneck stage 6 ep2 1837/1875 (98%) elapsed 15.6m eta 0.3m | loss 0.0318 | gpu mem 1.9G (peak 7.6/14.6G) util 88\n"}
+,{"stream_name":"stdout","time":5135.211596583,"data":"61% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211601346,"data":"[19:06:57 + 48.6m] bneck stage 6 ep2 1875/1875 (100%) elapsed 15.9m eta 0.0m | loss 0.0316 | gpu mem 1.4G (peak 7.6/14.6G) util 100\n"}
+,{"stream_name":"stdout","time":5135.211604739,"data":"83% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211608075,"data":"[19:06:57 + 48.6m] bneck stage 6 ep2 done: mean loss 0.0316 (15000 examples)\n"}
+,{"stream_name":"stdout","time":5135.211611722,"data":"[19:07:05 + 48.7m] gen coconut 10/10 (100%) elapsed 0.1m eta 0.0m | gpu mem 1.6G (peak 7.6/14.6G) util 100\n"}
+,{"stream_name":"stdout","time":5135.211615438,"data":"96% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211618926,"data":"[19:07:05 + 48.7m] bneck: val accuracy 0.85 on 150 held-out unhinted questions after 3/3 (chance 0.50)\n"}
+,{"stream_name":"stdout","time":5135.211622669,"data":"[19:07:06 + 48.7m] \u003c\u003c\u003c done train coconut_b in 48.3m (expected ~208.5m)\n"}
+,{"stream_name":"stdout","time":5135.211629782,"data":"[19:07:06 + 48.7m] === PHASE 7/9: generation + features | expected ~19.6m | total elapsed 48.7m ===\n"}
+,{"stream_name":"stdout","time":5135.211858902,"data":"[19:07:22 + 49.0m] gen coconut 19/19 (100%) elapsed 0.3m eta 0.0m | gpu mem 0.9G (peak 7.6/14.6G) util 92\n"}
+,{"stream_name":"stdout","time":5135.211875723,"data":"94% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211880359,"data":"[19:07:38 + 49.3m] gen coconut 19/19 (100%) elapsed 0.3m eta 0.0m | gpu mem 0.9G (peak 7.6/14.6G) util 100\n"}
+,{"stream_name":"stdout","time":5135.211884469,"data":"78% | cpu 51% ram 5.3/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211887834,"data":"[19:08:08 + 49.8m] gen coconut 36/38 (95%) elapsed 0.5m eta 0.0m | gpu mem 1.1G (peak 7.6/14.6G) util 0\n"}
+,{"stream_name":"stdout","time":5135.211891484,"data":"94% | cpu 52% ram 3.9/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211895257,"data":"[19:08:10 + 49.8m] gen coconut 38/38 (100%) elapsed 0.5m eta 0.0m | gpu mem 0.8G (peak 7.6/14.6G) util 6\n"}
+,{"stream_name":"stdout","time":5135.211901429,"data":"99% | cpu 64% ram 5.1/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211913858,"data":"[19:08:40 + 50.3m] gen coconut 36/38 (95%) elapsed 0.5m eta 0.0m | gpu mem 1.1G (peak 7.6/14.6G) util 99\n"}
+,{"stream_name":"stdout","time":5135.211918916,"data":"95% | cpu 51% ram 4.4/31.3G\n"}
+,{"stream_name":"stdout","time":5135.211922659,"data":"[19:08:42 + 50.3m] gen coconut 38/38 (100%) elapsed 0.5m eta 0.0m | gpu mem 0.8G (peak 7.6/14.6G) util 99\n"}
+,{"stream_name":"stdout","time":5135.211926367,"data":"89% | cpu 50% ram 4.4/31.3G\n"}
+,{"stream_name":"stdout","time":5135.21193123,"data":"[19:08:42 + 50.3m] coconut_b generations (900 rows): {\"tr\": {\"n\": 300, \"unhinted_acc\": 0.8566666666666667, \"hinted_acc_correct_hint\": 0.9733333333333334, \"follow_rate_wrong_hint\": 0.6933333333333334}, \"te\": {\"n\": 600, \"unhinted_acc\": 0.8433333333333334, \"hinted_acc_correct_hint\": 0.9666666666666667, \"follow_rate_wrong_hint\": 0.7533333333333333}}\n"}
+,{"stream_name":"stdout","time":5135.211937351,"data":"[19:08:42 + 50.3m] ALL DONE in 50.3m\n"}
+,{"stream_name":"stdout","time":5135.211941009,"data":"\n"}
+,{"stream_name":"stdout","time":5135.225440161,"data":"0 {'tr': {'n': 300, 'unhinted_acc': 0.8433333333333334, 'hinted_acc_correct_hint': 0.9533333333333334, 'follow_rate_wrong_hint': 0.62}, 'te': {'n': 600, 'unhinted_acc': 0.8516666666666667, 'hinted_acc_correct_hint': 0.9433333333333334, 'follow_rate_wrong_hint': 0.54}} {'before': [0.0], 'bneck': [0.8, 0.8333333333333334, 0.8533333333333334]}\n"}
+,{"stream_name":"stdout","time":5135.225465119,"data":"1 {'tr': {'n': 300, 'unhinted_acc': 0.8566666666666667, 'hinted_acc_correct_hint': 0.9733333333333334, 'follow_rate_wrong_hint': 0.6933333333333334}, 'te': {'n': 600, 'unhinted_acc': 0.8433333333333334, 'hinted_acc_correct_hint': 0.9666666666666667, 'follow_rate_wrong_hint': 0.7533333333333333}} {'before': [0.0], 'bneck': [0.8333333333333334, 0.8266666666666667, 0.8466666666666667]}\n"}
+,{"stream_name":"stdout","time":5135.225472157,"data":"done\n"}
+,{"stream_name":"stderr","time":5137.973913051,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":5137.973966956,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":5138.145042859,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":5138.145073621,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":5138.907905579,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":5138.984110245,"data":"[NbConvertApp] Writing 108415 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":5141.409843496,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":5141.930480495,"data":"[NbConvertApp] Writing 516780 bytes to __results__.html\n"}
+]

@@ -18,4 +18,4 @@
 - Restoration still about 0 although latents are necessary: the method or the donor construction misses the route; we cannot conclude anything about monitors until that is resolved.
 - Monitors (retrained on these twins) are a later step and are not part of this run.
 
-**Budget.** Estimated 1-1.5 h wall for both seeds in parallel on T4 x2 (3 epochs x 15000 samples at about 17 samples/s, plus validation and generation); then the diagnostic and patching (about 1 h). Two Kaggle pushes, each needing the user's yes.
+**Budget.** Estimated 1-1.5 h wall for both seeds in parallel on T4 x2 (3 epochs x 15000 samples at about 17 samples/s, plus validation and generation); then the diagnostic and patching (about 1 h). Decided with the user: ONE kernel (`prosqa-bneck-b`) runs training, then the Amendment 7 diagnostic, then the frozen patching, per seed on its own GPU, chained so a training failure stops the rest. The gates above are checked from the saved outputs afterwards; patching numbers are interpreted only for twins that pass them.

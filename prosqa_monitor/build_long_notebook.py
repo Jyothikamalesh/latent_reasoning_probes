@@ -64,17 +64,23 @@ launch = f'''SEEDS, MODE = {SEEDS}, {MODE!r}
 NG = max(torch.cuda.device_count(), 1); print('gpus', NG)
 subprocess.run([sys.executable, '-m', 'pip', 'install', '-q', 'transformers==5.22.2', 'scikit-learn'], check=True)   # once here, so the two workers do not race on pip
 if not os.path.exists('/kaggle/working/coconut_repo'): subprocess.run(['git', 'clone', '--depth', '1', 'https://github.com/facebookresearch/coconut.git', '/kaggle/working/coconut_repo'], check=True)
-t0 = time.time(); procs = []
+RUN_ID = str(int(time.time())); t0 = time.time(); procs = []
 for i, s in enumerate(SEEDS):     # one seed per GPU; more seeds than GPUs would share a GPU, so the plan is checked
     assert i < NG, f'seed {{s}} has no GPU of its own'
-    procs.append(subprocess.Popen(f'{{sys.executable}} /kaggle/working/train_{TAGN}_b.py > /kaggle/working/{TAGN}_s{{s}}.log 2>&1', shell=True, env={{**os.environ, 'CKPT': (glob.glob(f'/kaggle/input/**/s{{s}}_coconut_b.pt', recursive=True) or [''])[0] if {BN} else '', 'CUDA_VISIBLE_DEVICES': str(i), 'SEED': str(s), 'MODE': MODE}}))
+    cmd = f'{{sys.executable}} /kaggle/working/train_{TAGN}_b.py > /kaggle/working/{TAGN}_s{{s}}.log 2>&1'
+    if {BN}:      # same session: after training, the Amendment 7 diagnostic and then the frozen patching, both with the bottleneck on
+        for d, fl in (('latentdep', ' --latentdep'), ('patching', '')):
+            cmd += f' && {{sys.executable}} /kaggle/working/run_patching.py --ckpt /kaggle/working/s{{s}}_coconut_b.pt --gens /kaggle/working/s{{s}}_generations.jsonl --out /kaggle/working/{{d}}_s{{s}} --device cuda --seed {{s}} --boot 2000 --bs 32 --run-id {{RUN_ID}} --bottleneck{{fl}} > /kaggle/working/{{d}}_s{{s}}.log 2>&1'
+    procs.append(subprocess.Popen(cmd, shell=True, env={{**os.environ, 'PROSQA_DIR': '/kaggle/working/coconut_repo/data', 'CKPT': (glob.glob(f'/kaggle/input/**/s{{s}}_coconut_b.pt', recursive=True) or [''])[0] if {BN} else '', 'CUDA_VISIBLE_DEVICES': str(i), 'SEED': str(s), 'MODE': MODE}}))
 for p in procs: p.wait()
 print('workers exited', [p.returncode for p in procs], f'{{(time.time() - t0) / 60:.1f}} min')'''
 cs = [nbf.v4.new_markdown_cell('# Longer-trained COCONUT behaviour twin (docs/long_twin_protocol.md): one seed per GPU, training budget MODE=long'),
       nbf.v4.new_code_cell('import os, subprocess, sys, json, time, glob, torch\nopen("/kaggle/working/train_' + TAGN + '_b.py", "w").write(' + repr(script) + ')'),
+      *([nbf.v4.new_code_cell("os.makedirs('/kaggle/working/tests', exist_ok=True)\n" + "\n".join(f"open({dst!r}, 'w').write({open(src).read()!r})" for dst, src in (('/kaggle/working/latent_patching.py', f'{HERE}/analysis/latent_patching.py'), ('/kaggle/working/run_patching.py', f'{HERE}/analysis/run_patching.py'), ('/kaggle/working/tests/test_latent_patching.py', f'{HERE}/tests/test_latent_patching.py'))).replace("os.path.join(os.path.dirname(__file__), '..', 'analysis')", "'/kaggle/working'")),
+         nbf.v4.new_code_cell("r = subprocess.run([sys.executable, '/kaggle/working/tests/test_latent_patching.py'], capture_output=True, text=True); print(r.stdout[-800:], r.stderr[-800:])\nassert r.returncode == 0, 'unit tests failed on this transformers/torch version: stop'")] if BN else []),
       nbf.v4.new_code_cell(launch),
       nbf.v4.new_code_cell(f"TAGN = {TAGN!r}\nfor s in " + repr(SEEDS) + ":\n    f = f'/kaggle/working/{TAGN}_s{s}.log'\n    if os.path.exists(f): print(f'===== seed {s} =====\\n' + ''.join(l for l in open(f) if 'arn' not in l and 'it/s' not in l)[-6000:])"),
-      nbf.v4.new_code_cell("assert all(p.returncode == 0 for p in procs), 'a worker failed: see the logs above'\nfor s in " + repr(SEEDS) + ":\n    for n in (f's{s}_coconut_b.pt', f's{s}_generations.jsonl', f's{s}_long_meta.json'): assert os.path.exists('/kaggle/working/' + n), 'missing ' + n\n    m = json.load(open(f'/kaggle/working/s{s}_long_meta.json')); print(s, m['stats'], m['val_history'])\nprint('done')")]
+      nbf.v4.new_code_cell("assert all(p.returncode == 0 for p in procs), 'a worker failed: see the logs above'\nfor s in " + repr(SEEDS) + ":\n    for n in (f's{s}_coconut_b.pt', f's{s}_generations.jsonl', f's{s}_long_meta.json'): assert os.path.exists('/kaggle/working/' + n), 'missing ' + n\n    m = json.load(open(f'/kaggle/working/s{s}_long_meta.json')); print(s, m['stats'], m['val_history'])\n    if " + repr(BN) + ":\n        for d in ('latentdep', 'patching'):\n            f = f'/kaggle/working/{d}_s{s}/patching_summary.json'; assert os.path.exists(f), 'missing ' + f\n            assert json.load(open(f))['meta']['run_id'] == RUN_ID, f'{d} seed {s} summary is not from this run'\nprint('done')")]
 nb = nbf.v4.new_notebook(cells=cs); nb.metadata = {"kernelspec": {"display_name": "Python 3", "language": "python", "name": "python3"}, "language_info": {"name": "python"}}
 for i, c in enumerate(nb.cells): c['id'] = f'cell{i:03d}'
 out = f'{HERE}/notebooks/prosqa_{TAGN}_b.ipynb'; nbf.write(nb, out); print('->', out)

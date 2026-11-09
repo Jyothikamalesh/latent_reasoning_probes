@@ -140,5 +140,21 @@ class T(unittest.TestCase):
         self.assertTrue(torch.allclose(Mn, exp, atol=1e-5)); self.assertEqual(dn.tolist(), [1, 1])
         self.assertTrue(torch.allclose(M, lp.sentence_logprob(ot) - lp.sentence_logprob(ow), atol=1e-5))   # summed M is unchanged by the extra argument
 
+    def test_separate_hint_and_bot_blocking(self):
+        bt = batch(); a = bt['a']
+        for b, h in enumerate(HINTS):
+            self.assertEqual(bt['block_hint'][b].nonzero().flatten().tolist(), list(range(a - 1 - h, a - 1)))      # hint tokens only
+            self.assertEqual(bt['block_botpos'][b].nonzero().flatten().tolist(), [a - 1])                          # <bot> only
+        self.assertTrue(torch.equal(bt['block'], bt['block_hint'] | bt['block_botpos']))                          # the union is the old mask
+        unh = lp.make_batch(PROMPTS, [0, 0], TAILS, N, PAD, BOT, LAT)
+        self.assertFalse(unh['block_hint'].any()); self.assertFalse(unh['block_botpos'].any())                    # nothing to block without block_bot
+        self.assertTrue(lp.make_batch(PROMPTS, [0, 0], TAILS, N, PAD, BOT, LAT, block_bot=True)['block_botpos'][:, a - 1].all())
+        r = {k: lp.run(self.m, bt, block_answer=k)['logp'] for k in (True, 'hint', 'bot')}
+        self.assertFalse(torch.allclose(r['hint'], r['bot'])); self.assertFalse(torch.allclose(r[True], r['hint'])); self.assertFalse(torch.allclose(r[True], r['bot']))
+        self.assertTrue(torch.allclose(r[True], lp.run(self.m, bt, block_answer=True, latent_kind='hint')['logp']))   # latent_kind only matters for blocked latent steps
+        l = {k: lp.run(self.m, bt, block_latents_from=0, latent_kind=k)['thoughts'] for k in ('both', 'hint', 'bot')}
+        self.assertFalse(torch.allclose(l['hint'], l['bot']))
+        self.assertTrue(torch.allclose(lp.run(self.m, bt, block_latents_from=0)['logp'], lp.run(self.m, bt, block_latents_from=0, latent_kind='both')['logp']))
+
 
 if __name__ == '__main__': unittest.main()

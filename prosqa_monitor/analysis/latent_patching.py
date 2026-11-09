@@ -35,20 +35,23 @@ def make_batch(prompts, hint_lens, tails, n, pad_id, bot, lat, device='cpu', hid
     for b, t in enumerate(tails): tail_ids[b, :len(t)] = torch.tensor(t); tail_att[b, :len(t)] = 1
     ids = torch.cat([pre_ids, torch.full((B, n), lat), tail_ids], 1); att = torch.cat([pre_att, torch.ones(B, n, dtype=torch.long), tail_att], 1)
     pos = (att.cumsum(1) - 1).clamp(min=0)                                       # position ids are computed BEFORE any hiding
-    block = torch.zeros(B, ids.shape[1], dtype=torch.bool)
+    block = torch.zeros(B, ids.shape[1], dtype=torch.bool); block_hint = torch.zeros_like(block); block_botpos = torch.zeros_like(block)
     for b, h in enumerate(hint_lens):
-        if h > 0: block[b, a - 1 - h:a] = True                                  # hint-line tokens [a-1-h, a-1) and the <bot> position a-1 (nothing to block in an unhinted prompt)
+        if h > 0: block[b, a - 1 - h:a] = True; block_hint[b, a - 1 - h:a - 1] = True   # hint-line tokens [a-1-h, a-1) and the <bot> position a-1 (nothing to block in an unhinted prompt)
+        if h > 0 or block_bot: block_botpos[b, a - 1] = True
         if block_bot: block[b, a - 1] = True
         if hide_hint and h > 0: att[b, a - 1 - h:a - 1] = 0
-    return dict(ids=ids.to(device), att=att.to(device), pos=pos.to(device), block=block.to(device), a=a, n=n, tail_att=tail_att.to(device), tail_ids=tail_ids.to(device))
+    return dict(ids=ids.to(device), att=att.to(device), pos=pos.to(device), block=block.to(device), block_hint=block_hint.to(device), block_botpos=block_botpos.to(device), a=a, n=n, tail_att=tail_att.to(device), tail_ids=tail_ids.to(device))
 
 
 @torch.no_grad()
-def run(model, bt, patch=None, block_latents_from=None, block_answer=False):
+def run(model, bt, patch=None, block_latents_from=None, block_answer=False, latent_kind='both'):
     """patch: {slot: tensor (B, d)} replaces that slot's input embedding. block_latents_from=t: from latent slot t on, the hint span and <bot> are removed from attention.
-    block_answer: the answer positions cannot attend to the hint span and <bot>. Returns thoughts (B, n, d) and per-token log-probs of the answer sentence (B, T-1) with their mask."""
+    block_answer: the answer positions cannot attend to the hint span and <bot>; 'hint' = hint tokens only, 'bot' = <bot> only. latent_kind: which of those the blocked latent steps lose ('both' | 'hint' | 'bot'). Returns thoughts (B, n, d) and per-token log-probs of the answer sentence (B, T-1) with their mask."""
     assert not model.training, 'model must be in eval mode (dropout would make interventions non-reproducible)'
-    tr = model.transformer; a, n = bt['a'], bt['n']; ids, att, pos, blk = bt['ids'], bt['att'], bt['pos'], bt['block']
+    tr = model.transformer; a, n = bt['a'], bt['n']; ids, att, pos = bt['ids'], bt['att'], bt['pos']
+    pick = {'both': bt['block'], 'hint': bt['block_hint'], 'bot': bt['block_botpos']}
+    blk, ablk = pick[latent_kind], pick[{True: 'both', 'hint': 'hint', 'bot': 'bot'}[block_answer]] if block_answer else None
     emb = model.get_input_embeddings()(ids)
     pre = tr(inputs_embeds=emb[:, :a], attention_mask=att[:, :a], position_ids=pos[:, :a], use_cache=True)
     past, cur, thoughts = pre.past_key_values, pre.last_hidden_state[:, -1:], []
@@ -59,7 +62,7 @@ def run(model, bt, patch=None, block_latents_from=None, block_answer=False):
         if block_latents_from is not None and i >= block_latents_from: m = m * (~blk[:, :a + i + 1]).long()
         o = tr(inputs_embeds=cur, attention_mask=m, position_ids=pos[:, a + i:a + i + 1], past_key_values=past, use_cache=True)
         past, cur = o.past_key_values, o.last_hidden_state
-    m = att * ((~blk).long() if block_answer else 1)
+    m = att * ((~ablk).long() if block_answer else 1)
     o = tr(inputs_embeds=emb[:, a + n:], attention_mask=m, position_ids=pos[:, a + n:], past_key_values=past, use_cache=True)
     logits = model.lm_head(o.last_hidden_state)                     # tail columns: [<eot>, sentence...]
     lp = F.log_softmax(logits[:, :-1].float(), -1).gather(-1, bt['tail_ids'][:, 1:, None])[..., 0]
@@ -80,12 +83,12 @@ def option_logprob(out, start):
     return (out['logp'] * m).sum(1), m.sum(1)
 
 
-def margin(model, prompts, hint_lens, tail_true, tail_wrong, n, pad_id, bot, lat, patch=None, block_latents_from=None, block_answer=False, device='cpu', hide_hint=False, block_bot=False, opt_start=None):
+def margin(model, prompts, hint_lens, tail_true, tail_wrong, n, pad_id, bot, lat, patch=None, block_latents_from=None, block_answer=False, device='cpu', hide_hint=False, block_bot=False, opt_start=None, latent_kind='both'):
     """M = S(true option sentence) - S(wrong option sentence), same context, same intervention. Returns M (B,) and the thoughts of the true-option pass (identical for both passes)."""
     res = []
     for tails in (tail_true, tail_wrong):
         bt = make_batch(prompts, hint_lens, tails, n, pad_id, bot, lat, device, hide_hint, block_bot)
-        res.append(run(model, bt, patch, block_latents_from, block_answer))
+        res.append(run(model, bt, patch, block_latents_from, block_answer, latent_kind))
     M = sentence_logprob(res[0]) - sentence_logprob(res[1])
     if opt_start is None: return M, res[0]['thoughts']
     (st, nt), (sw, nw) = option_logprob(res[0], opt_start), option_logprob(res[1], opt_start)

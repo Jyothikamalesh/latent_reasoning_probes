@@ -107,7 +107,7 @@ def boot(vals, clusters, B, rng):
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument('--ckpt', required=True); ap.add_argument('--gens', required=True); ap.add_argument('--out', required=True)
     ap.add_argument('--model', default='coconut_b'); ap.add_argument('--limit', type=int, default=0); ap.add_argument('--device', default='cpu')
-    ap.add_argument('--boot', type=int, default=2000); ap.add_argument('--seed', type=int, default=0); ap.add_argument('--bs', type=int, default=16); ap.add_argument('--min-agree', type=float, default=0.9); ap.add_argument('--run-id', default='')
+    ap.add_argument('--boot', type=int, default=2000); ap.add_argument('--seed', type=int, default=0); ap.add_argument('--bs', type=int, default=16); ap.add_argument('--min-agree', type=float, default=0.9); ap.add_argument('--run-id', default=''); ap.add_argument('--followup', action='store_true')
     a = ap.parse_args(); os.makedirs(a.out, exist_ok=True); t0 = time.time(); torch.manual_seed(a.seed); rng = np.random.default_rng(a.seed)
     tok, model = load_model(a.ckpt, a.device)
     ids = tok.convert_tokens_to_ids(['<bot>', '<eot>', '<latent>']); assert ids == [50257, 50258, 50259] and len(tok) == model.get_input_embeddings().num_embeddings == 50260, (ids, len(tok))   # same special-token ids as in training
@@ -122,41 +122,52 @@ def main():
     don = donors(rows, rng); has_don = don >= 0
     V, base, VN = {}, {}, {}                                                       # V[name] = M under the intervention; base[name] = the baseline it is compared against
     def add(name, M, b): V[name], base[name], VN[name] = M, b, R.last_norm.copy()      # R.last_norm belongs to the R.all call that produced M (arguments are evaluated before add)
-    for t in range(N):
-        add(f'single_t{t}', R.all('h', lambda idx, t=t: {t: ZU[idx, t]})[0], MH)
-        g = torch.Generator().manual_seed(a.seed * 100 + t)
-        add(f'noise_t{t}', R.all('h', lambda idx, t=t, g=g: {t: torch.randn(len(idx), ZU.shape[-1], generator=g) * ZU[idx, t].norm(dim=-1, keepdim=True) / np.sqrt(ZU.shape[-1])})[0], MH)
-        add(f'matched_t{t}', R.all('h', lambda idx, t=t: {t: ZU[np.where(don[idx] >= 0, don[idx], idx), t]})[0], MH)
-        add(f'samecond_t{t}', R.all('h', lambda idx, t=t: {t: ZH[np.where(don[idx] >= 0, don[idx], idx), t]})[0], MH)
-        add(f'single_pm_t{t}', R.all('h', lambda idx, t=t: {t: ZP[idx, t]})[0], MH)
-        add(f'reverse_t{t}', R.all('u', lambda idx, t=t: {t: ZH[idx, t]})[0], MU)
-        # persist (Amendment 1, secondary): slots 0 and t replaced, slots t+1.. cannot attend to the hint; slot t and earlier cached states can still have seen it
-        add(f'persist_t{t}', R.all('h', lambda idx, t=t: {s: ZU[idx, s] for s in {0, t}}, block_latents_from=min(t + 1, N))[0], MH)
-    allU = lambda idx: {t: ZU[idx, t] for t in range(N)}
-    add('full6', R.all('h', allU)[0], MH)
-    # scale / positive controls (Amendment 3): if destroying or swapping ALL latents also leaves M unchanged, the answer is not reading the latents and a null restoration is expected
-    add('zero_full6', R.all('h', lambda idx: {t: torch.zeros_like(ZU[idx, t]) for t in range(N)})[0], MH)
-    add('matched_full6', R.all('h', lambda idx: {t: ZU[np.where(don[idx] >= 0, don[idx], idx), t] for t in range(N)})[0], MH)
-    add('block_answer', R.all('h', block_answer=True)[0], MH)
-    allP = lambda idx: {t: ZP[idx, t] for t in range(N)}
-    add('full6_pm', R.all('h', allP)[0], MH)
-    add('block_latents', R.all('h', lambda idx: {0: ZU[idx, 0]}, block_latents_from=0)[0], MH)                  # slot 0 replaced too: otherwise the hint-contaminated <bot> state leaks in
-    add('block_latents_pm', R.all('h', lambda idx: {0: ZP[idx, 0]}, block_latents_from=0)[0], MH)
-    # matched-attention controls (Amendment 3). (a) disruption baseline: the same blocks on UNHINTED prompts (<bot> blocked, nothing else to block), compared with the unhinted M:
-    # a shift here is caused by the blocking itself, not by removing a hint. Identity patches (own states) keep slot inputs unchanged.
-    allUid = lambda idx: {t: ZU[idx, t] for t in range(N)}
-    add('u_block_latents', R.all('u', lambda idx: {0: ZU[idx, 0]}, block_latents_from=0, block_bot=True)[0], MU)
-    add('u_block_answer', R.all('u', block_answer=True, block_bot=True)[0], MU)
-    add('u_both_blocked', R.all('u', allUid, block_latents_from=0, block_answer=True, block_bot=True)[0], MU)
-    # (b) donor trajectories produced under the SAME attention regime as the blocked recipient (hint hidden, <bot> blocked from every latent step)
-    _, ZB = R.all('m', block_latents_from=0, block_bot=True); allB = lambda idx: {t: ZB[idx, t] for t in range(N)}
-    add('block_latents_mad', R.all('h', lambda idx: {0: ZB[idx, 0]}, block_latents_from=0)[0], MH)
-    add('both_blocked_mad', R.all('h', allB, block_latents_from=0, block_answer=True)[0], MH)
-    add('both_blocked_pm', R.all('h', allP, block_latents_from=0, block_answer=True)[0], MH)
-    add('full6_block_answer', R.all('h', allU, block_answer=True)[0], MH)
-    add('both_blocked', R.all('h', allU, block_latents_from=0, block_answer=True)[0], MH)
-    for fam in ('single', 'single_pm', 'noise', 'matched', 'samecond', 'reverse', 'persist'):                        # row-level mean over the six steps (primary = single)
-        add(f'{fam}_mean', np.mean([V[f'{fam}_t{t}'] for t in range(N)], 0), MH if fam != 'reverse' else MU); VN[f'{fam}_mean'] = np.mean([VN[f'{fam}_t{t}'] for t in range(N)], 0)
+    if not a.followup:
+        for t in range(N):
+            add(f'single_t{t}', R.all('h', lambda idx, t=t: {t: ZU[idx, t]})[0], MH)
+            g = torch.Generator().manual_seed(a.seed * 100 + t)
+            add(f'noise_t{t}', R.all('h', lambda idx, t=t, g=g: {t: torch.randn(len(idx), ZU.shape[-1], generator=g) * ZU[idx, t].norm(dim=-1, keepdim=True) / np.sqrt(ZU.shape[-1])})[0], MH)
+            add(f'matched_t{t}', R.all('h', lambda idx, t=t: {t: ZU[np.where(don[idx] >= 0, don[idx], idx), t]})[0], MH)
+            add(f'samecond_t{t}', R.all('h', lambda idx, t=t: {t: ZH[np.where(don[idx] >= 0, don[idx], idx), t]})[0], MH)
+            add(f'single_pm_t{t}', R.all('h', lambda idx, t=t: {t: ZP[idx, t]})[0], MH)
+            add(f'reverse_t{t}', R.all('u', lambda idx, t=t: {t: ZH[idx, t]})[0], MU)
+            # persist (Amendment 1, secondary): slots 0 and t replaced, slots t+1.. cannot attend to the hint; slot t and earlier cached states can still have seen it
+            add(f'persist_t{t}', R.all('h', lambda idx, t=t: {s: ZU[idx, s] for s in {0, t}}, block_latents_from=min(t + 1, N))[0], MH)
+        allU = lambda idx: {t: ZU[idx, t] for t in range(N)}
+        add('full6', R.all('h', allU)[0], MH)
+        # scale / positive controls (Amendment 3): if destroying or swapping ALL latents also leaves M unchanged, the answer is not reading the latents and a null restoration is expected
+        add('zero_full6', R.all('h', lambda idx: {t: torch.zeros_like(ZU[idx, t]) for t in range(N)})[0], MH)
+        add('matched_full6', R.all('h', lambda idx: {t: ZU[np.where(don[idx] >= 0, don[idx], idx), t] for t in range(N)})[0], MH)
+        add('block_answer', R.all('h', block_answer=True)[0], MH)
+        allP = lambda idx: {t: ZP[idx, t] for t in range(N)}
+        add('full6_pm', R.all('h', allP)[0], MH)
+        add('block_latents', R.all('h', lambda idx: {0: ZU[idx, 0]}, block_latents_from=0)[0], MH)                  # slot 0 replaced too: otherwise the hint-contaminated <bot> state leaks in
+        add('block_latents_pm', R.all('h', lambda idx: {0: ZP[idx, 0]}, block_latents_from=0)[0], MH)
+        # matched-attention controls (Amendment 3). (a) disruption baseline: the same blocks on UNHINTED prompts (<bot> blocked, nothing else to block), compared with the unhinted M:
+        # a shift here is caused by the blocking itself, not by removing a hint. Identity patches (own states) keep slot inputs unchanged.
+        allUid = lambda idx: {t: ZU[idx, t] for t in range(N)}
+        add('u_block_latents', R.all('u', lambda idx: {0: ZU[idx, 0]}, block_latents_from=0, block_bot=True)[0], MU)
+        add('u_block_answer', R.all('u', block_answer=True, block_bot=True)[0], MU)
+        add('u_both_blocked', R.all('u', allUid, block_latents_from=0, block_answer=True, block_bot=True)[0], MU)
+        # (b) donor trajectories produced under the SAME attention regime as the blocked recipient (hint hidden, <bot> blocked from every latent step)
+        _, ZB = R.all('m', block_latents_from=0, block_bot=True); allB = lambda idx: {t: ZB[idx, t] for t in range(N)}
+        add('block_latents_mad', R.all('h', lambda idx: {0: ZB[idx, 0]}, block_latents_from=0)[0], MH)
+        add('both_blocked_mad', R.all('h', allB, block_latents_from=0, block_answer=True)[0], MH)
+        add('both_blocked_pm', R.all('h', allP, block_latents_from=0, block_answer=True)[0], MH)
+        add('full6_block_answer', R.all('h', allU, block_answer=True)[0], MH)
+        add('both_blocked', R.all('h', allU, block_latents_from=0, block_answer=True)[0], MH)
+        for fam in ('single', 'single_pm', 'noise', 'matched', 'samecond', 'reverse', 'persist'):                        # row-level mean over the six steps (primary = single)
+            add(f'{fam}_mean', np.mean([V[f'{fam}_t{t}'] for t in range(N)], 0), MH if fam != 'reverse' else MU); VN[f'{fam}_mean'] = np.mean([VN[f'{fam}_t{t}'] for t in range(N)], 0)
+    if a.followup:                                                         # follow-up (Amendment 6, exploratory): hint tokens and <bot> blocked separately; none of the registered conditions are recomputed
+        add('f_ans_hint', R.all('h', block_answer='hint')[0], MH)
+        add('f_ans_bot', R.all('h', block_answer='bot')[0], MH)
+        add('f_ans_both', R.all('h', block_answer=True)[0], MH)                           # = block_answer of the main run (consistency check)
+        add('f_lat_hint', R.all('h', block_latents_from=0, latent_kind='hint')[0], MH)
+        add('f_lat_bot', R.all('h', block_latents_from=0, latent_kind='bot')[0], MH)
+        add('f_lat_hint_ans_hint', R.all('h', block_latents_from=0, latent_kind='hint', block_answer='hint')[0], MH)
+        add('f_lat_bot_ans_bot', R.all('h', block_latents_from=0, latent_kind='bot', block_answer='bot')[0], MH)
+        add('f_u_ans_bot', R.all('u', block_answer='bot', block_bot=True)[0], MU)           # disruption baseline: blocking <bot> alone on UNHINTED prompts
+        add('f_u_lat_bot_ans_bot', R.all('u', block_latents_from=0, latent_kind='bot', block_answer='bot', block_bot=True)[0], MU)
     D = {k: V[k] - base[k] for k in V}                                                                 # change in M (positive = towards the true option)
     cl = [r['q'] for r in rows]; S = {}
     for g in cnt:
@@ -173,7 +184,7 @@ def main():
         S[g]['_length_sensitivity'] = dict(
             option_token_count_differs=float((tokdiff[m] != 0).mean()), mean_abs_token_diff=float(np.abs(tokdiff[m]).mean()),
             sign_disagree_M_vs_Mnorm_hinted=float((np.sign(MH[m]) != np.sign(MHn[m])).mean()), sign_disagree_M_vs_Mnorm_unhinted=float((np.sign(MU[m]) != np.sign(MUn[m])).mean()),
-            **{k: dict(mean_dMnorm=boot(dn(k)[m], [c for c, x in zip(cl, m) if x], a.boot, rng)[0], sign_disagree_M_vs_Mnorm=float((np.sign(V[k][m]) != np.sign(VN[k][m])).mean())) for k in LEN})
+            **{k: dict(mean_dMnorm=boot(dn(k)[m], [c for c, x in zip(cl, m) if x], a.boot, rng)[0], sign_disagree_M_vs_Mnorm=float((np.sign(V[k][m]) != np.sign(VN[k][m])).mean())) for k in LEN if k in V})
         S[g]['_baseline'] = dict(M_hinted=float(MH[m].mean()), M_unhinted=float(MU[m].mean()), p_true_hinted=float((MH[m] > 0).mean()))
     DESC = {'single_t{t}': 'hinted run; the INPUT vector of latent slot t replaced by the same question\'s natural UNHINTED state (shorter prompt, so shifted absolute positions); later slots and the answer recomputed; slots can still attend to the hinted prompt',
             'single_pm_t{t}': 'as single_t but the donor is the position-matched run (hinted prompt, hint tokens hidden from attention, same position ids)',
@@ -193,8 +204,12 @@ def main():
             'full6_block_answer': 'all six inputs replaced by unhinted states and the answer blocked from the hint span and <bot>; slots can still attend to the hint',
             'both_blocked': 'all six inputs replaced by unhinted states, latents AND answer blocked from the hint span and <bot>: no route from the hint remains',
             'both_blocked_pm': 'as both_blocked with position-matched donor states', 'both_blocked_mad': 'as both_blocked with donor states produced under the same blocked-attention regime',
+            'f_ans_hint / f_ans_bot / f_ans_both': 'FOLLOW-UP: the answer cannot attend to the hint tokens only / to <bot> only / to both (= block_answer); latents untouched',
+            'f_lat_hint / f_lat_bot': 'FOLLOW-UP: latent steps (from slot 0) cannot attend to the hint tokens only / to <bot> only; slot-0 input is NOT replaced; the answer reads everything',
+            'f_lat_hint_ans_hint / f_lat_bot_ans_bot': 'FOLLOW-UP: the same single-target block applied to both latent steps and the answer',
+            'f_u_ans_bot / f_u_lat_bot_ans_bot': 'FOLLOW-UP disruption baselines: <bot> alone blocked on UNHINTED prompts; change relative to the unhinted M',
             'u_block_latents / u_block_answer / u_both_blocked': 'disruption baselines: the same blocks applied to UNHINTED prompts (<bot> blocked); change relative to the unhinted M, i.e. what blocking does with no hint present'}
-    meta = dict(third_option_rows_skipped=build_rows.third_option_skipped, run_id=a.run_id, ckpt=a.ckpt, model=a.model, n_rows=len(rows), counts=cnt, depth_known=int(sum(r['depth'] is not None for r in rows)), rebuild_agreement_hinted=agree, rebuild_agreement_unhinted=agreeU, rebuild_agreement_by_group=gagree,
+    meta = dict(followup=a.followup, third_option_rows_skipped=build_rows.third_option_skipped, run_id=a.run_id, ckpt=a.ckpt, model=a.model, n_rows=len(rows), counts=cnt, depth_known=int(sum(r['depth'] is not None for r in rows)), rebuild_agreement_hinted=agree, rebuild_agreement_unhinted=agreeU, rebuild_agreement_by_group=gagree,
                 identity_max_abs_diff=float(np.abs(idn - MH).max()), seed=a.seed, boot=a.boot, minutes=(time.time() - t0) / 60, torch=torch.__version__)
     json.dump(dict(meta=meta, condition_descriptions=DESC, summary=S), open(f'{a.out}/patching_summary.json', 'w'), indent=1)
     with open(f'{a.out}/patching_rows.jsonl', 'w') as f:
@@ -203,7 +218,7 @@ def main():
     print(f"\nPRIMARY (harmful switches, single-step same-question restoration, mean over steps): dM = {h['single_mean']['mean_dM']:.3f} [{h['single_mean']['lo']:.3f}, {h['single_mean']['hi']:.3f}], n = {h['single_mean']['n']}" if 'single_mean' in h else 'no harmful rows')
     for g in S:
         print(f'\n[{g}] n={cnt[g]}  baseline {S[g]["_baseline"]}')
-        for k in ('single_mean', 'single_pm_mean', 'noise_mean', 'matched_mean', 'samecond_mean', 'persist_mean', 'full6', 'zero_full6', 'matched_full6', 'full6_pm', 'block_answer', 'block_latents', 'block_latents_pm', 'full6_block_answer', 'both_blocked', 'both_blocked_pm', 'block_latents_mad', 'both_blocked_mad', 'u_block_latents', 'u_block_answer', 'u_both_blocked', 'reverse_mean'):
+        for k in ('f_ans_hint', 'f_ans_bot', 'f_ans_both', 'f_lat_hint', 'f_lat_bot', 'f_lat_hint_ans_hint', 'f_lat_bot_ans_bot', 'f_u_ans_bot', 'f_u_lat_bot_ans_bot', 'single_mean', 'single_pm_mean', 'noise_mean', 'matched_mean', 'samecond_mean', 'persist_mean', 'full6', 'zero_full6', 'matched_full6', 'full6_pm', 'block_answer', 'block_latents', 'block_latents_pm', 'full6_block_answer', 'both_blocked', 'both_blocked_pm', 'block_latents_mad', 'both_blocked_mad', 'u_block_latents', 'u_block_answer', 'u_both_blocked', 'reverse_mean'):
             if k in S[g]: e = S[g][k]; print(f'  {k:20s} dM {e["mean_dM"]:+.3f} [{e["lo"]:+.3f},{e["hi"]:+.3f}]  P(true) {e["p_true"]:.2f}  P(wrong) {e["p_flip_to_wrong"]:.2f}')
     print(f'\nsaved to {a.out} in {meta["minutes"]:.1f} min')
 

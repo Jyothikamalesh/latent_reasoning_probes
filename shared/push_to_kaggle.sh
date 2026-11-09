@@ -33,7 +33,7 @@ case "${1:-push}" in
   "enable_internet": true,
   "dataset_sources": [${DATASETS:+$Q$DATASETS$Q}],
   "competition_sources": [],
-  "kernel_sources": []
+  "kernel_sources": [${KERNELS:+$Q$KERNELS$Q}]
 }
 JSON
     echo "notebook sha1: $(shasum "$NB.ipynb" | cut -c1-10)  (record this in the run's RUN.md)"

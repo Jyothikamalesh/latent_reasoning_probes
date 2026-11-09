@@ -4,6 +4,8 @@ import os, sys, nbformat as nbf
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(HERE)
 arg = lambda k, d: sys.argv[sys.argv.index(k) + 1] if k in sys.argv else d
 FOLLOWUP = '--followup' in sys.argv; PFX = 'followup' if FOLLOWUP else 'patching'
+LONG = '--long' in sys.argv     # new longer-trained twins: per seed the latent-dependence diagnostic (Amendment 7), then the frozen patching protocol, in one session
+DIRS = [('latentdep', ' --latentdep'), ('patching', '')] if LONG else [(PFX, ' --followup' if FOLLOWUP else '')]
 SEEDS = tuple(int(x) for x in arg('--seeds', '0,1,2').split(','))
 DATASET, LIMIT, BOOT = arg('--dataset', 'jyothikamaleshs/prosqa-coconut-b-twins'), int(arg('--limit', 0)), int(arg('--boot', 2000))
 read = lambda p: open(p).read()
@@ -25,20 +27,21 @@ cells = [
    "PLAN = {0: [0, 2], 1: [1]} if (SEEDS == [0, 1, 2] and NG >= 2) else {g: SEEDS[g::NG] for g in range(NG) if SEEDS[g::NG]}\n"
    "RUN_ID = str(int(time.time()))\n"
    "import shutil\n"
-   "for s in SEEDS: shutil.rmtree(f'/kaggle/working/{PFX}_s{s}', ignore_errors=True)\n"
+   f"DIRS = {DIRS!r}\n"
+   "for s in SEEDS:\n    for d, _ in DIRS: shutil.rmtree(f'/kaggle/working/{d}_s{s}', ignore_errors=True)\n"
    "def worker(gpu, seeds):\n"
-   "    cmds = ' && '.join(f\"{sys.executable} /kaggle/working/run_patching.py --ckpt {INP}/s{s}_coconut_b.pt --gens {INP}/s{s}_generations.jsonl --out /kaggle/working/{PFX}_s{s} --device cuda --seed {s} --boot {BOOT} --bs 32 --run-id {RUN_ID}\" + (' --followup' if FOLLOWUP else '') + (f' --limit {LIMIT}' if LIMIT else '') + f' > /kaggle/working/{PFX}_s{s}.log 2>&1' for s in seeds)\n"
+   "    cmds = ' && '.join(f\"{sys.executable} /kaggle/working/run_patching.py --ckpt {INP}/s{s}_coconut_b.pt --gens {INP}/s{s}_generations.jsonl --out /kaggle/working/{d}_s{s} --device cuda --seed {s} --boot {BOOT} --bs 32 --run-id {RUN_ID}{fl}\" + (f' --limit {LIMIT}' if LIMIT else '') + f' > /kaggle/working/{d}_s{s}.log 2>&1' for s in seeds for d, fl in DIRS)\n"
    "    return subprocess.Popen(['bash', '-c', cmds], env={**os.environ, 'CUDA_VISIBLE_DEVICES': str(gpu), 'PROSQA_DIR': DATA})\n"
    "t0 = time.time(); procs = [worker(g, s) for g, s in PLAN.items()]\n"
    "for p in procs: p.wait()\n"
    "print('workers exited', [p.returncode for p in procs], f'{(time.time() - t0) / 60:.1f} min')"),
- nbf.v4.new_code_cell("for s in SEEDS:\n    f = f'/kaggle/working/{PFX}_s{s}.log'\n    if os.path.exists(f): print(f'===== seed {s} =====\\n' + ''.join(l for l in open(f) if 'arn' not in l)[-5000:])"),
+ nbf.v4.new_code_cell("for s in SEEDS:\n  for d, _ in DIRS:\n    f = f'/kaggle/working/{d}_s{s}.log'\n    if os.path.exists(f): print(f'===== {d} seed {s} =====\\n' + ''.join(l for l in open(f) if 'arn' not in l)[-5000:])"),
  nbf.v4.new_code_cell("assert all(p.returncode == 0 for p in procs), 'a worker failed: see the logs above'\n"
-   "for s in SEEDS:\n"
-   "    f = f'/kaggle/working/{PFX}_s{s}/patching_summary.json'; assert os.path.exists(f), f'missing {f}'\n"
-   "    assert json.load(open(f))['meta']['run_id'] == RUN_ID, f'seed {s} summary is not from this run'\n"
+   "for s in SEEDS:\n  for d, _ in DIRS:\n"
+   "    f = f'/kaggle/working/{d}_s{s}/patching_summary.json'; assert os.path.exists(f), f'missing {f}'\n"
+   "    assert json.load(open(f))['meta']['run_id'] == RUN_ID, f'{d} seed {s} summary is not from this run'\n"
    "print('all requested summaries present and from this run', RUN_ID, SEEDS)"),
 ]
 nb = nbf.v4.new_notebook(cells=cells); nb.metadata = {"kernelspec": {"display_name": "Python 3", "language": "python", "name": "python3"}, "language_info": {"name": "python"}}
 for i, c in enumerate(nb.cells): c['id'] = f'cell{i:03d}'
-out = f'{ROOT}/notebooks/causal_patching.ipynb'; nbf.write(nb, out); print('->', out)
+out = f'{ROOT}/notebooks/' + ('causal_patching_long' if LONG else 'causal_patching') + '.ipynb'; nbf.write(nb, out); print('->', out)

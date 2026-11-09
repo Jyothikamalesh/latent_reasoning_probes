@@ -107,8 +107,8 @@ def boot(vals, clusters, B, rng):
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument('--ckpt', required=True); ap.add_argument('--gens', required=True); ap.add_argument('--out', required=True)
     ap.add_argument('--model', default='coconut_b'); ap.add_argument('--limit', type=int, default=0); ap.add_argument('--device', default='cpu')
-    ap.add_argument('--boot', type=int, default=2000); ap.add_argument('--seed', type=int, default=0); ap.add_argument('--bs', type=int, default=16); ap.add_argument('--min-agree', type=float, default=0.9); ap.add_argument('--run-id', default=''); ap.add_argument('--followup', action='store_true'); ap.add_argument('--latentdep', action='store_true')
-    a = ap.parse_args(); os.makedirs(a.out, exist_ok=True); t0 = time.time(); torch.manual_seed(a.seed); rng = np.random.default_rng(a.seed)
+    ap.add_argument('--boot', type=int, default=2000); ap.add_argument('--seed', type=int, default=0); ap.add_argument('--bs', type=int, default=16); ap.add_argument('--min-agree', type=float, default=0.9); ap.add_argument('--run-id', default=''); ap.add_argument('--followup', action='store_true'); ap.add_argument('--latentdep', action='store_true'); ap.add_argument('--bottleneck', action='store_true')
+    a = ap.parse_args(); lp.BOTTLENECK = a.bottleneck; os.makedirs(a.out, exist_ok=True); t0 = time.time(); torch.manual_seed(a.seed); rng = np.random.default_rng(a.seed)
     tok, model = load_model(a.ckpt, a.device)
     ids = tok.convert_tokens_to_ids(['<bot>', '<eot>', '<latent>']); assert ids == [50257, 50258, 50259] and len(tok) == model.get_input_embeddings().num_embeddings == 50260, (ids, len(tok))   # same special-token ids as in training
     rows = build_rows(a.gens, a.model, tok, a.limit); R = Runner(tok, model, rows, a.device, a.bs)

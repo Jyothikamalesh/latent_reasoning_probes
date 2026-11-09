@@ -157,4 +157,19 @@ class T(unittest.TestCase):
         self.assertTrue(torch.allclose(lp.run(self.m, bt, block_latents_from=0)['logp'], lp.run(self.m, bt, block_latents_from=0, latent_kind='both')['logp']))
 
 
+    def test_bottleneck_answer_sees_only_latents(self):
+        """With BOTTLENECK the answer depends on the prompt only through the latents: two different prompts with the same six latent inputs give identical answer log-probs; without it they differ."""
+        other = [[30, 31, 32, 33, 34, 35, 36, 37], [38, 39, 7, 8, 9]]
+        z = torch.randn(2, N, 32)
+        full = {i: z[:, i] for i in range(N)}
+        try:
+            lp.BOTTLENECK = True
+            a, b = lp.run(self.m, batch(), patch=full), lp.run(self.m, batch(other), patch=full)
+            self.assertTrue(torch.allclose(a['logp'], b['logp'], atol=1e-6))
+            lp.BOTTLENECK = False
+            a, b = lp.run(self.m, batch(), patch=full), lp.run(self.m, batch(other), patch=full)
+            self.assertFalse(torch.allclose(a['logp'], b['logp'], atol=1e-4))
+        finally: lp.BOTTLENECK = False
+
+
 if __name__ == '__main__': unittest.main()

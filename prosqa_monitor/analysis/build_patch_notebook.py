@@ -5,7 +5,8 @@ HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(HERE)
 arg = lambda k, d: sys.argv[sys.argv.index(k) + 1] if k in sys.argv else d
 FOLLOWUP = '--followup' in sys.argv; PFX = 'followup' if FOLLOWUP else 'patching'
 LONG = '--long' in sys.argv     # new longer-trained twins: per seed the latent-dependence diagnostic (Amendment 7), then the frozen patching protocol, in one session
-DIRS = [('latentdep', ' --latentdep'), ('patching', '')] if LONG else [(PFX, ' --followup' if FOLLOWUP else '')]
+BN = ' --bottleneck' if '--bottleneck' in sys.argv else ''     # twins trained with the information bottleneck (docs/bottleneck_protocol.md)
+DIRS = [('latentdep', ' --latentdep' + BN), ('patching', BN)] if LONG else [(PFX, ' --followup' if FOLLOWUP else '')]
 SEEDS = tuple(int(x) for x in arg('--seeds', '0,1,2').split(','))
 DATASET, LIMIT, BOOT = arg('--dataset', 'jyothikamaleshs/prosqa-coconut-b-twins'), int(arg('--limit', 0)), int(arg('--boot', 2000))
 read = lambda p: open(p).read()
@@ -44,4 +45,4 @@ cells = [
 ]
 nb = nbf.v4.new_notebook(cells=cells); nb.metadata = {"kernelspec": {"display_name": "Python 3", "language": "python", "name": "python3"}, "language_info": {"name": "python"}}
 for i, c in enumerate(nb.cells): c['id'] = f'cell{i:03d}'
-out = f'{ROOT}/notebooks/' + ('causal_patching_long' if LONG else 'causal_patching') + '.ipynb'; nbf.write(nb, out); print('->', out)
+out = f'{ROOT}/notebooks/' + ('causal_patching_bneck' if BN else 'causal_patching_long' if LONG else 'causal_patching') + '.ipynb'; nbf.write(nb, out); print('->', out)

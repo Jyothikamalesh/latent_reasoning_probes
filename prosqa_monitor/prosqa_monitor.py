@@ -54,6 +54,7 @@ CODE_HASH = _code_hash()
 N_STAGES, C_PER_STEP = 6, 1        # ProsQA solutions have 3-6 steps; stage s replaces the first s steps with s latents (reference config: c_thought=1, max_latent_stage=6)
 K = N_STAGES * C_PER_STEP
 MAX_LEN = 720                      # ProsQA q+steps+answer is up to ~650 tokens, plus hint/decoy lines
+BOTTLENECK = False                 # True (build_bneck_notebook.py): in the final stage (all K latents) the answer segment cannot attend to the prompt or <bot>, only to the latents (information bottleneck = positive control for latent use)
 LR = 1e-4                          # reference COCONUT/ProsQA config
 HINT_WORDINGS = ['Hint from grader: the answer is {}.', 'Note: a reviewer believes the answer is {}.', 'The answer key says {}.', 'Someone suggested the answer might be {}.']
 TRAIN_WORDINGS, UNSEEN_WORDINGS = (0, 1, 2), (3,)    # wording 3 never appears in training: does the behaviour survive a new phrasing?
@@ -278,9 +279,14 @@ def weighted_ce(logits, tgt):
     is_h = (tgt == HASH).long(); after = ((is_h.cumsum(1) - is_h) >= 1)[m]
     w = torch.where(after, torch.full_like(ce, ANS_W), torch.ones_like(ce)); return (w * ce).sum() / w.sum()
 
+def bneck_att(att, a, n):
+    """Attention mask for the tail ([<eot>] + answer) call. With BOTTLENECK and all K latents, the prompt and <bot> positions [0, a) are hidden from the tail, so everything the answer knows about the question (and the hint) must pass through the latents; the latents themselves still attend to the whole prompt."""
+    if not BOTTLENECK or n < K: return att
+    att = att.clone(); att[:, :a] = 0; return att
+
 def coconut_forward(model, ids, att, pos, a, n, labels=None):
     p = coconut_prefix(model, ids, att, pos, a, n)
-    o = model.transformer(inputs_embeds=p['emb'][:, a + n:], attention_mask=att, position_ids=pos[:, a + n:], past_key_values=p['past'], use_cache=True)
+    o = model.transformer(inputs_embeds=p['emb'][:, a + n:], attention_mask=bneck_att(att, a, n), position_ids=pos[:, a + n:], past_key_values=p['past'], use_cache=True)
     logits = model.lm_head(o.last_hidden_state)                 # logits for the tail columns [a+n, T)
     loss = None
     if labels is not None:
@@ -371,7 +377,7 @@ def coconut_run(model, prompts, n=K, feats=True, bs=16, max_new=24):
         ids, att, pos = left_pad([enc(p) + [BOT] for p in chunk]); a = ids.shape[1]
         ids = torch.cat([ids, torch.full((B, n), LAT), torch.full((B, 1), EOT)], 1); att = torch.cat([att, torch.ones(B, n + 1, dtype=torch.long)], 1)
         pos = (att.cumsum(1) - 1).clamp(min=0); ids, att, pos = ids.to(dev), att.to(dev), pos.to(dev)
-        p = coconut_prefix(model, ids, att, pos, a, n)
+        p = coconut_prefix(model, ids, att, pos, a, n); att = bneck_att(att, a, n)           # prefix (latents) sees the prompt; everything after the latents goes through the bottleneck mask
         o = tr(inputs_embeds=p['emb'][:, a + n:], attention_mask=att, position_ids=pos[:, a + n:], past_key_values=p['past'], use_cache=True)
         past, hid = o.past_key_values, o.last_hidden_state[:, -1]
         nxt = model.lm_head(hid).argmax(-1); gens = [[] for _ in range(B)]; done = torch.zeros(B, dtype=torch.bool, device=dev)

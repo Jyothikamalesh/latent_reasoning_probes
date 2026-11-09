@@ -9,6 +9,8 @@ Blocking the hint: the hint line is the last segment of the prompt and <bot> fol
 import torch
 import torch.nn.functional as F
 
+BOTTLENECK = False      # set by run_patching --bottleneck for twins trained with the information bottleneck: the answer segment cannot attend to the prompt or <bot>, only to the latents
+
 
 def left_pad(seqs, pad_id):
     L = max(len(s) for s in seqs)
@@ -63,6 +65,7 @@ def run(model, bt, patch=None, block_latents_from=None, block_answer=False, late
         o = tr(inputs_embeds=cur, attention_mask=m, position_ids=pos[:, a + i:a + i + 1], past_key_values=past, use_cache=True)
         past, cur = o.past_key_values, o.last_hidden_state
     m = att * ((~ablk).long() if block_answer else 1)
+    if BOTTLENECK: m = m.clone(); m[:, :a] = 0
     o = tr(inputs_embeds=emb[:, a + n:], attention_mask=m, position_ids=pos[:, a + n:], past_key_values=past, use_cache=True)
     logits = model.lm_head(o.last_hidden_state)                     # tail columns: [<eot>, sentence...]
     lp = F.log_softmax(logits[:, :-1].float(), -1).gather(-1, bt['tail_ids'][:, 1:, None])[..., 0]

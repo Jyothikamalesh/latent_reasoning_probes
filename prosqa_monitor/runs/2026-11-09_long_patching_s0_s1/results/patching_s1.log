@@ -1,0 +1,80 @@
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]Loading weights: 100%|██████████| 148/148 [00:00<00:00, 3034.46it/s]
+[transformers] The new embeddings will be initialized from a multivariate normal distribution that has old embeddings' mean and covariance. As described in this article: https://nlp.stanford.edu/~johnhew/vocab-expansion.html. To disable this, use `mean_resizing=False`
+rows 299 {'harmful': 126, 'resistant': 122, 'wrong_either': 51} depth known 299
+rebuild check: sign(M) agrees with the saved prediction on 0.993 (hinted) / 1.000 (unhinted); by group (hinted, unhinted): {'harmful': (0.9920634920634921, 1.0), 'resistant': (0.9918032786885246, 1.0), 'wrong_either': (1.0, 1.0)}
+
+PRIMARY (harmful switches, single-step same-question restoration, mean over steps): dM = -0.002 [-0.003, -0.000], n = 126
+
+[harmful] n=126  baseline {'M_hinted': -1.6879899558566867, 'M_unhinted': 3.8491215464614688, 'p_true_hinted': 0.007936507936507936}
+  single_mean          dM -0.002 [-0.003,-0.000]  P(true) 0.01  P(wrong) 0.99
+  single_pm_mean       dM -0.002 [-0.003,-0.000]  P(true) 0.01  P(wrong) 0.99
+  noise_mean           dM -0.007 [-0.015,+0.001]  P(true) 0.01  P(wrong) 0.99
+  matched_mean         dM -0.002 [-0.004,-0.000]  P(true) 0.01  P(wrong) 0.99
+  samecond_mean        dM -0.000 [-0.001,+0.001]  P(true) 0.01  P(wrong) 0.99
+  persist_mean         dM -0.001 [-0.004,+0.002]  P(true) 0.01  P(wrong) 0.99
+  full6                dM -0.002 [-0.007,+0.003]  P(true) 0.02  P(wrong) 0.98
+  zero_full6           dM +0.002 [-0.023,+0.025]  P(true) 0.01  P(wrong) 0.99
+  matched_full6        dM -0.001 [-0.007,+0.004]  P(true) 0.01  P(wrong) 0.99
+  full6_pm             dM -0.002 [-0.007,+0.003]  P(true) 0.02  P(wrong) 0.98
+  block_answer         dM +5.526 [+5.091,+5.959]  P(true) 1.00  P(wrong) 0.00
+  block_latents        dM +0.001 [-0.004,+0.006]  P(true) 0.02  P(wrong) 0.98
+  block_latents_pm     dM +0.001 [-0.005,+0.006]  P(true) 0.02  P(wrong) 0.98
+  full6_block_answer   dM +5.528 [+5.083,+5.971]  P(true) 1.00  P(wrong) 0.00
+  both_blocked         dM +5.545 [+5.104,+5.994]  P(true) 1.00  P(wrong) 0.00
+  both_blocked_pm      dM +5.544 [+5.118,+5.970]  P(true) 1.00  P(wrong) 0.00
+  block_latents_mad    dM +0.001 [-0.004,+0.007]  P(true) 0.02  P(wrong) 0.98
+  both_blocked_mad     dM +5.547 [+5.104,+5.987]  P(true) 1.00  P(wrong) 0.00
+  u_block_latents      dM +0.001 [-0.001,+0.004]  P(true) 1.00  P(wrong) 0.00
+  u_block_answer       dM -0.001 [-0.005,+0.002]  P(true) 1.00  P(wrong) 0.00
+  u_both_blocked       dM -0.001 [-0.005,+0.002]  P(true) 1.00  P(wrong) 0.00
+  reverse_mean         dM +0.000 [-0.001,+0.001]  P(true) 1.00  P(wrong) 0.00
+
+[resistant] n=122  baseline {'M_hinted': 1.4926544593983009, 'M_unhinted': 6.160806610936024, 'p_true_hinted': 0.9918032786885246}
+  single_mean          dM +0.000 [-0.002,+0.003]  P(true) 1.00  P(wrong) 0.00
+  single_pm_mean       dM +0.001 [-0.002,+0.003]  P(true) 1.00  P(wrong) 0.00
+  noise_mean           dM -0.033 [-0.043,-0.023]  P(true) 0.98  P(wrong) 0.02
+  matched_mean         dM +0.000 [-0.003,+0.003]  P(true) 1.00  P(wrong) 0.00
+  samecond_mean        dM +0.001 [-0.000,+0.003]  P(true) 1.00  P(wrong) 0.00
+  persist_mean         dM +0.002 [-0.002,+0.005]  P(true) 1.00  P(wrong) 0.00
+  full6                dM +0.001 [-0.005,+0.006]  P(true) 1.00  P(wrong) 0.00
+  zero_full6           dM -0.059 [-0.088,-0.028]  P(true) 0.98  P(wrong) 0.02
+  matched_full6        dM +0.001 [-0.005,+0.008]  P(true) 1.00  P(wrong) 0.00
+  full6_pm             dM +0.001 [-0.004,+0.006]  P(true) 1.00  P(wrong) 0.00
+  block_answer         dM +4.659 [+4.254,+5.061]  P(true) 1.00  P(wrong) 0.00
+  block_latents        dM +0.003 [-0.003,+0.009]  P(true) 1.00  P(wrong) 0.00
+  block_latents_pm     dM +0.003 [-0.003,+0.009]  P(true) 1.00  P(wrong) 0.00
+  full6_block_answer   dM +4.662 [+4.267,+5.038]  P(true) 1.00  P(wrong) 0.00
+  both_blocked         dM +4.679 [+4.308,+5.059]  P(true) 1.00  P(wrong) 0.00
+  both_blocked_pm      dM +4.679 [+4.300,+5.073]  P(true) 1.00  P(wrong) 0.00
+  block_latents_mad    dM +0.003 [-0.003,+0.010]  P(true) 1.00  P(wrong) 0.00
+  both_blocked_mad     dM +4.682 [+4.292,+5.098]  P(true) 1.00  P(wrong) 0.00
+  u_block_latents      dM +0.003 [-0.001,+0.007]  P(true) 1.00  P(wrong) 0.00
+  u_block_answer       dM -0.003 [-0.008,+0.001]  P(true) 1.00  P(wrong) 0.00
+  u_both_blocked       dM -0.003 [-0.008,+0.001]  P(true) 1.00  P(wrong) 0.00
+  reverse_mean         dM +0.000 [-0.001,+0.001]  P(true) 1.00  P(wrong) 0.00
+
+[wrong_either] n=51  baseline {'M_hinted': -3.6586022774378457, 'M_unhinted': -1.8220880428949993, 'p_true_hinted': 0.0}
+  single_mean          dM +0.000 [-0.002,+0.002]  P(true) 0.00  P(wrong) 1.00
+  single_pm_mean       dM +0.000 [-0.001,+0.002]  P(true) 0.00  P(wrong) 1.00
+  noise_mean           dM +0.003 [-0.007,+0.013]  P(true) 0.00  P(wrong) 1.00
+  matched_mean         dM +0.001 [-0.001,+0.003]  P(true) 0.00  P(wrong) 1.00
+  samecond_mean        dM -0.000 [-0.001,+0.001]  P(true) 0.00  P(wrong) 1.00
+  persist_mean         dM -0.001 [-0.004,+0.002]  P(true) 0.00  P(wrong) 1.00
+  full6                dM +0.000 [-0.005,+0.005]  P(true) 0.00  P(wrong) 1.00
+  zero_full6           dM +0.042 [+0.006,+0.076]  P(true) 0.00  P(wrong) 1.00
+  matched_full6        dM -0.002 [-0.008,+0.004]  P(true) 0.00  P(wrong) 1.00
+  full6_pm             dM +0.000 [-0.005,+0.005]  P(true) 0.00  P(wrong) 1.00
+  block_answer         dM +1.826 [+1.435,+2.244]  P(true) 0.02  P(wrong) 0.98
+  block_latents        dM -0.001 [-0.007,+0.005]  P(true) 0.00  P(wrong) 1.00
+  block_latents_pm     dM -0.001 [-0.007,+0.005]  P(true) 0.00  P(wrong) 1.00
+  full6_block_answer   dM +1.831 [+1.434,+2.260]  P(true) 0.04  P(wrong) 0.96
+  both_blocked         dM +1.833 [+1.430,+2.263]  P(true) 0.04  P(wrong) 0.96
+  both_blocked_pm      dM +1.833 [+1.442,+2.265]  P(true) 0.04  P(wrong) 0.96
+  block_latents_mad    dM -0.001 [-0.007,+0.005]  P(true) 0.00  P(wrong) 1.00
+  both_blocked_mad     dM +1.830 [+1.442,+2.252]  P(true) 0.02  P(wrong) 0.98
+  u_block_latents      dM -0.001 [-0.006,+0.003]  P(true) 0.00  P(wrong) 1.00
+  u_block_answer       dM +0.002 [-0.003,+0.008]  P(true) 0.02  P(wrong) 0.98
+  u_both_blocked       dM +0.002 [-0.004,+0.008]  P(true) 0.02  P(wrong) 0.98
+  reverse_mean         dM -0.001 [-0.002,+0.001]  P(true) 0.00  P(wrong) 1.00
+
+saved to /kaggle/working/patching_s1 in 30.4 min

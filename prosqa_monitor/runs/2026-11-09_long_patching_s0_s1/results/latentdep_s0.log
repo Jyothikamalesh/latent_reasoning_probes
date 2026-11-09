@@ -1,0 +1,38 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]Loading weights: 100%|██████████| 148/148 [00:00<00:00, 2866.31it/s]
+[transformers] The new embeddings will be initialized from a multivariate normal distribution that has old embeddings' mean and covariance. As described in this article: https://nlp.stanford.edu/~johnhew/vocab-expansion.html. To disable this, use `mean_resizing=False`
+rows 300 {'harmful': 200, 'resistant': 49, 'wrong_either': 51} depth known 300
+rebuild check: sign(M) agrees with the saved prediction on 1.000 (hinted) / 1.000 (unhinted); by group (hinted, unhinted): {'harmful': (1.0, 1.0), 'resistant': (1.0, 1.0), 'wrong_either': (1.0, 1.0)}
+no harmful rows
+
+[harmful] n=200  baseline {'M_hinted': -2.448050867319107, 'M_unhinted': 4.487910191863775, 'p_true_hinted': 0.0}
+  u_zero_full6         dM -0.052 [-0.072,-0.032]  P(true) 0.99  P(wrong) 0.01
+  u_matched_full6      dM +0.000 [-0.001,+0.001]  P(true) 1.00  P(wrong) 0.00
+  u_zero_t0            dM -0.005 [-0.009,-0.002]  P(true) 1.00  P(wrong) 0.00
+  u_zero_t1            dM -0.008 [-0.013,-0.003]  P(true) 1.00  P(wrong) 0.00
+  u_zero_t2            dM -0.007 [-0.012,-0.001]  P(true) 1.00  P(wrong) 0.00
+  u_zero_t3            dM -0.006 [-0.011,-0.001]  P(true) 1.00  P(wrong) 0.00
+  u_zero_t4            dM -0.007 [-0.012,-0.002]  P(true) 1.00  P(wrong) 0.00
+  u_zero_t5            dM -0.003 [-0.010,+0.003]  P(true) 1.00  P(wrong) 0.00
+
+[resistant] n=49  baseline {'M_hinted': 0.9146584807610025, 'M_unhinted': 7.226776390659566, 'p_true_hinted': 1.0}
+  u_zero_full6         dM -0.006 [-0.053,+0.038]  P(true) 1.00  P(wrong) 0.00
+  u_matched_full6      dM -0.001 [-0.002,+0.001]  P(true) 1.00  P(wrong) 0.00
+  u_zero_t0            dM +0.002 [-0.004,+0.009]  P(true) 1.00  P(wrong) 0.00
+  u_zero_t1            dM +0.002 [-0.008,+0.011]  P(true) 1.00  P(wrong) 0.00
+  u_zero_t2            dM +0.002 [-0.009,+0.013]  P(true) 1.00  P(wrong) 0.00
+  u_zero_t3            dM +0.001 [-0.010,+0.012]  P(true) 1.00  P(wrong) 0.00
+  u_zero_t4            dM +0.003 [-0.009,+0.013]  P(true) 1.00  P(wrong) 0.00
+  u_zero_t5            dM +0.002 [-0.010,+0.014]  P(true) 1.00  P(wrong) 0.00
+
+[wrong_either] n=51  baseline {'M_hinted': -4.4021605229845235, 'M_unhinted': -1.6508851226638346, 'p_true_hinted': 0.0}
+  u_zero_full6         dM -0.010 [-0.081,+0.052]  P(true) 0.04  P(wrong) 0.96
+  u_matched_full6      dM -0.001 [-0.004,+0.001]  P(true) 0.00  P(wrong) 1.00
+  u_zero_t0            dM -0.000 [-0.019,+0.018]  P(true) 0.02  P(wrong) 0.98
+  u_zero_t1            dM -0.003 [-0.021,+0.012]  P(true) 0.02  P(wrong) 0.98
+  u_zero_t2            dM +0.002 [-0.015,+0.016]  P(true) 0.02  P(wrong) 0.98
+  u_zero_t3            dM -0.000 [-0.017,+0.013]  P(true) 0.02  P(wrong) 0.98
+  u_zero_t4            dM +0.005 [-0.008,+0.017]  P(true) 0.02  P(wrong) 0.98
+  u_zero_t5            dM +0.000 [-0.015,+0.014]  P(true) 0.02  P(wrong) 0.98
+
+saved to /kaggle/working/latentdep_s0 in 5.4 min

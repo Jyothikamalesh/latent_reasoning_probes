@@ -1,0 +1,253 @@
+[{"stream_name":"stderr","time":6.668788719,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":6.668820146,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":6.668824059,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":6.668826603,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":7.216186907,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":7.216211664,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":7.216216133,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":7.216220011,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":23.974141813,"data":"Cloning into '/kaggle/working/coconut_repo'...\n"}
+,{"stream_name":"stdout","time":24.152299842,"data":"torch 2.11.0+cu130 transformers 5.20.2 gpus 2 ['Tesla T4', 'Tesla T4']\n"}
+,{"stream_name":"stderr","time":24.17676032,"data":"Cloning into '/kaggle/working/coconut_repo'...\n"}
+,{"stream_name":"stderr","time":24.176783248,"data":"\n"}
+,{"stream_name":"stderr","time":24.176802483,"data":"Cloning into '/kaggle/working/coconut_repo'...\n"}
+,{"stream_name":"stdout","time":25.469696951,"data":"inputs /kaggle/input/notebooks/jyothikamaleshs/prosqa-long-b ['__huggingface_repos__.json', '__notebook__.ipynb', '__output__.json', '__results__.html', 'coconut_repo', 'custom.css', 'long_s0.log', 'long_s1.log', 's0_coconut_b.pt', 's0_generations.jsonl', 's0_long_meta.json', 's1_coconut_b.pt', 's1_generations.jsonl', 's1_long_meta.json', 'train_long_b.py']\n"}
+,{"stream_name":"stdout","time":43.123426774,"data":" [transformers] Model config: bos_token_id must be `None` or an integer within the vocabulary (between 0 and 39), got 50256. This may result in unexpected behavior.\n"}
+,{"stream_name":"stdout","time":43.123473292,"data":"[transformers] Model config: eos_token_id must be `None` or an integer within the vocabulary (between 0 and 39), got 50256. This may result in unexpected behavior.\n"}
+,{"stream_name":"stdout","time":43.123502866,"data":".................\n"}
+,{"stream_name":"stdout","time":43.123508909,"data":"----------------------------------------------------------------------\n"}
+,{"stream_name":"stdout","time":43.123513634,"data":"Ran 17 tests in 0.819s\n"}
+,{"stream_name":"stdout","time":43.12351817,"data":"\n"}
+,{"stream_name":"stdout","time":43.123522335,"data":"OK\n"}
+,{"stream_name":"stdout","time":43.123527198,"data":"\n"}
+,{"stream_name":"stdout","time":2213.994851527,"data":"workers exited [0, 0] 36.2 min\n"}
+,{"stream_name":"stdout","time":2214.00729134,"data":"===== latentdep seed 0 =====\n"}
+,{"stream_name":"stdout","time":2214.007322924,"data":"\n"}
+,{"stream_name":"stdout","time":2214.007329587,"data":"Loading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\n"}
+,{"stream_name":"stdout","time":2214.007334713,"data":"Loading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 2866.31it/s]\n"}
+,{"stream_name":"stdout","time":2214.00734053,"data":"[transformers] The new embeddings will be initialized from a multivariate normal distribution that has old embeddings' mean and covariance. As described in this article: https://nlp.stanford.edu/~johnhew/vocab-expansion.html. To disable this, use `mean_resizing=False`\n"}
+,{"stream_name":"stdout","time":2214.007346574,"data":"rows 300 {'harmful': 200, 'resistant': 49, 'wrong_either': 51} depth known 300\n"}
+,{"stream_name":"stdout","time":2214.007361547,"data":"rebuild check: sign(M) agrees with the saved prediction on 1.000 (hinted) / 1.000 (unhinted); by group (hinted, unhinted): {'harmful': (1.0, 1.0), 'resistant': (1.0, 1.0), 'wrong_either': (1.0, 1.0)}\n"}
+,{"stream_name":"stdout","time":2214.007365801,"data":"no harmful rows\n"}
+,{"stream_name":"stdout","time":2214.007369765,"data":"\n"}
+,{"stream_name":"stdout","time":2214.007372988,"data":"[harmful] n=200  baseline {'M_hinted': -2.448050867319107, 'M_unhinted': 4.487910191863775, 'p_true_hinted': 0.0}\n"}
+,{"stream_name":"stdout","time":2214.007376898,"data":"  u_zero_full6         dM -0.052 [-0.072,-0.032]  P(true) 0.99  P(wrong) 0.01\n"}
+,{"stream_name":"stdout","time":2214.007381179,"data":"  u_matched_full6      dM +0.000 [-0.001,+0.001]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007384715,"data":"  u_zero_t0            dM -0.005 [-0.009,-0.002]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.00738814,"data":"  u_zero_t1            dM -0.008 [-0.013,-0.003]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007391707,"data":"  u_zero_t2            dM -0.007 [-0.012,-0.001]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007395193,"data":"  u_zero_t3            dM -0.006 [-0.011,-0.001]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007398399,"data":"  u_zero_t4            dM -0.007 [-0.012,-0.002]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007401836,"data":"  u_zero_t5            dM -0.003 [-0.010,+0.003]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.00740527,"data":"\n"}
+,{"stream_name":"stdout","time":2214.007408522,"data":"[resistant] n=49  baseline {'M_hinted': 0.9146584807610025, 'M_unhinted': 7.226776390659566, 'p_true_hinted': 1.0}\n"}
+,{"stream_name":"stdout","time":2214.007412262,"data":"  u_zero_full6         dM -0.006 [-0.053,+0.038]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007416274,"data":"  u_matched_full6      dM -0.001 [-0.002,+0.001]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007419874,"data":"  u_zero_t0            dM +0.002 [-0.004,+0.009]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007423391,"data":"  u_zero_t1            dM +0.002 [-0.008,+0.011]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007426941,"data":"  u_zero_t2            dM +0.002 [-0.009,+0.013]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007431934,"data":"  u_zero_t3            dM +0.001 [-0.010,+0.012]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007435248,"data":"  u_zero_t4            dM +0.003 [-0.009,+0.013]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007438648,"data":"  u_zero_t5            dM +0.002 [-0.010,+0.014]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007441966,"data":"\n"}
+,{"stream_name":"stdout","time":2214.007445081,"data":"[wrong_either] n=51  baseline {'M_hinted': -4.4021605229845235, 'M_unhinted': -1.6508851226638346, 'p_true_hinted': 0.0}\n"}
+,{"stream_name":"stdout","time":2214.007448641,"data":"  u_zero_full6         dM -0.010 [-0.081,+0.052]  P(true) 0.04  P(wrong) 0.96\n"}
+,{"stream_name":"stdout","time":2214.007451958,"data":"  u_matched_full6      dM -0.001 [-0.004,+0.001]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.007455478,"data":"  u_zero_t0            dM -0.000 [-0.019,+0.018]  P(true) 0.02  P(wrong) 0.98\n"}
+,{"stream_name":"stdout","time":2214.007458843,"data":"  u_zero_t1            dM -0.003 [-0.021,+0.012]  P(true) 0.02  P(wrong) 0.98\n"}
+,{"stream_name":"stdout","time":2214.007466807,"data":"  u_zero_t2            dM +0.002 [-0.015,+0.016]  P(true) 0.02  P(wrong) 0.98\n"}
+,{"stream_name":"stdout","time":2214.007470214,"data":"  u_zero_t3            dM -0.000 [-0.017,+0.013]  P(true) 0.02  P(wrong) 0.98\n"}
+,{"stream_name":"stdout","time":2214.007473732,"data":"  u_zero_t4            dM +0.005 [-0.008,+0.017]  P(true) 0.02  P(wrong) 0.98\n"}
+,{"stream_name":"stdout","time":2214.007477151,"data":"  u_zero_t5            dM +0.000 [-0.015,+0.014]  P(true) 0.02  P(wrong) 0.98\n"}
+,{"stream_name":"stdout","time":2214.007480423,"data":"\n"}
+,{"stream_name":"stdout","time":2214.007483634,"data":"saved to /kaggle/working/latentdep_s0 in 5.4 min\n"}
+,{"stream_name":"stdout","time":2214.007486871,"data":"\n"}
+,{"stream_name":"stdout","time":2214.007489845,"data":"===== patching seed 0 =====\n"}
+,{"stream_name":"stdout","time":2214.007493147,"data":"0]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.007496752,"data":"  full6                dM -0.000 [-0.001,-0.000]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.007500131,"data":"  zero_full6           dM +0.059 [+0.042,+0.077]  P(true) 0.01  P(wrong) 0.99\n"}
+,{"stream_name":"stdout","time":2214.007503618,"data":"  matched_full6        dM +0.000 [-0.001,+0.001]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.007507315,"data":"  full6_pm             dM -0.000 [-0.001,+0.000]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.007510675,"data":"  block_answer         dM +6.938 [+6.571,+7.294]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007513693,"data":"  block_latents        dM -0.000 [-0.001,-0.000]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.007517043,"data":"  block_latents_pm     dM -0.000 [-0.001,-0.000]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.007520343,"data":"  full6_block_answer   dM +6.937 [+6.599,+7.300]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007523631,"data":"  both_blocked         dM +6.938 [+6.595,+7.294]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007526727,"data":"  both_blocked_pm      dM +6.938 [+6.592,+7.294]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007530007,"data":"  block_latents_mad    dM -0.000 [-0.001,-0.000]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.007533452,"data":"  both_blocked_mad     dM +6.938 [+6.590,+7.282]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007536903,"data":"  u_block_latents      dM -0.000 [-0.000,+0.000]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007541062,"data":"  u_block_answer       dM +0.004 [+0.001,+0.007]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007544658,"data":"  u_both_blocked       dM +0.004 [+0.001,+0.007]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007548152,"data":"  reverse_mean         dM +0.000 [-0.000,+0.000]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007551702,"data":"\n"}
+,{"stream_name":"stdout","time":2214.00755499,"data":"[resistant] n=49  baseline {'M_hinted': 0.9146584807610025, 'M_unhinted': 7.226776390659566, 'p_true_hinted': 1.0}\n"}
+,{"stream_name":"stdout","time":2214.007558503,"data":"  single_mean          dM +0.000 [-0.000,+0.000]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007562116,"data":"  single_pm_mean       dM +0.000 [-0.000,+0.000]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007565649,"data":"  noise_mean           dM +0.022 [+0.003,+0.040]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.00757239,"data":"  matched_mean         dM +0.000 [-0.000,+0.000]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007576143,"data":"  samecond_mean        dM +0.000 [-0.000,+0.000]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007579541,"data":"  persist_mean         dM -0.000 [-0.001,+0.001]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007582888,"data":"  full6                dM +0.000 [-0.000,+0.001]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007585965,"data":"  zero_full6           dM +0.083 [+0.044,+0.125]  P(true) 0.96  P(wrong) 0.04\n"}
+,{"stream_name":"stdout","time":2214.00758925,"data":"  matched_full6        dM +0.000 [-0.001,+0.002]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007592744,"data":"  full6_pm             dM +0.000 [-0.000,+0.001]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007596005,"data":"  block_answer         dM +6.311 [+5.851,+6.786]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007599508,"data":"  block_latents        dM -0.000 [-0.001,+0.001]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007603032,"data":"  block_latents_pm     dM -0.000 [-0.001,+0.001]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007606326,"data":"  full6_block_answer   dM +6.310 [+5.855,+6.789]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007609836,"data":"  both_blocked         dM +6.311 [+5.829,+6.774]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007613339,"data":"  both_blocked_pm      dM +6.311 [+5.861,+6.790]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007616775,"data":"  block_latents_mad    dM -0.000 [-0.001,+0.001]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007620184,"data":"  both_blocked_mad     dM +6.311 [+5.845,+6.804]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007623523,"data":"  u_block_latents      dM -0.000 [-0.001,-0.000]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.00762692,"data":"  u_block_answer       dM +0.001 [-0.005,+0.008]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007630408,"data":"  u_both_blocked       dM +0.001 [-0.005,+0.007]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007634462,"data":"  reverse_mean         dM +0.000 [-0.000,+0.000]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007637944,"data":"\n"}
+,{"stream_name":"stdout","time":2214.00764109,"data":"[wrong_either] n=51  baseline {'M_hinted': -4.4021605229845235, 'M_unhinted': -1.6508851226638346, 'p_true_hinted': 0.0}\n"}
+,{"stream_name":"stdout","time":2214.007644589,"data":"  single_mean          dM -0.000 [-0.000,+0.000]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.007648141,"data":"  single_pm_mean       dM -0.000 [-0.000,+0.000]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.007651685,"data":"  noise_mean           dM +0.015 [+0.001,+0.029]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.007655115,"data":"  matched_mean         dM -0.000 [-0.001,+0.000]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.007658238,"data":"  samecond_mean        dM +0.000 [-0.000,+0.000]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.007661447,"data":"  persist_mean         dM -0.000 [-0.001,+0.000]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.007664879,"data":"  full6                dM -0.001 [-0.001,+0.000]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.007671896,"data":"  zero_full6           dM +0.019 [-0.015,+0.053]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.00767556,"data":"  matched_full6        dM -0.001 [-0.004,+0.001]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.007679056,"data":"  full6_pm             dM -0.001 [-0.001,+0.000]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.007682301,"data":"  block_answer         dM +2.748 [+2.326,+3.157]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.007685669,"data":"  block_latents        dM -0.001 [-0.002,+0.000]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.007689201,"data":"  block_latents_pm     dM -0.001 [-0.001,+0.000]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.007692761,"data":"  full6_block_answer   dM +2.748 [+2.324,+3.171]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.00769616,"data":"  both_blocked         dM +2.749 [+2.343,+3.164]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.007699378,"data":"  both_blocked_pm      dM +2.749 [+2.348,+3.173]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.007702728,"data":"  block_latents_mad    dM -0.001 [-0.002,+0.000]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.007706088,"data":"  both_blocked_mad     dM +2.749 [+2.324,+3.184]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.007731571,"data":"  u_block_latents      dM -0.000 [-0.001,+0.001]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.007735253,"data":"  u_block_answer       dM +0.002 [-0.006,+0.009]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.00773878,"data":"  u_both_blocked       dM +0.002 [-0.006,+0.010]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.007742281,"data":"  reverse_mean         dM +0.000 [+0.000,+0.000]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.007746075,"data":"\n"}
+,{"stream_name":"stdout","time":2214.007749557,"data":"saved to /kaggle/working/patching_s0 in 29.6 min\n"}
+,{"stream_name":"stdout","time":2214.007752986,"data":"\n"}
+,{"stream_name":"stdout","time":2214.007756265,"data":"===== latentdep seed 1 =====\n"}
+,{"stream_name":"stdout","time":2214.007759665,"data":"\n"}
+,{"stream_name":"stdout","time":2214.007763008,"data":"Loading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\n"}
+,{"stream_name":"stdout","time":2214.007767327,"data":"Loading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 2832.80it/s]\n"}
+,{"stream_name":"stdout","time":2214.007771281,"data":"[transformers] The new embeddings will be initialized from a multivariate normal distribution that has old embeddings' mean and covariance. As described in this article: https://nlp.stanford.edu/~johnhew/vocab-expansion.html. To disable this, use `mean_resizing=False`\n"}
+,{"stream_name":"stdout","time":2214.007775421,"data":"rows 299 {'harmful': 126, 'resistant': 122, 'wrong_either': 51} depth known 299\n"}
+,{"stream_name":"stdout","time":2214.007778927,"data":"rebuild check: sign(M) agrees with the saved prediction on 0.993 (hinted) / 1.000 (unhinted); by group (hinted, unhinted): {'harmful': (0.9920634920634921, 1.0), 'resistant': (0.9918032786885246, 1.0), 'wrong_either': (1.0, 1.0)}\n"}
+,{"stream_name":"stdout","time":2214.00778302,"data":"no harmful rows\n"}
+,{"stream_name":"stdout","time":2214.007786338,"data":"\n"}
+,{"stream_name":"stdout","time":2214.007789424,"data":"[harmful] n=126  baseline {'M_hinted': -1.6879899558566867, 'M_unhinted': 3.8491215464614688, 'p_true_hinted': 0.007936507936507936}\n"}
+,{"stream_name":"stdout","time":2214.007797969,"data":"  u_zero_full6         dM -0.064 [-0.088,-0.042]  P(true) 0.99  P(wrong) 0.01\n"}
+,{"stream_name":"stdout","time":2214.007801706,"data":"  u_matched_full6      dM -0.004 [-0.009,+0.002]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007805073,"data":"  u_zero_t0            dM -0.004 [-0.007,-0.001]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007808511,"data":"  u_zero_t1            dM -0.002 [-0.005,+0.001]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007812019,"data":"  u_zero_t2            dM -0.002 [-0.005,+0.001]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007815386,"data":"  u_zero_t3            dM -0.002 [-0.006,+0.001]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007818808,"data":"  u_zero_t4            dM -0.002 [-0.005,+0.001]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007822196,"data":"  u_zero_t5            dM -0.004 [-0.007,-0.001]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007825594,"data":"\n"}
+,{"stream_name":"stdout","time":2214.007829068,"data":"[resistant] n=122  baseline {'M_hinted': 1.4926544593983009, 'M_unhinted': 6.160806610936024, 'p_true_hinted': 0.9918032786885246}\n"}
+,{"stream_name":"stdout","time":2214.00783271,"data":"  u_zero_full6         dM -0.074 [-0.100,-0.047]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007836128,"data":"  u_matched_full6      dM -0.002 [-0.008,+0.004]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.00783939,"data":"  u_zero_t0            dM -0.003 [-0.006,+0.001]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007842889,"data":"  u_zero_t1            dM +0.001 [-0.003,+0.006]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007846339,"data":"  u_zero_t2            dM -0.000 [-0.004,+0.004]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007849724,"data":"  u_zero_t3            dM -0.000 [-0.004,+0.003]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007853559,"data":"  u_zero_t4            dM -0.000 [-0.004,+0.003]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007857021,"data":"  u_zero_t5            dM -0.002 [-0.005,+0.002]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007860591,"data":"\n"}
+,{"stream_name":"stdout","time":2214.007863608,"data":"[wrong_either] n=51  baseline {'M_hinted': -3.6586022774378457, 'M_unhinted': -1.8220880428949993, 'p_true_hinted': 0.0}\n"}
+,{"stream_name":"stdout","time":2214.007867006,"data":"  u_zero_full6         dM +0.045 [+0.001,+0.092]  P(true) 0.04  P(wrong) 0.96\n"}
+,{"stream_name":"stdout","time":2214.007870308,"data":"  u_matched_full6      dM -0.008 [-0.022,+0.002]  P(true) 0.02  P(wrong) 0.98\n"}
+,{"stream_name":"stdout","time":2214.007873735,"data":"  u_zero_t0            dM +0.005 [-0.000,+0.011]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.007877319,"data":"  u_zero_t1            dM +0.004 [-0.003,+0.012]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.00788079,"data":"  u_zero_t2            dM +0.004 [-0.001,+0.011]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.007884269,"data":"  u_zero_t3            dM +0.003 [-0.003,+0.010]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.007887531,"data":"  u_zero_t4            dM +0.005 [-0.001,+0.011]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.00789082,"data":"  u_zero_t5            dM +0.006 [+0.000,+0.012]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.007898354,"data":"\n"}
+,{"stream_name":"stdout","time":2214.007901575,"data":"saved to /kaggle/working/latentdep_s1 in 5.5 min\n"}
+,{"stream_name":"stdout","time":2214.007904956,"data":"\n"}
+,{"stream_name":"stdout","time":2214.007907934,"data":"===== patching seed 1 =====\n"}
+,{"stream_name":"stdout","time":2214.007911238,"data":"  P(wrong) 0.99\n"}
+,{"stream_name":"stdout","time":2214.007914474,"data":"  full6                dM -0.002 [-0.007,+0.003]  P(true) 0.02  P(wrong) 0.98\n"}
+,{"stream_name":"stdout","time":2214.007917889,"data":"  zero_full6           dM +0.002 [-0.023,+0.025]  P(true) 0.01  P(wrong) 0.99\n"}
+,{"stream_name":"stdout","time":2214.007921231,"data":"  matched_full6        dM -0.001 [-0.007,+0.004]  P(true) 0.01  P(wrong) 0.99\n"}
+,{"stream_name":"stdout","time":2214.007924639,"data":"  full6_pm             dM -0.002 [-0.007,+0.003]  P(true) 0.02  P(wrong) 0.98\n"}
+,{"stream_name":"stdout","time":2214.00792807,"data":"  block_answer         dM +5.526 [+5.091,+5.959]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007931556,"data":"  block_latents        dM +0.001 [-0.004,+0.006]  P(true) 0.02  P(wrong) 0.98\n"}
+,{"stream_name":"stdout","time":2214.007934984,"data":"  block_latents_pm     dM +0.001 [-0.005,+0.006]  P(true) 0.02  P(wrong) 0.98\n"}
+,{"stream_name":"stdout","time":2214.007938476,"data":"  full6_block_answer   dM +5.528 [+5.083,+5.971]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007941889,"data":"  both_blocked         dM +5.545 [+5.104,+5.994]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007945587,"data":"  both_blocked_pm      dM +5.544 [+5.118,+5.970]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.00796154,"data":"  block_latents_mad    dM +0.001 [-0.004,+0.007]  P(true) 0.02  P(wrong) 0.98\n"}
+,{"stream_name":"stdout","time":2214.007965049,"data":"  both_blocked_mad     dM +5.547 [+5.104,+5.987]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.00796866,"data":"  u_block_latents      dM +0.001 [-0.001,+0.004]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007972041,"data":"  u_block_answer       dM -0.001 [-0.005,+0.002]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007976289,"data":"  u_both_blocked       dM -0.001 [-0.005,+0.002]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007979707,"data":"  reverse_mean         dM +0.000 [-0.001,+0.001]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007982862,"data":"\n"}
+,{"stream_name":"stdout","time":2214.007985933,"data":"[resistant] n=122  baseline {'M_hinted': 1.4926544593983009, 'M_unhinted': 6.160806610936024, 'p_true_hinted': 0.9918032786885246}\n"}
+,{"stream_name":"stdout","time":2214.007989624,"data":"  single_mean          dM +0.000 [-0.002,+0.003]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007993139,"data":"  single_pm_mean       dM +0.001 [-0.002,+0.003]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.007996557,"data":"  noise_mean           dM -0.033 [-0.043,-0.023]  P(true) 0.98  P(wrong) 0.02\n"}
+,{"stream_name":"stdout","time":2214.008000726,"data":"  matched_mean         dM +0.000 [-0.003,+0.003]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.008003801,"data":"  samecond_mean        dM +0.001 [-0.000,+0.003]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.008007341,"data":"  persist_mean         dM +0.002 [-0.002,+0.005]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.008016699,"data":"  full6                dM +0.001 [-0.005,+0.006]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.008020645,"data":"  zero_full6           dM -0.059 [-0.088,-0.028]  P(true) 0.98  P(wrong) 0.02\n"}
+,{"stream_name":"stdout","time":2214.008023988,"data":"  matched_full6        dM +0.001 [-0.005,+0.008]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.008027499,"data":"  full6_pm             dM +0.001 [-0.004,+0.006]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.008030959,"data":"  block_answer         dM +4.659 [+4.254,+5.061]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.008034279,"data":"  block_latents        dM +0.003 [-0.003,+0.009]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.008037528,"data":"  block_latents_pm     dM +0.003 [-0.003,+0.009]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.008040954,"data":"  full6_block_answer   dM +4.662 [+4.267,+5.038]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.008044403,"data":"  both_blocked         dM +4.679 [+4.308,+5.059]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.008047848,"data":"  both_blocked_pm      dM +4.679 [+4.300,+5.073]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.008051334,"data":"  block_latents_mad    dM +0.003 [-0.003,+0.010]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.008054881,"data":"  both_blocked_mad     dM +4.682 [+4.292,+5.098]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.008058518,"data":"  u_block_latents      dM +0.003 [-0.001,+0.007]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.00806218,"data":"  u_block_answer       dM -0.003 [-0.008,+0.001]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.008065444,"data":"  u_both_blocked       dM -0.003 [-0.008,+0.001]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.008068827,"data":"  reverse_mean         dM +0.000 [-0.001,+0.001]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":2214.008072172,"data":"\n"}
+,{"stream_name":"stdout","time":2214.00807607,"data":"[wrong_either] n=51  baseline {'M_hinted': -3.6586022774378457, 'M_unhinted': -1.8220880428949993, 'p_true_hinted': 0.0}\n"}
+,{"stream_name":"stdout","time":2214.008079641,"data":"  single_mean          dM +0.000 [-0.002,+0.002]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.008083132,"data":"  single_pm_mean       dM +0.000 [-0.001,+0.002]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.008086587,"data":"  noise_mean           dM +0.003 [-0.007,+0.013]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.008089951,"data":"  matched_mean         dM +0.001 [-0.001,+0.003]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.008093133,"data":"  samecond_mean        dM -0.000 [-0.001,+0.001]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.008096549,"data":"  persist_mean         dM -0.001 [-0.004,+0.002]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.008100063,"data":"  full6                dM +0.000 [-0.005,+0.005]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.008103416,"data":"  zero_full6           dM +0.042 [+0.006,+0.076]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.008106772,"data":"  matched_full6        dM -0.002 [-0.008,+0.004]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.00810999,"data":"  full6_pm             dM +0.000 [-0.005,+0.005]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.008116869,"data":"  block_answer         dM +1.826 [+1.435,+2.244]  P(true) 0.02  P(wrong) 0.98\n"}
+,{"stream_name":"stdout","time":2214.008120519,"data":"  block_latents        dM -0.001 [-0.007,+0.005]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.008124027,"data":"  block_latents_pm     dM -0.001 [-0.007,+0.005]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.008127613,"data":"  full6_block_answer   dM +1.831 [+1.434,+2.260]  P(true) 0.04  P(wrong) 0.96\n"}
+,{"stream_name":"stdout","time":2214.008131038,"data":"  both_blocked         dM +1.833 [+1.430,+2.263]  P(true) 0.04  P(wrong) 0.96\n"}
+,{"stream_name":"stdout","time":2214.008134041,"data":"  both_blocked_pm      dM +1.833 [+1.442,+2.265]  P(true) 0.04  P(wrong) 0.96\n"}
+,{"stream_name":"stdout","time":2214.008137446,"data":"  block_latents_mad    dM -0.001 [-0.007,+0.005]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.008140951,"data":"  both_blocked_mad     dM +1.830 [+1.442,+2.252]  P(true) 0.02  P(wrong) 0.98\n"}
+,{"stream_name":"stdout","time":2214.008144183,"data":"  u_block_latents      dM -0.001 [-0.006,+0.003]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.008147521,"data":"  u_block_answer       dM +0.002 [-0.003,+0.008]  P(true) 0.02  P(wrong) 0.98\n"}
+,{"stream_name":"stdout","time":2214.008151016,"data":"  u_both_blocked       dM +0.002 [-0.004,+0.008]  P(true) 0.02  P(wrong) 0.98\n"}
+,{"stream_name":"stdout","time":2214.008154466,"data":"  reverse_mean         dM -0.001 [-0.002,+0.001]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":2214.008157981,"data":"\n"}
+,{"stream_name":"stdout","time":2214.008161187,"data":"saved to /kaggle/working/patching_s1 in 30.4 min\n"}
+,{"stream_name":"stdout","time":2214.008164638,"data":"\n"}
+,{"stream_name":"stdout","time":2214.019632072,"data":"all requested summaries present and from this run 1794244408 [0, 1]\n"}
+,{"stream_name":"stderr","time":2216.879202351,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":2216.879256774,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":2217.024846074,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":2217.024874899,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":2217.746014276,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":2217.820948753,"data":"[NbConvertApp] Writing 73442 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":2220.245845797,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":2220.737870478,"data":"[NbConvertApp] Writing 425883 bytes to __results__.html\n"}
+]

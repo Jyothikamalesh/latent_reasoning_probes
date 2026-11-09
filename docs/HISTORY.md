@@ -157,6 +157,9 @@ On UNHINTED prompts, zeroing all six latent inputs changes the margin by +0.003 
 ### Longer-trained COCONUT twin: prepared, not yet run (2026-11-09)
 Because the seed-0 twin's latents are inert even without a hint, a new `MODE=long` (15000 questions, 2 epochs per stage, one COCONUT behaviour twin per seed, seeds 0 and 1 on one GPU each) was added to `prosqa_monitor.py`, with `build_long_notebook.py` -> `notebooks/prosqa_long_b.ipynb`. Pre-registration with gates and decision rules: `docs/long_twin_protocol.md`. Tested end to end on CPU in `tiny` mode (trains, generates, writes generations and meta); pushed to Kaggle 2026-11-09 with the user's yes as kernel `jyothikamaleshs/prosqa-long-b` version 1 (notebook sha1 7ea898a4bf, tag `prosqa-long-b-v1-pushed`); result pending.
 
+### Longer-trained COCONUT twins, seeds 0 and 1 (2026-11-09, `runs/2026-11-09_long_b_s0_s1`)
+Both twins pass the pre-registered gates: unhinted accuracy 0.845 / 0.855 (the frozen twins were far lower), harmful switches 200 / 126 of 300 wrong-hint test prompts. Wrong-hint follow rate 0.84 / 0.59. Whether the latents are now used is NOT yet known; the Amendment 7 diagnostic is the next step.
+
 ## Open items (live, updated 2026-11-08 after the 3-seed v4 run)
 1. **Causal latent-restoration experiment: done for 3 seeds (see the two entries above).** Follow-ups, not part of the frozen protocol: separate the hint tokens from `<bot>` in the blocked route (block only one), test whether the same holds in the explicit twin (patch CoT text), and check a twin whose latents are causally used (the depth condition is not learned, which may be why they are inert). Full-text novelty audit still open.
 2. **Explicit twin pair** does not meet the accuracy criterion (seed 1 gap 0.09; seed 2 twins at 0.60-0.61). Decide: larger suite to see whether the gap is noise (about 400 questions on the saved twins), or a training change.

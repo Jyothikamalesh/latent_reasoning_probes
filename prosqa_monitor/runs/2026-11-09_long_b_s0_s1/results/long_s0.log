@@ -1,0 +1,852 @@
+mode=long device=cuda Tesla T4 torch=2.11.0+cu130 transformers=5.22.2
+[13:17:55 +  0.0m] seed=0 split_seed=1234 code_hash=3ddd03023a (runs are only comparable when the hash matches)
+[13:17:55 +  0.0m] MODE=long: N_TRAIN=15000, epochs/stage=2, explicit epochs=14, monitor sets 300/600, benign 500
+[13:17:55 +  0.0m] plan: preflight -> smoke pass -> train explicit_b -> train explicit_c -> train coconut_b -> train coconut_c -> generation + features -> behaviour suite -> monitors; total expected ~837m (from T4 profile). gpu mem 0.0G (peak 0.0/14.6G) util 0
+0% | cpu 35% ram 2.2/31.3G
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+15000 train questions; hints: 7488 none, 3711 correct, 3801 wrong | decoy 0.50
+example prompt tail: s a quimpus. Sally is a bompus. Is Sally a dumpus or rorpus? | hint None | true dumpus | steps 4
+[13:18:02 +  0.1m] === PHASE 1/9: preflight | expected ~0.5m | total elapsed 0.1m ===
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]Loading weights: 100%|██████████| 148/148 [00:00<00:00, 2678.62it/s]
+[transformers] The new embeddings will be initialized from a multivariate normal distribution that has old embeddings' mean and covariance. As described in this article: https://nlp.stanford.edu/~johnhew/vocab-expansion.html. To disable this, use `mean_resizing=False`
+[13:18:13 +  0.3m] preflight OK: worst-case COCONUT batch (len 720, 6 latents, micro-batch 8) peak 6.7 GiB of 14.6
+[13:18:14 +  0.3m] <<< done preflight in 0.2m (expected ~0.5m)
+[13:18:14 +  0.3m] === PHASE 5/9: train coconut_b | expected ~208.5m | total elapsed 0.3m ===
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]Loading weights: 100%|██████████| 148/148 [00:00<00:00, 2268.61it/s]
+[13:18:26 +  0.5m] train coconut_b stage 0: 15000/15000 examples, 0 latents, 2 epochs, micro-batch 8 x accum 2
+[13:18:59 +  1.1m] train coconut_b stage 0 ep0 90/1875 (5%) elapsed 0.5m eta 10.0m | loss 0.4327 | gpu mem 1.4G (peak 6.5/14.6G) util 99
+98% | cpu 42% ram 4.9/31.3G
+[13:19:29 +  1.6m] train coconut_b stage 0 ep0 174/1875 (9%) elapsed 1.0m eta 9.8m | loss 0.2902 | gpu mem 1.4G (peak 6.5/14.6G) util 99
+99% | cpu 51% ram 4.9/31.3G
+[13:19:59 +  2.1m] train coconut_b stage 0 ep0 251/1875 (13%) elapsed 1.5m eta 9.8m | loss 0.2370 | gpu mem 1.9G (peak 6.5/14.6G) util 99
+99% | cpu 51% ram 4.9/31.3G
+[13:20:29 +  2.6m] train coconut_b stage 0 ep0 334/1875 (18%) elapsed 2.0m eta 9.3m | loss 0.2041 | gpu mem 1.4G (peak 6.5/14.6G) util 99
+99% | cpu 51% ram 4.8/31.3G
+[13:20:59 +  3.1m] train coconut_b stage 0 ep0 417/1875 (22%) elapsed 2.5m eta 8.8m | loss 0.1835 | gpu mem 1.9G (peak 6.5/14.6G) util 99
+99% | cpu 51% ram 4.8/31.3G
+[13:21:30 +  3.6m] train coconut_b stage 0 ep0 498/1875 (27%) elapsed 3.0m eta 8.3m | loss 0.1687 | gpu mem 1.4G (peak 7.0/14.6G) util 99
+99% | cpu 51% ram 4.8/31.3G
+[13:22:00 +  4.1m] train coconut_b stage 0 ep0 580/1875 (31%) elapsed 3.5m eta 7.9m | loss 0.1577 | gpu mem 1.4G (peak 7.0/14.6G) util 99
+98% | cpu 51% ram 4.8/31.3G
+[13:22:30 +  4.6m] train coconut_b stage 0 ep0 662/1875 (35%) elapsed 4.0m eta 7.4m | loss 0.1492 | gpu mem 1.4G (peak 7.0/14.6G) util 99
+99% | cpu 51% ram 4.8/31.3G
+[13:23:00 +  5.1m] train coconut_b stage 0 ep0 745/1875 (40%) elapsed 4.5m eta 6.9m | loss 0.1415 | gpu mem 1.9G (peak 7.0/14.6G) util 99
+99% | cpu 51% ram 4.8/31.3G
+[13:23:30 +  5.6m] train coconut_b stage 0 ep0 828/1875 (44%) elapsed 5.0m eta 6.4m | loss 0.1357 | gpu mem 1.4G (peak 7.0/14.6G) util 87
+99% | cpu 51% ram 4.8/31.3G
+[13:24:00 +  6.1m] train coconut_b stage 0 ep0 910/1875 (49%) elapsed 5.5m eta 5.9m | loss 0.1307 | gpu mem 1.4G (peak 7.0/14.6G) util 100
+99% | cpu 51% ram 4.8/31.3G
+[13:24:30 +  6.6m] train coconut_b stage 0 ep0 992/1875 (53%) elapsed 6.0m eta 5.4m | loss 0.1263 | gpu mem 1.4G (peak 7.0/14.6G) util 99
+100% | cpu 51% ram 4.8/31.3G
+[13:25:00 +  7.1m] train coconut_b stage 0 ep0 1075/1875 (57%) elapsed 6.5m eta 4.9m | loss 0.1223 | gpu mem 1.9G (peak 7.0/14.6G) util 99
+99% | cpu 51% ram 4.8/31.3G
+[13:25:31 +  7.6m] train coconut_b stage 0 ep0 1158/1875 (62%) elapsed 7.0m eta 4.4m | loss 0.1187 | gpu mem 1.4G (peak 7.0/14.6G) util 99
+99% | cpu 51% ram 4.8/31.3G
+[13:26:01 +  8.1m] train coconut_b stage 0 ep0 1241/1875 (66%) elapsed 7.5m eta 3.8m | loss 0.1153 | gpu mem 1.9G (peak 7.0/14.6G) util 99
+99% | cpu 51% ram 4.8/31.3G
+[13:26:31 +  8.6m] train coconut_b stage 0 ep0 1324/1875 (71%) elapsed 8.0m eta 3.3m | loss 0.1123 | gpu mem 1.4G (peak 7.0/14.6G) util 86
+100% | cpu 51% ram 4.8/31.3G
+[13:27:01 +  9.1m] train coconut_b stage 0 ep0 1408/1875 (75%) elapsed 8.5m eta 2.8m | loss 0.1098 | gpu mem 1.4G (peak 7.0/14.6G) util 100
+99% | cpu 51% ram 4.8/31.3G
+[13:27:31 +  9.6m] train coconut_b stage 0 ep0 1491/1875 (80%) elapsed 9.0m eta 2.3m | loss 0.1077 | gpu mem 1.9G (peak 7.0/14.6G) util 99
+99% | cpu 51% ram 4.8/31.3G
+[13:28:01 + 10.1m] train coconut_b stage 0 ep0 1574/1875 (84%) elapsed 9.5m eta 1.8m | loss 0.1056 | gpu mem 1.4G (peak 7.0/14.6G) util 99
+99% | cpu 51% ram 4.8/31.3G
+[13:28:31 + 10.6m] train coconut_b stage 0 ep0 1658/1875 (88%) elapsed 10.0m eta 1.3m | loss 0.1036 | gpu mem 1.4G (peak 7.0/14.6G) util 100
+99% | cpu 51% ram 4.8/31.3G
+[13:29:02 + 11.1m] train coconut_b stage 0 ep0 1742/1875 (93%) elapsed 10.6m eta 0.8m | loss 0.1017 | gpu mem 1.4G (peak 7.0/14.6G) util 99
+98% | cpu 51% ram 4.8/31.3G
+[13:29:32 + 11.6m] train coconut_b stage 0 ep0 1826/1875 (97%) elapsed 11.1m eta 0.3m | loss 0.1002 | gpu mem 1.4G (peak 7.0/14.6G) util 99
+99% | cpu 51% ram 4.8/31.3G
+[13:29:50 + 11.9m] train coconut_b stage 0 ep0 1875/1875 (100%) elapsed 11.4m eta 0.0m | loss 0.0992 | gpu mem 1.4G (peak 7.0/14.6G) util 99
+99% | cpu 51% ram 4.8/31.3G
+[13:29:50 + 11.9m] train coconut_b stage 0 ep0 done: mean loss 0.0992 (15000 examples)
+[13:30:22 + 12.5m] train coconut_b stage 0 ep1 83/1875 (4%) elapsed 0.5m eta 10.8m | loss 0.0614 | gpu mem 1.9G (peak 6.3/14.6G) util 100
+100% | cpu 51% ram 5.3/31.3G
+[13:30:53 + 13.0m] train coconut_b stage 0 ep1 166/1875 (9%) elapsed 1.0m eta 10.4m | loss 0.0609 | gpu mem 1.4G (peak 6.3/14.6G) util 99
+99% | cpu 51% ram 5.3/31.3G
+[13:31:23 + 13.5m] train coconut_b stage 0 ep1 248/1875 (13%) elapsed 1.5m eta 9.9m | loss 0.0598 | gpu mem 1.4G (peak 6.4/14.6G) util 85
+98% | cpu 51% ram 5.3/31.3G
+[13:31:53 + 14.0m] train coconut_b stage 0 ep1 332/1875 (18%) elapsed 2.0m eta 9.3m | loss 0.0601 | gpu mem 1.4G (peak 6.4/14.6G) util 99
+99% | cpu 51% ram 5.3/31.3G
+[13:32:23 + 14.5m] train coconut_b stage 0 ep1 415/1875 (22%) elapsed 2.5m eta 8.9m | loss 0.0592 | gpu mem 1.9G (peak 7.0/14.6G) util 90
+99% | cpu 51% ram 5.3/31.3G
+[13:32:53 + 15.0m] train coconut_b stage 0 ep1 498/1875 (27%) elapsed 3.0m eta 8.3m | loss 0.0589 | gpu mem 1.4G (peak 7.0/14.6G) util 94
+99% | cpu 51% ram 5.3/31.3G
+[13:33:23 + 15.5m] train coconut_b stage 0 ep1 580/1875 (31%) elapsed 3.5m eta 7.9m | loss 0.0591 | gpu mem 1.4G (peak 7.0/14.6G) util 99
+99% | cpu 51% ram 5.3/31.3G
+[13:33:54 + 16.0m] train coconut_b stage 0 ep1 663/1875 (35%) elapsed 4.0m eta 7.3m | loss 0.0587 | gpu mem 1.9G (peak 7.0/14.6G) util 88
+99% | cpu 51% ram 5.3/31.3G
+[13:34:24 + 16.5m] train coconut_b stage 0 ep1 746/1875 (40%) elapsed 4.5m eta 6.8m | loss 0.0585 | gpu mem 1.4G (peak 7.0/14.6G) util 99
+99% | cpu 51% ram 5.3/31.3G
+[13:34:54 + 17.0m] train coconut_b stage 0 ep1 829/1875 (44%) elapsed 5.0m eta 6.3m | loss 0.0584 | gpu mem 1.9G (peak 7.0/14.6G) util 99
+99% | cpu 51% ram 5.3/31.3G
+[13:35:24 + 17.5m] train coconut_b stage 0 ep1 913/1875 (49%) elapsed 5.5m eta 5.8m | loss 0.0583 | gpu mem 1.9G (peak 7.0/14.6G) util 99
+99% | cpu 51% ram 5.3/31.3G
+[13:35:54 + 18.0m] train coconut_b stage 0 ep1 996/1875 (53%) elapsed 6.0m eta 5.3m | loss 0.0582 | gpu mem 1.4G (peak 7.0/14.6G) util 99
+98% | cpu 51% ram 5.3/31.3G
+[13:36:24 + 18.5m] train coconut_b stage 0 ep1 1079/1875 (58%) elapsed 6.5m eta 4.8m | loss 0.0581 | gpu mem 1.9G (peak 7.0/14.6G) util 99
+99% | cpu 51% ram 5.3/31.3G
+[13:36:55 + 19.0m] train coconut_b stage 0 ep1 1163/1875 (62%) elapsed 7.0m eta 4.3m | loss 0.0579 | gpu mem 1.9G (peak 7.0/14.6G) util 99
+100% | cpu 51% ram 5.3/31.3G
+[13:37:25 + 19.5m] train coconut_b stage 0 ep1 1246/1875 (66%) elapsed 7.5m eta 3.8m | loss 0.0578 | gpu mem 1.4G (peak 7.0/14.6G) util 99
+99% | cpu 51% ram 5.3/31.3G
+[13:37:55 + 20.0m] train coconut_b stage 0 ep1 1330/1875 (71%) elapsed 8.0m eta 3.3m | loss 0.0578 | gpu mem 1.4G (peak 7.0/14.6G) util 99
+99% | cpu 51% ram 5.3/31.3G
+[13:38:25 + 20.5m] train coconut_b stage 0 ep1 1414/1875 (75%) elapsed 8.6m eta 2.8m | loss 0.0577 | gpu mem 1.4G (peak 7.0/14.6G) util 99
+98% | cpu 51% ram 5.3/31.3G
+[13:38:56 + 21.0m] train coconut_b stage 0 ep1 1497/1875 (80%) elapsed 9.1m eta 2.3m | loss 0.0576 | gpu mem 1.9G (peak 7.0/14.6G) util 99
+99% | cpu 51% ram 5.3/31.3G
+[13:39:26 + 21.5m] train coconut_b stage 0 ep1 1580/1875 (84%) elapsed 9.6m eta 1.8m | loss 0.0574 | gpu mem 1.4G (peak 7.0/14.6G) util 96
+99% | cpu 51% ram 5.3/31.3G
+[13:39:56 + 22.0m] train coconut_b stage 0 ep1 1664/1875 (89%) elapsed 10.1m eta 1.3m | loss 0.0573 | gpu mem 1.4G (peak 7.0/14.6G) util 99
+99% | cpu 51% ram 5.3/31.3G
+[13:40:26 + 22.5m] train coconut_b stage 0 ep1 1748/1875 (93%) elapsed 10.6m eta 0.8m | loss 0.0571 | gpu mem 1.4G (peak 7.0/14.6G) util 92
+99% | cpu 51% ram 5.3/31.3G
+[13:40:57 + 23.0m] train coconut_b stage 0 ep1 1832/1875 (98%) elapsed 11.1m eta 0.3m | loss 0.0569 | gpu mem 1.4G (peak 7.0/14.6G) util 98
+99% | cpu 51% ram 5.3/31.3G
+[13:41:12 + 23.3m] train coconut_b stage 0 ep1 1875/1875 (100%) elapsed 11.3m eta 0.0m | loss 0.0568 | gpu mem 1.4G (peak 7.0/14.6G) util 99
+100% | cpu 51% ram 5.3/31.3G
+[13:41:12 + 23.3m] train coconut_b stage 0 ep1 done: mean loss 0.0568 (15000 examples)
+[13:41:31 + 23.6m] gen coconut 10/10 (100%) elapsed 0.3m eta 0.0m | gpu mem 1.6G (peak 7.0/14.6G) util 68
+99% | cpu 51% ram 5.3/31.3G
+[13:41:31 + 23.6m] train coconut_b: val accuracy 0.71 on 150 held-out unhinted questions after 1/7 (chance 0.50)
+[13:41:31 + 23.6m] finished train coconut_b stage 0 (1/7) after 23.3m
+[13:41:43 + 23.8m] train coconut_b stage 1: 15000/15000 examples, 1 latents, 2 epochs, micro-batch 8 x accum 2
+[13:42:15 + 24.3m] train coconut_b stage 1 ep0 79/1875 (4%) elapsed 0.5m eta 11.4m | loss 0.2581 | gpu mem 1.9G (peak 6.5/14.6G) util 95
+0% | cpu 51% ram 5.4/31.3G
+[13:42:45 + 24.8m] train coconut_b stage 1 ep0 156/1875 (8%) elapsed 1.0m eta 11.0m | loss 0.1626 | gpu mem 1.4G (peak 6.5/14.6G) util 99
+99% | cpu 51% ram 5.4/31.3G
+[13:43:16 + 25.3m] train coconut_b stage 1 ep0 231/1875 (12%) elapsed 1.5m eta 10.7m | loss 0.1304 | gpu mem 1.9G (peak 6.5/14.6G) util 100
+94% | cpu 51% ram 5.4/31.3G
+[13:43:46 + 25.8m] train coconut_b stage 1 ep0 310/1875 (17%) elapsed 2.0m eta 10.2m | loss 0.1128 | gpu mem 1.4G (peak 6.6/14.6G) util 98
+99% | cpu 51% ram 5.4/31.3G
+[13:44:16 + 26.4m] train coconut_b stage 1 ep0 387/1875 (21%) elapsed 2.5m eta 9.7m | loss 0.1026 | gpu mem 1.9G (peak 6.6/14.6G) util 96
+96% | cpu 51% ram 5.4/31.3G
+[13:44:46 + 26.9m] train coconut_b stage 1 ep0 463/1875 (25%) elapsed 3.0m eta 9.2m | loss 0.0959 | gpu mem 1.9G (peak 6.7/14.6G) util 95
+95% | cpu 51% ram 5.4/31.3G
+[13:45:17 + 27.4m] train coconut_b stage 1 ep0 541/1875 (29%) elapsed 3.5m eta 8.7m | loss 0.0910 | gpu mem 1.9G (peak 6.7/14.6G) util 98
+94% | cpu 51% ram 5.4/31.3G
+[13:45:47 + 27.9m] train coconut_b stage 1 ep0 617/1875 (33%) elapsed 4.0m eta 8.2m | loss 0.0877 | gpu mem 1.9G (peak 6.7/14.6G) util 100
+99% | cpu 51% ram 5.4/31.3G
+[13:46:17 + 28.4m] train coconut_b stage 1 ep0 694/1875 (37%) elapsed 4.5m eta 7.7m | loss 0.0848 | gpu mem 1.4G (peak 6.7/14.6G) util 100
+99% | cpu 51% ram 5.4/31.3G
+[13:46:47 + 28.9m] train coconut_b stage 1 ep0 772/1875 (41%) elapsed 5.0m eta 7.2m | loss 0.0823 | gpu mem 1.4G (peak 6.7/14.6G) util 98
+93% | cpu 51% ram 5.4/31.3G
+[13:47:17 + 29.4m] train coconut_b stage 1 ep0 850/1875 (45%) elapsed 5.5m eta 6.7m | loss 0.0802 | gpu mem 1.4G (peak 6.7/14.6G) util 97
+99% | cpu 51% ram 5.4/31.3G
+[13:47:48 + 29.9m] train coconut_b stage 1 ep0 927/1875 (49%) elapsed 6.0m eta 6.2m | loss 0.0787 | gpu mem 1.9G (peak 6.7/14.6G) util 95
+97% | cpu 51% ram 5.4/31.3G
+[13:48:18 + 30.4m] train coconut_b stage 1 ep0 1004/1875 (54%) elapsed 6.5m eta 5.7m | loss 0.0775 | gpu mem 1.4G (peak 6.7/14.6G) util 97
+99% | cpu 51% ram 5.4/31.3G
+[13:48:48 + 30.9m] train coconut_b stage 1 ep0 1081/1875 (58%) elapsed 7.1m eta 5.2m | loss 0.0763 | gpu mem 1.9G (peak 6.7/14.6G) util 95
+96% | cpu 51% ram 5.4/31.3G
+[13:49:19 + 31.4m] train coconut_b stage 1 ep0 1159/1875 (62%) elapsed 7.6m eta 4.7m | loss 0.0753 | gpu mem 1.9G (peak 6.7/14.6G) util 95
+95% | cpu 51% ram 5.4/31.3G
+[13:49:49 + 31.9m] train coconut_b stage 1 ep0 1237/1875 (66%) elapsed 8.1m eta 4.2m | loss 0.0741 | gpu mem 1.9G (peak 6.7/14.6G) util 94
+98% | cpu 51% ram 5.4/31.3G
+[13:50:19 + 32.4m] train coconut_b stage 1 ep0 1314/1875 (70%) elapsed 8.6m eta 3.7m | loss 0.0733 | gpu mem 1.4G (peak 6.7/14.6G) util 87
+99% | cpu 51% ram 5.4/31.3G
+[13:50:49 + 32.9m] train coconut_b stage 1 ep0 1392/1875 (74%) elapsed 9.1m eta 3.1m | loss 0.0725 | gpu mem 1.4G (peak 6.7/14.6G) util 99
+96% | cpu 51% ram 5.4/31.3G
+[13:51:19 + 33.4m] train coconut_b stage 1 ep0 1471/1875 (78%) elapsed 9.6m eta 2.6m | loss 0.0719 | gpu mem 1.9G (peak 6.7/14.6G) util 99
+100% | cpu 51% ram 5.4/31.3G
+[13:51:49 + 33.9m] train coconut_b stage 1 ep0 1548/1875 (83%) elapsed 10.1m eta 2.1m | loss 0.0713 | gpu mem 1.4G (peak 6.7/14.6G) util 99
+99% | cpu 51% ram 5.3/31.3G
+[13:52:20 + 34.4m] train coconut_b stage 1 ep0 1626/1875 (87%) elapsed 10.6m eta 1.6m | loss 0.0706 | gpu mem 1.4G (peak 6.7/14.6G) util 100
+99% | cpu 51% ram 5.4/31.3G
+[13:52:50 + 34.9m] train coconut_b stage 1 ep0 1703/1875 (91%) elapsed 11.1m eta 1.1m | loss 0.0701 | gpu mem 1.9G (peak 6.7/14.6G) util 95
+93% | cpu 51% ram 5.4/31.3G
+[13:53:20 + 35.4m] train coconut_b stage 1 ep0 1780/1875 (95%) elapsed 11.6m eta 0.6m | loss 0.0694 | gpu mem 1.4G (peak 6.8/14.6G) util 100
+99% | cpu 51% ram 5.4/31.3G
+[13:53:50 + 35.9m] train coconut_b stage 1 ep0 1858/1875 (99%) elapsed 12.1m eta 0.1m | loss 0.0691 | gpu mem 1.4G (peak 6.8/14.6G) util 95
+100% | cpu 51% ram 5.4/31.3G
+[13:53:57 + 36.0m] train coconut_b stage 1 ep0 1875/1875 (100%) elapsed 12.2m eta 0.0m | loss 0.0690 | gpu mem 1.4G (peak 6.8/14.6G) util 93
+97% | cpu 51% ram 5.4/31.3G
+[13:53:57 + 36.0m] train coconut_b stage 1 ep0 done: mean loss 0.0690 (15000 examples)
+[13:54:30 + 36.6m] train coconut_b stage 1 ep1 77/1875 (4%) elapsed 0.5m eta 11.8m | loss 0.0526 | gpu mem 1.9G (peak 6.6/14.6G) util 89
+95% | cpu 51% ram 5.4/31.3G
+[13:55:00 + 37.1m] train coconut_b stage 1 ep1 155/1875 (8%) elapsed 1.0m eta 11.2m | loss 0.0517 | gpu mem 1.9G (peak 6.6/14.6G) util 99
+99% | cpu 51% ram 5.5/31.3G
+[13:55:30 + 37.6m] train coconut_b stage 1 ep1 232/1875 (12%) elapsed 1.5m eta 10.7m | loss 0.0506 | gpu mem 1.4G (peak 6.6/14.6G) util 100
+99% | cpu 51% ram 5.5/31.3G
+[13:56:00 + 38.1m] train coconut_b stage 1 ep1 309/1875 (16%) elapsed 2.0m eta 10.2m | loss 0.0512 | gpu mem 1.9G (peak 6.6/14.6G) util 95
+99% | cpu 51% ram 5.5/31.3G
+[13:56:31 + 38.6m] train coconut_b stage 1 ep1 388/1875 (21%) elapsed 2.5m eta 9.7m | loss 0.0515 | gpu mem 1.4G (peak 6.6/14.6G) util 94
+95% | cpu 51% ram 5.5/31.3G
+[13:57:01 + 39.1m] train coconut_b stage 1 ep1 465/1875 (25%) elapsed 3.0m eta 9.2m | loss 0.0519 | gpu mem 1.9G (peak 6.6/14.6G) util 95
+99% | cpu 51% ram 5.5/31.3G
+[13:57:31 + 39.6m] train coconut_b stage 1 ep1 542/1875 (29%) elapsed 3.5m eta 8.7m | loss 0.0519 | gpu mem 1.4G (peak 6.7/14.6G) util 95
+99% | cpu 51% ram 5.5/31.3G
+[13:58:01 + 40.1m] train coconut_b stage 1 ep1 619/1875 (33%) elapsed 4.0m eta 8.2m | loss 0.0519 | gpu mem 1.9G (peak 6.7/14.6G) util 95
+100% | cpu 51% ram 5.5/31.3G
+[13:58:31 + 40.6m] train coconut_b stage 1 ep1 696/1875 (37%) elapsed 4.5m eta 7.7m | loss 0.0516 | gpu mem 1.4G (peak 6.7/14.6G) util 95
+99% | cpu 51% ram 5.5/31.3G
+[13:59:01 + 41.1m] train coconut_b stage 1 ep1 773/1875 (41%) elapsed 5.0m eta 7.2m | loss 0.0517 | gpu mem 1.9G (peak 6.7/14.6G) util 95
+98% | cpu 51% ram 5.5/31.3G
+[13:59:31 + 41.6m] train coconut_b stage 1 ep1 851/1875 (45%) elapsed 5.5m eta 6.6m | loss 0.0516 | gpu mem 1.9G (peak 6.7/14.6G) util 95
+99% | cpu 51% ram 5.5/31.3G
+[14:00:01 + 42.1m] train coconut_b stage 1 ep1 927/1875 (49%) elapsed 6.0m eta 6.2m | loss 0.0513 | gpu mem 1.9G (peak 6.7/14.6G) util 100
+99% | cpu 51% ram 5.5/31.3G
+[14:00:31 + 42.6m] train coconut_b stage 1 ep1 1005/1875 (54%) elapsed 6.5m eta 5.7m | loss 0.0511 | gpu mem 1.9G (peak 6.7/14.6G) util 97
+100% | cpu 51% ram 5.5/31.3G
+[14:01:02 + 43.1m] train coconut_b stage 1 ep1 1081/1875 (58%) elapsed 7.0m eta 5.2m | loss 0.0512 | gpu mem 1.9G (peak 6.7/14.6G) util 98
+93% | cpu 51% ram 5.5/31.3G
+[14:01:32 + 43.6m] train coconut_b stage 1 ep1 1158/1875 (62%) elapsed 7.5m eta 4.7m | loss 0.0514 | gpu mem 1.4G (peak 6.7/14.6G) util 94
+94% | cpu 51% ram 5.5/31.3G
+[14:02:02 + 44.1m] train coconut_b stage 1 ep1 1235/1875 (66%) elapsed 8.0m eta 4.2m | loss 0.0514 | gpu mem 1.9G (peak 6.7/14.6G) util 91
+99% | cpu 51% ram 5.5/31.3G
+[14:02:32 + 44.6m] train coconut_b stage 1 ep1 1312/1875 (70%) elapsed 8.5m eta 3.7m | loss 0.0516 | gpu mem 1.4G (peak 6.7/14.6G) util 94
+99% | cpu 51% ram 5.5/31.3G
+[14:03:03 + 45.1m] train coconut_b stage 1 ep1 1390/1875 (74%) elapsed 9.1m eta 3.2m | loss 0.0517 | gpu mem 1.4G (peak 6.7/14.6G) util 99
+99% | cpu 51% ram 5.5/31.3G
+[14:03:33 + 45.6m] train coconut_b stage 1 ep1 1467/1875 (78%) elapsed 9.6m eta 2.7m | loss 0.0517 | gpu mem 1.9G (peak 6.7/14.6G) util 94
+99% | cpu 51% ram 5.5/31.3G
+[14:04:03 + 46.1m] train coconut_b stage 1 ep1 1545/1875 (82%) elapsed 10.1m eta 2.1m | loss 0.0517 | gpu mem 1.9G (peak 6.7/14.6G) util 96
+98% | cpu 51% ram 5.5/31.3G
+[14:04:33 + 46.6m] train coconut_b stage 1 ep1 1623/1875 (87%) elapsed 10.6m eta 1.6m | loss 0.0515 | gpu mem 1.9G (peak 6.7/14.6G) util 95
+95% | cpu 51% ram 5.5/31.3G
+[14:05:04 + 47.1m] train coconut_b stage 1 ep1 1700/1875 (91%) elapsed 11.1m eta 1.1m | loss 0.0515 | gpu mem 1.4G (peak 6.7/14.6G) util 99
+96% | cpu 51% ram 5.5/31.3G
+[14:05:34 + 47.6m] train coconut_b stage 1 ep1 1778/1875 (95%) elapsed 11.6m eta 0.6m | loss 0.0516 | gpu mem 1.4G (peak 6.7/14.6G) util 99
+95% | cpu 51% ram 5.5/31.3G
+[14:06:04 + 48.1m] train coconut_b stage 1 ep1 1855/1875 (99%) elapsed 12.1m eta 0.1m | loss 0.0515 | gpu mem 1.9G (peak 6.8/14.6G) util 95
+99% | cpu 51% ram 5.5/31.3G
+[14:06:12 + 48.3m] train coconut_b stage 1 ep1 1875/1875 (100%) elapsed 12.2m eta 0.0m | loss 0.0515 | gpu mem 1.4G (peak 6.8/14.6G) util 100
+96% | cpu 51% ram 5.5/31.3G
+[14:06:12 + 48.3m] train coconut_b stage 1 ep1 done: mean loss 0.0515 (15000 examples)
+[14:06:31 + 48.6m] gen coconut 10/10 (100%) elapsed 0.3m eta 0.0m | gpu mem 1.7G (peak 6.8/14.6G) util 75
+96% | cpu 51% ram 5.5/31.3G
+[14:06:31 + 48.6m] train coconut_b: val accuracy 0.67 on 150 held-out unhinted questions after 2/7 (chance 0.50)
+[14:06:31 + 48.6m] finished train coconut_b stage 1 (2/7) after 48.3m
+[14:06:42 + 48.8m] train coconut_b stage 2: 15000/15000 examples, 2 latents, 2 epochs, micro-batch 8 x accum 2
+[14:07:15 + 49.3m] train coconut_b stage 2 ep0 76/1875 (4%) elapsed 0.5m eta 11.9m | loss 0.1284 | gpu mem 1.4G (peak 6.5/14.6G) util 97
+95% | cpu 51% ram 5.5/31.3G
+[14:07:45 + 49.8m] train coconut_b stage 2 ep0 150/1875 (8%) elapsed 1.0m eta 11.6m | loss 0.1143 | gpu mem 1.4G (peak 6.6/14.6G) util 99
+95% | cpu 51% ram 5.5/31.3G
+[14:08:15 + 50.3m] train coconut_b stage 2 ep0 225/1875 (12%) elapsed 1.5m eta 11.1m | loss 0.1087 | gpu mem 1.9G (peak 6.9/14.6G) util 91
+100% | cpu 51% ram 5.5/31.3G
+[14:08:45 + 50.8m] train coconut_b stage 2 ep0 296/1875 (16%) elapsed 2.0m eta 10.7m | loss 0.1065 | gpu mem 1.4G (peak 6.9/14.6G) util 100
+93% | cpu 51% ram 5.5/31.3G
+[14:09:16 + 51.3m] train coconut_b stage 2 ep0 370/1875 (20%) elapsed 2.5m eta 10.2m | loss 0.1044 | gpu mem 1.4G (peak 6.9/14.6G) util 91
+100% | cpu 51% ram 5.5/31.3G
+[14:09:46 + 51.8m] train coconut_b stage 2 ep0 445/1875 (24%) elapsed 3.0m eta 9.7m | loss 0.1031 | gpu mem 1.9G (peak 6.9/14.6G) util 100
+92% | cpu 51% ram 5.5/31.3G
+[14:10:16 + 52.3m] train coconut_b stage 2 ep0 519/1875 (28%) elapsed 3.5m eta 9.2m | loss 0.1022 | gpu mem 1.9G (peak 6.9/14.6G) util 90
+98% | cpu 51% ram 5.5/31.3G
+[14:10:46 + 52.9m] train coconut_b stage 2 ep0 594/1875 (32%) elapsed 4.0m eta 8.7m | loss 0.1013 | gpu mem 1.4G (peak 6.9/14.6G) util 98
+99% | cpu 51% ram 5.5/31.3G
+[14:11:16 + 53.4m] train coconut_b stage 2 ep0 668/1875 (36%) elapsed 4.5m eta 8.2m | loss 0.1006 | gpu mem 1.4G (peak 6.9/14.6G) util 91
+97% | cpu 51% ram 5.5/31.3G
+[14:11:46 + 53.9m] train coconut_b stage 2 ep0 742/1875 (40%) elapsed 5.0m eta 7.7m | loss 0.1001 | gpu mem 1.4G (peak 6.9/14.6G) util 100
+99% | cpu 51% ram 5.5/31.3G
+[14:12:17 + 54.4m] train coconut_b stage 2 ep0 818/1875 (44%) elapsed 5.5m eta 7.1m | loss 0.0996 | gpu mem 1.4G (peak 6.9/14.6G) util 99
+93% | cpu 51% ram 5.5/31.3G
+[14:12:47 + 54.9m] train coconut_b stage 2 ep0 893/1875 (48%) elapsed 6.0m eta 6.6m | loss 0.0993 | gpu mem 1.9G (peak 6.9/14.6G) util 89
+91% | cpu 51% ram 5.5/31.3G
+[14:13:17 + 55.4m] train coconut_b stage 2 ep0 968/1875 (52%) elapsed 6.5m eta 6.1m | loss 0.0988 | gpu mem 1.4G (peak 6.9/14.6G) util 99
+99% | cpu 51% ram 5.5/31.3G
+[14:13:48 + 55.9m] train coconut_b stage 2 ep0 1042/1875 (56%) elapsed 7.0m eta 5.6m | loss 0.0985 | gpu mem 1.4G (peak 6.9/14.6G) util 100
+92% | cpu 51% ram 5.5/31.3G
+[14:14:18 + 56.4m] train coconut_b stage 2 ep0 1117/1875 (60%) elapsed 7.5m eta 5.1m | loss 0.0981 | gpu mem 1.9G (peak 6.9/14.6G) util 90
+99% | cpu 51% ram 5.5/31.3G
+[14:14:48 + 56.9m] train coconut_b stage 2 ep0 1193/1875 (64%) elapsed 8.1m eta 4.6m | loss 0.0979 | gpu mem 1.9G (peak 6.9/14.6G) util 100
+99% | cpu 51% ram 5.5/31.3G
+[14:15:19 + 57.4m] train coconut_b stage 2 ep0 1268/1875 (68%) elapsed 8.6m eta 4.1m | loss 0.0976 | gpu mem 1.4G (peak 6.9/14.6G) util 90
+100% | cpu 51% ram 5.5/31.3G
+[14:15:49 + 57.9m] train coconut_b stage 2 ep0 1342/1875 (72%) elapsed 9.1m eta 3.6m | loss 0.0974 | gpu mem 1.4G (peak 6.9/14.6G) util 92
+90% | cpu 51% ram 5.5/31.3G
+[14:16:19 + 58.4m] train coconut_b stage 2 ep0 1417/1875 (76%) elapsed 9.6m eta 3.1m | loss 0.0967 | gpu mem 1.9G (peak 6.9/14.6G) util 87
+92% | cpu 51% ram 5.5/31.3G
+[14:16:49 + 58.9m] train coconut_b stage 2 ep0 1492/1875 (80%) elapsed 10.1m eta 2.6m | loss 0.0964 | gpu mem 1.4G (peak 6.9/14.6G) util 98
+91% | cpu 51% ram 5.5/31.3G
+[14:17:19 + 59.4m] train coconut_b stage 2 ep0 1566/1875 (84%) elapsed 10.6m eta 2.1m | loss 0.0961 | gpu mem 1.4G (peak 6.9/14.6G) util 86
+92% | cpu 51% ram 5.5/31.3G
+[14:17:50 + 59.9m] train coconut_b stage 2 ep0 1641/1875 (88%) elapsed 11.1m eta 1.6m | loss 0.0957 | gpu mem 1.9G (peak 6.9/14.6G) util 89
+91% | cpu 51% ram 5.5/31.3G
+[14:18:20 + 60.4m] train coconut_b stage 2 ep0 1715/1875 (91%) elapsed 11.6m eta 1.1m | loss 0.0953 | gpu mem 1.9G (peak 6.9/14.6G) util 91
+93% | cpu 51% ram 5.5/31.3G
+[14:18:50 + 60.9m] train coconut_b stage 2 ep0 1790/1875 (95%) elapsed 12.1m eta 0.6m | loss 0.0949 | gpu mem 1.4G (peak 6.9/14.6G) util 92
+92% | cpu 51% ram 5.5/31.3G
+[14:19:20 + 61.4m] train coconut_b stage 2 ep0 1865/1875 (99%) elapsed 12.6m eta 0.1m | loss 0.0947 | gpu mem 1.9G (peak 6.9/14.6G) util 94
+92% | cpu 51% ram 5.5/31.3G
+[14:19:25 + 61.5m] train coconut_b stage 2 ep0 1875/1875 (100%) elapsed 12.7m eta 0.0m | loss 0.0947 | gpu mem 1.4G (peak 6.9/14.6G) util 89
+95% | cpu 50% ram 5.5/31.3G
+[14:19:25 + 61.5m] train coconut_b stage 2 ep0 done: mean loss 0.0947 (15000 examples)
+[14:19:57 + 62.0m] train coconut_b stage 2 ep1 75/1875 (4%) elapsed 0.5m eta 12.1m | loss 0.0782 | gpu mem 1.9G (peak 6.6/14.6G) util 85
+99% | cpu 51% ram 5.5/31.3G
+[14:20:27 + 62.5m] train coconut_b stage 2 ep1 150/1875 (8%) elapsed 1.0m eta 11.6m | loss 0.0793 | gpu mem 1.4G (peak 6.6/14.6G) util 95
+90% | cpu 51% ram 5.5/31.3G
+[14:20:57 + 63.0m] train coconut_b stage 2 ep1 225/1875 (12%) elapsed 1.5m eta 11.1m | loss 0.0788 | gpu mem 1.9G (peak 6.6/14.6G) util 90
+91% | cpu 51% ram 5.5/31.3G
+[14:21:27 + 63.5m] train coconut_b stage 2 ep1 299/1875 (16%) elapsed 2.0m eta 10.6m | loss 0.0797 | gpu mem 1.9G (peak 6.6/14.6G) util 90
+91% | cpu 51% ram 5.5/31.3G
+[14:21:57 + 64.0m] train coconut_b stage 2 ep1 373/1875 (20%) elapsed 2.5m eta 10.1m | loss 0.0802 | gpu mem 1.9G (peak 6.8/14.6G) util 89
+89% | cpu 51% ram 5.5/31.3G
+[14:22:28 + 64.5m] train coconut_b stage 2 ep1 446/1875 (24%) elapsed 3.0m eta 9.6m | loss 0.0801 | gpu mem 1.4G (peak 6.8/14.6G) util 99
+99% | cpu 51% ram 5.5/31.3G
+[14:22:58 + 65.0m] train coconut_b stage 2 ep1 519/1875 (28%) elapsed 3.5m eta 9.2m | loss 0.0798 | gpu mem 1.9G (peak 6.8/14.6G) util 100
+90% | cpu 51% ram 5.5/31.3G
+[14:23:28 + 65.5m] train coconut_b stage 2 ep1 592/1875 (32%) elapsed 4.0m eta 8.7m | loss 0.0793 | gpu mem 1.4G (peak 6.8/14.6G) util 94
+99% | cpu 51% ram 5.5/31.3G
+[14:23:58 + 66.0m] train coconut_b stage 2 ep1 666/1875 (36%) elapsed 4.5m eta 8.2m | loss 0.0788 | gpu mem 1.4G (peak 6.8/14.6G) util 100
+92% | cpu 51% ram 5.5/31.3G
+[14:24:28 + 66.5m] train coconut_b stage 2 ep1 740/1875 (39%) elapsed 5.0m eta 7.7m | loss 0.0781 | gpu mem 1.4G (peak 6.8/14.6G) util 100
+100% | cpu 51% ram 5.5/31.3G
+[14:24:58 + 67.0m] train coconut_b stage 2 ep1 814/1875 (43%) elapsed 5.5m eta 7.2m | loss 0.0775 | gpu mem 1.4G (peak 6.8/14.6G) util 100
+91% | cpu 51% ram 5.5/31.3G
+[14:25:28 + 67.5m] train coconut_b stage 2 ep1 888/1875 (47%) elapsed 6.0m eta 6.7m | loss 0.0775 | gpu mem 1.4G (peak 6.8/14.6G) util 95
+92% | cpu 51% ram 5.5/31.3G
+[14:25:58 + 68.1m] train coconut_b stage 2 ep1 962/1875 (51%) elapsed 6.5m eta 6.2m | loss 0.0770 | gpu mem 1.4G (peak 6.8/14.6G) util 99
+94% | cpu 51% ram 5.5/31.3G
+[14:26:28 + 68.6m] train coconut_b stage 2 ep1 1037/1875 (55%) elapsed 7.0m eta 5.7m | loss 0.0765 | gpu mem 1.9G (peak 6.8/14.6G) util 88
+88% | cpu 51% ram 5.5/31.3G
+[14:26:59 + 69.1m] train coconut_b stage 2 ep1 1111/1875 (59%) elapsed 7.5m eta 5.2m | loss 0.0757 | gpu mem 1.9G (peak 6.8/14.6G) util 94
+99% | cpu 51% ram 5.5/31.3G
+[14:27:29 + 69.6m] train coconut_b stage 2 ep1 1186/1875 (63%) elapsed 8.0m eta 4.7m | loss 0.0753 | gpu mem 1.4G (peak 6.8/14.6G) util 99
+96% | cpu 51% ram 5.5/31.3G
+[14:27:59 + 70.1m] train coconut_b stage 2 ep1 1261/1875 (67%) elapsed 8.5m eta 4.2m | loss 0.0749 | gpu mem 1.9G (peak 6.8/14.6G) util 89
+91% | cpu 51% ram 5.5/31.3G
+[14:28:29 + 70.6m] train coconut_b stage 2 ep1 1336/1875 (71%) elapsed 9.0m eta 3.6m | loss 0.0746 | gpu mem 1.4G (peak 6.9/14.6G) util 94
+98% | cpu 51% ram 5.5/31.3G
+[14:28:59 + 71.1m] train coconut_b stage 2 ep1 1410/1875 (75%) elapsed 9.5m eta 3.1m | loss 0.0743 | gpu mem 1.4G (peak 6.9/14.6G) util 99
+93% | cpu 51% ram 5.5/31.3G
+[14:29:30 + 71.6m] train coconut_b stage 2 ep1 1484/1875 (79%) elapsed 10.0m eta 2.6m | loss 0.0741 | gpu mem 1.4G (peak 6.9/14.6G) util 99
+100% | cpu 51% ram 5.5/31.3G
+[14:30:00 + 72.1m] train coconut_b stage 2 ep1 1558/1875 (83%) elapsed 10.5m eta 2.1m | loss 0.0737 | gpu mem 1.4G (peak 6.9/14.6G) util 98
+91% | cpu 51% ram 5.5/31.3G
+[14:30:30 + 72.6m] train coconut_b stage 2 ep1 1632/1875 (87%) elapsed 11.0m eta 1.6m | loss 0.0732 | gpu mem 1.4G (peak 6.9/14.6G) util 97
+96% | cpu 51% ram 5.5/31.3G
+[14:31:00 + 73.1m] train coconut_b stage 2 ep1 1707/1875 (91%) elapsed 11.6m eta 1.1m | loss 0.0730 | gpu mem 1.9G (peak 6.9/14.6G) util 94
+98% | cpu 51% ram 5.5/31.3G
+[14:31:31 + 73.6m] train coconut_b stage 2 ep1 1781/1875 (95%) elapsed 12.1m eta 0.6m | loss 0.0727 | gpu mem 1.9G (peak 6.9/14.6G) util 90
+92% | cpu 51% ram 5.5/31.3G
+[14:32:01 + 74.1m] train coconut_b stage 2 ep1 1855/1875 (99%) elapsed 12.6m eta 0.1m | loss 0.0724 | gpu mem 1.9G (peak 6.9/14.6G) util 91
+99% | cpu 51% ram 5.5/31.3G
+[14:32:09 + 74.2m] train coconut_b stage 2 ep1 1875/1875 (100%) elapsed 12.7m eta 0.0m | loss 0.0724 | gpu mem 1.4G (peak 6.9/14.6G) util 90
+99% | cpu 51% ram 5.5/31.3G
+[14:32:09 + 74.2m] train coconut_b stage 2 ep1 done: mean loss 0.0724 (15000 examples)
+[14:32:26 + 74.5m] gen coconut 10/10 (100%) elapsed 0.3m eta 0.0m | gpu mem 1.7G (peak 6.9/14.6G) util 72
+100% | cpu 51% ram 5.5/31.3G
+[14:32:26 + 74.5m] train coconut_b: val accuracy 0.66 on 150 held-out unhinted questions after 3/7 (chance 0.50)
+[14:32:26 + 74.5m] finished train coconut_b stage 2 (3/7) after 74.2m
+[14:32:37 + 74.7m] train coconut_b stage 3: 15000/15000 examples, 3 latents, 2 epochs, micro-batch 8 x accum 2
+[14:33:09 + 75.2m] train coconut_b stage 3 ep0 73/1875 (4%) elapsed 0.5m eta 12.4m | loss 0.2435 | gpu mem 1.9G (peak 6.4/14.6G) util 96
+98% | cpu 51% ram 5.5/31.3G
+[14:33:40 + 75.7m] train coconut_b stage 3 ep0 145/1875 (8%) elapsed 1.0m eta 12.0m | loss 0.1931 | gpu mem 1.9G (peak 7.0/14.6G) util 77
+93% | cpu 51% ram 5.5/31.3G
+[14:34:10 + 76.2m] train coconut_b stage 3 ep0 216/1875 (12%) elapsed 1.5m eta 11.6m | loss 0.1799 | gpu mem 1.4G (peak 7.0/14.6G) util 97
+94% | cpu 51% ram 5.5/31.3G
+[14:34:40 + 76.7m] train coconut_b stage 3 ep0 287/1875 (15%) elapsed 2.0m eta 11.1m | loss 0.1684 | gpu mem 1.9G (peak 7.0/14.6G) util 87
+88% | cpu 51% ram 5.5/31.3G
+[14:35:10 + 77.2m] train coconut_b stage 3 ep0 357/1875 (19%) elapsed 2.5m eta 10.7m | loss 0.1608 | gpu mem 1.9G (peak 7.2/14.6G) util 82
+97% | cpu 51% ram 5.5/31.3G
+[14:35:40 + 77.7m] train coconut_b stage 3 ep0 427/1875 (23%) elapsed 3.0m eta 10.2m | loss 0.1563 | gpu mem 1.9G (peak 7.2/14.6G) util 79
+87% | cpu 51% ram 5.5/31.3G
+[14:36:10 + 78.3m] train coconut_b stage 3 ep0 499/1875 (27%) elapsed 3.5m eta 9.7m | loss 0.1516 | gpu mem 1.9G (peak 7.2/14.6G) util 83
+91% | cpu 51% ram 5.5/31.3G
+[14:36:41 + 78.8m] train coconut_b stage 3 ep0 569/1875 (30%) elapsed 4.0m eta 9.2m | loss 0.1488 | gpu mem 1.9G (peak 7.2/14.6G) util 80
+89% | cpu 51% ram 5.5/31.3G
+[14:37:11 + 79.3m] train coconut_b stage 3 ep0 640/1875 (34%) elapsed 4.5m eta 8.7m | loss 0.1468 | gpu mem 1.4G (peak 7.2/14.6G) util 81
+84% | cpu 51% ram 5.5/31.3G
+[14:37:41 + 79.8m] train coconut_b stage 3 ep0 711/1875 (38%) elapsed 5.0m eta 8.2m | loss 0.1439 | gpu mem 1.9G (peak 7.2/14.6G) util 99
+88% | cpu 51% ram 5.5/31.3G
+[14:38:11 + 80.3m] train coconut_b stage 3 ep0 781/1875 (42%) elapsed 5.5m eta 7.7m | loss 0.1426 | gpu mem 1.9G (peak 7.2/14.6G) util 81
+93% | cpu 51% ram 5.5/31.3G
+[14:38:42 + 80.8m] train coconut_b stage 3 ep0 852/1875 (45%) elapsed 6.0m eta 7.3m | loss 0.1404 | gpu mem 1.4G (peak 7.2/14.6G) util 93
+88% | cpu 51% ram 5.5/31.3G
+[14:39:12 + 81.3m] train coconut_b stage 3 ep0 923/1875 (49%) elapsed 6.5m eta 6.7m | loss 0.1389 | gpu mem 1.9G (peak 7.2/14.6G) util 92
+86% | cpu 51% ram 5.5/31.3G
+[14:39:42 + 81.8m] train coconut_b stage 3 ep0 994/1875 (53%) elapsed 7.0m eta 6.2m | loss 0.1372 | gpu mem 1.4G (peak 7.2/14.6G) util 99
+95% | cpu 51% ram 5.5/31.3G
+[14:40:12 + 82.3m] train coconut_b stage 3 ep0 1064/1875 (57%) elapsed 7.5m eta 5.7m | loss 0.1355 | gpu mem 1.4G (peak 7.2/14.6G) util 99
+98% | cpu 51% ram 5.5/31.3G
+[14:40:42 + 82.8m] train coconut_b stage 3 ep0 1134/1875 (60%) elapsed 8.0m eta 5.3m | loss 0.1346 | gpu mem 1.4G (peak 7.2/14.6G) util 99
+87% | cpu 51% ram 5.5/31.3G
+[14:41:12 + 83.3m] train coconut_b stage 3 ep0 1204/1875 (64%) elapsed 8.5m eta 4.8m | loss 0.1334 | gpu mem 1.4G (peak 7.2/14.6G) util 91
+88% | cpu 51% ram 5.5/31.3G
+[14:41:42 + 83.8m] train coconut_b stage 3 ep0 1275/1875 (68%) elapsed 9.1m eta 4.3m | loss 0.1326 | gpu mem 1.9G (peak 7.2/14.6G) util 97
+99% | cpu 51% ram 5.5/31.3G
+[14:42:12 + 84.3m] train coconut_b stage 3 ep0 1346/1875 (72%) elapsed 9.6m eta 3.8m | loss 0.1319 | gpu mem 1.4G (peak 7.2/14.6G) util 96
+98% | cpu 51% ram 5.5/31.3G
+[14:42:43 + 84.8m] train coconut_b stage 3 ep0 1418/1875 (76%) elapsed 10.1m eta 3.2m | loss 0.1310 | gpu mem 1.4G (peak 7.2/14.6G) util 98
+86% | cpu 51% ram 5.5/31.3G
+[14:43:13 + 85.3m] train coconut_b stage 3 ep0 1489/1875 (79%) elapsed 10.6m eta 2.7m | loss 0.1304 | gpu mem 1.9G (peak 7.2/14.6G) util 97
+87% | cpu 51% ram 5.5/31.3G
+[14:43:43 + 85.8m] train coconut_b stage 3 ep0 1560/1875 (83%) elapsed 11.1m eta 2.2m | loss 0.1299 | gpu mem 1.4G (peak 7.2/14.6G) util 89
+87% | cpu 51% ram 5.5/31.3G
+[14:44:13 + 86.3m] train coconut_b stage 3 ep0 1631/1875 (87%) elapsed 11.6m eta 1.7m | loss 0.1291 | gpu mem 1.9G (peak 7.2/14.6G) util 83
+89% | cpu 51% ram 5.5/31.3G
+[14:44:43 + 86.8m] train coconut_b stage 3 ep0 1702/1875 (91%) elapsed 12.1m eta 1.2m | loss 0.1282 | gpu mem 1.4G (peak 7.2/14.6G) util 99
+99% | cpu 51% ram 5.5/31.3G
+[14:45:14 + 87.3m] train coconut_b stage 3 ep0 1773/1875 (95%) elapsed 12.6m eta 0.7m | loss 0.1274 | gpu mem 1.9G (peak 7.2/14.6G) util 93
+99% | cpu 51% ram 5.5/31.3G
+[14:45:44 + 87.8m] train coconut_b stage 3 ep0 1843/1875 (98%) elapsed 13.1m eta 0.2m | loss 0.1270 | gpu mem 1.9G (peak 7.2/14.6G) util 98
+98% | cpu 51% ram 5.5/31.3G
+[14:45:57 + 88.0m] train coconut_b stage 3 ep0 1875/1875 (100%) elapsed 13.3m eta 0.0m | loss 0.1268 | gpu mem 1.4G (peak 7.2/14.6G) util 97
+97% | cpu 51% ram 5.5/31.3G
+[14:45:57 + 88.0m] train coconut_b stage 3 ep0 done: mean loss 0.1268 (15000 examples)
+[14:46:30 + 88.6m] train coconut_b stage 3 ep1 71/1875 (4%) elapsed 0.5m eta 12.7m | loss 0.0983 | gpu mem 1.9G (peak 6.5/14.6G) util 92
+98% | cpu 51% ram 5.5/31.3G
+[14:47:00 + 89.1m] train coconut_b stage 3 ep1 142/1875 (8%) elapsed 1.0m eta 12.3m | loss 0.0965 | gpu mem 1.4G (peak 6.5/14.6G) util 100
+95% | cpu 51% ram 5.5/31.3G
+[14:47:30 + 89.6m] train coconut_b stage 3 ep1 214/1875 (11%) elapsed 1.5m eta 11.7m | loss 0.0998 | gpu mem 1.4G (peak 6.5/14.6G) util 86
+99% | cpu 51% ram 5.5/31.3G
+[14:48:00 + 90.1m] train coconut_b stage 3 ep1 285/1875 (15%) elapsed 2.0m eta 11.2m | loss 0.1002 | gpu mem 1.9G (peak 6.5/14.6G) util 79
+79% | cpu 51% ram 5.5/31.3G
+[14:48:30 + 90.6m] train coconut_b stage 3 ep1 355/1875 (19%) elapsed 2.5m eta 10.8m | loss 0.1003 | gpu mem 1.9G (peak 6.5/14.6G) util 71
+98% | cpu 51% ram 5.5/31.3G
+[14:49:00 + 91.1m] train coconut_b stage 3 ep1 426/1875 (23%) elapsed 3.0m eta 10.2m | loss 0.0998 | gpu mem 1.4G (peak 6.7/14.6G) util 99
+99% | cpu 51% ram 5.5/31.3G
+[14:49:31 + 91.6m] train coconut_b stage 3 ep1 497/1875 (27%) elapsed 3.5m eta 9.8m | loss 0.1006 | gpu mem 1.9G (peak 6.7/14.6G) util 99
+88% | cpu 51% ram 5.5/31.3G
+[14:50:01 + 92.1m] train coconut_b stage 3 ep1 567/1875 (30%) elapsed 4.0m eta 9.3m | loss 0.1011 | gpu mem 1.9G (peak 6.8/14.6G) util 96
+98% | cpu 51% ram 5.5/31.3G
+[14:50:31 + 92.6m] train coconut_b stage 3 ep1 637/1875 (34%) elapsed 4.5m eta 8.8m | loss 0.1012 | gpu mem 1.9G (peak 7.0/14.6G) util 98
+82% | cpu 51% ram 5.5/31.3G
+[14:51:01 + 93.1m] train coconut_b stage 3 ep1 707/1875 (38%) elapsed 5.0m eta 8.3m | loss 0.1015 | gpu mem 1.9G (peak 7.0/14.6G) util 82
+96% | cpu 51% ram 5.5/31.3G
+[14:51:31 + 93.6m] train coconut_b stage 3 ep1 778/1875 (41%) elapsed 5.5m eta 7.8m | loss 0.1017 | gpu mem 1.4G (peak 7.0/14.6G) util 80
+85% | cpu 51% ram 5.5/31.3G
+[14:52:01 + 94.1m] train coconut_b stage 3 ep1 849/1875 (45%) elapsed 6.0m eta 7.3m | loss 0.1018 | gpu mem 1.9G (peak 7.0/14.6G) util 88
+97% | cpu 51% ram 5.5/31.3G
+[14:52:32 + 94.6m] train coconut_b stage 3 ep1 920/1875 (49%) elapsed 6.5m eta 6.8m | loss 0.1013 | gpu mem 1.4G (peak 7.0/14.6G) util 82
+88% | cpu 51% ram 5.5/31.3G
+[14:53:02 + 95.1m] train coconut_b stage 3 ep1 990/1875 (53%) elapsed 7.0m eta 6.3m | loss 0.1014 | gpu mem 1.4G (peak 7.0/14.6G) util 99
+100% | cpu 51% ram 5.5/31.3G
+[14:53:32 + 95.6m] train coconut_b stage 3 ep1 1060/1875 (57%) elapsed 7.5m eta 5.8m | loss 0.1014 | gpu mem 1.4G (peak 7.0/14.6G) util 98
+99% | cpu 51% ram 5.5/31.3G
+[14:54:02 + 96.1m] train coconut_b stage 3 ep1 1130/1875 (60%) elapsed 8.0m eta 5.3m | loss 0.1010 | gpu mem 1.4G (peak 7.0/14.6G) util 83
+86% | cpu 51% ram 5.5/31.3G
+[14:54:32 + 96.6m] train coconut_b stage 3 ep1 1201/1875 (64%) elapsed 8.5m eta 4.8m | loss 0.1013 | gpu mem 1.9G (peak 7.0/14.6G) util 98
+99% | cpu 51% ram 5.5/31.3G
+[14:55:03 + 97.1m] train coconut_b stage 3 ep1 1272/1875 (68%) elapsed 9.0m eta 4.3m | loss 0.1013 | gpu mem 1.4G (peak 7.0/14.6G) util 99
+81% | cpu 51% ram 5.5/31.3G
+[14:55:33 + 97.6m] train coconut_b stage 3 ep1 1343/1875 (72%) elapsed 9.6m eta 3.8m | loss 0.1010 | gpu mem 1.9G (peak 7.0/14.6G) util 80
+94% | cpu 51% ram 5.5/31.3G
+[14:56:03 + 98.1m] train coconut_b stage 3 ep1 1414/1875 (75%) elapsed 10.1m eta 3.3m | loss 0.1008 | gpu mem 1.4G (peak 7.0/14.6G) util 85
+98% | cpu 51% ram 5.5/31.3G
+[14:56:33 + 98.6m] train coconut_b stage 3 ep1 1485/1875 (79%) elapsed 10.6m eta 2.8m | loss 0.1007 | gpu mem 1.9G (peak 7.0/14.6G) util 98
+100% | cpu 51% ram 5.5/31.3G
+[14:57:03 + 99.1m] train coconut_b stage 3 ep1 1555/1875 (83%) elapsed 11.1m eta 2.3m | loss 0.1006 | gpu mem 1.9G (peak 7.0/14.6G) util 98
+88% | cpu 51% ram 5.5/31.3G
+[14:57:34 + 99.6m] train coconut_b stage 3 ep1 1625/1875 (87%) elapsed 11.6m eta 1.8m | loss 0.1004 | gpu mem 1.9G (peak 7.0/14.6G) util 82
+99% | cpu 51% ram 5.5/31.3G
+[14:58:04 +100.2m] train coconut_b stage 3 ep1 1696/1875 (90%) elapsed 12.1m eta 1.3m | loss 0.1005 | gpu mem 1.4G (peak 7.0/14.6G) util 92
+92% | cpu 51% ram 5.5/31.3G
+[14:58:34 +100.7m] train coconut_b stage 3 ep1 1767/1875 (94%) elapsed 12.6m eta 0.8m | loss 0.1003 | gpu mem 1.9G (peak 7.0/14.6G) util 85
+88% | cpu 51% ram 5.5/31.3G
+[14:59:05 +101.2m] train coconut_b stage 3 ep1 1837/1875 (98%) elapsed 13.1m eta 0.3m | loss 0.1002 | gpu mem 1.9G (peak 7.0/14.6G) util 86
+86% | cpu 51% ram 5.5/31.3G
+[14:59:21 +101.4m] train coconut_b stage 3 ep1 1875/1875 (100%) elapsed 13.4m eta 0.0m | loss 0.1001 | gpu mem 1.4G (peak 7.0/14.6G) util 100
+85% | cpu 51% ram 5.5/31.3G
+[14:59:21 +101.4m] train coconut_b stage 3 ep1 done: mean loss 0.1001 (15000 examples)
+[14:59:35 +101.7m] gen coconut 10/10 (100%) elapsed 0.2m eta 0.0m | gpu mem 1.6G (peak 7.0/14.6G) util 70
+86% | cpu 51% ram 5.5/31.3G
+[14:59:35 +101.7m] train coconut_b: val accuracy 0.89 on 150 held-out unhinted questions after 4/7 (chance 0.50)
+[14:59:35 +101.7m] finished train coconut_b stage 3 (4/7) after 101.4m
+[14:59:47 +101.9m] train coconut_b stage 4: 15000/15000 examples, 4 latents, 2 epochs, micro-batch 8 x accum 2
+[15:00:19 +102.4m] train coconut_b stage 4 ep0 68/1875 (4%) elapsed 0.5m eta 13.3m | loss 0.1131 | gpu mem 1.4G (peak 6.8/14.6G) util 94
+100% | cpu 51% ram 5.5/31.3G
+[15:00:49 +102.9m] train coconut_b stage 4 ep0 135/1875 (7%) elapsed 1.0m eta 13.0m | loss 0.1081 | gpu mem 1.9G (peak 6.8/14.6G) util 87
+99% | cpu 51% ram 5.5/31.3G
+[15:01:20 +103.4m] train coconut_b stage 4 ep0 202/1875 (11%) elapsed 1.5m eta 12.5m | loss 0.1027 | gpu mem 1.4G (peak 6.8/14.6G) util 94
+99% | cpu 51% ram 5.5/31.3G
+[15:01:50 +103.9m] train coconut_b stage 4 ep0 269/1875 (14%) elapsed 2.0m eta 12.0m | loss 0.1014 | gpu mem 1.9G (peak 6.8/14.6G) util 71
+0% | cpu 51% ram 5.5/31.3G
+[15:02:20 +104.4m] train coconut_b stage 4 ep0 335/1875 (18%) elapsed 2.5m eta 11.6m | loss 0.1017 | gpu mem 1.9G (peak 6.8/14.6G) util 79
+99% | cpu 51% ram 5.5/31.3G
+[15:02:50 +104.9m] train coconut_b stage 4 ep0 400/1875 (21%) elapsed 3.0m eta 11.1m | loss 0.1025 | gpu mem 1.4G (peak 6.8/14.6G) util 90
+90% | cpu 51% ram 5.5/31.3G
+[15:03:20 +105.4m] train coconut_b stage 4 ep0 466/1875 (25%) elapsed 3.5m eta 10.6m | loss 0.1012 | gpu mem 1.4G (peak 6.8/14.6G) util 92
+87% | cpu 51% ram 5.5/31.3G
+[15:03:50 +105.9m] train coconut_b stage 4 ep0 533/1875 (28%) elapsed 4.0m eta 10.1m | loss 0.1015 | gpu mem 1.9G (peak 6.8/14.6G) util 96
+82% | cpu 51% ram 5.5/31.3G
+[15:04:21 +106.4m] train coconut_b stage 4 ep0 599/1875 (32%) elapsed 4.5m eta 9.6m | loss 0.1006 | gpu mem 1.9G (peak 6.8/14.6G) util 95
+98% | cpu 51% ram 5.5/31.3G
+[15:04:51 +106.9m] train coconut_b stage 4 ep0 665/1875 (35%) elapsed 5.0m eta 9.2m | loss 0.1004 | gpu mem 1.9G (peak 6.8/14.6G) util 78
+74% | cpu 51% ram 5.5/31.3G
+[15:05:21 +107.4m] train coconut_b stage 4 ep0 731/1875 (39%) elapsed 5.5m eta 8.7m | loss 0.1005 | gpu mem 1.9G (peak 6.8/14.6G) util 74
+73% | cpu 51% ram 5.5/31.3G
+[15:05:51 +107.9m] train coconut_b stage 4 ep0 797/1875 (43%) elapsed 6.0m eta 8.2m | loss 0.1007 | gpu mem 1.9G (peak 6.8/14.6G) util 96
+95% | cpu 51% ram 5.5/31.3G
+[15:06:22 +108.4m] train coconut_b stage 4 ep0 864/1875 (46%) elapsed 6.5m eta 7.7m | loss 0.1009 | gpu mem 1.4G (peak 6.8/14.6G) util 99
+96% | cpu 51% ram 5.5/31.3G
+[15:06:52 +108.9m] train coconut_b stage 4 ep0 930/1875 (50%) elapsed 7.0m eta 7.2m | loss 0.1016 | gpu mem 1.4G (peak 7.1/14.6G) util 88
+91% | cpu 51% ram 5.5/31.3G
+[15:07:22 +109.5m] train coconut_b stage 4 ep0 997/1875 (53%) elapsed 7.6m eta 6.7m | loss 0.1011 | gpu mem 1.9G (peak 7.1/14.6G) util 85
+91% | cpu 51% ram 5.5/31.3G
+[15:07:52 +110.0m] train coconut_b stage 4 ep0 1063/1875 (57%) elapsed 8.1m eta 6.2m | loss 0.1012 | gpu mem 1.9G (peak 7.1/14.6G) util 88
+83% | cpu 51% ram 5.5/31.3G
+[15:08:23 +110.5m] train coconut_b stage 4 ep0 1129/1875 (60%) elapsed 8.6m eta 5.7m | loss 0.1009 | gpu mem 1.9G (peak 7.1/14.6G) util 100
+93% | cpu 51% ram 5.5/31.3G
+[15:08:53 +111.0m] train coconut_b stage 4 ep0 1196/1875 (64%) elapsed 9.1m eta 5.1m | loss 0.1004 | gpu mem 1.4G (peak 7.1/14.6G) util 95
+76% | cpu 51% ram 5.5/31.3G
+[15:09:23 +111.5m] train coconut_b stage 4 ep0 1263/1875 (67%) elapsed 9.6m eta 4.6m | loss 0.1006 | gpu mem 1.9G (peak 7.1/14.6G) util 78
+84% | cpu 51% ram 5.5/31.3G
+[15:09:53 +112.0m] train coconut_b stage 4 ep0 1330/1875 (71%) elapsed 10.1m eta 4.1m | loss 0.1007 | gpu mem 1.4G (peak 7.1/14.6G) util 95
+92% | cpu 51% ram 5.5/31.3G
+[15:10:24 +112.5m] train coconut_b stage 4 ep0 1397/1875 (75%) elapsed 10.6m eta 3.6m | loss 0.1007 | gpu mem 1.9G (peak 7.1/14.6G) util 85
+75% | cpu 51% ram 5.5/31.3G
+[15:10:54 +113.0m] train coconut_b stage 4 ep0 1464/1875 (78%) elapsed 11.1m eta 3.1m | loss 0.1006 | gpu mem 1.4G (peak 7.1/14.6G) util 98
+89% | cpu 51% ram 5.5/31.3G
+[15:11:24 +113.5m] train coconut_b stage 4 ep0 1530/1875 (82%) elapsed 11.6m eta 2.6m | loss 0.1005 | gpu mem 1.4G (peak 7.1/14.6G) util 89
+80% | cpu 51% ram 5.5/31.3G
+[15:11:55 +114.0m] train coconut_b stage 4 ep0 1597/1875 (85%) elapsed 12.1m eta 2.1m | loss 0.1003 | gpu mem 1.9G (peak 7.1/14.6G) util 87
+96% | cpu 51% ram 5.5/31.3G
+[15:12:25 +114.5m] train coconut_b stage 4 ep0 1664/1875 (89%) elapsed 12.6m eta 1.6m | loss 0.1004 | gpu mem 1.4G (peak 7.1/14.6G) util 72
+99% | cpu 51% ram 5.5/31.3G
+[15:12:55 +115.0m] train coconut_b stage 4 ep0 1730/1875 (92%) elapsed 13.1m eta 1.1m | loss 0.1005 | gpu mem 1.4G (peak 7.1/14.6G) util 94
+85% | cpu 51% ram 5.5/31.3G
+[15:13:25 +115.5m] train coconut_b stage 4 ep0 1796/1875 (96%) elapsed 13.6m eta 0.6m | loss 0.1005 | gpu mem 1.4G (peak 7.1/14.6G) util 97
+98% | cpu 51% ram 5.5/31.3G
+[15:13:55 +116.0m] train coconut_b stage 4 ep0 1863/1875 (99%) elapsed 14.1m eta 0.1m | loss 0.1006 | gpu mem 1.9G (peak 7.1/14.6G) util 68
+71% | cpu 51% ram 5.5/31.3G
+[15:14:01 +116.1m] train coconut_b stage 4 ep0 1875/1875 (100%) elapsed 14.2m eta 0.0m | loss 0.1006 | gpu mem 1.4G (peak 7.1/14.6G) util 94
+95% | cpu 51% ram 5.5/31.3G
+[15:14:01 +116.1m] train coconut_b stage 4 ep0 done: mean loss 0.1006 (15000 examples)
+[15:14:34 +116.6m] train coconut_b stage 4 ep1 66/1875 (4%) elapsed 0.5m eta 13.8m | loss 0.0846 | gpu mem 1.4G (peak 7.5/14.6G) util 67
+99% | cpu 51% ram 5.5/31.3G
+[15:15:04 +117.1m] train coconut_b stage 4 ep1 132/1875 (7%) elapsed 1.0m eta 13.3m | loss 0.0843 | gpu mem 1.4G (peak 7.5/14.6G) util 90
+99% | cpu 51% ram 5.5/31.3G
+[15:15:34 +117.7m] train coconut_b stage 4 ep1 199/1875 (11%) elapsed 1.5m eta 12.8m | loss 0.0861 | gpu mem 1.9G (peak 7.5/14.6G) util 82
+100% | cpu 51% ram 5.5/31.3G
+[15:16:05 +118.2m] train coconut_b stage 4 ep1 265/1875 (14%) elapsed 2.0m eta 12.3m | loss 0.0864 | gpu mem 1.9G (peak 7.5/14.6G) util 69
+99% | cpu 51% ram 5.5/31.3G
+[15:16:35 +118.7m] train coconut_b stage 4 ep1 331/1875 (18%) elapsed 2.5m eta 11.8m | loss 0.0859 | gpu mem 1.9G (peak 7.5/14.6G) util 71
+87% | cpu 51% ram 5.5/31.3G
+[15:17:05 +119.2m] train coconut_b stage 4 ep1 397/1875 (21%) elapsed 3.0m eta 11.3m | loss 0.0871 | gpu mem 1.9G (peak 7.5/14.6G) util 87
+99% | cpu 51% ram 5.5/31.3G
+[15:17:36 +119.7m] train coconut_b stage 4 ep1 463/1875 (25%) elapsed 3.5m eta 10.8m | loss 0.0876 | gpu mem 1.9G (peak 7.5/14.6G) util 91
+99% | cpu 51% ram 5.5/31.3G
+[15:18:06 +120.2m] train coconut_b stage 4 ep1 529/1875 (28%) elapsed 4.0m eta 10.3m | loss 0.0875 | gpu mem 1.9G (peak 7.5/14.6G) util 74
+99% | cpu 51% ram 5.5/31.3G
+[15:18:36 +120.7m] train coconut_b stage 4 ep1 595/1875 (32%) elapsed 4.5m eta 9.8m | loss 0.0878 | gpu mem 1.9G (peak 7.5/14.6G) util 97
+86% | cpu 51% ram 5.5/31.3G
+[15:19:06 +121.2m] train coconut_b stage 4 ep1 661/1875 (35%) elapsed 5.0m eta 9.3m | loss 0.0881 | gpu mem 1.9G (peak 7.5/14.6G) util 74
+87% | cpu 51% ram 5.5/31.3G
+[15:19:37 +121.7m] train coconut_b stage 4 ep1 727/1875 (39%) elapsed 5.6m eta 8.8m | loss 0.0880 | gpu mem 1.9G (peak 7.5/14.6G) util 74
+90% | cpu 51% ram 5.5/31.3G
+[15:20:07 +122.2m] train coconut_b stage 4 ep1 794/1875 (42%) elapsed 6.1m eta 8.3m | loss 0.0887 | gpu mem 1.4G (peak 7.5/14.6G) util 85
+90% | cpu 51% ram 5.5/31.3G
+[15:20:37 +122.7m] train coconut_b stage 4 ep1 861/1875 (46%) elapsed 6.6m eta 7.7m | loss 0.0888 | gpu mem 1.9G (peak 7.5/14.6G) util 72
+99% | cpu 51% ram 5.5/31.3G
+[15:21:07 +123.2m] train coconut_b stage 4 ep1 927/1875 (49%) elapsed 7.1m eta 7.2m | loss 0.0891 | gpu mem 1.9G (peak 7.5/14.6G) util 88
+95% | cpu 51% ram 5.5/31.3G
+[15:21:37 +123.7m] train coconut_b stage 4 ep1 992/1875 (53%) elapsed 7.6m eta 6.7m | loss 0.0893 | gpu mem 1.4G (peak 7.5/14.6G) util 71
+99% | cpu 51% ram 5.5/31.3G
+[15:22:08 +124.2m] train coconut_b stage 4 ep1 1058/1875 (56%) elapsed 8.1m eta 6.2m | loss 0.0894 | gpu mem 1.4G (peak 7.5/14.6G) util 87
+99% | cpu 51% ram 5.5/31.3G
+[15:22:38 +124.7m] train coconut_b stage 4 ep1 1124/1875 (60%) elapsed 8.6m eta 5.7m | loss 0.0897 | gpu mem 1.4G (peak 7.5/14.6G) util 95
+76% | cpu 51% ram 5.5/31.3G
+[15:23:08 +125.2m] train coconut_b stage 4 ep1 1190/1875 (63%) elapsed 9.1m eta 5.2m | loss 0.0897 | gpu mem 1.4G (peak 7.5/14.6G) util 89
+99% | cpu 51% ram 5.5/31.3G
+[15:23:39 +125.7m] train coconut_b stage 4 ep1 1256/1875 (67%) elapsed 9.6m eta 4.7m | loss 0.0897 | gpu mem 1.4G (peak 7.5/14.6G) util 78
+99% | cpu 51% ram 5.5/31.3G
+[15:24:09 +126.2m] train coconut_b stage 4 ep1 1322/1875 (71%) elapsed 10.1m eta 4.2m | loss 0.0895 | gpu mem 1.4G (peak 7.5/14.6G) util 76
+96% | cpu 51% ram 5.5/31.3G
+[15:24:39 +126.7m] train coconut_b stage 4 ep1 1388/1875 (74%) elapsed 10.6m eta 3.7m | loss 0.0897 | gpu mem 1.4G (peak 7.5/14.6G) util 76
+82% | cpu 51% ram 5.5/31.3G
+[15:25:09 +127.2m] train coconut_b stage 4 ep1 1454/1875 (78%) elapsed 11.1m eta 3.2m | loss 0.0900 | gpu mem 1.4G (peak 7.5/14.6G) util 99
+83% | cpu 51% ram 5.5/31.3G
+[15:25:40 +127.7m] train coconut_b stage 4 ep1 1520/1875 (81%) elapsed 11.6m eta 2.7m | loss 0.0899 | gpu mem 1.4G (peak 7.5/14.6G) util 95
+78% | cpu 51% ram 5.5/31.3G
+[15:26:10 +128.2m] train coconut_b stage 4 ep1 1586/1875 (85%) elapsed 12.1m eta 2.2m | loss 0.0897 | gpu mem 1.4G (peak 7.5/14.6G) util 74
+98% | cpu 51% ram 5.5/31.3G
+[15:26:40 +128.7m] train coconut_b stage 4 ep1 1652/1875 (88%) elapsed 12.6m eta 1.7m | loss 0.0900 | gpu mem 1.4G (peak 7.5/14.6G) util 74
+99% | cpu 51% ram 5.5/31.3G
+[15:27:10 +129.2m] train coconut_b stage 4 ep1 1719/1875 (92%) elapsed 13.1m eta 1.2m | loss 0.0904 | gpu mem 1.9G (peak 7.5/14.6G) util 75
+79% | cpu 51% ram 5.5/31.3G
+[15:27:40 +129.8m] train coconut_b stage 4 ep1 1785/1875 (95%) elapsed 13.6m eta 0.7m | loss 0.0903 | gpu mem 1.9G (peak 7.5/14.6G) util 86
+74% | cpu 51% ram 5.5/31.3G
+[15:28:10 +130.3m] train coconut_b stage 4 ep1 1851/1875 (99%) elapsed 14.1m eta 0.2m | loss 0.0901 | gpu mem 1.9G (peak 7.5/14.6G) util 75
+84% | cpu 51% ram 5.5/31.3G
+[15:28:21 +130.4m] train coconut_b stage 4 ep1 1875/1875 (100%) elapsed 14.3m eta 0.0m | loss 0.0901 | gpu mem 1.4G (peak 7.5/14.6G) util 98
+74% | cpu 51% ram 5.5/31.3G
+[15:28:21 +130.4m] train coconut_b stage 4 ep1 done: mean loss 0.0901 (15000 examples)
+[15:28:29 +130.6m] gen coconut 10/10 (100%) elapsed 0.1m eta 0.0m | gpu mem 1.6G (peak 7.5/14.6G) util 95
+81% | cpu 51% ram 5.5/31.3G
+[15:28:29 +130.6m] train coconut_b: val accuracy 0.83 on 150 held-out unhinted questions after 5/7 (chance 0.50)
+[15:28:29 +130.6m] finished train coconut_b stage 4 (5/7) after 130.3m
+[15:28:40 +130.7m] train coconut_b stage 5: 15000/15000 examples, 5 latents, 2 epochs, micro-batch 8 x accum 2
+[15:29:12 +131.3m] train coconut_b stage 5 ep0 63/1875 (3%) elapsed 0.5m eta 14.5m | loss 0.0634 | gpu mem 1.9G (peak 6.9/14.6G) util 94
+100% | cpu 51% ram 5.5/31.3G
+[15:29:43 +131.8m] train coconut_b stage 5 ep0 126/1875 (7%) elapsed 1.0m eta 14.0m | loss 0.0617 | gpu mem 1.4G (peak 6.9/14.6G) util 92
+98% | cpu 51% ram 5.5/31.3G
+[15:30:13 +132.3m] train coconut_b stage 5 ep0 189/1875 (10%) elapsed 1.5m eta 13.5m | loss 0.0612 | gpu mem 1.9G (peak 6.9/14.6G) util 73
+97% | cpu 51% ram 5.5/31.3G
+[15:30:43 +132.8m] train coconut_b stage 5 ep0 252/1875 (13%) elapsed 2.0m eta 13.0m | loss 0.0639 | gpu mem 1.4G (peak 6.9/14.6G) util 99
+93% | cpu 51% ram 5.5/31.3G
+[15:31:13 +133.3m] train coconut_b stage 5 ep0 315/1875 (17%) elapsed 2.5m eta 12.5m | loss 0.0629 | gpu mem 1.9G (peak 7.0/14.6G) util 97
+99% | cpu 51% ram 5.5/31.3G
+[15:31:44 +133.8m] train coconut_b stage 5 ep0 376/1875 (20%) elapsed 3.0m eta 12.0m | loss 0.0636 | gpu mem 1.4G (peak 7.0/14.6G) util 100
+99% | cpu 51% ram 5.5/31.3G
+[15:32:14 +134.3m] train coconut_b stage 5 ep0 438/1875 (23%) elapsed 3.5m eta 11.6m | loss 0.0621 | gpu mem 1.4G (peak 7.0/14.6G) util 99
+76% | cpu 51% ram 5.5/31.3G
+[15:32:44 +134.8m] train coconut_b stage 5 ep0 500/1875 (27%) elapsed 4.0m eta 11.1m | loss 0.0618 | gpu mem 1.4G (peak 7.0/14.6G) util 98
+92% | cpu 51% ram 5.5/31.3G
+[15:33:15 +135.3m] train coconut_b stage 5 ep0 562/1875 (30%) elapsed 4.5m eta 10.6m | loss 0.0616 | gpu mem 1.4G (peak 7.0/14.6G) util 96
+94% | cpu 51% ram 5.5/31.3G
+[15:33:45 +135.8m] train coconut_b stage 5 ep0 625/1875 (33%) elapsed 5.0m eta 10.1m | loss 0.0626 | gpu mem 1.9G (peak 7.0/14.6G) util 70
+72% | cpu 51% ram 5.5/31.3G
+[15:34:15 +136.3m] train coconut_b stage 5 ep0 687/1875 (37%) elapsed 5.5m eta 9.6m | loss 0.0630 | gpu mem 1.9G (peak 7.0/14.6G) util 89
+99% | cpu 51% ram 5.5/31.3G
+[15:34:45 +136.8m] train coconut_b stage 5 ep0 749/1875 (40%) elapsed 6.0m eta 9.1m | loss 0.0623 | gpu mem 1.9G (peak 7.3/14.6G) util 96
+76% | cpu 51% ram 5.5/31.3G
+[15:35:15 +137.3m] train coconut_b stage 5 ep0 811/1875 (43%) elapsed 6.6m eta 8.6m | loss 0.0620 | gpu mem 1.9G (peak 7.3/14.6G) util 87
+84% | cpu 51% ram 5.5/31.3G
+[15:35:46 +137.8m] train coconut_b stage 5 ep0 874/1875 (47%) elapsed 7.1m eta 8.1m | loss 0.0611 | gpu mem 1.4G (peak 7.3/14.6G) util 96
+99% | cpu 51% ram 5.5/31.3G
+[15:36:16 +138.3m] train coconut_b stage 5 ep0 936/1875 (50%) elapsed 7.6m eta 7.6m | loss 0.0611 | gpu mem 1.4G (peak 7.3/14.6G) util 97
+96% | cpu 51% ram 5.5/31.3G
+[15:36:46 +138.8m] train coconut_b stage 5 ep0 999/1875 (53%) elapsed 8.1m eta 7.1m | loss 0.0613 | gpu mem 1.9G (peak 7.3/14.6G) util 93
+99% | cpu 51% ram 5.5/31.3G
+[15:37:17 +139.4m] train coconut_b stage 5 ep0 1062/1875 (57%) elapsed 8.6m eta 6.6m | loss 0.0612 | gpu mem 1.4G (peak 7.3/14.6G) util 85
+67% | cpu 51% ram 5.5/31.3G
+[15:37:47 +139.9m] train coconut_b stage 5 ep0 1124/1875 (60%) elapsed 9.1m eta 6.1m | loss 0.0612 | gpu mem 1.4G (peak 7.3/14.6G) util 99
+66% | cpu 51% ram 5.5/31.3G
+[15:38:17 +140.4m] train coconut_b stage 5 ep0 1185/1875 (63%) elapsed 9.6m eta 5.6m | loss 0.0612 | gpu mem 1.9G (peak 7.3/14.6G) util 91
+70% | cpu 51% ram 5.5/31.3G
+[15:38:47 +140.9m] train coconut_b stage 5 ep0 1248/1875 (67%) elapsed 10.1m eta 5.1m | loss 0.0610 | gpu mem 1.4G (peak 7.3/14.6G) util 99
+99% | cpu 51% ram 5.5/31.3G
+[15:39:18 +141.4m] train coconut_b stage 5 ep0 1311/1875 (70%) elapsed 10.6m eta 4.6m | loss 0.0611 | gpu mem 1.9G (peak 7.3/14.6G) util 61
+75% | cpu 51% ram 5.5/31.3G
+[15:39:48 +141.9m] train coconut_b stage 5 ep0 1373/1875 (73%) elapsed 11.1m eta 4.1m | loss 0.0612 | gpu mem 1.9G (peak 7.3/14.6G) util 57
+85% | cpu 51% ram 5.5/31.3G
+[15:40:18 +142.4m] train coconut_b stage 5 ep0 1435/1875 (77%) elapsed 11.6m eta 3.6m | loss 0.0611 | gpu mem 1.9G (peak 7.3/14.6G) util 86
+71% | cpu 51% ram 5.5/31.3G
+[15:40:48 +142.9m] train coconut_b stage 5 ep0 1497/1875 (80%) elapsed 12.1m eta 3.1m | loss 0.0612 | gpu mem 1.9G (peak 7.3/14.6G) util 95
+95% | cpu 51% ram 5.5/31.3G
+[15:41:18 +143.4m] train coconut_b stage 5 ep0 1559/1875 (83%) elapsed 12.6m eta 2.6m | loss 0.0614 | gpu mem 1.9G (peak 7.3/14.6G) util 96
+68% | cpu 51% ram 5.5/31.3G
+[15:41:48 +143.9m] train coconut_b stage 5 ep0 1621/1875 (86%) elapsed 13.1m eta 2.1m | loss 0.0613 | gpu mem 1.9G (peak 7.3/14.6G) util 92
+88% | cpu 51% ram 5.5/31.3G
+[15:42:18 +144.4m] train coconut_b stage 5 ep0 1684/1875 (90%) elapsed 13.6m eta 1.5m | loss 0.0611 | gpu mem 1.4G (peak 7.3/14.6G) util 91
+82% | cpu 51% ram 5.5/31.3G
+[15:42:48 +144.9m] train coconut_b stage 5 ep0 1746/1875 (93%) elapsed 14.1m eta 1.0m | loss 0.0611 | gpu mem 1.4G (peak 7.3/14.6G) util 93
+96% | cpu 51% ram 5.5/31.3G
+[15:43:18 +145.4m] train coconut_b stage 5 ep0 1809/1875 (96%) elapsed 14.6m eta 0.5m | loss 0.0609 | gpu mem 1.9G (peak 7.3/14.6G) util 80
+99% | cpu 51% ram 5.5/31.3G
+[15:43:49 +145.9m] train coconut_b stage 5 ep0 1872/1875 (100%) elapsed 15.1m eta 0.0m | loss 0.0609 | gpu mem 1.4G (peak 7.3/14.6G) util 95
+91% | cpu 51% ram 5.5/31.3G
+[15:43:50 +145.9m] train coconut_b stage 5 ep0 1875/1875 (100%) elapsed 15.1m eta 0.0m | loss 0.0609 | gpu mem 1.4G (peak 7.3/14.6G) util 87
+99% | cpu 50% ram 5.5/31.3G
+[15:43:50 +145.9m] train coconut_b stage 5 ep0 done: mean loss 0.0609 (15000 examples)
+[15:44:23 +146.5m] train coconut_b stage 5 ep1 62/1875 (3%) elapsed 0.5m eta 14.8m | loss 0.0580 | gpu mem 1.4G (peak 6.8/14.6G) util 99
+87% | cpu 51% ram 5.5/31.3G
+[15:44:53 +147.0m] train coconut_b stage 5 ep1 123/1875 (7%) elapsed 1.0m eta 14.4m | loss 0.0535 | gpu mem 1.9G (peak 6.9/14.6G) util 97
+99% | cpu 51% ram 5.5/31.3G
+[15:45:23 +147.5m] train coconut_b stage 5 ep1 185/1875 (10%) elapsed 1.5m eta 13.8m | loss 0.0520 | gpu mem 1.9G (peak 6.9/14.6G) util 72
+74% | cpu 51% ram 5.5/31.3G
+[15:45:54 +148.0m] train coconut_b stage 5 ep1 247/1875 (13%) elapsed 2.0m eta 13.3m | loss 0.0501 | gpu mem 1.9G (peak 6.9/14.6G) util 63
+99% | cpu 51% ram 5.5/31.3G
+[15:46:24 +148.5m] train coconut_b stage 5 ep1 309/1875 (16%) elapsed 2.5m eta 12.8m | loss 0.0523 | gpu mem 1.9G (peak 6.9/14.6G) util 97
+98% | cpu 51% ram 5.5/31.3G
+[15:46:54 +149.0m] train coconut_b stage 5 ep1 371/1875 (20%) elapsed 3.0m eta 12.3m | loss 0.0525 | gpu mem 1.9G (peak 6.9/14.6G) util 86
+76% | cpu 51% ram 5.5/31.3G
+[15:47:24 +149.5m] train coconut_b stage 5 ep1 434/1875 (23%) elapsed 3.5m eta 11.7m | loss 0.0525 | gpu mem 1.4G (peak 7.0/14.6G) util 91
+68% | cpu 51% ram 5.5/31.3G
+[15:47:55 +150.0m] train coconut_b stage 5 ep1 497/1875 (27%) elapsed 4.0m eta 11.2m | loss 0.0533 | gpu mem 1.9G (peak 7.0/14.6G) util 67
+78% | cpu 51% ram 5.5/31.3G
+[15:48:25 +150.5m] train coconut_b stage 5 ep1 560/1875 (30%) elapsed 4.5m eta 10.7m | loss 0.0531 | gpu mem 1.4G (peak 7.0/14.6G) util 98
+65% | cpu 51% ram 5.5/31.3G
+[15:48:56 +151.0m] train coconut_b stage 5 ep1 622/1875 (33%) elapsed 5.0m eta 10.2m | loss 0.0531 | gpu mem 1.4G (peak 7.0/14.6G) util 99
+99% | cpu 51% ram 5.5/31.3G
+[15:49:26 +151.5m] train coconut_b stage 5 ep1 684/1875 (36%) elapsed 5.6m eta 9.7m | loss 0.0532 | gpu mem 1.4G (peak 7.0/14.6G) util 99
+85% | cpu 51% ram 5.5/31.3G
+[15:49:56 +152.0m] train coconut_b stage 5 ep1 747/1875 (40%) elapsed 6.1m eta 9.1m | loss 0.0533 | gpu mem 1.9G (peak 7.0/14.6G) util 55
+99% | cpu 51% ram 5.5/31.3G
+[15:50:26 +152.5m] train coconut_b stage 5 ep1 810/1875 (43%) elapsed 6.6m eta 8.6m | loss 0.0537 | gpu mem 1.4G (peak 7.0/14.6G) util 94
+99% | cpu 51% ram 5.5/31.3G
+[15:50:56 +153.0m] train coconut_b stage 5 ep1 872/1875 (47%) elapsed 7.1m eta 8.1m | loss 0.0541 | gpu mem 1.4G (peak 7.5/14.6G) util 73
+67% | cpu 51% ram 5.5/31.3G
+[15:51:27 +153.5m] train coconut_b stage 5 ep1 934/1875 (50%) elapsed 7.6m eta 7.6m | loss 0.0540 | gpu mem 1.4G (peak 7.5/14.6G) util 99
+83% | cpu 51% ram 5.5/31.3G
+[15:51:57 +154.0m] train coconut_b stage 5 ep1 996/1875 (53%) elapsed 8.1m eta 7.1m | loss 0.0541 | gpu mem 1.4G (peak 7.5/14.6G) util 93
+74% | cpu 51% ram 5.5/31.3G
+[15:52:27 +154.5m] train coconut_b stage 5 ep1 1058/1875 (56%) elapsed 8.6m eta 6.6m | loss 0.0542 | gpu mem 1.4G (peak 7.5/14.6G) util 68
+88% | cpu 51% ram 5.5/31.3G
+[15:52:57 +155.0m] train coconut_b stage 5 ep1 1120/1875 (60%) elapsed 9.1m eta 6.1m | loss 0.0543 | gpu mem 1.4G (peak 7.5/14.6G) util 100
+99% | cpu 51% ram 5.5/31.3G
+[15:53:28 +155.5m] train coconut_b stage 5 ep1 1183/1875 (63%) elapsed 9.6m eta 5.6m | loss 0.0539 | gpu mem 1.9G (peak 7.5/14.6G) util 63
+91% | cpu 51% ram 5.5/31.3G
+[15:53:58 +156.0m] train coconut_b stage 5 ep1 1245/1875 (66%) elapsed 10.1m eta 5.1m | loss 0.0535 | gpu mem 1.9G (peak 7.5/14.6G) util 93
+99% | cpu 51% ram 5.5/31.3G
+[15:54:28 +156.5m] train coconut_b stage 5 ep1 1306/1875 (70%) elapsed 10.6m eta 4.6m | loss 0.0537 | gpu mem 1.4G (peak 7.5/14.6G) util 99
+93% | cpu 51% ram 5.5/31.3G
+[15:54:58 +157.0m] train coconut_b stage 5 ep1 1368/1875 (73%) elapsed 11.1m eta 4.1m | loss 0.0536 | gpu mem 1.4G (peak 7.5/14.6G) util 98
+98% | cpu 51% ram 5.5/31.3G
+[15:55:28 +157.5m] train coconut_b stage 5 ep1 1430/1875 (76%) elapsed 11.6m eta 3.6m | loss 0.0538 | gpu mem 1.4G (peak 7.5/14.6G) util 99
+95% | cpu 51% ram 5.5/31.3G
+[15:55:58 +158.1m] train coconut_b stage 5 ep1 1492/1875 (80%) elapsed 12.1m eta 3.1m | loss 0.0543 | gpu mem 1.4G (peak 7.5/14.6G) util 86
+99% | cpu 51% ram 5.5/31.3G
+[15:56:28 +158.6m] train coconut_b stage 5 ep1 1554/1875 (83%) elapsed 12.6m eta 2.6m | loss 0.0547 | gpu mem 1.4G (peak 7.5/14.6G) util 99
+68% | cpu 51% ram 5.5/31.3G
+[15:56:58 +159.1m] train coconut_b stage 5 ep1 1616/1875 (86%) elapsed 13.1m eta 2.1m | loss 0.0545 | gpu mem 1.4G (peak 7.5/14.6G) util 75
+99% | cpu 51% ram 5.5/31.3G
+[15:57:29 +159.6m] train coconut_b stage 5 ep1 1678/1875 (89%) elapsed 13.6m eta 1.6m | loss 0.0548 | gpu mem 1.4G (peak 7.5/14.6G) util 78
+70% | cpu 51% ram 5.5/31.3G
+[15:57:59 +160.1m] train coconut_b stage 5 ep1 1740/1875 (93%) elapsed 14.1m eta 1.1m | loss 0.0547 | gpu mem 1.4G (peak 7.5/14.6G) util 99
+94% | cpu 51% ram 5.5/31.3G
+[15:58:29 +160.6m] train coconut_b stage 5 ep1 1802/1875 (96%) elapsed 14.6m eta 0.6m | loss 0.0547 | gpu mem 1.4G (peak 7.5/14.6G) util 97
+77% | cpu 51% ram 5.5/31.3G
+[15:59:00 +161.1m] train coconut_b stage 5 ep1 1864/1875 (99%) elapsed 15.1m eta 0.1m | loss 0.0548 | gpu mem 1.4G (peak 7.5/14.6G) util 96
+95% | cpu 51% ram 5.5/31.3G
+[15:59:05 +161.2m] train coconut_b stage 5 ep1 1875/1875 (100%) elapsed 15.2m eta 0.0m | loss 0.0548 | gpu mem 1.4G (peak 7.5/14.6G) util 89
+96% | cpu 50% ram 5.5/31.3G
+[15:59:05 +161.2m] train coconut_b stage 5 ep1 done: mean loss 0.0548 (15000 examples)
+[15:59:13 +161.3m] gen coconut 10/10 (100%) elapsed 0.1m eta 0.0m | gpu mem 1.6G (peak 7.5/14.6G) util 64
+75% | cpu 51% ram 5.5/31.3G
+[15:59:13 +161.3m] train coconut_b: val accuracy 0.84 on 150 held-out unhinted questions after 6/7 (chance 0.50)
+[15:59:13 +161.3m] finished train coconut_b stage 5 (6/7) after 161.0m
+[15:59:24 +161.5m] train coconut_b stage 6: 15000/15000 examples, 6 latents, 2 epochs, micro-batch 8 x accum 2
+[15:59:57 +162.0m] train coconut_b stage 6 ep0 59/1875 (3%) elapsed 0.5m eta 15.6m | loss 0.0408 | gpu mem 1.9G (peak 7.5/14.6G) util 98
+99% | cpu 51% ram 5.5/31.3G
+[16:00:27 +162.5m] train coconut_b stage 6 ep0 118/1875 (6%) elapsed 1.0m eta 15.0m | loss 0.0389 | gpu mem 1.4G (peak 7.5/14.6G) util 63
+89% | cpu 51% ram 5.5/31.3G
+[16:00:57 +163.0m] train coconut_b stage 6 ep0 177/1875 (9%) elapsed 1.5m eta 14.6m | loss 0.0379 | gpu mem 1.9G (peak 7.5/14.6G) util 92
+89% | cpu 51% ram 5.5/31.3G
+[16:01:28 +163.5m] train coconut_b stage 6 ep0 236/1875 (13%) elapsed 2.0m eta 14.0m | loss 0.0380 | gpu mem 1.4G (peak 7.5/14.6G) util 92
+100% | cpu 51% ram 5.5/31.3G
+[16:01:58 +164.0m] train coconut_b stage 6 ep0 294/1875 (16%) elapsed 2.5m eta 13.6m | loss 0.0378 | gpu mem 1.4G (peak 7.5/14.6G) util 97
+74% | cpu 51% ram 5.5/31.3G
+[16:02:28 +164.6m] train coconut_b stage 6 ep0 352/1875 (19%) elapsed 3.0m eta 13.1m | loss 0.0386 | gpu mem 1.4G (peak 7.5/14.6G) util 99
+99% | cpu 51% ram 5.5/31.3G
+[16:02:58 +165.1m] train coconut_b stage 6 ep0 410/1875 (22%) elapsed 3.5m eta 12.6m | loss 0.0387 | gpu mem 1.4G (peak 7.5/14.6G) util 95
+68% | cpu 51% ram 5.5/31.3G
+[16:03:29 +165.6m] train coconut_b stage 6 ep0 469/1875 (25%) elapsed 4.0m eta 12.1m | loss 0.0390 | gpu mem 1.9G (peak 7.5/14.6G) util 57
+60% | cpu 51% ram 5.5/31.3G
+[16:03:59 +166.1m] train coconut_b stage 6 ep0 528/1875 (28%) elapsed 4.6m eta 11.6m | loss 0.0389 | gpu mem 1.4G (peak 7.5/14.6G) util 99
+62% | cpu 51% ram 5.5/31.3G
+[16:04:30 +166.6m] train coconut_b stage 6 ep0 587/1875 (31%) elapsed 5.1m eta 11.1m | loss 0.0392 | gpu mem 1.9G (peak 7.5/14.6G) util 94
+69% | cpu 51% ram 5.5/31.3G
+[16:05:00 +167.1m] train coconut_b stage 6 ep0 645/1875 (34%) elapsed 5.6m eta 10.6m | loss 0.0402 | gpu mem 1.9G (peak 7.5/14.6G) util 83
+70% | cpu 51% ram 5.5/31.3G
+[16:05:30 +167.6m] train coconut_b stage 6 ep0 704/1875 (38%) elapsed 6.1m eta 10.1m | loss 0.0405 | gpu mem 1.4G (peak 7.5/14.6G) util 88
+91% | cpu 51% ram 5.5/31.3G
+[16:06:00 +168.1m] train coconut_b stage 6 ep0 764/1875 (41%) elapsed 6.6m eta 9.5m | loss 0.0413 | gpu mem 1.4G (peak 7.5/14.6G) util 89
+97% | cpu 50% ram 5.5/31.3G
+[16:06:31 +168.6m] train coconut_b stage 6 ep0 824/1875 (44%) elapsed 7.1m eta 9.0m | loss 0.0411 | gpu mem 1.4G (peak 7.5/14.6G) util 99
+99% | cpu 50% ram 5.5/31.3G
+[16:07:01 +169.1m] train coconut_b stage 6 ep0 883/1875 (47%) elapsed 7.6m eta 8.5m | loss 0.0410 | gpu mem 1.9G (peak 7.5/14.6G) util 76
+98% | cpu 50% ram 5.4/31.3G
+[16:07:31 +169.6m] train coconut_b stage 6 ep0 943/1875 (50%) elapsed 8.1m eta 8.0m | loss 0.0411 | gpu mem 1.9G (peak 7.5/14.6G) util 85
+89% | cpu 50% ram 5.5/31.3G
+[16:08:02 +170.1m] train coconut_b stage 6 ep0 1003/1875 (53%) elapsed 8.6m eta 7.5m | loss 0.0411 | gpu mem 1.9G (peak 7.5/14.6G) util 76
+74% | cpu 50% ram 5.4/31.3G
+[16:08:32 +170.6m] train coconut_b stage 6 ep0 1062/1875 (57%) elapsed 9.1m eta 7.0m | loss 0.0412 | gpu mem 1.4G (peak 7.5/14.6G) util 83
+95% | cpu 50% ram 5.4/31.3G
+[16:09:02 +171.1m] train coconut_b stage 6 ep0 1121/1875 (60%) elapsed 9.6m eta 6.5m | loss 0.0412 | gpu mem 1.9G (peak 7.5/14.6G) util 93
+99% | cpu 50% ram 5.5/31.3G
+[16:09:32 +171.6m] train coconut_b stage 6 ep0 1181/1875 (63%) elapsed 10.1m eta 5.9m | loss 0.0413 | gpu mem 1.9G (peak 7.5/14.6G) util 94
+84% | cpu 50% ram 5.4/31.3G
+[16:10:03 +172.1m] train coconut_b stage 6 ep0 1240/1875 (66%) elapsed 10.6m eta 5.4m | loss 0.0412 | gpu mem 1.4G (peak 7.5/14.6G) util 77
+99% | cpu 50% ram 5.4/31.3G
+[16:10:33 +172.6m] train coconut_b stage 6 ep0 1300/1875 (69%) elapsed 11.1m eta 4.9m | loss 0.0413 | gpu mem 1.4G (peak 7.5/14.6G) util 99
+67% | cpu 50% ram 5.4/31.3G
+[16:11:03 +173.1m] train coconut_b stage 6 ep0 1359/1875 (72%) elapsed 11.6m eta 4.4m | loss 0.0411 | gpu mem 1.9G (peak 7.5/14.6G) util 80
+94% | cpu 50% ram 5.5/31.3G
+[16:11:33 +173.6m] train coconut_b stage 6 ep0 1418/1875 (76%) elapsed 12.1m eta 3.9m | loss 0.0409 | gpu mem 1.4G (peak 7.5/14.6G) util 93
+91% | cpu 50% ram 5.4/31.3G
+[16:12:03 +174.1m] train coconut_b stage 6 ep0 1477/1875 (79%) elapsed 12.6m eta 3.4m | loss 0.0411 | gpu mem 1.9G (peak 7.5/14.6G) util 85
+99% | cpu 50% ram 5.4/31.3G
+[16:12:34 +174.6m] train coconut_b stage 6 ep0 1536/1875 (82%) elapsed 13.1m eta 2.9m | loss 0.0412 | gpu mem 1.4G (peak 7.5/14.6G) util 88
+66% | cpu 50% ram 5.4/31.3G
+[16:13:04 +175.2m] train coconut_b stage 6 ep0 1595/1875 (85%) elapsed 13.6m eta 2.4m | loss 0.0414 | gpu mem 1.9G (peak 7.5/14.6G) util 94
+70% | cpu 50% ram 5.4/31.3G
+[16:13:34 +175.7m] train coconut_b stage 6 ep0 1654/1875 (88%) elapsed 14.1m eta 1.9m | loss 0.0416 | gpu mem 1.4G (peak 7.5/14.6G) util 85
+70% | cpu 50% ram 5.5/31.3G
+[16:14:04 +176.2m] train coconut_b stage 6 ep0 1712/1875 (91%) elapsed 14.6m eta 1.4m | loss 0.0416 | gpu mem 1.4G (peak 7.7/14.6G) util 80
+90% | cpu 50% ram 5.4/31.3G
+[16:14:35 +176.7m] train coconut_b stage 6 ep0 1772/1875 (95%) elapsed 15.1m eta 0.9m | loss 0.0416 | gpu mem 1.4G (peak 7.7/14.6G) util 93
+99% | cpu 50% ram 5.4/31.3G
+[16:15:05 +177.2m] train coconut_b stage 6 ep0 1831/1875 (98%) elapsed 15.6m eta 0.4m | loss 0.0416 | gpu mem 1.9G (peak 7.7/14.6G) util 89
+99% | cpu 50% ram 5.4/31.3G
+[16:15:27 +177.5m] train coconut_b stage 6 ep0 1875/1875 (100%) elapsed 16.0m eta 0.0m | loss 0.0415 | gpu mem 1.4G (peak 7.7/14.6G) util 96
+99% | cpu 50% ram 5.4/31.3G
+[16:15:27 +177.5m] train coconut_b stage 6 ep0 done: mean loss 0.0415 (15000 examples)
+[16:16:00 +178.1m] train coconut_b stage 6 ep1 59/1875 (3%) elapsed 0.5m eta 15.5m | loss 0.0313 | gpu mem 1.9G (peak 6.9/14.6G) util 64
+73% | cpu 50% ram 5.4/31.3G
+[16:16:30 +178.6m] train coconut_b stage 6 ep1 118/1875 (6%) elapsed 1.0m eta 15.0m | loss 0.0344 | gpu mem 1.4G (peak 7.0/14.6G) util 95
+65% | cpu 50% ram 5.4/31.3G
+[16:17:00 +179.1m] train coconut_b stage 6 ep1 177/1875 (9%) elapsed 1.5m eta 14.5m | loss 0.0345 | gpu mem 1.9G (peak 7.0/14.6G) util 74
+99% | cpu 50% ram 5.4/31.3G
+[16:17:31 +179.6m] train coconut_b stage 6 ep1 236/1875 (13%) elapsed 2.0m eta 14.0m | loss 0.0349 | gpu mem 1.4G (peak 7.1/14.6G) util 99
+71% | cpu 50% ram 5.4/31.3G
+[16:18:01 +180.1m] train coconut_b stage 6 ep1 295/1875 (16%) elapsed 2.5m eta 13.5m | loss 0.0346 | gpu mem 1.9G (peak 7.1/14.6G) util 89
+55% | cpu 50% ram 5.4/31.3G
+[16:18:31 +180.6m] train coconut_b stage 6 ep1 353/1875 (19%) elapsed 3.0m eta 13.0m | loss 0.0355 | gpu mem 1.9G (peak 7.1/14.6G) util 94
+99% | cpu 50% ram 5.4/31.3G
+[16:19:01 +181.1m] train coconut_b stage 6 ep1 412/1875 (22%) elapsed 3.5m eta 12.5m | loss 0.0351 | gpu mem 1.4G (peak 7.5/14.6G) util 88
+61% | cpu 50% ram 5.5/31.3G
+[16:19:32 +181.6m] train coconut_b stage 6 ep1 471/1875 (25%) elapsed 4.0m eta 12.0m | loss 0.0356 | gpu mem 1.9G (peak 7.5/14.6G) util 75
+67% | cpu 50% ram 5.4/31.3G
+[16:20:02 +182.1m] train coconut_b stage 6 ep1 529/1875 (28%) elapsed 4.5m eta 11.6m | loss 0.0347 | gpu mem 1.9G (peak 7.5/14.6G) util 93
+90% | cpu 50% ram 5.4/31.3G
+[16:20:32 +182.6m] train coconut_b stage 6 ep1 588/1875 (31%) elapsed 5.0m eta 11.0m | loss 0.0349 | gpu mem 1.4G (peak 7.5/14.6G) util 72
+93% | cpu 50% ram 5.4/31.3G
+[16:21:02 +183.1m] train coconut_b stage 6 ep1 647/1875 (35%) elapsed 5.5m eta 10.5m | loss 0.0348 | gpu mem 1.9G (peak 7.5/14.6G) util 68
+87% | cpu 50% ram 5.4/31.3G
+[16:21:33 +183.6m] train coconut_b stage 6 ep1 706/1875 (38%) elapsed 6.1m eta 10.0m | loss 0.0352 | gpu mem 1.4G (peak 7.5/14.6G) util 81
+68% | cpu 50% ram 5.4/31.3G
+[16:22:03 +184.1m] train coconut_b stage 6 ep1 765/1875 (41%) elapsed 6.6m eta 9.5m | loss 0.0349 | gpu mem 1.9G (peak 7.5/14.6G) util 82
+71% | cpu 50% ram 5.4/31.3G
+[16:22:33 +184.6m] train coconut_b stage 6 ep1 824/1875 (44%) elapsed 7.1m eta 9.0m | loss 0.0352 | gpu mem 1.4G (peak 7.5/14.6G) util 86
+97% | cpu 50% ram 5.4/31.3G
+[16:23:04 +185.1m] train coconut_b stage 6 ep1 883/1875 (47%) elapsed 7.6m eta 8.5m | loss 0.0352 | gpu mem 1.9G (peak 7.5/14.6G) util 63
+58% | cpu 51% ram 5.5/31.3G
+[16:23:34 +185.6m] train coconut_b stage 6 ep1 941/1875 (50%) elapsed 8.1m eta 8.0m | loss 0.0349 | gpu mem 1.9G (peak 7.7/14.6G) util 87
+99% | cpu 51% ram 5.5/31.3G
+[16:24:04 +186.1m] train coconut_b stage 6 ep1 1000/1875 (53%) elapsed 8.6m eta 7.5m | loss 0.0357 | gpu mem 1.4G (peak 7.7/14.6G) util 93
+99% | cpu 51% ram 5.5/31.3G
+[16:24:34 +186.7m] train coconut_b stage 6 ep1 1059/1875 (56%) elapsed 9.1m eta 7.0m | loss 0.0358 | gpu mem 1.9G (peak 7.7/14.6G) util 90
+99% | cpu 51% ram 5.5/31.3G
+[16:25:04 +187.2m] train coconut_b stage 6 ep1 1117/1875 (60%) elapsed 9.6m eta 6.5m | loss 0.0355 | gpu mem 1.9G (peak 7.7/14.6G) util 89
+99% | cpu 51% ram 5.5/31.3G
+[16:25:35 +187.7m] train coconut_b stage 6 ep1 1176/1875 (63%) elapsed 10.1m eta 6.0m | loss 0.0355 | gpu mem 1.4G (peak 7.7/14.6G) util 88
+99% | cpu 51% ram 5.5/31.3G
+[16:26:05 +188.2m] train coconut_b stage 6 ep1 1234/1875 (66%) elapsed 10.6m eta 5.5m | loss 0.0360 | gpu mem 1.4G (peak 7.7/14.6G) util 92
+79% | cpu 51% ram 5.5/31.3G
+[16:26:35 +188.7m] train coconut_b stage 6 ep1 1293/1875 (69%) elapsed 11.1m eta 5.0m | loss 0.0358 | gpu mem 1.9G (peak 7.7/14.6G) util 80
+95% | cpu 51% ram 5.5/31.3G
+[16:27:05 +189.2m] train coconut_b stage 6 ep1 1352/1875 (72%) elapsed 11.6m eta 4.5m | loss 0.0357 | gpu mem 1.4G (peak 7.7/14.6G) util 99
+96% | cpu 51% ram 5.5/31.3G
+[16:27:36 +189.7m] train coconut_b stage 6 ep1 1411/1875 (75%) elapsed 12.1m eta 4.0m | loss 0.0356 | gpu mem 1.9G (peak 7.7/14.6G) util 52
+93% | cpu 51% ram 5.5/31.3G
+[16:28:06 +190.2m] train coconut_b stage 6 ep1 1470/1875 (78%) elapsed 12.6m eta 3.5m | loss 0.0355 | gpu mem 1.4G (peak 7.7/14.6G) util 70
+97% | cpu 51% ram 5.5/31.3G
+[16:28:36 +190.7m] train coconut_b stage 6 ep1 1529/1875 (82%) elapsed 13.1m eta 3.0m | loss 0.0356 | gpu mem 1.9G (peak 7.7/14.6G) util 65
+99% | cpu 51% ram 5.5/31.3G
+[16:29:06 +191.2m] train coconut_b stage 6 ep1 1587/1875 (85%) elapsed 13.6m eta 2.5m | loss 0.0355 | gpu mem 1.9G (peak 7.7/14.6G) util 89
+99% | cpu 51% ram 5.5/31.3G
+[16:29:37 +191.7m] train coconut_b stage 6 ep1 1646/1875 (88%) elapsed 14.1m eta 2.0m | loss 0.0356 | gpu mem 1.4G (peak 7.7/14.6G) util 88
+96% | cpu 51% ram 5.5/31.3G
+[16:30:07 +192.2m] train coconut_b stage 6 ep1 1704/1875 (91%) elapsed 14.6m eta 1.5m | loss 0.0359 | gpu mem 1.4G (peak 7.7/14.6G) util 95
+66% | cpu 51% ram 5.5/31.3G
+[16:30:37 +192.7m] train coconut_b stage 6 ep1 1763/1875 (94%) elapsed 15.1m eta 1.0m | loss 0.0359 | gpu mem 1.9G (peak 7.7/14.6G) util 89
+100% | cpu 51% ram 5.5/31.3G
+[16:31:08 +193.2m] train coconut_b stage 6 ep1 1822/1875 (97%) elapsed 15.6m eta 0.5m | loss 0.0359 | gpu mem 1.4G (peak 7.7/14.6G) util 99
+86% | cpu 51% ram 5.5/31.3G
+[16:31:35 +193.7m] train coconut_b stage 6 ep1 1875/1875 (100%) elapsed 16.1m eta 0.0m | loss 0.0359 | gpu mem 1.4G (peak 7.7/14.6G) util 78
+91% | cpu 51% ram 5.5/31.3G
+[16:31:35 +193.7m] train coconut_b stage 6 ep1 done: mean loss 0.0359 (15000 examples)
+[16:31:43 +193.8m] gen coconut 10/10 (100%) elapsed 0.1m eta 0.0m | gpu mem 1.6G (peak 7.7/14.6G) util 97
+82% | cpu 51% ram 5.5/31.3G
+[16:31:43 +193.8m] train coconut_b: val accuracy 0.85 on 150 held-out unhinted questions after 7/7 (chance 0.50)
+[16:31:43 +193.8m] finished train coconut_b stage 6 (7/7) after 193.5m
+[16:31:44 +193.8m] <<< done train coconut_b in 193.5m (expected ~208.5m)
+[16:31:44 +193.8m] === PHASE 7/9: generation + features | expected ~19.6m | total elapsed 193.8m ===
+[16:32:00 +194.1m] gen coconut 19/19 (100%) elapsed 0.3m eta 0.0m | gpu mem 0.9G (peak 7.7/14.6G) util 92
+75% | cpu 51% ram 5.4/31.3G
+[16:32:16 +194.4m] gen coconut 19/19 (100%) elapsed 0.3m eta 0.0m | gpu mem 0.9G (peak 7.7/14.6G) util 98
+97% | cpu 51% ram 5.4/31.3G
+[16:32:47 +194.9m] gen coconut 35/38 (92%) elapsed 0.5m eta 0.0m | gpu mem 1.0G (peak 7.7/14.6G) util 94
+99% | cpu 51% ram 5.4/31.3G
+[16:32:49 +194.9m] gen coconut 38/38 (100%) elapsed 0.5m eta 0.0m | gpu mem 0.8G (peak 7.7/14.6G) util 94
+66% | cpu 51% ram 5.3/31.3G
+[16:33:19 +195.4m] gen coconut 36/38 (95%) elapsed 0.5m eta 0.0m | gpu mem 1.1G (peak 7.7/14.6G) util 97
+88% | cpu 51% ram 5.4/31.3G
+[16:33:20 +195.4m] gen coconut 38/38 (100%) elapsed 0.5m eta 0.0m | gpu mem 0.8G (peak 7.7/14.6G) util 89
+99% | cpu 50% ram 5.4/31.3G
+[16:33:20 +195.4m] coconut_b generations (900 rows): {"tr": {"n": 300, "unhinted_acc": 0.8466666666666667, "hinted_acc_correct_hint": 0.9933333333333333, "follow_rate_wrong_hint": 0.86}, "te": {"n": 600, "unhinted_acc": 0.845, "hinted_acc_correct_hint": 0.99, "follow_rate_wrong_hint": 0.8366666666666667}}
+[16:33:20 +195.4m] ALL DONE in 195.4m

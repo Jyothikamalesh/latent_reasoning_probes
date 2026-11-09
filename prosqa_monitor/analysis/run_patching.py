@@ -107,7 +107,7 @@ def boot(vals, clusters, B, rng):
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument('--ckpt', required=True); ap.add_argument('--gens', required=True); ap.add_argument('--out', required=True)
     ap.add_argument('--model', default='coconut_b'); ap.add_argument('--limit', type=int, default=0); ap.add_argument('--device', default='cpu')
-    ap.add_argument('--boot', type=int, default=2000); ap.add_argument('--seed', type=int, default=0); ap.add_argument('--bs', type=int, default=16); ap.add_argument('--min-agree', type=float, default=0.9); ap.add_argument('--run-id', default=''); ap.add_argument('--followup', action='store_true')
+    ap.add_argument('--boot', type=int, default=2000); ap.add_argument('--seed', type=int, default=0); ap.add_argument('--bs', type=int, default=16); ap.add_argument('--min-agree', type=float, default=0.9); ap.add_argument('--run-id', default=''); ap.add_argument('--followup', action='store_true'); ap.add_argument('--latentdep', action='store_true')
     a = ap.parse_args(); os.makedirs(a.out, exist_ok=True); t0 = time.time(); torch.manual_seed(a.seed); rng = np.random.default_rng(a.seed)
     tok, model = load_model(a.ckpt, a.device)
     ids = tok.convert_tokens_to_ids(['<bot>', '<eot>', '<latent>']); assert ids == [50257, 50258, 50259] and len(tok) == model.get_input_embeddings().num_embeddings == 50260, (ids, len(tok))   # same special-token ids as in training
@@ -122,7 +122,7 @@ def main():
     don = donors(rows, rng); has_don = don >= 0
     V, base, VN = {}, {}, {}                                                       # V[name] = M under the intervention; base[name] = the baseline it is compared against
     def add(name, M, b): V[name], base[name], VN[name] = M, b, R.last_norm.copy()      # R.last_norm belongs to the R.all call that produced M (arguments are evaluated before add)
-    if not a.followup:
+    if not (a.followup or a.latentdep):
         for t in range(N):
             add(f'single_t{t}', R.all('h', lambda idx, t=t: {t: ZU[idx, t]})[0], MH)
             g = torch.Generator().manual_seed(a.seed * 100 + t)
@@ -168,6 +168,10 @@ def main():
         add('f_lat_bot_ans_bot', R.all('h', block_latents_from=0, latent_kind='bot', block_answer='bot')[0], MH)
         add('f_u_ans_bot', R.all('u', block_answer='bot', block_bot=True)[0], MU)           # disruption baseline: blocking <bot> alone on UNHINTED prompts
         add('f_u_lat_bot_ans_bot', R.all('u', block_latents_from=0, latent_kind='bot', block_answer='bot', block_bot=True)[0], MU)
+    if a.latentdep:                                                        # diagnostic (Amendment 7): do the latents matter for the plain, unhinted answer?
+        add('u_zero_full6', R.all('u', lambda idx: {t: torch.zeros_like(ZU[idx, t]) for t in range(N)})[0], MU)
+        add('u_matched_full6', R.all('u', lambda idx: {t: ZU[np.where(don[idx] >= 0, don[idx], idx), t] for t in range(N)})[0], MU)
+        for t in range(N): add(f'u_zero_t{t}', R.all('u', lambda idx, t=t: {t: torch.zeros_like(ZU[idx, t])})[0], MU)
     D = {k: V[k] - base[k] for k in V}                                                                 # change in M (positive = towards the true option)
     cl = [r['q'] for r in rows]; S = {}
     for g in cnt:
@@ -208,8 +212,9 @@ def main():
             'f_lat_hint / f_lat_bot': 'FOLLOW-UP: latent steps (from slot 0) cannot attend to the hint tokens only / to <bot> only; slot-0 input is NOT replaced; the answer reads everything',
             'f_lat_hint_ans_hint / f_lat_bot_ans_bot': 'FOLLOW-UP: the same single-target block applied to both latent steps and the answer',
             'f_u_ans_bot / f_u_lat_bot_ans_bot': 'FOLLOW-UP disruption baselines: <bot> alone blocked on UNHINTED prompts; change relative to the unhinted M',
+            'u_zero_full6 / u_matched_full6 / u_zero_t*': 'DIAGNOSTIC on the UNHINTED prompt: all six latent inputs zeroed / replaced by another question\'s unhinted states / one slot zeroed; change relative to the unhinted M',
             'u_block_latents / u_block_answer / u_both_blocked': 'disruption baselines: the same blocks applied to UNHINTED prompts (<bot> blocked); change relative to the unhinted M, i.e. what blocking does with no hint present'}
-    meta = dict(followup=a.followup, third_option_rows_skipped=build_rows.third_option_skipped, run_id=a.run_id, ckpt=a.ckpt, model=a.model, n_rows=len(rows), counts=cnt, depth_known=int(sum(r['depth'] is not None for r in rows)), rebuild_agreement_hinted=agree, rebuild_agreement_unhinted=agreeU, rebuild_agreement_by_group=gagree,
+    meta = dict(latentdep=a.latentdep, followup=a.followup, third_option_rows_skipped=build_rows.third_option_skipped, run_id=a.run_id, ckpt=a.ckpt, model=a.model, n_rows=len(rows), counts=cnt, depth_known=int(sum(r['depth'] is not None for r in rows)), rebuild_agreement_hinted=agree, rebuild_agreement_unhinted=agreeU, rebuild_agreement_by_group=gagree,
                 identity_max_abs_diff=float(np.abs(idn - MH).max()), seed=a.seed, boot=a.boot, minutes=(time.time() - t0) / 60, torch=torch.__version__)
     json.dump(dict(meta=meta, condition_descriptions=DESC, summary=S), open(f'{a.out}/patching_summary.json', 'w'), indent=1)
     with open(f'{a.out}/patching_rows.jsonl', 'w') as f:
@@ -218,7 +223,7 @@ def main():
     print(f"\nPRIMARY (harmful switches, single-step same-question restoration, mean over steps): dM = {h['single_mean']['mean_dM']:.3f} [{h['single_mean']['lo']:.3f}, {h['single_mean']['hi']:.3f}], n = {h['single_mean']['n']}" if 'single_mean' in h else 'no harmful rows')
     for g in S:
         print(f'\n[{g}] n={cnt[g]}  baseline {S[g]["_baseline"]}')
-        for k in ('f_ans_hint', 'f_ans_bot', 'f_ans_both', 'f_lat_hint', 'f_lat_bot', 'f_lat_hint_ans_hint', 'f_lat_bot_ans_bot', 'f_u_ans_bot', 'f_u_lat_bot_ans_bot', 'single_mean', 'single_pm_mean', 'noise_mean', 'matched_mean', 'samecond_mean', 'persist_mean', 'full6', 'zero_full6', 'matched_full6', 'full6_pm', 'block_answer', 'block_latents', 'block_latents_pm', 'full6_block_answer', 'both_blocked', 'both_blocked_pm', 'block_latents_mad', 'both_blocked_mad', 'u_block_latents', 'u_block_answer', 'u_both_blocked', 'reverse_mean'):
+        for k in ('u_zero_full6', 'u_matched_full6', 'u_zero_t0', 'u_zero_t1', 'u_zero_t2', 'u_zero_t3', 'u_zero_t4', 'u_zero_t5', 'f_ans_hint', 'f_ans_bot', 'f_ans_both', 'f_lat_hint', 'f_lat_bot', 'f_lat_hint_ans_hint', 'f_lat_bot_ans_bot', 'f_u_ans_bot', 'f_u_lat_bot_ans_bot', 'single_mean', 'single_pm_mean', 'noise_mean', 'matched_mean', 'samecond_mean', 'persist_mean', 'full6', 'zero_full6', 'matched_full6', 'full6_pm', 'block_answer', 'block_latents', 'block_latents_pm', 'full6_block_answer', 'both_blocked', 'both_blocked_pm', 'block_latents_mad', 'both_blocked_mad', 'u_block_latents', 'u_block_answer', 'u_both_blocked', 'reverse_mean'):
             if k in S[g]: e = S[g][k]; print(f'  {k:20s} dM {e["mean_dM"]:+.3f} [{e["lo"]:+.3f},{e["hi"]:+.3f}]  P(true) {e["p_true"]:.2f}  P(wrong) {e["p_flip_to_wrong"]:.2f}')
     print(f'\nsaved to {a.out} in {meta["minutes"]:.1f} min')
 

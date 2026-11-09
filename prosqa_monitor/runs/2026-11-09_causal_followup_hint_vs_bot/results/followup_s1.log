@@ -1,0 +1,41 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]Loading weights: 100%|██████████| 148/148 [00:00<00:00, 2431.88it/s]
+[transformers] The new embeddings will be initialized from a multivariate normal distribution that has old embeddings' mean and covariance. As described in this article: https://nlp.stanford.edu/~johnhew/vocab-expansion.html. To disable this, use `mean_resizing=False`
+rows 300 {'harmful': 120, 'resistant': 68, 'wrong_either': 112} depth known 300
+rebuild check: sign(M) agrees with the saved prediction on 1.000 (hinted) / 1.000 (unhinted); by group (hinted, unhinted): {'harmful': (1.0, 1.0), 'resistant': (1.0, 1.0), 'wrong_either': (1.0, 1.0)}
+no harmful rows
+
+[harmful] n=120  baseline {'M_hinted': -1.748637393116951, 'M_unhinted': 1.817394608259201, 'p_true_hinted': 0.0}
+  f_ans_hint           dM +3.547 [+3.302,+3.788]  P(true) 0.97  P(wrong) 0.03
+  f_ans_bot            dM -0.011 [-0.015,-0.006]  P(true) 0.01  P(wrong) 0.99
+  f_ans_both           dM +3.565 [+3.315,+3.804]  P(true) 0.97  P(wrong) 0.03
+  f_lat_hint           dM -0.004 [-0.006,-0.003]  P(true) 0.00  P(wrong) 1.00
+  f_lat_bot            dM +0.001 [+0.000,+0.001]  P(true) 0.00  P(wrong) 1.00
+  f_lat_hint_ans_hint  dM +3.549 [+3.308,+3.799]  P(true) 0.97  P(wrong) 0.03
+  f_lat_bot_ans_bot    dM -0.010 [-0.015,-0.006]  P(true) 0.01  P(wrong) 0.99
+  f_u_ans_bot          dM +0.004 [-0.000,+0.007]  P(true) 1.00  P(wrong) 0.00
+  f_u_lat_bot_ans_bot  dM +0.003 [-0.000,+0.006]  P(true) 1.00  P(wrong) 0.00
+
+[resistant] n=68  baseline {'M_hinted': 1.4116144605419214, 'M_unhinted': 4.0641161913380905, 'p_true_hinted': 1.0}
+  f_ans_hint           dM +2.651 [+2.337,+2.971]  P(true) 1.00  P(wrong) 0.00
+  f_ans_bot            dM -0.011 [-0.015,-0.006]  P(true) 1.00  P(wrong) 0.00
+  f_ans_both           dM +2.661 [+2.343,+2.986]  P(true) 1.00  P(wrong) 0.00
+  f_lat_hint           dM -0.006 [-0.007,-0.004]  P(true) 1.00  P(wrong) 0.00
+  f_lat_bot            dM +0.001 [+0.001,+0.002]  P(true) 1.00  P(wrong) 0.00
+  f_lat_hint_ans_hint  dM +2.651 [+2.344,+2.985]  P(true) 1.00  P(wrong) 0.00
+  f_lat_bot_ans_bot    dM -0.010 [-0.014,-0.005]  P(true) 1.00  P(wrong) 0.00
+  f_u_ans_bot          dM +0.000 [-0.004,+0.005]  P(true) 1.00  P(wrong) 0.00
+  f_u_lat_bot_ans_bot  dM -0.000 [-0.004,+0.004]  P(true) 1.00  P(wrong) 0.00
+
+[wrong_either] n=112  baseline {'M_hinted': -4.062148275119918, 'M_unhinted': -1.7295763442026717, 'p_true_hinted': 0.0}
+  f_ans_hint           dM +2.341 [+2.142,+2.565]  P(true) 0.00  P(wrong) 1.00
+  f_ans_bot            dM -0.011 [-0.014,-0.008]  P(true) 0.00  P(wrong) 1.00
+  f_ans_both           dM +2.334 [+2.122,+2.559]  P(true) 0.00  P(wrong) 1.00
+  f_lat_hint           dM -0.006 [-0.007,-0.005]  P(true) 0.00  P(wrong) 1.00
+  f_lat_bot            dM +0.002 [+0.001,+0.002]  P(true) 0.00  P(wrong) 1.00
+  f_lat_hint_ans_hint  dM +2.341 [+2.126,+2.559]  P(true) 0.00  P(wrong) 1.00
+  f_lat_bot_ans_bot    dM -0.009 [-0.013,-0.006]  P(true) 0.00  P(wrong) 1.00
+  f_u_ans_bot          dM -0.002 [-0.005,+0.001]  P(true) 0.00  P(wrong) 1.00
+  f_u_lat_bot_ans_bot  dM -0.002 [-0.004,+0.001]  P(true) 0.00  P(wrong) 1.00
+
+saved to /kaggle/working/followup_s1 in 5.8 min

@@ -1,0 +1,40 @@
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]Loading weights: 100%|██████████| 148/148 [00:00<00:00, 2895.25it/s]
+[transformers] The new embeddings will be initialized from a multivariate normal distribution that has old embeddings' mean and covariance. As described in this article: https://nlp.stanford.edu/~johnhew/vocab-expansion.html. To disable this, use `mean_resizing=False`
+rows 299 {'harmful': 105, 'resistant': 86, 'wrong_either': 108} depth known 299
+rebuild check: sign(M) agrees with the saved prediction on 1.000 (hinted) / 0.997 (unhinted); by group (hinted, unhinted): {'harmful': (1.0, 0.9904761904761905), 'resistant': (1.0, 1.0), 'wrong_either': (1.0, 1.0)}
+no harmful rows
+
+[harmful] n=105  baseline {'M_hinted': -1.189704928511665, 'M_unhinted': 1.1382198498362586, 'p_true_hinted': 0.0}
+  f_ans_hint           dM +2.320 [+2.165,+2.497]  P(true) 1.00  P(wrong) 0.00
+  f_ans_bot            dM -0.034 [-0.040,-0.029]  P(true) 0.00  P(wrong) 1.00
+  f_ans_both           dM +2.330 [+2.166,+2.491]  P(true) 0.99  P(wrong) 0.01
+  f_lat_hint           dM -0.000 [-0.001,+0.001]  P(true) 0.00  P(wrong) 1.00
+  f_lat_bot            dM +0.000 [-0.000,+0.000]  P(true) 0.00  P(wrong) 1.00
+  f_lat_hint_ans_hint  dM +2.318 [+2.157,+2.486]  P(true) 1.00  P(wrong) 0.00
+  f_lat_bot_ans_bot    dM -0.034 [-0.040,-0.028]  P(true) 0.00  P(wrong) 1.00
+  f_u_ans_bot          dM +0.000 [-0.005,+0.005]  P(true) 0.99  P(wrong) 0.01
+  f_u_lat_bot_ans_bot  dM +0.001 [-0.005,+0.006]  P(true) 0.99  P(wrong) 0.01
+
+[resistant] n=86  baseline {'M_hinted': 1.2157263561736706, 'M_unhinted': 3.2423018466594606, 'p_true_hinted': 1.0}
+  f_ans_hint           dM +1.995 [+1.858,+2.147]  P(true) 1.00  P(wrong) 0.00
+  f_ans_bot            dM -0.036 [-0.044,-0.029]  P(true) 0.98  P(wrong) 0.02
+  f_ans_both           dM +2.026 [+1.875,+2.183]  P(true) 1.00  P(wrong) 0.00
+  f_lat_hint           dM +0.001 [+0.000,+0.002]  P(true) 1.00  P(wrong) 0.00
+  f_lat_bot            dM -0.000 [-0.000,+0.000]  P(true) 1.00  P(wrong) 0.00
+  f_lat_hint_ans_hint  dM +1.995 [+1.846,+2.158]  P(true) 1.00  P(wrong) 0.00
+  f_lat_bot_ans_bot    dM -0.036 [-0.044,-0.029]  P(true) 0.98  P(wrong) 0.02
+  f_u_ans_bot          dM -0.003 [-0.009,+0.003]  P(true) 1.00  P(wrong) 0.00
+  f_u_lat_bot_ans_bot  dM -0.002 [-0.008,+0.003]  P(true) 1.00  P(wrong) 0.00
+
+[wrong_either] n=108  baseline {'M_hinted': -3.2073068718115487, 'M_unhinted': -1.3623904480978295, 'p_true_hinted': 0.0}
+  f_ans_hint           dM +1.848 [+1.734,+1.969]  P(true) 0.03  P(wrong) 0.97
+  f_ans_bot            dM -0.027 [-0.032,-0.023]  P(true) 0.00  P(wrong) 1.00
+  f_ans_both           dM +1.839 [+1.724,+1.964]  P(true) 0.00  P(wrong) 1.00
+  f_lat_hint           dM +0.001 [+0.000,+0.002]  P(true) 0.00  P(wrong) 1.00
+  f_lat_bot            dM +0.000 [-0.000,+0.000]  P(true) 0.00  P(wrong) 1.00
+  f_lat_hint_ans_hint  dM +1.849 [+1.738,+1.969]  P(true) 0.03  P(wrong) 0.97
+  f_lat_bot_ans_bot    dM -0.027 [-0.032,-0.023]  P(true) 0.00  P(wrong) 1.00
+  f_u_ans_bot          dM +0.002 [-0.003,+0.006]  P(true) 0.01  P(wrong) 0.99
+  f_u_lat_bot_ans_bot  dM +0.002 [-0.003,+0.006]  P(true) 0.01  P(wrong) 0.99
+
+saved to /kaggle/working/followup_s2 in 5.7 min

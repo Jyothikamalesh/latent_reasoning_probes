@@ -1,0 +1,321 @@
+{
+ "meta": {
+  "followup": true,
+  "third_option_rows_skipped": 0,
+  "run_id": "1794200993",
+  "ckpt": "/kaggle/input/datasets/jyothikamaleshs/prosqa-coconut-b-twins/s1_coconut_b.pt",
+  "model": "coconut_b",
+  "n_rows": 300,
+  "counts": {
+   "harmful": 120,
+   "resistant": 68,
+   "wrong_either": 112
+  },
+  "depth_known": 300,
+  "rebuild_agreement_hinted": 1.0,
+  "rebuild_agreement_unhinted": 1.0,
+  "rebuild_agreement_by_group": {
+   "harmful": [
+    1.0,
+    1.0
+   ],
+   "resistant": [
+    1.0,
+    1.0
+   ],
+   "wrong_either": [
+    1.0,
+    1.0
+   ]
+  },
+  "identity_max_abs_diff": 0.0,
+  "seed": 1,
+  "boot": 2000,
+  "minutes": 5.79231348435084,
+  "torch": "2.11.0+cu130"
+ },
+ "condition_descriptions": {
+  "single_t{t}": "hinted run; the INPUT vector of latent slot t replaced by the same question's natural UNHINTED state (shorter prompt, so shifted absolute positions); later slots and the answer recomputed; slots can still attend to the hinted prompt",
+  "single_pm_t{t}": "as single_t but the donor is the position-matched run (hinted prompt, hint tokens hidden from attention, same position ids)",
+  "noise_t{t}": "slot t input replaced by Gaussian noise with the norm of the unhinted donor state",
+  "matched_t{t}": "slot t input replaced by the unhinted state of ANOTHER question (same group and depth where known)",
+  "samecond_t{t}": "slot t input replaced by the hinted state of another question of the same group",
+  "reverse_t{t}": "UNHINTED run; slot t input replaced by the same question's hinted state (change relative to the unhinted M)",
+  "persist_t{t}": "slots 0 and t replaced by unhinted states; slots t+1.. cannot attend to the hint span or <bot>; slot t and earlier cached states may have seen the hint (secondary)",
+  "*_mean": "row-level mean of the six per-step conditions of that family (single_mean is the registered primary)",
+  "full6": "all six slot inputs replaced by natural unhinted states; the hinted prompt stays accessible to the slots and to the answer",
+  "zero_full6": "all six slot inputs replaced by zeros (scale control); hinted prompt stays accessible",
+  "matched_full6": "all six slot inputs replaced by another question's unhinted states (scale control); hinted prompt stays accessible",
+  "full6_pm": "all six slot inputs replaced by position-matched states; hinted prompt stays accessible",
+  "block_answer": "answer positions cannot attend to the hint span or <bot>; the latents run unchanged and may carry the hint",
+  "block_latents": "slot 0 input replaced by the unhinted state, and latent steps cannot attend to the hint span or <bot>; the answer can still read the hint directly",
+  "block_latents_pm": "as block_latents with the position-matched slot-0 state",
+  "block_latents_mad": "as block_latents with slot 0 from the matched-attention donor run (hint hidden, <bot> blocked)",
+  "full6_block_answer": "all six inputs replaced by unhinted states and the answer blocked from the hint span and <bot>; slots can still attend to the hint",
+  "both_blocked": "all six inputs replaced by unhinted states, latents AND answer blocked from the hint span and <bot>: no route from the hint remains",
+  "both_blocked_pm": "as both_blocked with position-matched donor states",
+  "both_blocked_mad": "as both_blocked with donor states produced under the same blocked-attention regime",
+  "f_ans_hint / f_ans_bot / f_ans_both": "FOLLOW-UP: the answer cannot attend to the hint tokens only / to <bot> only / to both (= block_answer); latents untouched",
+  "f_lat_hint / f_lat_bot": "FOLLOW-UP: latent steps (from slot 0) cannot attend to the hint tokens only / to <bot> only; slot-0 input is NOT replaced; the answer reads everything",
+  "f_lat_hint_ans_hint / f_lat_bot_ans_bot": "FOLLOW-UP: the same single-target block applied to both latent steps and the answer",
+  "f_u_ans_bot / f_u_lat_bot_ans_bot": "FOLLOW-UP disruption baselines: <bot> alone blocked on UNHINTED prompts; change relative to the unhinted M",
+  "u_block_latents / u_block_answer / u_both_blocked": "disruption baselines: the same blocks applied to UNHINTED prompts (<bot> blocked); change relative to the unhinted M, i.e. what blocking does with no hint present"
+ },
+ "summary": {
+  "harmful": {
+   "f_ans_hint": {
+    "n": 120,
+    "mean_dM": 3.546525413542986,
+    "lo": 3.3015082523288823,
+    "hi": 3.7884523620394366,
+    "p_true": 0.9666666666666667,
+    "p_flip_to_wrong": 0.03333333333333333
+   },
+   "f_ans_bot": {
+    "n": 120,
+    "mean_dM": -0.01070513278245926,
+    "lo": -0.014887153456608454,
+    "hi": -0.006254152407248815,
+    "p_true": 0.008333333333333333,
+    "p_flip_to_wrong": 0.9916666666666667
+   },
+   "f_ans_both": {
+    "n": 120,
+    "mean_dM": 3.564938010275364,
+    "lo": 3.3149728170906503,
+    "hi": 3.804309619416793,
+    "p_true": 0.975,
+    "p_flip_to_wrong": 0.025
+   },
+   "f_lat_hint": {
+    "n": 120,
+    "mean_dM": -0.004279638826847077,
+    "lo": -0.005543055819968382,
+    "hi": -0.0029649684329827635,
+    "p_true": 0.0,
+    "p_flip_to_wrong": 1.0
+   },
+   "f_lat_bot": {
+    "n": 120,
+    "mean_dM": 0.0006539598107337952,
+    "lo": 0.00017799301693836847,
+    "hi": 0.0011601370945572853,
+    "p_true": 0.0,
+    "p_flip_to_wrong": 1.0
+   },
+   "f_lat_hint_ans_hint": {
+    "n": 120,
+    "mean_dM": 3.5485583561162155,
+    "lo": 3.3080400065518916,
+    "hi": 3.7988200847990803,
+    "p_true": 0.9666666666666667,
+    "p_flip_to_wrong": 0.03333333333333333
+   },
+   "f_lat_bot_ans_bot": {
+    "n": 120,
+    "mean_dM": -0.010235477487246196,
+    "lo": -0.01461363305648168,
+    "hi": -0.005979850888252261,
+    "p_true": 0.008333333333333333,
+    "p_flip_to_wrong": 0.9916666666666667
+   },
+   "f_u_ans_bot": {
+    "n": 120,
+    "mean_dM": 0.0035346890489260357,
+    "lo": -0.00023017818729082742,
+    "hi": 0.007235060955087343,
+    "p_true": 1.0,
+    "p_flip_to_wrong": 0.0
+   },
+   "f_u_lat_bot_ans_bot": {
+    "n": 120,
+    "mean_dM": 0.0029237359762191773,
+    "lo": -0.00034338091810544324,
+    "hi": 0.006243258826434612,
+    "p_true": 1.0,
+    "p_flip_to_wrong": 0.0
+   },
+   "_length_sensitivity": {
+    "option_token_count_differs": 0.25833333333333336,
+    "mean_abs_token_diff": 0.275,
+    "sign_disagree_M_vs_Mnorm_hinted": 0.0,
+    "sign_disagree_M_vs_Mnorm_unhinted": 0.025
+   },
+   "_baseline": {
+    "M_hinted": -1.748637393116951,
+    "M_unhinted": 1.817394608259201,
+    "p_true_hinted": 0.0
+   }
+  },
+  "resistant": {
+   "f_ans_hint": {
+    "n": 68,
+    "mean_dM": 2.6508828519898304,
+    "lo": 2.336772703171215,
+    "hi": 2.970967378445408,
+    "p_true": 1.0,
+    "p_flip_to_wrong": 0.0
+   },
+   "f_ans_bot": {
+    "n": 68,
+    "mean_dM": -0.01065296767389073,
+    "lo": -0.015341629865853225,
+    "hi": -0.006041043076445083,
+    "p_true": 1.0,
+    "p_flip_to_wrong": 0.0
+   },
+   "f_ans_both": {
+    "n": 68,
+    "mean_dM": 2.6608579469954265,
+    "lo": 2.3431779365438747,
+    "hi": 2.9855543867410983,
+    "p_true": 1.0,
+    "p_flip_to_wrong": 0.0
+   },
+   "f_lat_hint": {
+    "n": 68,
+    "mean_dM": -0.005824916064739227,
+    "lo": -0.007495226743904983,
+    "hi": -0.004161118047640605,
+    "p_true": 1.0,
+    "p_flip_to_wrong": 0.0
+   },
+   "f_lat_bot": {
+    "n": 68,
+    "mean_dM": 0.0012484731919625226,
+    "lo": 0.0006991345435380936,
+    "hi": 0.0017636463813045442,
+    "p_true": 1.0,
+    "p_flip_to_wrong": 0.0
+   },
+   "f_lat_hint_ans_hint": {
+    "n": 68,
+    "mean_dM": 2.6506250969627323,
+    "lo": 2.3443533794516154,
+    "hi": 2.9845503465875103,
+    "p_true": 1.0,
+    "p_flip_to_wrong": 0.0
+   },
+   "f_lat_bot_ans_bot": {
+    "n": 68,
+    "mean_dM": -0.009523978566422182,
+    "lo": -0.013938787382315186,
+    "hi": -0.004767844486324228,
+    "p_true": 1.0,
+    "p_flip_to_wrong": 0.0
+   },
+   "f_u_ans_bot": {
+    "n": 68,
+    "mean_dM": 0.0002379171988543342,
+    "lo": -0.004304026352132068,
+    "hi": 0.004835077966837319,
+    "p_true": 1.0,
+    "p_flip_to_wrong": 0.0
+   },
+   "f_u_lat_bot_ans_bot": {
+    "n": 68,
+    "mean_dM": -3.857910633087158e-05,
+    "lo": -0.004253100099809029,
+    "hi": 0.004148245887721285,
+    "p_true": 1.0,
+    "p_flip_to_wrong": 0.0
+   },
+   "_length_sensitivity": {
+    "option_token_count_differs": 0.38235294117647056,
+    "mean_abs_token_diff": 0.39705882352941174,
+    "sign_disagree_M_vs_Mnorm_hinted": 0.014705882352941176,
+    "sign_disagree_M_vs_Mnorm_unhinted": 0.0
+   },
+   "_baseline": {
+    "M_hinted": 1.4116144605419214,
+    "M_unhinted": 4.0641161913380905,
+    "p_true_hinted": 1.0
+   }
+  },
+  "wrong_either": {
+   "f_ans_hint": {
+    "n": 112,
+    "mean_dM": 2.341444804998381,
+    "lo": 2.1415877482920354,
+    "hi": 2.565177875284904,
+    "p_true": 0.0,
+    "p_flip_to_wrong": 1.0
+   },
+   "f_ans_bot": {
+    "n": 112,
+    "mean_dM": -0.010786257684230804,
+    "lo": -0.01409910816167082,
+    "hi": -0.00766783758465733,
+    "p_true": 0.0,
+    "p_flip_to_wrong": 1.0
+   },
+   "f_ans_both": {
+    "n": 112,
+    "mean_dM": 2.334150285060917,
+    "lo": 2.1224024855398707,
+    "hi": 2.5591497091576456,
+    "p_true": 0.0,
+    "p_flip_to_wrong": 1.0
+   },
+   "f_lat_hint": {
+    "n": 112,
+    "mean_dM": -0.006137990525790623,
+    "lo": -0.0074723604534353534,
+    "hi": -0.004801451627697265,
+    "p_true": 0.0,
+    "p_flip_to_wrong": 1.0
+   },
+   "f_lat_bot": {
+    "n": 112,
+    "mean_dM": 0.0016102982418877737,
+    "lo": 0.0011684341356158255,
+    "hi": 0.002073190574135099,
+    "p_true": 0.0,
+    "p_flip_to_wrong": 1.0
+   },
+   "f_lat_hint_ans_hint": {
+    "n": 112,
+    "mean_dM": 2.340587998341237,
+    "lo": 2.126258694646614,
+    "hi": 2.559426680360255,
+    "p_true": 0.0,
+    "p_flip_to_wrong": 1.0
+   },
+   "f_lat_bot_ans_bot": {
+    "n": 112,
+    "mean_dM": -0.009297594428062439,
+    "lo": -0.012661548171724591,
+    "hi": -0.005842197180858681,
+    "p_true": 0.0,
+    "p_flip_to_wrong": 1.0
+   },
+   "f_u_ans_bot": {
+    "n": 112,
+    "mean_dM": -0.0021817348897457123,
+    "lo": -0.004948031755962542,
+    "hi": 0.0009196729266217738,
+    "p_true": 0.0,
+    "p_flip_to_wrong": 1.0
+   },
+   "f_u_lat_bot_ans_bot": {
+    "n": 112,
+    "mean_dM": -0.0015762134322098323,
+    "lo": -0.004318933601358107,
+    "hi": 0.0011557670576231786,
+    "p_true": 0.0,
+    "p_flip_to_wrong": 1.0
+   },
+   "_length_sensitivity": {
+    "option_token_count_differs": 0.3392857142857143,
+    "mean_abs_token_diff": 0.3392857142857143,
+    "sign_disagree_M_vs_Mnorm_hinted": 0.0,
+    "sign_disagree_M_vs_Mnorm_unhinted": 0.026785714285714284
+   },
+   "_baseline": {
+    "M_hinted": -4.062148275119918,
+    "M_unhinted": -1.7295763442026717,
+    "p_true_hinted": 0.0
+   }
+  }
+ }
+}

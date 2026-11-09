@@ -1,0 +1,165 @@
+[{"stream_name":"stderr","time":6.393315358,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":6.393362216,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":6.3933666,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":6.393369195,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":6.942793882,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":6.942821396,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":6.942826762,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":6.942831456,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":23.240460573,"data":"Cloning into '/kaggle/working/coconut_repo'...\n"}
+,{"stream_name":"stdout","time":23.427039961,"data":"torch 2.11.0+cu130 transformers 5.20.2 gpus 2 ['Tesla T4', 'Tesla T4']\n"}
+,{"stream_name":"stderr","time":23.442160673,"data":"Cloning into '/kaggle/working/coconut_repo'...\n"}
+,{"stream_name":"stderr","time":23.442180934,"data":"\n"}
+,{"stream_name":"stderr","time":23.442185687,"data":"Cloning into '/kaggle/working/coconut_repo'...\n"}
+,{"stream_name":"stdout","time":24.29950832,"data":"inputs /kaggle/input/datasets/jyothikamaleshs/prosqa-coconut-b-twins ['s0_coconut_b.pt', 's0_generations.jsonl', 's1_coconut_b.pt', 's1_generations.jsonl', 's2_coconut_b.pt', 's2_generations.jsonl']\n"}
+,{"stream_name":"stdout","time":41.833482294,"data":" [transformers] Model config: bos_token_id must be `None` or an integer within the vocabulary (between 0 and 39), got 50256. This may result in unexpected behavior.\n"}
+,{"stream_name":"stdout","time":41.8335457,"data":"[transformers] Model config: eos_token_id must be `None` or an integer within the vocabulary (between 0 and 39), got 50256. This may result in unexpected behavior.\n"}
+,{"stream_name":"stdout","time":41.833554208,"data":".................\n"}
+,{"stream_name":"stdout","time":41.833560525,"data":"----------------------------------------------------------------------\n"}
+,{"stream_name":"stdout","time":41.833566596,"data":"Ran 17 tests in 0.838s\n"}
+,{"stream_name":"stdout","time":41.833572406,"data":"\n"}
+,{"stream_name":"stdout","time":41.83357717,"data":"OK\n"}
+,{"stream_name":"stdout","time":41.833581843,"data":"\n"}
+,{"stream_name":"stdout","time":745.238202224,"data":"workers exited [0, 0] 11.7 min\n"}
+,{"stream_name":"stdout","time":745.249086953,"data":"===== seed 0 =====\n"}
+,{"stream_name":"stdout","time":745.249118784,"data":"\n"}
+,{"stream_name":"stdout","time":745.249125304,"data":"Loading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\n"}
+,{"stream_name":"stdout","time":745.249130909,"data":"Loading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 2479.09it/s]\n"}
+,{"stream_name":"stdout","time":745.249137021,"data":"[transformers] The new embeddings will be initialized from a multivariate normal distribution that has old embeddings' mean and covariance. As described in this article: https://nlp.stanford.edu/~johnhew/vocab-expansion.html. To disable this, use `mean_resizing=False`\n"}
+,{"stream_name":"stdout","time":745.249142724,"data":"rows 300 {'harmful': 116, 'resistant': 78, 'wrong_either': 106} depth known 300\n"}
+,{"stream_name":"stdout","time":745.249147057,"data":"rebuild check: sign(M) agrees with the saved prediction on 1.000 (hinted) / 1.000 (unhinted); by group (hinted, unhinted): {'harmful': (1.0, 1.0), 'resistant': (1.0, 1.0), 'wrong_either': (1.0, 1.0)}\n"}
+,{"stream_name":"stdout","time":745.249160526,"data":"no harmful rows\n"}
+,{"stream_name":"stdout","time":745.249164043,"data":"\n"}
+,{"stream_name":"stdout","time":745.249167294,"data":"[harmful] n=116  baseline {'M_hinted': -1.844411363889431, 'M_unhinted': 1.7296615792759533, 'p_true_hinted': 0.0}\n"}
+,{"stream_name":"stdout","time":745.249170746,"data":"  f_ans_hint           dM +3.564 [+3.338,+3.813]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":745.249174179,"data":"  f_ans_bot            dM -0.030 [-0.034,-0.025]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":745.249177444,"data":"  f_ans_both           dM +3.581 [+3.350,+3.820]  P(true) 0.99  P(wrong) 0.01\n"}
+,{"stream_name":"stdout","time":745.249182471,"data":"  f_lat_hint           dM -0.001 [-0.002,-0.000]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":745.249185824,"data":"  f_lat_bot            dM +0.000 [+0.000,+0.001]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":745.249189259,"data":"  f_lat_hint_ans_hint  dM +3.565 [+3.348,+3.798]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":745.249194362,"data":"  f_lat_bot_ans_bot    dM -0.030 [-0.034,-0.025]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":745.249197739,"data":"  f_u_ans_bot          dM +0.002 [-0.002,+0.006]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":745.249201718,"data":"  f_u_lat_bot_ans_bot  dM +0.002 [-0.002,+0.006]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":745.249205634,"data":"\n"}
+,{"stream_name":"stdout","time":745.249209372,"data":"[resistant] n=78  baseline {'M_hinted': 1.6374421119689941, 'M_unhinted': 4.685947457949321, 'p_true_hinted': 1.0}\n"}
+,{"stream_name":"stdout","time":745.249213819,"data":"  f_ans_hint           dM +3.034 [+2.808,+3.266]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":745.249217929,"data":"  f_ans_bot            dM -0.029 [-0.035,-0.022]  P(true) 0.99  P(wrong) 0.01\n"}
+,{"stream_name":"stdout","time":745.249221935,"data":"  f_ans_both           dM +3.056 [+2.834,+3.282]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":745.249225979,"data":"  f_lat_hint           dM -0.001 [-0.002,+0.000]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":745.249230562,"data":"  f_lat_bot            dM +0.000 [+0.000,+0.001]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":745.249233732,"data":"  f_lat_hint_ans_hint  dM +3.034 [+2.798,+3.253]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":745.249236779,"data":"  f_lat_bot_ans_bot    dM -0.028 [-0.035,-0.021]  P(true) 0.99  P(wrong) 0.01\n"}
+,{"stream_name":"stdout","time":745.249240007,"data":"  f_u_ans_bot          dM +0.005 [-0.001,+0.011]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":745.249243312,"data":"  f_u_lat_bot_ans_bot  dM +0.005 [-0.001,+0.011]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":745.249246929,"data":"\n"}
+,{"stream_name":"stdout","time":745.249250685,"data":"[wrong_either] n=106  baseline {'M_hinted': -4.402506848551193, 'M_unhinted': -1.780024048292412, 'p_true_hinted': 0.0}\n"}
+,{"stream_name":"stdout","time":745.249254178,"data":"  f_ans_hint           dM +2.640 [+2.419,+2.862]  P(true) 0.02  P(wrong) 0.98\n"}
+,{"stream_name":"stdout","time":745.249257409,"data":"  f_ans_bot            dM -0.025 [-0.030,-0.019]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":745.249260957,"data":"  f_ans_both           dM +2.617 [+2.389,+2.839]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":745.249269129,"data":"  f_lat_hint           dM -0.000 [-0.001,+0.001]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":745.249272632,"data":"  f_lat_bot            dM +0.001 [+0.000,+0.001]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":745.249276551,"data":"  f_lat_hint_ans_hint  dM +2.640 [+2.416,+2.868]  P(true) 0.02  P(wrong) 0.98\n"}
+,{"stream_name":"stdout","time":745.249280087,"data":"  f_lat_bot_ans_bot    dM -0.024 [-0.030,-0.019]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":745.249283866,"data":"  f_u_ans_bot          dM -0.004 [-0.008,-0.000]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":745.249287679,"data":"  f_u_lat_bot_ans_bot  dM -0.004 [-0.008,-0.000]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":745.249291724,"data":"\n"}
+,{"stream_name":"stdout","time":745.249295676,"data":"saved to /kaggle/working/followup_s0 in 5.7 min\n"}
+,{"stream_name":"stdout","time":745.249299724,"data":"\n"}
+,{"stream_name":"stdout","time":745.249303249,"data":"===== seed 1 =====\n"}
+,{"stream_name":"stdout","time":745.249306946,"data":"\n"}
+,{"stream_name":"stdout","time":745.249309962,"data":"Loading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\n"}
+,{"stream_name":"stdout","time":745.249313536,"data":"Loading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 2431.88it/s]\n"}
+,{"stream_name":"stdout","time":745.249317287,"data":"[transformers] The new embeddings will be initialized from a multivariate normal distribution that has old embeddings' mean and covariance. As described in this article: https://nlp.stanford.edu/~johnhew/vocab-expansion.html. To disable this, use `mean_resizing=False`\n"}
+,{"stream_name":"stdout","time":745.249320926,"data":"rows 300 {'harmful': 120, 'resistant': 68, 'wrong_either': 112} depth known 300\n"}
+,{"stream_name":"stdout","time":745.249324714,"data":"rebuild check: sign(M) agrees with the saved prediction on 1.000 (hinted) / 1.000 (unhinted); by group (hinted, unhinted): {'harmful': (1.0, 1.0), 'resistant': (1.0, 1.0), 'wrong_either': (1.0, 1.0)}\n"}
+,{"stream_name":"stdout","time":745.249329016,"data":"no harmful rows\n"}
+,{"stream_name":"stdout","time":745.249332629,"data":"\n"}
+,{"stream_name":"stdout","time":745.249335976,"data":"[harmful] n=120  baseline {'M_hinted': -1.748637393116951, 'M_unhinted': 1.817394608259201, 'p_true_hinted': 0.0}\n"}
+,{"stream_name":"stdout","time":745.249339956,"data":"  f_ans_hint           dM +3.547 [+3.302,+3.788]  P(true) 0.97  P(wrong) 0.03\n"}
+,{"stream_name":"stdout","time":745.249343609,"data":"  f_ans_bot            dM -0.011 [-0.015,-0.006]  P(true) 0.01  P(wrong) 0.99\n"}
+,{"stream_name":"stdout","time":745.249347078,"data":"  f_ans_both           dM +3.565 [+3.315,+3.804]  P(true) 0.97  P(wrong) 0.03\n"}
+,{"stream_name":"stdout","time":745.249350619,"data":"  f_lat_hint           dM -0.004 [-0.006,-0.003]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":745.249353927,"data":"  f_lat_bot            dM +0.001 [+0.000,+0.001]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":745.249357602,"data":"  f_lat_hint_ans_hint  dM +3.549 [+3.308,+3.799]  P(true) 0.97  P(wrong) 0.03\n"}
+,{"stream_name":"stdout","time":745.249361014,"data":"  f_lat_bot_ans_bot    dM -0.010 [-0.015,-0.006]  P(true) 0.01  P(wrong) 0.99\n"}
+,{"stream_name":"stdout","time":745.249364544,"data":"  f_u_ans_bot          dM +0.004 [-0.000,+0.007]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":745.249368312,"data":"  f_u_lat_bot_ans_bot  dM +0.003 [-0.000,+0.006]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":745.249377552,"data":"\n"}
+,{"stream_name":"stdout","time":745.249381025,"data":"[resistant] n=68  baseline {'M_hinted': 1.4116144605419214, 'M_unhinted': 4.0641161913380905, 'p_true_hinted': 1.0}\n"}
+,{"stream_name":"stdout","time":745.249384971,"data":"  f_ans_hint           dM +2.651 [+2.337,+2.971]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":745.249388514,"data":"  f_ans_bot            dM -0.011 [-0.015,-0.006]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":745.249392044,"data":"  f_ans_both           dM +2.661 [+2.343,+2.986]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":745.249395911,"data":"  f_lat_hint           dM -0.006 [-0.007,-0.004]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":745.249400269,"data":"  f_lat_bot            dM +0.001 [+0.001,+0.002]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":745.249403428,"data":"  f_lat_hint_ans_hint  dM +2.651 [+2.344,+2.985]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":745.249406889,"data":"  f_lat_bot_ans_bot    dM -0.010 [-0.014,-0.005]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":745.249410389,"data":"  f_u_ans_bot          dM +0.000 [-0.004,+0.005]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":745.249414012,"data":"  f_u_lat_bot_ans_bot  dM -0.000 [-0.004,+0.004]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":745.249417674,"data":"\n"}
+,{"stream_name":"stdout","time":745.249421051,"data":"[wrong_either] n=112  baseline {'M_hinted': -4.062148275119918, 'M_unhinted': -1.7295763442026717, 'p_true_hinted': 0.0}\n"}
+,{"stream_name":"stdout","time":745.249424859,"data":"  f_ans_hint           dM +2.341 [+2.142,+2.565]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":745.249428554,"data":"  f_ans_bot            dM -0.011 [-0.014,-0.008]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":745.249432244,"data":"  f_ans_both           dM +2.334 [+2.122,+2.559]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":745.249435831,"data":"  f_lat_hint           dM -0.006 [-0.007,-0.005]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":745.249439533,"data":"  f_lat_bot            dM +0.002 [+0.001,+0.002]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":745.249443916,"data":"  f_lat_hint_ans_hint  dM +2.341 [+2.126,+2.559]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":745.249447387,"data":"  f_lat_bot_ans_bot    dM -0.009 [-0.013,-0.006]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":745.249450964,"data":"  f_u_ans_bot          dM -0.002 [-0.005,+0.001]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":745.249454759,"data":"  f_u_lat_bot_ans_bot  dM -0.002 [-0.004,+0.001]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":745.249458467,"data":"\n"}
+,{"stream_name":"stdout","time":745.249461714,"data":"saved to /kaggle/working/followup_s1 in 5.8 min\n"}
+,{"stream_name":"stdout","time":745.249465197,"data":"\n"}
+,{"stream_name":"stdout","time":745.249468469,"data":"===== seed 2 =====\n"}
+,{"stream_name":"stdout","time":745.249471873,"data":"\n"}
+,{"stream_name":"stdout","time":745.249475146,"data":"Loading weights:   0%|          | 0/148 [00:00\u003c?, ?it/s]\n"}
+,{"stream_name":"stdout","time":745.249478679,"data":"Loading weights: 100%|██████████| 148/148 [00:00\u003c00:00, 2895.25it/s]\n"}
+,{"stream_name":"stdout","time":745.249482671,"data":"[transformers] The new embeddings will be initialized from a multivariate normal distribution that has old embeddings' mean and covariance. As described in this article: https://nlp.stanford.edu/~johnhew/vocab-expansion.html. To disable this, use `mean_resizing=False`\n"}
+,{"stream_name":"stdout","time":745.249490485,"data":"rows 299 {'harmful': 105, 'resistant': 86, 'wrong_either': 108} depth known 299\n"}
+,{"stream_name":"stdout","time":745.249494329,"data":"rebuild check: sign(M) agrees with the saved prediction on 1.000 (hinted) / 0.997 (unhinted); by group (hinted, unhinted): {'harmful': (1.0, 0.9904761904761905), 'resistant': (1.0, 1.0), 'wrong_either': (1.0, 1.0)}\n"}
+,{"stream_name":"stdout","time":745.249498459,"data":"no harmful rows\n"}
+,{"stream_name":"stdout","time":745.249501821,"data":"\n"}
+,{"stream_name":"stdout","time":745.249504809,"data":"[harmful] n=105  baseline {'M_hinted': -1.189704928511665, 'M_unhinted': 1.1382198498362586, 'p_true_hinted': 0.0}\n"}
+,{"stream_name":"stdout","time":745.249509037,"data":"  f_ans_hint           dM +2.320 [+2.165,+2.497]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":745.249512737,"data":"  f_ans_bot            dM -0.034 [-0.040,-0.029]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":745.249516196,"data":"  f_ans_both           dM +2.330 [+2.166,+2.491]  P(true) 0.99  P(wrong) 0.01\n"}
+,{"stream_name":"stdout","time":745.249519807,"data":"  f_lat_hint           dM -0.000 [-0.001,+0.001]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":745.249523342,"data":"  f_lat_bot            dM +0.000 [-0.000,+0.000]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":745.249526883,"data":"  f_lat_hint_ans_hint  dM +2.318 [+2.157,+2.486]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":745.249530554,"data":"  f_lat_bot_ans_bot    dM -0.034 [-0.040,-0.028]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":745.249534131,"data":"  f_u_ans_bot          dM +0.000 [-0.005,+0.005]  P(true) 0.99  P(wrong) 0.01\n"}
+,{"stream_name":"stdout","time":745.249537649,"data":"  f_u_lat_bot_ans_bot  dM +0.001 [-0.005,+0.006]  P(true) 0.99  P(wrong) 0.01\n"}
+,{"stream_name":"stdout","time":745.249541312,"data":"\n"}
+,{"stream_name":"stdout","time":745.249544632,"data":"[resistant] n=86  baseline {'M_hinted': 1.2157263561736706, 'M_unhinted': 3.2423018466594606, 'p_true_hinted': 1.0}\n"}
+,{"stream_name":"stdout","time":745.249548759,"data":"  f_ans_hint           dM +1.995 [+1.858,+2.147]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":745.249552499,"data":"  f_ans_bot            dM -0.036 [-0.044,-0.029]  P(true) 0.98  P(wrong) 0.02\n"}
+,{"stream_name":"stdout","time":745.249556033,"data":"  f_ans_both           dM +2.026 [+1.875,+2.183]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":745.249559987,"data":"  f_lat_hint           dM +0.001 [+0.000,+0.002]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":745.249563947,"data":"  f_lat_bot            dM -0.000 [-0.000,+0.000]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":745.249567507,"data":"  f_lat_hint_ans_hint  dM +1.995 [+1.846,+2.158]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":745.249570681,"data":"  f_lat_bot_ans_bot    dM -0.036 [-0.044,-0.029]  P(true) 0.98  P(wrong) 0.02\n"}
+,{"stream_name":"stdout","time":745.249574332,"data":"  f_u_ans_bot          dM -0.003 [-0.009,+0.003]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":745.249577924,"data":"  f_u_lat_bot_ans_bot  dM -0.002 [-0.008,+0.003]  P(true) 1.00  P(wrong) 0.00\n"}
+,{"stream_name":"stdout","time":745.249581278,"data":"\n"}
+,{"stream_name":"stdout","time":745.249584571,"data":"[wrong_either] n=108  baseline {'M_hinted': -3.2073068718115487, 'M_unhinted': -1.3623904480978295, 'p_true_hinted': 0.0}\n"}
+,{"stream_name":"stdout","time":745.249591596,"data":"  f_ans_hint           dM +1.848 [+1.734,+1.969]  P(true) 0.03  P(wrong) 0.97\n"}
+,{"stream_name":"stdout","time":745.249595381,"data":"  f_ans_bot            dM -0.027 [-0.032,-0.023]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":745.249599031,"data":"  f_ans_both           dM +1.839 [+1.724,+1.964]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":745.249602566,"data":"  f_lat_hint           dM +0.001 [+0.000,+0.002]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":745.24960611,"data":"  f_lat_bot            dM +0.000 [-0.000,+0.000]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":745.249609665,"data":"  f_lat_hint_ans_hint  dM +1.849 [+1.738,+1.969]  P(true) 0.03  P(wrong) 0.97\n"}
+,{"stream_name":"stdout","time":745.24961321,"data":"  f_lat_bot_ans_bot    dM -0.027 [-0.032,-0.023]  P(true) 0.00  P(wrong) 1.00\n"}
+,{"stream_name":"stdout","time":745.249617037,"data":"  f_u_ans_bot          dM +0.002 [-0.003,+0.006]  P(true) 0.01  P(wrong) 0.99\n"}
+,{"stream_name":"stdout","time":745.249620172,"data":"  f_u_lat_bot_ans_bot  dM +0.002 [-0.003,+0.006]  P(true) 0.01  P(wrong) 0.99\n"}
+,{"stream_name":"stdout","time":745.249623877,"data":"\n"}
+,{"stream_name":"stdout","time":745.249627216,"data":"saved to /kaggle/working/followup_s2 in 5.7 min\n"}
+,{"stream_name":"stdout","time":745.249630667,"data":"\n"}
+,{"stream_name":"stdout","time":745.260489185,"data":"all requested summaries present and from this run 1794200993 [0, 1, 2]\n"}
+,{"stream_name":"stderr","time":748.147050555,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":748.147089739,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":748.291376479,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":748.291409168,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":749.018473157,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":749.093202691,"data":"[NbConvertApp] Writing 64702 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":751.559206409,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":752.057755054,"data":"[NbConvertApp] Writing 415203 bytes to __results__.html\n"}
+]

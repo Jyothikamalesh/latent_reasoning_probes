@@ -20,8 +20,8 @@ import os, sys, subprocess, json, re, random, time, math, gc, copy
 ON_KAGGLE = os.path.exists('/kaggle')
 MODE_OVERRIDE = None                                  # build_notebook.py --mode sets this for Kaggle pushes (kernels cannot take env vars)
 MODE = MODE_OVERRIDE or os.environ.get('MODE', 'controlled')   # 'tiny' = CPU wiring test | 'mini' = minimal GPU pipeline check | 'controlled' = rehearsal | 'full' = the real run
-assert MODE in ('tiny', 'mini', 'controlled', 'seeds', 'full'), MODE
-FAIL_FAST = MODE in ('seeds', 'full')            # abort early on a non-learning explicit twin or a broken data split; all other gate failures are recorded, not fatal
+assert MODE in ('tiny', 'mini', 'controlled', 'seeds', 'full', 'long'), MODE
+FAIL_FAST = MODE in ('seeds', 'full', 'long')            # abort early on a non-learning explicit twin or a broken data split; all other gate failures are recorded, not fatal
 if ON_KAGGLE:
     subprocess.run([sys.executable, '-m', 'pip', 'install', '-q', 'transformers==5.22.2', 'scikit-learn'], check=True)
 import numpy as np, torch, torch.nn as nn, torch.nn.functional as F
@@ -67,11 +67,12 @@ CFG = {   # sizes chosen from the T4 profile (controlled ~60-70 min, full ~5 h).
     'seeds':      dict(N_TRAIN=3000, EPOCHS_PER_STAGE=1, N_MON_TRAIN=300, N_MON_TEST=600,  N_BENIGN=500,  MIN_POS=20,  MIN_NEG=20,  ACC_MIN=0.6, N_VAL=150, VAL_EVERY=1, N_SUITE=80),    # 3000 training questions (seed 1 at 2000 left the explicit twin near chance), 150 held-out questions per learning check; ~2 h per seed on a T4
     'controlled': dict(N_TRAIN=2000, EPOCHS_PER_STAGE=1, N_MON_TRAIN=200, N_MON_TEST=300,  N_BENIGN=500,  MIN_POS=20,  MIN_NEG=20,  ACC_MIN=0.6, N_VAL=100, VAL_EVERY=1, N_SUITE=80),
     'full':       dict(N_TRAIN=6000, EPOCHS_PER_STAGE=2, N_MON_TRAIN=500, N_MON_TEST=2000, N_BENIGN=1000, MIN_POS=100, MIN_NEG=200, ACC_MIN=0.7, N_VAL=150, VAL_EVERY=2, N_SUITE=300),   # full: 2000 test questions -> ~1000 wrong-hint prompts, enough negatives for TPR@5%FPR (MIN_NEG gates it); extra questions are held out of ProsQA train
+    'long':       dict(N_TRAIN=15000, EPOCHS_PER_STAGE=2, N_MON_TRAIN=300, N_MON_TEST=600, N_BENIGN=500, MIN_POS=20, MIN_NEG=20, ACC_MIN=0.8, N_VAL=150, VAL_EVERY=1, N_SUITE=80),   # 'long': ONE COCONUT behaviour twin per seed (build_long_notebook.py), 5x the data and 2x the epochs of 'seeds'; ~3.5 h per seed on a T4
 }[MODE]
 globals().update(CFG)
 EPOCHS_TEXT = EPOCHS_PER_STAGE * (N_STAGES + 1)    # explicit twins get the same number of passes over the data as COCONUT's curriculum
 BS, ACCUM, BS_COCO, ACCUM_COCO = (8, 2, 8, 2) if dev == 'cuda' else (2, 2, 2, 2)   # T4 profile: throughput plateaus at micro-batch 8 (peak 7.7 GiB for COCONUT, 9.4 for text worst case)
-SAVE_CKPT = MODE in ('seeds', 'full')   # keep the trained twins (fp16, ~250 MB each) for the causal analyses
+SAVE_CKPT = MODE in ('seeds', 'full', 'long')   # keep the trained twins (fp16, ~250 MB each) for the causal analyses
 OUT_DIR = '/kaggle/working' if ON_KAGGLE else ('tiny_out' if MODE == 'tiny' else '.')
 os.makedirs(OUT_DIR, exist_ok=True)
 

@@ -68,4 +68,4 @@ python prosqa_monitor/tests/test_latent_patching.py
 Experiments ran on free Kaggle T4 GPUs. The notebooks are generated from `prosqa_monitor.py` (`build_notebook.py`, `build_long_notebook.py`); never edit the `.ipynb` files by hand.
 
 ## 6. Status
-Work in progress by one student. Results are per seed and are not pooled. Protocol amendments are recorded, not hidden. Treat numbers here as a summary and the `RUN.md` files as the record.
+Work in progress . Results are per seed and are not pooled. Protocol amendments are recorded, not hidden. Treat numbers here as a summary and the `RUN.md` files as the record.

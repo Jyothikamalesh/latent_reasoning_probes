@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>One training step, mathematically</title>
+<style>
+@page { size: A4; margin: 18mm 17mm; }
+body { font-family: -apple-system, "Helvetica Neue", Arial, sans-serif; color:#1b1f24; font-size:11pt; line-height:1.5; }
+h1 { font-size:21pt; margin:0 0 2pt; } .sub { color:#586069; margin:0 0 14pt; }
+h2 { font-size:14pt; margin:18pt 0 6pt; padding-bottom:3pt; border-bottom:1.5px solid #d0d7de; }
+h3 { font-size:11.5pt; margin:12pt 0 4pt; }
+code, pre { font-family: "SF Mono", Menlo, Consolas, monospace; font-size:9.6pt; }
+code { background:#f0f2f4; padding:0 3px; border-radius:3px; }
+pre { background:#f6f8fa; border:1px solid #d8dee4; border-radius:6px; padding:8pt 10pt; line-height:1.45; white-space:pre-wrap; }
+.eq { background:#f6f8fa; border-left:4px solid #3b7dd8; padding:8pt 12pt; margin:8pt 0; font-family: "Cambria Math","Times New Roman",serif; font-size:12pt; }
+table { border-collapse:collapse; width:100%; margin:8pt 0; font-size:10.3pt; }
+th, td { border:1px solid #d0d7de; padding:5pt 8pt; text-align:left; vertical-align:top; }
+th { background:#eef1f4; }
+.note { background:#fff8e6; border:1px solid #f0d58a; border-radius:6px; padding:7pt 10pt; margin:8pt 0; }
+.bad { color:#b3261e; font-weight:600; } .ok { color:#1a7f37; font-weight:600; }
+.pb { page-break-before: always; }
+</style></head><body>
+
+<h1>One training step, mathematically</h1>
+<p class="sub">Walkthrough of the loop in Part A4 of <code>learn_the_techniques.ipynb</code></p>
+
+<h2>0. The code being explained</h2>
+<pre>x = torch.tensor([[3, 7, 12, 5]] * 8)       # 8 identical sequences of 4 token ids
+y = torch.tensor([4] * 8)                   # target token for each sequence
+opt = torch.optim.AdamW(model.parameters(), lr=1e-3)
+for step in range(30):
+    logits = model(input_ids=x).logits[:, -1]   # (8, 14)
+    loss = F.cross_entropy(logits, y)           # one number
+    opt.zero_grad()
+    loss.backward()
+    opt.step()</pre>
+
+<h2>1. Corrections to common misreadings</h2>
+<table>
+<tr><th>Reading</th><th>What is actually true</th></tr>
+<tr><td>"<code>model(...).logits[:, -1]</code> turns the residual stream into logits"</td>
+<td>It runs the <b>whole forward pass</b>: ids &rarr; embeddings &rarr; all layers (the residual stream) &rarr; final norm &rarr; <code>lm_head</code> &rarr; logits. Turning the final residual stream into logits is only the last step. <code>[:, -1]</code> then keeps the last position's logits.</td></tr>
+<tr><td>"<code>y</code> is the target token stream"</td>
+<td>Here <code>y</code> is <b>one</b> target token per sequence (8 numbers). In the real training the targets exist at many positions.</td></tr>
+<tr><td>"<code>opt.nograd</code> / zero_grad stops gradient calculation"</td>
+<td><span class="bad">There is no opt.nograd.</span> <code>opt.zero_grad()</code> <b>clears the stored gradients</b>; it does not stop anything. Stopping gradient tracking is a different tool: <code>torch.no_grad()</code>.</td></tr>
+<tr><td>"<code>loss.backward()</code> gives a number"</td>
+<td>The <b>loss</b> is the number. <code>backward()</code> fills a gradient tensor for <b>every weight</b>.</td></tr>
+</table>
+
+<h2>2. Notation</h2>
+<table>
+<tr><th>Symbol</th><th>Meaning</th><th>Size here</th></tr>
+<tr><td>&theta;</td><td>all the model's weights</td><td>millions of numbers</td></tr>
+<tr><td>&eta;</td><td>learning rate (<code>lr=1e-3</code>)</td><td>one number</td></tr>
+<tr><td>x</td><td>input token ids</td><td>8 &times; 4</td></tr>
+<tr><td>y</td><td>target token ids (all equal 4)</td><td>8</td></tr>
+<tr><td>h</td><td>last-position residual stream (after final norm)</td><td>8 &times; 128</td></tr>
+<tr><td>W<sub>U</sub></td><td><code>lm_head</code> weights</td><td>14 &times; 128</td></tr>
+<tr><td>z</td><td>logits</td><td>8 &times; 14</td></tr>
+<tr><td>p</td><td>probabilities</td><td>8 &times; 14</td></tr>
+<tr><td>L</td><td>loss</td><td>one number</td></tr>
+</table>
+
+<h2>3. Forward pass</h2>
+<div class="eq">
+h = f<sub>&theta;</sub>(x)[:, &minus;1] &nbsp;&nbsp; (embed, then all layers, then final norm, last position)<br>
+z = h &middot; W<sub>U</sub><sup>T</sup> &nbsp;&nbsp; (logits: one score per token id)<br>
+p<sub>ik</sub> = e<sup>z<sub>ik</sub></sup> / &Sigma;<sub>j</sub> e<sup>z<sub>ij</sub></sup> &nbsp;&nbsp; (softmax: scores &rarr; probabilities)
+</div>
+<p>Row <i>i</i> is one of the 8 sequences. Column <i>k</i> is a token id (0 to 13).</p>
+
+<h2>4. The loss: cross-entropy</h2>
+<div class="eq">
+L = &minus;(1/8) &Sigma;<sub>i</sub> log p<sub>i, y<sub>i</sub></sub>
+&nbsp;=&nbsp; (1/8) &Sigma;<sub>i</sub> [ log &Sigma;<sub>j</sub> e<sup>z<sub>ij</sub></sup> &minus; z<sub>i, y<sub>i</sub></sub> ]
+</div>
+<p>L is small when the model puts high probability on the correct token. Reference points:</p>
+<table>
+<tr><th>Situation</th><th>Loss</th></tr>
+<tr><td>Guessing uniformly among 14 tokens</td><td>ln 14 &asymp; 2.64</td></tr>
+<tr><td>Untrained model (observed at step 0)</td><td>about 3.0 (random weights, slightly worse than uniform)</td></tr>
+<tr><td>Observed at step 29</td><td>0.03, so p(correct) &asymp; e<sup>&minus;0.03</sup> &asymp; 0.97</td></tr>
+</table>
+
+<h2 class="pb">5. Backward: where the gradients come from</h2>
+<p>The gradient of L with respect to the logits has a very simple form:</p>
+<div class="eq">&part;L / &part;z<sub>ik</sub> = (1/8) &middot; ( p<sub>ik</sub> &minus; 1[ k = y<sub>i</sub> ] )</div>
+<p>(1[...] is 1 if the condition holds and 0 otherwise.) <b>Tiny worked example</b> with three tokens, z = [2, 1, 0] and the correct token 0:</p>
+<table>
+<tr><th>Quantity</th><th>Token 0 (correct)</th><th>Token 1</th><th>Token 2</th></tr>
+<tr><td>logit z</td><td>2</td><td>1</td><td>0</td></tr>
+<tr><td>probability p</td><td>0.665</td><td>0.245</td><td>0.090</td></tr>
+<tr><td>gradient p &minus; onehot</td><td>&minus;0.335</td><td>+0.245</td><td>+0.090</td></tr>
+</table>
+<p>Loss = &minus;ln 0.665 = 0.408. The wrong tokens get a <b>positive</b> gradient and the right token a <b>negative</b> one. Updates move <b>against</b> the gradient, so the right logit goes up and the others go down. The gradients sum to zero across tokens.</p>
+<p><code>loss.backward()</code> carries this signal back to every weight with the chain rule:</p>
+<div class="eq">&part;L/&part;&theta; = (&part;L/&part;z) &middot; (&part;z/&part;h) &middot; (&part;h/&part;&theta;)</div>
+<p>The result is stored in each weight's <code>.grad</code>. New gradients are <b>added</b> to what is already there (<code>.grad &larr; .grad + new</code>). That is exactly why <code>zero_grad()</code> exists.</p>
+
+<h2>6. The update step</h2>
+<p>Plain gradient descent would be:</p>
+<div class="eq">&theta; &larr; &theta; &minus; &eta; &middot; g</div>
+<p>AdamW (used in the code) keeps running averages of the gradient g and its square, so each weight gets its own step size:</p>
+<div class="eq">
+m &larr; &beta;<sub>1</sub> m + (1 &minus; &beta;<sub>1</sub>) g<br>
+v &larr; &beta;<sub>2</sub> v + (1 &minus; &beta;<sub>2</sub>) g<sup>2</sup><br>
+&theta; &larr; &theta; &minus; &eta; &middot; m&#770; / ( &radic;v&#770; + &epsilon; ) &minus; &eta; &middot; &lambda; &middot; &theta;
+</div>
+<p>m&#770; and v&#770; are bias-corrected versions of m and v. Defaults in PyTorch: &beta;<sub>1</sub> = 0.9, &beta;<sub>2</sub> = 0.999, &epsilon; = 1e-8, weight decay &lambda; = 0.01. The direction is still "against the gradient"; AdamW only rescales how far each weight moves.</p>
+
+<h2>7. The three optimizer lines, side by side</h2>
+<table>
+<tr><th>Line</th><th>What it does</th><th>Changes the weights?</th></tr>
+<tr><td><code>opt.zero_grad()</code></td><td>Clears stored <code>.grad</code> values from the previous step</td><td>No</td></tr>
+<tr><td><code>loss.backward()</code></td><td>Computes &part;L/&part;&theta; for every weight and stores it</td><td>No</td></tr>
+<tr><td><code>opt.step()</code></td><td>Applies the update rule from section 6</td><td><span class="ok">Yes</span></td></tr>
+</table>
+<p>Order matters: clear the old numbers, compute the new ones, then use them.</p>
+
+<h2>8. All 30 steps in one picture</h2>
+<pre>repeat 30 times:
+   forward  : x  -> h -> z -> p
+   loss     : L = cross_entropy(z, y)
+   zero_grad: wipe old gradients
+   backward : compute dL/d(theta) for every weight
+   step     : theta <- theta - (AdamW-scaled) eta * gradient
+   (weights changed, so the next forward pass gives a lower L)</pre>
+<div class="note"><b>Do not picture "making the residual stream".</b> Each step changes the weights &theta;. The residual stream changes only as a result. And nothing here generalizes: the demo teaches one sequence to produce token 4, which is why the loss reaches about 0.03.</div>
+
+<h2>9. Where "stopping gradients" actually lives</h2>
+<table>
+<tr><th>Tool</th><th>Effect</th><th>Used for</th></tr>
+<tr><td><code>torch.no_grad()</code></td><td>No gradient tracking inside the block; weights cannot learn from it</td><td>Measuring: accuracy, patching, probes</td></tr>
+<tr><td><code>.detach()</code></td><td>Cuts one tensor out of the gradient graph</td><td>Copying an activation out (hook demo)</td></tr>
+<tr><td><code>model.eval()</code></td><td>Turns dropout off. It does <i>not</i> stop gradients</td><td>Repeatable measurements</td></tr>
+</table>
+<p>In COCONUT training, <code>loss.backward()</code> sends the learning signal back <b>through</b> the fed-back thoughts. If a thought were detached, the signal would stop there: the model could use the thought but could not learn to improve it. Patching (Part F) runs under <code>no_grad</code> because it tests a trained model.</p>
+</body></html>

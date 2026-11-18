@@ -1,4 +1,4 @@
-#  latent reasoning monitoring
+#  Latent reasoning monitoring
 
 This repository is a worked investigation of one question:
 

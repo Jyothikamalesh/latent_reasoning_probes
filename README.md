@@ -1,7 +1,6 @@
 #  Latent reasoning monitoring
 
 This repository is a worked investigation of one question:
-
 > Some language models "think" in hidden numbers instead of words. Can we watch those hidden thoughts to catch unwanted behaviour, and when a watcher raises a flag, is it tracking the real cause or just something that goes along with it?
 
 It is written as a learning path. Each section says what we wanted to understand, what we did, and what we learned, including the dead ends. Every claim points to a protocol written before the result and a record of the run that produced it.

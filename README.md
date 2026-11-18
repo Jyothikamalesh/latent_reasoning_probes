@@ -1,4 +1,4 @@
-# Learning what latent reasoning does, and whether we can monitor it
+#  latent reasoning monitoring
 
 This repository is a worked investigation of one question:
 
